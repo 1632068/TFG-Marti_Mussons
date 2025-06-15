@@ -1,0 +1,56 @@
+# Fitxers i carpetes de Python
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints/
+
+# Fitxers temporals
+*.tmp
+*.log
+*.bak
+*.swp
+
+# Fitxers del sistema
+.DS_Store
+Thumbs.db
+
+# Models entrenats i outputs
+output/
+models/
+checkpoints/
+*.pt
+*.pth
+*.bin
+*.h5
+*.ckpt
+
+# Dades grans i exportacions
+*.csv
+*.tsv
+*.json
+*.xlsx
+*.parquet
+data/
+datasets/
+results/
+embeddings/
+logs/
+
+# Gràfics i figures
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.pdf
+
+# Entorns virtuals
+.env
+.venv/
+venv/
+ENV/
+env/
+
+# Fitxers de Jupyter nbconvert
+*.nbconvert.ipynb
+
+#El model guerdat
+src_tex/training/modernbert-contrastive-manual/
