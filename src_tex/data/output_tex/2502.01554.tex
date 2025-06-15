@@ -1,0 +1,99 @@
+
+%constants
+\newcommand{\imun} {\sqrt{-1}}
+\newcommand{\vol}{v}
+
+\newcommand{\res}{{\rm{Res}}}
+\newcommand{\ext}{{\rm{E}}}
+
+\newcommand{\conv}{{\rm{conv}}}
+\newcommand{\sym}{{\rm{Sym}}}
+
+%sets
+\newcommand{\comp}{\mathbb{C}}
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\rat}{\mathbb{Q}}
+\newcommand{\nat}{\mathbb{N}}
+\newcommand{\integ}{\mathbb{Z}}
+\newcommand{\spec}{{\rm{Spec}}}
+\newcommand{\dist}{{\rm{dist}}}
+\newcommand{\dd}{\mathbb{D}}
+\newcommand{\hh}{\mathbb{H}}
+
+\NewDocumentCommand{\sff}{}{\mathrm{I\!I}}
+
+\newcommand{\tinyint}{\begingroup\textstyle\int\endgroup}
+
+\DeclareMathOperator*{\esssup}{ess\,sup}
+\DeclareMathOperator*{\essinf}{ess\,inf}
+\DeclareMathOperator*{\esssupp}{ess\,supp}
+
+%vector bundles
+\newcommand{\enmr}[1]{\text{End}{(#1)}}
+\newcommand{\Conv}[1]{{\rm{Conv}}{(#1)}}
+
+%sets of sections
+\newcommand{\dfor}[2][]{\Omega^{#1}(#2)}
+\newcommand{\dforc}[2][]{\Omega^{#1}_{c}(#2)}
+\newcommand{\ccal}{\mathscr{C}}
+
+%differential operators
+\newcommand{\dbar}{ \overline{\partial} }
+\newcommand{\dbardual}{ \overline{\partial}^* }
+\newcommand{\laplcomp}{\Box}
+
+%matrices symbols and operators on matrices
+\newcommand{\rk}[1]{{\rm{rk}} ( #1 )}
+\newcommand{\tr}[1]{{\rm{Tr}} \big[ #1 \big]}
+\newcommand{\aut}{{\rm{Aut}}}
+
+%miscellaneous
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\scal}[2]{\langle #1, #2 \rangle}
+
+\newcommand{\modul}{\mathscr{M}}
+\newcommand{\modulcomp}{\overline{\mathscr{M}}}
+\newcommand{\teich}{\mathcal{T}_g}
+\newcommand{\univcurv}{\mathscr{C}}
+\newcommand{\univcurvcomp}{\overline{\mathscr{C}}}
+\newcommand{\divvect}[1]{\mathcal{O}(#1)}
+
+\newcommand{\wpform}{\omega_{WP}}
+
+\newcommand{\td}{{\rm{Td}}}
+\newcommand{\ch}{{\rm{ch}}}
+
+\newcommand{\ssubset}{\subset\joinrel\subset}
+
+
+\makeatletter
+\DeclareFontFamily{OMX}{MnSymbolE}{}
+\DeclareSymbolFont{MnLargeSymbols}{OMX}{MnSymbolE}{m}{n}
+\SetSymbolFont{MnLargeSymbols}{bold}{OMX}{MnSymbolE}{b}{n}
+\DeclareFontShape{OMX}{MnSymbolE}{m}{n}{
+    <-6>  MnSymbolE5
+   <6-7>  MnSymbolE6
+   <7-8>  MnSymbolE7
+   <8-9>  MnSymbolE8
+   <9-10> MnSymbolE9
+  <10-12> MnSymbolE10
+  <12->   MnSymbolE12
+}{}
+\DeclareFontShape{OMX}{MnSymbolE}{b}{n}{
+    <-6>  MnSymbolE-Bold5
+   <6-7>  MnSymbolE-Bold6
+   <7-8>  MnSymbolE-Bold7
+   <8-9>  MnSymbolE-Bold8
+   <9-10> MnSymbolE-Bold9
+  <10-12> MnSymbolE-Bold10
+  <12->   MnSymbolE-Bold12
+}{}
+
+\let\llangle\@undefined
+\let\rrangle\@undefined
+\DeclareMathDelimiter{\llangle}{\mathopen}%
+                     {MnLargeSymbols}{'164}{MnLargeSymbols}{'164}
+\DeclareMathDelimiter{\rrangle}{\mathclose}%
+                     {MnLargeSymbols}{'171}{MnLargeSymbols}{'171}
+\makeatother

@@ -1,0 +1,127 @@
+
+
+
+\section{Introduction}
+
+\subsection{Auto-scaling in Serverless Computing}
+
+% Auto-scaling mechanisms are at the core of serverless computing systems as they efficiently support cloud providers to handle the largest possible user base on their physical platforms.
+% These mechanisms adjust the current service capacity automatically in response to the current load while guaranteeing that service level agreement (SLA) contracts are respected.
+Auto-scaling mechanisms are considered to be essential components of serverless computing systems as they efficiently support cloud providers in handling the largest possible user base on their physical platforms.
+These mechanisms are designed to automatically adjust the current service capacity in response to the current load while ensuring that service level agreement (SLA) contracts are respected.
+In this paper, we tweak a popular auto-scaling paradigm that in the cloud computing literature is known as ``per-request''~\cite{scaleperrequest,ASLANPOUR2024266,Anselmi24} or ``reactive''~\cite{DOGANI2024104837} auto-scaling. According to this paradigm, an incoming request (or \emph{job}) is processed by an active idle function instance (or \emph{server}) if there is any available,
+otherwise, the platform spawns a new server that will serve the job immediately after a \emph{coldstart} latency.
+By design, the activation of a new server is only triggered at the arrival time of an \emph{unfortunate} job, i.e., a job that finds no active idle servers upon its arrival and thus must wait.
+In practice, this is the de-facto auto-scaling pattern and is currently employed by serverless computing platforms such as AWS Lambda, Google Cloud Functions, Azure Functions, IBM Cloud Functions and Apache OpenWhisk.
+
+% \subsection{Scientific Challenge}
+% \subsection{Objective}
+\subsection{Addressed Problem}
+
+The current implementations of the auto-scaling paradigm described above operate under the assumption that \emph{exactly one} server is spawned (or initialized)
+when an unfortunate job arrives~\cite{scaleperrequest}.
+The objective of this work is \emph{to investigate whether or not it would be convenient to activate more than one server}, say $1+\theta$, instead of just one.
+It is worth noting that activating $\theta>0$ extra servers results in increased energy consumption compared to the case where $\theta=0$. On the other hand, this brings a performance benefit \emph{proactively}, as future arrivals have a higher chance of finding active idle servers, thus avoiding the coldstart latency cost.
+%
+This is particularly crucial for serverless or edge computing applications, where response time is critical to ensure optimal performance~\cite{DOGANI2024104837}. It is commonly recognized that even a minor rise of even a few milliseconds in latency can have a drastic effect on real-time applications such as e-commerce sales.
+%
+Therefore, this paper aims to explore whether the activation of surplus servers at scale-up times ultimately leads to a more favourable balance between energy consumption and user-perceived performance.
+
+
+% \subsection{Approach: Markovian Model with Learning}
+% \subsection{Approach: Kiefer--Wolfowitz Stochastic Gradient Descent}
+\subsection{Stochastic Optimization Framework}
+
+
+Several analytical performance models have been developed in the literature to evaluate the delay performance and power consumption induced by auto-scaling algorithms; see, e.g., \cite{scaleperrequest,Jonckheere18,Gandhi13}. The starting point of our work is the Markov model proposed in~\cite{scaleperrequest}, which captures the unique details of several existing serverless computing platforms and is also tailored to the auto-scaling algorithm implemented in Amazon's AWS Lambda.
+We extend this model to the case where the platform spawns $\theta+1$ servers at the moment of a job arrival if the job finds no active idle server -- the model in \cite{scaleperrequest} is recovered when $\theta=0$.
+
+To find the~$\theta$ that minimizes a cost function that takes into account the blocking probability, i.e., the probability that a random job incurs a coldstart latency, and the energy consumption, we follow a stochastic optimization approach looking for an online learning algorithm.
+The main motivation for this approach is that some quantities such as the job arrival rate are time-varying and unknown in advance. However, they are observable and can therefore be learned.
+Moreover, the specific structure of the cost function induced by the considered auto-scaling setting brings the additional difficulty that the \emph{gradient} of the cost function is unknown as well, although again observable.
+This issue prevents us from relying on the class of Stochastic Gradient Descent (SGD) iterative schemes, which are common in stochastic optimization, and leads us to consider iterative schemes of the Kiefer-Wolfowitz type~\cite{borkar2008stochastic}; see below for further details.
+
+To optimize over $\theta$, an alternative approach would consist in modeling the problem via a Markov decision process (MDP) \cite{Puterman94} and then learning the optimal policy via (variations of) algorithms such as the celebrated UCRL2~\cite{UCRL2}.
+In the literature, MDP formulations for problems similar to ours have been developed recently in \cite{IEEE_TR_CS_2024,TournaireHyon2023}; see also the references therein.
+In contrast to our approach, these works assume full knowledge of the model parameters and no learning is considered.
+%
+% Since such MDP may be defined over a wider range of policies, the cost induced by its optimal policy may be smaller than the cost induced by the optimal policy obtained within the approach followed in this paper.
+We do not follow the MDP reinforcement learning approach for two reasons.
+% First, the optimal policy strongly depends on the system state and, as a consequence, will be hardly versatile.
+In general, the optimal policy is highly dependent on the system state and therefore not versatile.
+In our case, however, the optimal policy reduces to a one-dimensional parameter $\theta$, indicating how many servers to activate upon job arrivals. Also,  the size of the state space of the  MDP is prohibitively large  in our case, and this would make any model-based reinforcement learning algorithm impractical. We show in Section~\ref{sec:framework}, that the size of the state space is of the order of~$N^3$ where~$N$ denotes the nominal number of servers that can be up and running, which for several applications is in the order of hundreds or thousands.
+
+{
+We also notice that the application of reinforcement learning for autoscaling of serverless applications is currently a bit underexplored~\cite{Benedetti22,Buyya24}.
+A Q-learning approach is considered in \cite{Buyya21} and a comprehensive numerical evaluation of existing deep learning algorithms has been recently conducted in~\cite{Buyya24}.
+The downside of these works is that no theoretical properties about convergence and optimality are proven.}
+
+
+Finally, to minimize over $\theta$, a further approach would consist of i) solving the global balance equations of the underlying Markov chain to get the stationary measure induced by a given $\theta$ and then ii) computing the optimal $\theta$ by binary search or relying on standard algorithms for deterministic optimization.
+This naive  approach is not interesting either because it requires the knowledge of all the parameters that define the underlying Markov chain. As discussed above, we do not assume this knowledge.
+
+
+
+% \subsection{Technical Difficulty and Novelty of our Approach: Non-Stationary Samples}
+\subsection{Novelty of our Approach: Non-Stationary Samples}
+\label{ssec:nonstationary}
+
+% Our approach undergoes a technical difficulty that we describe here.
+When trying to apply existing stochastic optimization techniques to the specific case of auto-scaling, the following technical difficulty appears.
+To fully grasp the root of the problem, let us formally introduce the general stochastic optimization framework under investigation.
+The objective is to minimize some real function $f(\theta) := \E[F(\theta,X)]$ over $\theta \in \mathbb R^p$, where $X$ is some random variable over $\mathcal{X}$.
+The distribution of $X$ and the mapping $F:\mathbb{R}^p \times \mathcal{X}\mapsto \mathbb{R}$ are unknown.
+However, it is allowed to get samples $X_1,X_2,\dots$ and, thus, $F(\theta_1;X_1),F(\theta_2;X_2),\ldots$ for different values of $\theta_n$. Here, $F(\theta_n, X_n)$ represents the random cost observed at time step $n$ under the set of parameters $\theta$. To find an optimal $\theta$, one can only rely on such information.
+Under certain technical conditions, the Robbins--Monro and Kiefer-Wolfowitz algorithms are the classical iterative schemes that make the sequence $\theta_n$ converge to a minimum of~$f$~\cite{borkar2008stochastic,Rasonyi_Tikosi_2023}; \review{see also~\cite{Walton22}}.
+Unfortunately, this type of approach can not be employed within our setting because our problem does not grant access to samples of~$X$. In our case,~$X$ has the stationary distribution of a continuous-time Markov chain that models the dynamics of auto-scaling, and what we can only observe are (non-stationary) samples from the \emph{transient} behavior of such chain;
+in practice, this corresponds to collecting observations from the up-and-running real system.
+This non-stationarity is the main technical difficulty that singles out our work from existing approaches; for further details, see Section~\ref{ssec:problem} and Remark~\ref{rem:rem1}.
+\review{
+To deal with this difficulty, we modify the standard Kiefer-Wolfowitz algorithm by introducing a new parameter  that controls how long the system is observed for a given $\theta$ in order to obtain a non-stationary sample that is sufficiently close to the corresponding stationary distribution of the Markov chain parameterized by that given~$\theta$.
+While we can prove that the modified algorithm converges a.s. to the optimal value of $\theta$ (Theorem \ref{th:as})  with a state-of-the-art convergence rate in $O(n^{2/3})$ (Theorem \ref{th:rate}), there is still a price to pay for non-stationarity:
+\begin{itemize}
+\item {\it Additional assumptions: }
+Assumption~\ref{as:mixing}, which requires the underlying Markov chain to mix \emph{uniformly}, is critical to our proof technique.
+% This assumption keeps the problem non-trivial but enables us to adapt the proof technique from~\cite{Walton22}, which, however, applies only when stationary samples of the underlying Markov chain are available.
+It provides a means to control the accuracy of non-stationary samples and is, to some extent, necessary, as we demonstrate that without it, the desired convergence properties fail to hold. This is supported by numerical evidence.
+\item {\it Technical difficulty:} The proof for the convergence rate requires a truncation/extension of the control policy to ensure smoothness of the stationary policy with respect to $\theta$. 
+\item  {\it Increased convergence time:}  The convergence rate involves a  term depending on the mixing time, more precisely $\log(1/\rho)$ where $\rho$ is the uniform mixing rate.
+\end{itemize}
+}
+
+{The closest reference to our work is the classical work~\cite{Pflug1990}, which presents a scheme of the Kiefer-Wolfowitz type as in our setting. Under technical conditions, that scheme converges almost surely to a minimum of the cost function. However, no convergence rate is proven for that scheme.
+Another reference that is close to ours is \cite{Borkar22ssy}. Here, the authors consider a general iteration scheme for solving a stochastic optimization problem as in our setting, modulo some minor technical assumptions.
+The main differences with respect to our work are that their iterative scheme is of the Robbins-Monroe type and that their main result (Theorem~1) does not specify the convergence speed of the scheme towards the minimum of the cost function. More precisely, they show that it has a polynomial structure, but the exponent depends on a parameter, $\alpha$, related to the Lipschitz constant of the average cost, which may be difficult to get depending on the application considered.}
+
+We also mention a number of related works that have recently appeared in the literature to address settings similar to ours~\cite{MCGD,M1,M2,M3,M4}, i.e., where samples of~$X$ are not available.
+These propose SGD methods where approximate samples of~$X$ are taken on the trajectory of a Markov chain, as we do within our approach.
+In particular, the algorithm proposed in~\cite{MCGD} has nice convergence properties even in the case of non-convex cost functions and non-reversible Markov chains, which is the setting considered in this paper. The crucial difference between all these works and ours is that they all assume the knowledge of the gradient of the cost function~$f$.
+In our case, this information is not available as it depends on the unknown transition rate matrix of the underlying Markov chain.
+
+
+
+
+
+
+\subsection{Summary of our Contribution}
+
+First, we model the job and server dynamics induced by our auto-scaling mechanism in terms of a Markov chain that generalizes the one recently proposed in~\cite{scaleperrequest}.
+This is parameterized by $\theta$, which defines a set of auto-scaling policies and may be interpreted as a \emph{reserve} of extra servers that are ready to be used --
+the model and the algorithm discussed in~\cite{scaleperrequest} are recovered if $\theta=0$.
+The parameter $\theta$ is under the control of the system manager and, following the stochastic optimization approach discussed above, the aim is to design an iterative scheme capable of making $\theta$ to converge to $\theta^*$, i.e., the reserve size that minimizes some cost function.
+%
+lthough our optimization framework is inspired by auto-scaling, we look at the problem from a larger perspective than auto-scaling and propose a general iterative scheme, see Algorithm~\ref{algo:kw}, which is an adaptation of the celebrated Kiefer-Wolfowitz scheme.
+Under natural conditions, in Theorem~\ref{th:as}, we show that the sequence of scalars generated by the proposed algorithm converges almost surely to a minimum of the cost function of interest, and in Theorem~\ref{th2}, we show that the convergence rate is $O(n^{-2/3})$, where $n$ denotes the number of iterations on $\theta$.
+% Our proofs rely on arguments that \textbf{[to do]}.
+%
+Finally, we apply the proposed algorithm to the special case of auto-scaling. By means of numerical simulations, we validate the proposed approach and quantify the cost function relative gains with respect to the common scale-up rule where~$\theta=0$.
+Within a realistic parametrization of our problem, we show that $\theta^* \approx 6$ and that the proposed algorithm indeed generates a sequence $(\theta_n)_n$ that converges to such a value, yielding relative gains of around 5-8\%.
+
+
+\subsection{Organization}
+
+This paper is organized as follows.
+Section~\ref{sec:framework} introduces a Markov model for the considered auto-scaling system and formalizes the stochastic optimization problem of interest.
+Section~\ref{sec:KW} defines our non-stationary Kiefer--Wolfowitz algorithm (Algorithm~\ref{algo:kw}) and presents our main results (Theorems~\ref{th:as} and~\ref{th2}). We stress that this algorithm is general and that it can be applied outside the auto-scaling framework introduced in Section~\ref{sec:framework}.
+Finally, Section~\ref{sec:application} is dedicated to the application of Algorithm~\ref{algo:kw} in the context of auto-scaling.
+Here, we validate its behavior and evaluate its performance numerically.

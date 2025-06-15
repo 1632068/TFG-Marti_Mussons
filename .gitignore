@@ -24,12 +24,10 @@ checkpoints/
 *.ckpt
 
 # Dades grans i exportacions
-*.csv
 *.tsv
 *.json
 *.xlsx
 *.parquet
-data/
 datasets/
 results/
 embeddings/

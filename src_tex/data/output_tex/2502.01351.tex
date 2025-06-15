@@ -1,0 +1,233 @@
+% Packages
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{color, soul}
+\usepackage{centernot}
+\usepackage{verbatim}
+\usepackage{multirow}
+\usepackage{array}   % for \newcolumntype macro
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+\usepackage{setspace}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{bigints}
+\usepackage{bm}
+\usepackage{caption}
+\usepackage{subcaption}
+%\usepackage{romannum}
+\usepackage{url}
+\usepackage{imakeidx}
+\makeindex[columns=2, intoc]
+%\usepackage{hyperref}
+\usepackage{tikz-cd}
+%\usepackage{parskip}
+%\usepackage{natbib}
+%\usepackage{biblatex}
+%\usepackage{titling}
+    %\predate{}
+    %\postdate{}
+
+% Left-align alpha references
+\makeatletter
+\renewcommand{\@biblabel}[1]{[#1]\hfill}
+\makeatother
+    
+\newtheorem{mtheorem}{Theorem}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{guess}[theorem]{Guess}
+
+\newenvironment{claim}[1]{\par\noindent\textbf{Claim:}\space#1}{}
+\newenvironment{claimproof}[1]{\par\noindent\textit{Proof of claim:}\space#1}{\hfill $\blacksquare$}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{fact}{Fact}
+\newtheorem*{notation}{Notation}
+\newtheorem*{step1}{Step 1}
+\newtheorem*{step2}{Step 2}
+\newtheorem*{step3}{Step 3}
+\newtheorem{algorithm}[theorem]{Algorithm}
+%\newenvironment{definition}
+%  {\pushQED{\qed}\renewcommand{\qedsymbol}{$\diamondsuit$}\definitionx}
+%  {\popQED\enddefinitionx}
+
+\newtheorem{examplex}[theorem]{Example}
+\newenvironment{example}
+  {\pushQED{\qed}\renewcommand{\qedsymbol}{$\diamondsuit$}\examplex}
+  {\popQED\endexamplex}
+\newtheorem{exercise}{Exercise}
+\newtheorem{remarkx}[theorem]{Remark}
+\newenvironment{remark}
+  {\pushQED{\qed}\renewcommand{\qedsymbol}{$\diamondsuit$}\remarkx}
+  {\popQED\endremarkx}
+
+\newtheorem*{nexample}{Example}
+
+\theoremstyle{remark}
+\newtheorem{stratx}[theorem]{Strategy}
+\newenvironment{strat}
+  {\pushQED{\qed}\renewcommand{\qedsymbol}{$\diamondsuit$}\stratx}
+  {\popQED\endstratx}
+\newtheorem{case}{Case}
+\newenvironment{solution}
+  {\begin{proof}[Solution]}
+  {\end{proof}}
+
+%\numberwithin{equation}{section}
+
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
+
+% Commands
+% \let\temp\phi
+% \let\phi\varphi
+% \let\varphi\temp
+%\renewcommand{\phi}{\varphi}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\der}{\text{d}}
+\newcommand{\pic}{\text{Pic}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\ff}{\mathcal{F}}
+\newcommand{\bb}{\mathcal{B}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\pe}{\mathcal{P}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\Sphere}{\mathbb{S}}
+\newcommand{\sone}{\mathbb{S}^1}
+\newcommand{\Proj}{\mathbb{P}}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Ord}{Ord}
+\DeclareMathOperator{\sn}{sn}
+\DeclareMathOperator{\cn}{cn}
+\DeclareMathOperator{\dn}{dn}
+\DeclareMathOperator{\am}{am}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Cont}{Cont}
+\DeclareMathOperator{\LC}{LC}
+\DeclareMathOperator{\Lip}{Lip}
+\DeclareMathOperator{\NP}{NP}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\charac}{char}
+\DeclareMathOperator{\CL}{CL}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\Princ}{Princ}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\Frob}{Frob}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Jac}{Jac}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Fil}{Fil}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\dR}{dR}
+\DeclareMathOperator{\BSD}{BSD}
+\DeclareMathOperator{\dd}{d}
+\DeclareMathOperator{\disc}{disc}
+\DeclareMathOperator{\Prym}{Prym}
+\DeclareMathOperator{\minn}{min}
+\DeclareMathOperator{\Sel}{Sel}
+\DeclareMathOperator{\Hess}{Hess}
+
+% Defining \Sha
+\DeclareFontFamily{U}{wncy}{}
+\DeclareFontShape{U}{wncy}{m}{n}{<->wncyr10}{}
+\DeclareSymbolFont{mcy}{U}{wncy}{m}{n}
+\DeclareMathSymbol{\Sha}{\mathord}{mcy}{"58}
+
+\newcommand{\pp}{\mathfrak{p}}
+\newcommand{\PP}{\mathfrak{P}}
+\newcommand{\qq}{\mathfrak{q}}
+\newcommand{\rr}{\mathfrak{r}}
+\newcommand{\fR}{\mathfrak{R}}
+\newcommand{\aaa}{\mathfrak{a}}
+\newcommand{\fraka}{\mathfrak{a}}
+\newcommand{\frakb}{\mathfrak{b}}
+\newcommand{\cc}{\mathfrak{c}}
+
+\newcommand{\x}{\times}
+
+% to make change reversible
+\newcommand{\midx}{\mid}
+
+\newcommand{\hh}{\hat{h}}
+\newcommand{\vv}{\nu}
+\newcommand{\tors}{\mathrm{tors}}
+\renewcommand{\div}{\mathrm{div}}
+
+\renewcommand{\bar}{\overline}
+\renewcommand{\tilde}{\widetilde}
+
+\usepackage{geometry}
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+%	inner=2.5cm, % Inner margin
+%	outer=3.8cm, % Outer margin
+    inner = 3cm,
+    outer = 3cm,
+	%bindingoffset= 0.5cm, % Binding offset
+	top=2cm, % Top margin
+	bottom=2cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+	headheight = 14pt
+}
+%\textwidth=40pc
+%\topmargin=-20pt
+%\oddsidemargin=-40pt
+%\evensidemargin=-40pt
+%\textheight=600pt
+
+
+\usepackage{fancyhdr}
+
+%\pagestyle{fancy}
+%\fancyhf{}
+%\renewcommand{\headrulewidth}{0pt}
+%\fancyhead[LE]{\thepage}
+%\fancyhead[RO]{\nouppercase{\rightmark}}
+%\fancyhead[LE]{\nouppercase{\leftmark}}
+%\fancyhead[RO]{\thepage}
+%\fancyfoot[CE,CO]{\leftmark}
+%\fancyfoot[LE,RO]{\thepage}
+
+%\fancypagestyle{plain}{%
+%  \fancyhf{}
+%  \fancyfoot[LE,RO]{\thepage}
+%  \renewcommand{\headrulewidth}{0pt}
+%  \renewcommand{\footrulewidth}{0pt}
+%}
+
+

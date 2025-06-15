@@ -1,0 +1,188 @@
+\section{Proofs from Section~\ref{section: preliminaries}}\label{app:prelim-proofs}
+\subsection{Proof of Lemma~\ref{lem:inv_kern}}\label{sec:proof_lem_inv}
+The fact that $K^*$ is invariant follows directly from right-translation invariance of the Haar measure, $\mu(Sg)=\mu(S)$, for all $g\in G$ and all Borel sets $S$. Suppose now that $K$ is PSD and fix 
+arbitrary points $x_1, \ldots, x_n\in V$.  Using linearity of the integral, we compute 
+\begin{align*}
+    \sum_{i,j=1}^n c_ic_j K^*(x_i, x_j)
+    = \int_G\int_{G} \underbrace{\sum_{i,j=1}^n c_ic_j K(gx_i, hx_j)}_{\geq 0}\, d\mu(g)d\mu(h),
+\end{align*}
+and therefore $K^*$ is PSD.
+
+\subsection{Proof of Lemma~\ref{lemma: C is unique}}\label{sec:proof_lembilin}
+Writing the polynomial kernel $K$ in terms of the basis $f_1, \ldots, f_N$  yields the equation 
+$$ K(x,y)=\sum_{i=1}^N\sum_{j=1}^N c_{ij} f_j(x)f_i(y),$$
+for some constants $c_{ij}$. Let us now argue uniqueness. To this end, suppose that there exists another matrix $\tilde C$ satisfying \eqref{eqn:K_as_lin_form}. Then we may write $K(x,y)$ in two ways:
+$$\sum_{i=1}^N\left(\sum_{j=1}^N c_{ij} f_j(x)\right) f_i(y)=K(x,y)=\sum_{i=1}^N\left(\sum_{j=1}^N \tilde c_{ij} f_j(x)\right)f_i(y).$$
+Linear independence of $f_i$ implies the equality $\sum_{j=1}^N c_{ij} f_j(x)=\sum_{j=1}^N \tilde c_{ij} f_j(x)$ for any $x$ and any index $i=1,\dots,N$. Again using linear independence, we deduce $c_{ij}=\tilde c_{ij}$ for all $i,j$, as claimed. Finally, symmetry of $K(x,y)$ in $x$ and $y$ implies that \eqref{eqn:K_as_lin_form} remains true with $C$ replaced by $(C+C^\top)/2$. Uniqueness of the matrix $C$ satisfying \eqref{eqn:K_as_lin_form}, which we already established, therefore implies that $C$ is symmetric. Taking the expectation $\E_{g,h}$ of both sides in \eqref{eqn:K_as_lin_form} directly yields \eqref{eqn:K_as_lin_form_sym}.
+
+\subsection{Proof of Theorem~\ref{theorem: rank is number of orbits}} 
+ Define $\mathcal{F}(x)=[f_1(x),\ldots,f_N(x)]$, $\mathcal{F}_*(x)=[f_1^*(x),\ldots,f^*_N(x)]$, and
+$\mathcal{V}(x)=[g_1(x),\ldots, g_r(x)]$ 
+where $\{g_j\}_{j=1}^r$ is a basis for ${\rm span}\{f_1^*, \ldots, f_N^*\}$. Then expanding $f_i^*$ in the $\{g_j\}$ basis we deduce that there exists a matrix $B\in \R^{r\times N}$ such that  $\cF_*(x)=\mathcal{V}(x)B$ for all $x\in\R^d$. Consequently using \eqref{eqn:K_as_lin_form}, we deduce 
+\begin{align*}
+K(x,y)&=\mathcal{V}(x)\cdot (BCB^\top) \cdot\mathcal{V}(x)^\top.
+\end{align*}
+Forming a rank $r$ factorization $BCB^\top=LR^\top$ for some $L,R\in\R^{r\times r}$ therefore yields the equality $K(x,y)=\langle \mathcal{V}(x)L,\mathcal{V}(x)R\rangle$, thereby verifying the inequality $\rank K\leq r$ in \eqref{eqn:rank_est_basis}. 
+
+Next, we show the equality in \eqref{eqn:rank_est_basis}. Clearly, since $f_i^*$ lie in $\R[V]_m^G$, the inequality holds:
+\begin{equation}\label{eqn:invar_space_lower}
+r\leq\dim(\R[V]_m^G).
+\end{equation}
+
+It remains to argue that $\dim(\R[V]_m^G)\leq r.$ Choose $h(x) \in\R[V]_m^G.$ Since $\R[V]_m^G$ is a subspace of $\R[V]_m,$ it follows that there exist coefficients $c_1, \ldots, c_N$ such that $h(x) = \sum_{i=1}^Nc_i f_i(x).$ Then, as $h$ is invariant under the action of $G$ and $G$ acts linearly on $\R[V]_m$, the equalities 
+\begin{align*}
+    h(x) &= h^*(x) = \sum_{i=1}^Nc_if_i^*(x)
+\end{align*}
+hold. It follows that $f_1^*(x), \ldots, f_N^*(x)$ form a spanning set for $\R[V]_m^G$ and thus the inequality $\dim(\R[V]_m^G)\leq r$ holds as claimed.
+
+\section{Proofs from Section~\ref{sec:generalization}} \label{app:generalization}
+\subsection{Proof of Theorem~\ref{thm:bound_estimator}}
+The proof follows along similar lines as the standard argument for linear regression in a fixed dimension \cite[Proposition 3.5]{bach2024learning}.
+The fact that the estimator is unbiased follows immediately from its definition and the fact that $y = \Phi(X)\alpha^{\star} + \varepsilon$ with $\EE\varepsilon = 0.$  
+Take any $\alpha \in \R^d$, expanding and using the fact that the noise is i.i.d, we derive 
+\begin{align}\begin{split}
+R_{T}^{(\alpha^{\star})}(\alpha) &= \frac{1}{|T|}  \sum_{(x, y) \in T} \EE\left( \dotp{\varphi(x),  \alpha} - \dotp{\varphi(x), \alpha^{\star}} + \varepsilon \right)^2 \\
+&= \sigma^2+ \frac{1}{|T|}  \sum_{(x, y) \in T}\EE \left( \dotp{\varphi(x),  \alpha} - \dotp{\varphi(x), \alpha^{\star}}  \right)^2 \notag \\
+&= R_{T}^{(\alpha^{\star})}(\alpha^{\star}) + \frac{1}{|T|}  \sum_{(x, y) \in T} \EE\left( \dotp{\varphi(x),  \alpha} - \dotp{\varphi(x), \alpha^{\star}}  \right)^2.
+\end{split}
+\end{align}
+In particular, the risk $R_T$ is minimized at $\alpha^{\star}$. Then, the excess risk of $\widehat \alpha$ is equal to
+\begin{align*}
+R_{T}^{(\alpha^{\star})}(\widehat \alpha) - R_{T}^{(\alpha^{\star})}(\alpha^{\star}) &= \EE\,\|\widehat \alpha - \alpha^{\star}\|^2_{\Sigma_{T}} \\
+&= \EE\,\left\|\left(\Phi(X)^\top \Phi(X)\right)^{-1}\Phi(X)^\top y -\alpha^{\star}\right\|^2_{\Sigma_{T}}\\
+&= \EE\,\left\|\left(\Phi(X)^\top \Phi(X)\right)^{-1}\Phi(X)^\top ( y - \Phi(X) \alpha^{\star})\right\|^2_{\Sigma_{T}} \\
+&= \EE\,\left\|\left(\Phi(X)^\top \Phi(X)\right)^{-1}\Phi(X)^\top\varepsilon\right\|^2_{\Sigma_{T}} \\
+&= \EE\,\Tr\left(\varepsilon^\top\Phi(X)\left(\Phi(X)^\top \Phi(X)\right)^{-1}\Sigma_{T}\left(\Phi(X)^\top \Phi(X)\right)^{-1}\Phi(X)^\top\varepsilon\right)\\
+&= \sigma^2 \Tr\left(\left(\Phi(X)^\top \Phi(X)\right)^{-1} \Sigma_{{T}}\right) \\
+&= \frac{\sigma^2}{n}\Tr\left(\Sigma_{S}^{-1}\Sigma_{{T}}\right),
+\end{align*}
+where the second to last inequality uses the cyclic invariance of the trace.
+
+\subsection{Proof of \cref{ex:instantiation-minimax-risk}}\label{app:proof-instantiation-minimax-risk} Let $\bar \Sigma _S = \EE \Sigma_S$ and $ \bar \Sigma_T  = \EE \Sigma_T$. We can upper bound 
+\begin{align}\begin{split}\label{eq:break-apart-trace}
+    \Tr\left(\Sigma_S^{-1} \Sigma_T\right) & \leq    \underbrace{\Tr\left(\bar \Sigma_S^{-1} \bar \Sigma_T\right)}_{Q_1} +\underbrace{\Tr\left( \left|\Sigma_S^{-1} - \bar \Sigma_S^{-1}\right| \left| \Sigma_T - \bar \Sigma_T\right| \right)}_{Q_2} \\ & \hspace{2cm} + \underbrace{\Tr\left(\left|\Sigma_S^{-1} - \bar \Sigma_S^{-1}\right| \bar \Sigma_T\right)}_{Q_3} + \underbrace{\Tr\left(\bar \Sigma_S^{-1}\left|\Sigma_T - \bar \Sigma_T\right|\right)}_{Q_4}
+    \end{split}
+\end{align}
+where we use $|A|$ to denote the matrix with component-wise absolute values of $A.$ To bound each one of these terms we will use the following lemma. 
+
+\begin{lemma}\label{lem:component-wise-bounds}
+    Let $n = |S|$ and fix $\delta \in (0, 1/6)$, then with probability at least $1 - 4\exp(-\delta n)$ we have  
+    $$
+    \left|\Sigma_S^{-1} - \bar \Sigma_S^{-1}\right|_{11} \leq 2 \delta, \quad \left|\Sigma_S^{-1} - \bar \Sigma_S^{-1}\right|_{12} \leq 2  \sqrt{\frac{\delta}{d}}, \quad \text{and}\quad \left|\Sigma_S^{-1} - \bar \Sigma_S^{-1}\right|_{22} \leq 10 \frac{\delta}{d}.
+    $$
+    Similarly, let $m = |T|$ and fix $\delta \in (0, \infty),$ with probability at least $ 1- 4\exp(-\delta m)$ we have that 
+    $$
+      \left|\Sigma_T - \bar \Sigma_T\right|_{11} = 0, \quad \left|\Sigma_T - \bar \Sigma_T\right|_{12} \leq  \sqrt{{\delta}{\bar d}}, \quad \text{and}\quad \left|\Sigma_T - \bar \Sigma_T\right|_{22} \leq 4 {\delta}{\bar d}.
+    $$
+\end{lemma}
+Before proving this lemma, let us show how it proves the conclusion from~\Cref{ex:instantiation-minimax-risk}. Assume that the bounds in the Lemma hold with a fixed $\delta \in (0, 1/6)$. It is immediate that $Q_1 = 1 + \frac{\bar d}{d}.$ Furthermore,
+\begin{align*}
+    Q_2 &\leq 4 \delta \cdot \frac{\bar d}{d} + 40 \delta^2 \cdot \frac{\bar d} {d} \leq 44 \delta \cdot \left(1 + \frac{\bar d} {d}\right) \\ 
+    Q_3 &\leq 2\delta + 10 \delta \frac{\bar d}{d} \leq 10 \delta \cdot \left(1+\frac{\bar d}{d}\right) \\
+    Q_4 &\leq 4\delta \cdot \frac{\bar d}{d} \leq 4\delta \cdot \left((1 + \frac{\bar d}{d}\right)
+\end{align*}
+Combining all of these bounds yields 
+$$
+ \Tr\left(\Sigma_S^{-1} \Sigma_T\right) \leq (1 + 58\delta)\cdot \left(1 + \frac{\bar d}{d}\right),
+$$
+setting $\Delta = \delta/58$ proves the promised bound. We now proof Lemma~\ref{lem:component-wise-bounds}.
+\begin{proof}[Proof of Lemma~\ref{lem:component-wise-bounds}]
+ Let us start with the statement for $S$. Enumerate the samples in $S$ as $(x_1, y_1), \dots, (x_n, y_n).$ For each $x_i$, let $z_i = \sum_{j = 1}^d (x_i)_j$ be the sum of its coordinates. Let $\bar z_1 = \frac{1}{n} \sum_{i=1}^n z_i$ and $\bar z_2 = \frac{1}{n} \sum_{i=1}^n z_i^2.$ Then, we have
+ \begin{equation}\label{eq:cov-S}
+     \Sigma_S = \begin{pmatrix}
+         1 & \bar z_1 \\
+          \bar z_1 &  \bar z_2 
+     \end{pmatrix}  \quad \text{and} \quad \Sigma_S^{-1} = \frac{1}{\bar z_2 - \bar z_1^2} \begin{pmatrix}
+          \bar z_2  & - \bar z_1 \\
+          - \bar z_1 &  1
+     \end{pmatrix}.
+ \end{equation}
+ Thus, 
+ \begin{equation*}
+     \Sigma_S^{-1} - \bar \Sigma_S^{-1} = \begin{pmatrix}
+          \frac{\bar z_2}{\bar z_2 - \bar z_1^2} - 1  & - \frac{\bar z_1}{\bar z_2 - \bar z_1^2} \\
+          - \frac{\bar z_1}{\bar z_2 - \bar z_1^2}&  \frac{1}{\bar z_2 - \bar z_1^2} - \frac{1}{d}
+     \end{pmatrix}.
+ \end{equation*}
+The random variables $z_i \sim N(0, d)$ and so $\bar z_1 \sim N(0, \frac{d}{n^2})$ and $\bar z_2 =  \frac{d}{n} w $ with $w \sim \chi^2_n$, a chi-squared distribution with $n$ degrees of freedom.
+\begin{fact}[\cite{vershynin2018high}]
+    Let $z \sim N(0, \sigma^2),$ then for any $t \geq 0$ we have $\PP(|z| \geq t) \leq 2 \exp\left(-\frac{t^2}{2\sigma^2}\right).$
+\end{fact}
+\begin{fact}[\cite{laurent2000adaptive}]
+    Let $w \sim \chi_n^2$, then for any $t \geq 0$ we have that $$\max\left\{\PP( 2\sqrt{n t} + 2t \leq w - n), \PP( w - n \leq - 2\sqrt{n t})\right\} \leq \exp(-t).$$
+\end{fact}
+Equipped with these two facts, it is easy to derive that for any fixed $\delta > 0,$  we have $\PP(|\bar z_1| \geq  \sqrt{\delta d}) \leq 2 \exp\left(- {\delta n^2}\right)$ and $\max\left\{\PP(2(\delta+\delta^2)d \leq \bar z_2 -d), \PP (\bar z_2 - d \leq -2\delta d) \right\}\leq \exp(-\delta n).$ Consider the event $$
+\mathcal{E} = \left\{|\bar z_1 | \leq \sqrt{\delta d} \quad \text{ and } \quad (1 - 2\delta) d \leq \bar z_2 \leq ( 1+4 \delta) d \right\}.
+$$
+A union bound argument yields $\PP(\cE) \geq 1 - 4\exp\left(-\delta n \right),$ which matches the stated probability. For the rest of the proof assume that $\cE$ holds with $\delta \in (0, 1/6)$.
+
+ We are finally ready to prove the three stated bounds for $S$. We will repeatedly use that $\delta/(1-3\delta) \leq 2 \delta$ for $\delta < 1/6.$ Let us start with the first statement:
+    \begin{align*}
+       \left| \frac{\bar z_2}{\bar z_2 - \bar z_1^2} -1\right|= \left| \frac{\bar z_1^2}{\bar z_2 - \bar z_1^2}\right| \leq \frac{|\bar z_1^2|}{|\bar z_2| - |\bar z_1^2|} \leq \frac{\delta }{(1-3\delta)} \leq 2 \delta.
+    \end{align*}
+ Similarly,
+    \begin{align*}
+       \left| \frac{\bar z_1}{\bar z_2 - \bar z_1^2}\right|= \left| \frac{\bar z_1}{\bar z_2 - \bar z_1^2}\right| \leq \frac{|\bar z_1|}{|\bar z_2| - |\bar z_1^2|} \leq \frac{\sqrt{\delta d}}{(1-3\delta) d} \leq 2\sqrt{\frac{\delta}{d}}
+    \end{align*}
+    where the last inequality follows for any $\delta < 1/6$ and $d \geq 1.$ Finally, 
+\begin{align*}
+    \left|\frac{1}{\bar z_2 - \bar z_1^2} - \frac{1}{d} \right| = \left| \frac{d - \bar z_2 + \bar z_1^2}{(\bar z_2 - \bar z_1^2) d}\right| \leq \frac{|d - \bar z_2| + \bar z_1^2}{(|\bar z_2| - |\bar z_1^2|) d } \leq \frac{5 \delta }{(1-3\delta)d} \leq 10 \frac{\delta}{d}.
+\end{align*}
+This completes the statement involving $S$. 
+
+To show the statement for $T$ we use a very similar strategy. Notice that $\Sigma_T$ can also be written as in \eqref{eq:cov-S} for a $\bar z_1$ and $\bar z_2$ with an analogous distribution where we substitute $d$ with $\bar d.$ Then, assuming again that we are in $\cE$---defined with the the new $\bar z_1$ and $\bar z_2$ and with $\bar d$ in place of $d$---yields the stated probability bound. Hence, $\left(\Sigma_T - \bar \Sigma_T \right)_{11} = 0 $, while 
+\begin{align*}
+\left|\left(\Sigma_T - \bar \Sigma_T \right)_{12}\right| = |z_1| \leq \sqrt{\delta d}, \quad \text{and} \quad \left|\left(\Sigma_T - \bar \Sigma_T \right)_{22}\right| = |\bar z_2 - d| \leq 4 \delta d,
+\end{align*}
+which completes the proof.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:loweround}}
+    The proof follows along similar lines as the argument in \cite{mourtada2022exact}, also summarized in \cite[Section 3.7]{bach2024learning}.
+    Define $n = |S|$. We have already proved an upper bound that matches \eqref{eq:minimax}, so we focus on proving a lower bound. %
+    We can lower bound the supremum using a prior on $\alpha \sim N\left(0, \tfrac{\sigma^2}{\lambda n} \cdot I\right)$ where $\lambda >0$ is any fixed positive scalar. Let $Y$ denote the random vector of new observations $Y_i = \dotp{\varphi(x_i), \alpha} + \epsilon_i$ with $x_i\in S$. In particular,
+\begin{align}
+\begin{split}
+    \label{eq:lower-bayes}
+        \inf_{\widehat \alpha} \mathop{\sup}_{\alpha}\left\{{R}_T^{(\alpha)}(\widehat \alpha(Y)) - {R}_T^{(\alpha)}( \alpha) \right\} & = \inf_{\widehat \alpha} \mathop{\sup}_{\alpha} \EE_Y \left\| \widehat \alpha - \alpha \right\|_{\Sigma_{T}}^2\\
+    & \geq \inf_{\widehat \alpha} \EE_{\alpha} \EE_Y \left[ \left.  \left\| \widehat \alpha(Y) - \alpha \right\|_{\Sigma_{T}}^2 \, \right| \, \alpha \right]\\
+   & = \inf_{\widehat \alpha} \EE_{Y} \EE_\alpha \left[\left.  \left\| \widehat \alpha(Y) - \alpha \right\|_{\Sigma_{T}}^2 \right| Y\right] \\
+   & \geq \EE_{Y} \inf_{\widehat \alpha} \E_{\alpha} \left[\left.  \left\| \widehat \alpha(Y) - \alpha \right\|_{\Sigma_{T}}^2\right| Y\right],
+\end{split}
+\end{align}
+where the second line uses the prior, and the fourth line uses Jensen's inequality. We can recognize a minimizer for the inner infimum via first-order optimality conditions as the conditional mean
+$
+\widehat \alpha_{\star} = \EE \left[\alpha \mid Y \right].
+$
+In order to explicitly compute $\widehat \alpha_{\star}$, observe that
+$(\alpha,Y)=(\alpha, \Phi(X)\alpha + \epsilon)$ is a jointly Gaussian vector:
+$$ (\alpha, Y)\sim N\left(0, \frac{\sigma^2}{\lambda n}\begin{bmatrix}  I &  \Phi(X)^\top \\
+\Phi(X) &  \Phi(X)\Phi(X)^\top +  \lambda n \cdot I\end{bmatrix}\right).$$
+Next, we will use the following two standard lemmas, whose proofs are elementary.
+\begin{lemma}\label{lem:cond-mean}
+    Let $(X,Y) \sim N\left(0, \begin{bmatrix} \Sigma_{xx} & \Sigma{xy} \\ \Sigma_{yx} & \Sigma_{yy}\end{bmatrix}\right),$ then, $\EE\left(X \mid Y\right) = \Sigma_{xy}\Sigma_{yy}^{-1}Y$.
+\end{lemma}
+\begin{lemma}\label{lem:funny-commutativity}
+    Let $Q \in \R^{d \times r}$ be a rank $r$ matrix, then, $Q^\top \left(QQ^\top - I_d\right)^{-1} = \left(Q^\top Q - I_r\right)^{-1} Q^\top.$
+\end{lemma}
+
+Thus using Lemma~\ref{lem:cond-mean}, we compute
+\begin{align*}
+\widehat \alpha_{\star} &=  \frac{\sigma^2}{\lambda n} \Phi(X)^\top \left(\frac{\sigma^2}{\lambda n} \Phi(X) \Phi(X)^\top +  \sigma^2 I\right)^{-1}  Y \\
+&= \frac{\sigma^2}{\lambda n} \left( \frac{\sigma^2}{\lambda n}\Phi(X)^\top \Phi(X) +  \sigma^2 I\right)^{-1} \Phi(X)^\top Y \\
+&= \left( \Phi(X)^\top \Phi(X) +  \lambda n I\right)^{-1} \Phi(X)^\top Y 
+\end{align*}
+where the second line follows from Lemma~\ref{lem:funny-commutativity}. Substituting this expression into \eqref{eq:lower-bayes} yields
+\begin{align*}
+     &\inf_{\widehat \alpha} \mathop{\sup}_{\alpha}\left\{{R}_T^{(\alpha)}(\widehat \alpha) - {R}_T^{(\alpha)}( \alpha) \right\} \\ 
+     &\hspace{1cm}\geq \EE_{Y} \EE_{\alpha\mid Y} \left\|  \left( \Phi(X)^\top\Phi(X) +  \lambda n I\right)^{-1} \Phi(X)^\top Y   - \alpha \right\|^2_{\Sigma_{T}} \\
+    &\hspace{1cm}= \EE_{\alpha, \varepsilon} \left\|  \left( \Phi(X)^\top\Phi(X) +  \lambda n I\right)^{-1} \Phi(X)^\top\left(  \Phi(X) \alpha + \varepsilon \right) - \alpha \right\|^2_{\Sigma_{T}} \\
+        &\hspace{1cm}= \EE_{\alpha, \varepsilon} \left\|  \left( \Phi(X)^\top\Phi(X) +  \lambda n I\right)^{-1} \Phi(X)^\top\left(  \Phi(X) \alpha - \left(\Phi(X) +  \lambda n I\right)\alpha -\varepsilon \right) - \alpha \right\|^2_{\Sigma_{T}} \\
+        &\hspace{1cm}= \EE_{\alpha, \varepsilon} \left\|  \left( \Phi(X)^\top\Phi(X) +  \lambda n I\right)^{-1} \Phi(X)^\top\left(\varepsilon - n\lambda \alpha\right)  \right\|^2_{\Sigma_{T}} \\
+     & \hspace{1cm}= \EE_{\alpha} \left\|  \lambda\cdot \left(\Sigma_{S} + \lambda\cdot I\right)^{-1} \alpha \right\|^2_{\Sigma_{T}} + \EE_{\varepsilon} \left\|  \left(\Sigma_{S} + \lambda I\right)^{-1} \Phi\left(X\right)^\top \varepsilon  \right\|^2_{\Sigma_{T}} \\
+     & \hspace{1cm}= \frac{\lambda \sigma^2}{n} \Tr  \left(\left(\Sigma_{S} + \lambda I\right)^{-2} \Sigma_{T}\right) + \frac{\sigma^2}{n} \Tr\left(\left(\Sigma_S + \lambda I\right)^{-2} \Sigma_S \Sigma_{T}\right) \\
+       & \hspace{1cm}= \frac{\sigma^2}{n} \Tr  \left(\left(\Sigma_{S} + \lambda I\right)^{-2} \left(\Sigma_{S}+\lambda I\right)\Sigma_{T}\right) \\
+         & \hspace{1cm}=  \frac{\sigma^2}{n} \Tr  \left(\left(\Sigma_S + \lambda I\right)^{-1} \Sigma_{T}\right).
+\end{align*}
+Taking $\lambda \rightarrow 0$ yields a lower bound of $\frac{\sigma^2}{n} \Tr  \left(\left(\Sigma_S\right)^{-1} \Sigma_{T}\right)$, establishing the result. %
+

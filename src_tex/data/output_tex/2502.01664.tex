@@ -1,0 +1,1446 @@
+\documentclass[11pt]{article}
+
+%%%%%%%%%%%%%%%%%%%
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+
+\usepackage{booktabs}
+
+\usepackage{empheq}
+
+
+%%%%%%%%%%%
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage{refcheck}
+
+
+\usepackage{graphicx} %Loading the package
+\graphicspath{{figures/}} %Setting the graphicspat
+
+%\usetikzlibrary[patterns]
+%\definecolor{ududff}{rgb}{0.30196078431372547,0.30196078431372547,1.}
+%\definecolor{qqwuqq}{rgb}{0.,0.39215686274509803,0.}
+%\definecolor{xdxdff}{rgb}{0.49019607843137253,0.49019607843137253,1.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{fullpage, url,amsmath,amsfonts,amssymb,mathtools,mathrsfs,graphicx,  algorithm, float, sansmath,epstopdf,color,caption,enumitem,tabularx}
+\usepackage[final]{pdfpages}
+\usepackage{amsthm}
+\usetikzlibrary{automata,topaths}
+\usetikzlibrary{decorations.pathreplacing,shapes.misc}
+\usepackage{fancyhdr}
+
+%\renewcommand{\chaptername}{Lecture}
+
+%%%%%%%%%%%%%%%%%
+
+
+\def\beq{\begin{equation}}
+\def\eeq{\end{equation}}
+\def\baq{\begin{eqnarray}}
+\def\eaq{\end{eqnarray}}
+\def\baqn{\begin{eqnarray*}}
+\def\eaqn{\end{eqnarray*}}
+\newcommand{\CC}{\mbox{\rm $~\vrule height6.6pt width0.5pt depth0.25pt\!\!$C}}
+%\newcommand{\R}{\mathbb{R}}
+%\newcommand{\N}{\mathbb{N}}
+\newcommand{\ball}{\mathbb{B}}
+\newcommand{\ballc}{\overline{\ball}}
+
+
+
+%%%%%%%%%%%%%%
+
+\usepackage{multirow}
+\usetikzlibrary{calc,arrows}
+\theoremstyle{plain}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{properties}{Properties}
+\newtheorem{example}{Example}
+\newtheorem{theorem}{Theorem}
+%\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{observation}{Observation}
+%\usepackage{floatrow}
+\usepackage{blindtext}
+\def \endprf{\hfill {\vrule height6pt width6pt depth0pt}\medskip}
+%\newenvironment{proof}{\noindent {\bf Proof} }{\endprf\par}
+\usepackage[colorlinks,linkcolor=blue,citecolor=red]{hyperref}
+
+
+\newcommand{\A}{\mathcal{A}}
+
+\newcommand{\loss}{\operatorname*{loss}}
+\newcommand{\minimize}{\mathrm{minimize}}
+\newcommand{\st}{\mathrm{subject to}}
+
+
+\newcommand{\insertrep}[1]{%
+\hspace*{-2.4cm}
+\fbox{\includegraphics[page=1,scale=0.4]{#1}}
+\includepdf[scale=0.4,pages=1-,frame]{#1}
+}
+
+\setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{8.5in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{xcolor, framed}
+\newenvironment{myframedeq}[1][\linewidth]{\FrameSep=4pt\abovedisplayskip=0pt\belowdisplayskip=0pt
+\framed\hsize=#1\leftskip=\dimexpr(\textwidth-#1)/2\relax}
+{\endframed}
+
+
+
+\newcommand{\tcblack}{\textcolor{black}}
+\newcommand{\tcb}{\textcolor{blue}}
+\newcommand{\tcr}{\textcolor{red}}
+\newcommand{\todo}[1]{\tcr{{\bf TODO:}~#1}}
+
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\N}{{\mathbb N}}
+\DeclareMathOperator{\argmin}{argmin}
+\newcommand{\interior}{{\rm int}\kern 0.06em}
+
+\newcommand{\X}{\mathcal X}
+\newcommand{\Y}{\mathcal Y}
+\newcommand{\Z}{\mathcal Z}
+\newcommand{\Hb}{\mathcal{H}}
+\newcommand{\T}{{\rm T}}
+
+\newcommand{\Id}{\mathrm{Id}}
+
+
+
+\newcommand{\Rb}{\mathbb R\cup\{+\infty\}}
+\newcommand{\xb}{\overline x}
+\newcommand{\yb}{\overline y}
+\newcommand{\zb}{\overline z}
+\newcommand{\xinf}{x_\infty}
+\newcommand{\yinf}{y_\infty}
+\newcommand{\zinf}{z_\infty}
+\newcommand{\xku}{x_{k+1}}
+\newcommand{\yku}{y_{k+1}}
+\newcommand{\zku}{z_{k+1}}
+
+%\newcommand{\R}{{\mathbb R}}
+%\newcommand{\N}{{\mathbb N}}
+%\DeclareMathOperator{\argmin}{argmin}
+
+
+\newcommand{\cP}{{\mathcal P}}
+\newcommand{\cC}{{\mathcal C}}
+\newcommand{\cE}{{\mathcal E}}
+\newcommand{\cH}{{\mathcal{H}}}
+\newcommand{\cO}{{\mathcal{O}}}
+\newcommand{\cS}{{\mathcal S}}
+
+\newcommand{\tW}{\widetilde W}
+
+\newcommand{\demi}{\frac{1}{2}}
+\newcommand{\ie}{{\it i.e.}\,\,}
+\newcommand{\cf}{{\it cf.}\,\,}
+
+
+
+\def\a{\alpha}
+\def\oa{\overline{\alpha}}
+\def\ua{\underline{\alpha}}
+\def\b{\beta}
+\def\e{\epsilon}
+\def\d{\delta}
+\def\t{\theta}
+\def\g{\gamma}
+\def\m{\mu}
+\def\s{\sigma}
+\def\l{\lambda}
+\def\<{\langle}
+\def\>{\rangle}
+
+\newcommand\prox{{\rm prox}}%
+\newcommand\dom{{\rm dom}}%
+\newcommand{\dotp}[2]{\left\langle #1,\,#2 \right\rangle}
+\newcommand{\norm}[1]{\left\|{#1}\right\|}
+\newcommand{\pa}[1]{\left({#1}\right)}
+\newcommand{\bpa}[1]{\big({#1}\big)}
+\newcommand{\brac}[1]{\left[{#1}\right]}
+\newcommand{\IPAHD}{\mathrm{(IPAHD)}}
+\newcommand{\IPAHDNS}{\text{\rm{(IPAHD-NS)}\,}}
+\newcommand{\IPAHDSC}{\text{\rm{(IPAHD-SC)}\,}}
+\newcommand{\IPAHDNSSC}{\text{\rm{(IPAHD-NS-SC)}\,}}
+\newcommand{\IGAHD}{\text{\rm{IGAHD}}}
+\newcommand{\IGAHDSC}{\text{\rm{(IGAHD-SC)}\,}}
+\newcommand{\AVD}[1]{\text{\rm{AVD}$_{#1}$}}
+\newcommand{\HBF}{\text{\rm{HBF}}}
+\newcommand{\DINAVD}[1]{\text{\rm{DIN-AVD}$_{#1}$}}
+\newcommand{\DIN}[1]{\text{\rm{(DIN)}$_{#1}$\,}}
+\newcommand{\DINNS}[1]{\text{\rm{(DIN-NS)}$_{#1}$}}
+\newcommand{\ISIHD}{\text{\rm{ISIHD}}}
+\newcommand{\RAG}[1]{\text{\rm{RAG}$_{#1}$}}
+\newcommand{\NAG}[1]{\text{\rm{NAG}$_{#1}$}}
+\newcommand{\IPG}[1]{\text{\rm{IPG}$_{#1}$}}
+\newcommand{\RAPG}[1]{\text{\rm{RAPG}$_{#1}$}}
+
+\newcommand{\seq}[1]{\pa{#1}_{k \in \N}}
+\DeclareMathOperator*{\wlim}{w-lim}
+\newcommand{\qandq}{\quad \text{and} \quad}
+
+\newcommand{\eqdef}{:=}
+
+\newcommand{\rinf}{\R\cup\{+\infty\}}
+
+\usepackage{ulem}
+
+
+
+%\usepackage[final]{graphicx}
+\usepackage{subcaption}
+
+%\usepackage{epsfig}
+%\usepackage{geometry}
+%\geometry{lmargin=1in,rmargin=1in,bmargin=1.0in,tmargin=1.0in}
+\usepackage{pict2e}
+
+\if
+{
+
+\usepackage[pageref]{backref}
+\renewcommand*{\backrefalt}[4]{%
+\ifcase #1 %
+(Not cited)%
+\or
+(Cited on p.~#2)%
+\else
+(Cited on pp.~#2)%
+\fi
+}
+\renewcommand*{\backreftwosep}{, }
+\renewcommand*{\backreflastsep}{, }
+
+
+}
+\fi
+
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%\title{Asymptotic Analysis of State-dependent Sweeping Processes and  New  Algorithms  for Quasi-Variational Inequalities}
+\title{{New  General Fixed-Point Approach to Compute the Resolvent of Composite Operators}}
+\author{Samir Adly\thanks{Laboratoire XLIM, Universit\'e de Limoges,
+123 Avenue Albert Thomas,
+87060 Limoges CEDEX, France\vskip 0mm
+Email: \texttt{samir.adly@unilim.fr}}
+ \qquad Ba Khiet Le \thanks{Optimization Research Group, Faculty of Mathematics and Statistics, Ton Duc Thang University, Ho Chi Minh City, Vietnam\vskip 0mm
+ E-mail: \texttt{lebakhiet@tdtu.edu.vn}}
+ }
+\date{\today}
+\maketitle
+\begin{abstract}
+In this paper,  we  propose a new general  and stable  fixed-point approach to  compute the resolvents of the composition of a set-valued maximal monotone operator with a linear bounded mapping. Weak, strong and linear convergence of the proposed algorithms are obtained. Advantages of our method over the existing approaches are also thoroughly analyzed. 
+  %{An application to the image denoising problem is provided.}
+\end{abstract}
+ {\bf Keywords.} Resolvents of composite operators;  fixed-point approach; maximal monotone operators
+ % L1/TV image denoising
+\section{Introduction}
+Resolvents of maximal monotone operators play an essential role in many fundamental algorithms in optimizations such as proximal point algorithm, Douglas-Rachford splitting, forward-backward splitting and their generalized forms (see, e.g., \cite{Attouch0, Attouch1,Bauschke,Tseng} and the references therein).  
+Our aim is to find a new efficient way to compute the resolvent of the composite operator $C^T\mathcal{M}C$,  where $\mathcal{M}: H_2 \rightrightarrows H_2$ is  maximal monotone and $C: H_1\to H_2$ is a linear bounded mapping with its adjoint $C^T: H_2 \to H_1$ where $H_1, H_2$ are  real Hilbert spaces. % It is known that the resolvent computation of composite operators can be applied  in the image denoising, image reconstruction, traffic equilibrium... and can be used to compute the resolvent of the sum of two maximal monotone operators (see, e.g., \cite{chen,Micchelli,Moudafi}).\\
+% \tcr{May be we can motivate by this, I will smooth it later}.
+ {
+ %Consider \( C : H_1 \to H_2 \), a linear and continuous operator, along with its adjoint \( C^* : H_2^* \to H_1^* \). 
+  It can be rigorously proved that the composed operator \( C^T\mathcal{M}C : H_1 \to H_1 \), defined by \( C^T\mathcal{M}C(x) := \{C^Tu^* | u^* \in \mathcal{M}(Cx)\} \), exhibits monotonicity. Such operators are not only frequently encountered in the study of elliptic partial differential equations but also play a significant role in optimization problems, Lur'e dynamical systems, signal processing, and machine learning, particularly in the context of large-scale data analysis (see, e.g., \cite{ahl2,Brezis,br0,BT,chen,Micchelli,Micchelli1,Moudafi,L1} and references therein). Moreover, they encapsulate, as a particular instance, the scenario where an operator is the pointwise sum of two or more individual operators. However, without additional constraints, the operator \( C^T\mathcal{M}C \) may not necessarily satisfy the property of maximal monotonicity. For sufficient conditions that guarantee maximal monotonicity, we refer to the works cited in \cite{Zalinescu}.
+Further, let \( f : H_2 \to \mathbb{R}\cup\{+\infty\} \) be a function that is convex, proper, and lower semicontinuous.  The composition \( f \circ C \) retains the properties of convexity and lower semicontinuity. Invoking the chain rule of convex analysis yields the relation:
+\[
+C^T\:(\partial f)\:C\subseteq \partial (f \circ C).
+\]
+This inclusion becomes an equality under the constraint qualification \( 0 \in \text{int}(\text{rge}\, (C) - \text{dom} f) \), implying that
+\[
+\partial (f \circ C) = C^T\:(\partial f)\:C.
+\]
+%In the absence of this constraint qualification, the aforementioned inclusion may not be comprehensive, indicating the possibility of it being strict.
+From a numerical perspective, computing the resolvent of \( \partial (f \circ C) \) is crucial for the implementation of algorithms such as the proximal point algorithm. Accurate computation of this resolvent can significantly enhance the performance and convergence properties of  algorithms in solving optimization problems.}
+
+Mathematically, for given $\lambda >0, y\in H_1$ we want to compute the resolvent $J_{\lambda C^T\mathcal{M}C}(y):=x\in H_1$ satisfying 
+\beq\label{comp}
+y\in x+ \lambda C^T\mathcal{M}C x.
+\eeq
+Note that  (\ref{comp}) can be rewritten as follows 
+\begin{equation}\label{lmiso}
+\left\{
+\begin{array}{l}
+x=y-\lambda C^T v\\ \\
+v\in \mathcal{M}C x,
+\end{array}\right.
+\end{equation}
+and  thus  
+$$
+v \in \mathcal{M}(Cy-\lambda CC^Tv) \Leftrightarrow v \in (\mathcal{M}^{-1}+\lambda CC^T)^{-1}(Cy).
+$$
+The equality can be obtained in the latter inclusion if $E:=CC^T$ is invertible \cite{Robinson} since then the operator $\mathcal{M}^{-1}+\lambda CC^T$ is strongly monotone. However the operator $\mathcal{M}^{-1}$  makes the computation complex. 
+
+On the other hand, if $E$ is invertible, similarly to the classical equality $(\mathcal{M}^{-1}+\lambda I)^{-1}=\frac{1}{\lambda}(I-J_{\lambda \mathcal{M}})$ one can show that (see Proposition \ref{formula})
+$$
+(\mathcal{M}^{-1}+\lambda E)^{-1}=\frac{1}{\lambda}E^{-1}(I-J_{\lambda E\mathcal{M}})
+$$
+where $J_{\lambda E\mathcal{M}}$ is the resolvent of $\lambda E\mathcal{M}$ defined by 
+$$
+J_{\lambda E\mathcal{M}}:=(I+\lambda E\mathcal{M})^{-1},
+$$
+and $E\mathcal{M}$ may not be maximal monotone. 
+ It gives a new explanation to the algorithm proposed by  Fukushima \cite{Fukushima}, which does not require $\mathcal{M}^{-1}$. {{Nevertheless} even in a finite-dimensional setting, calculating $E^{-1}$ remains costly when the size of matrix $C$ is too large.}
+
+\vskip 2mm
+%\textcolor{red}{
+% In \cite{Micchelli}, Micchelli-Chen-Xu proposed a new approach based on the fixed-point technique to avoid the above limitation for the case $\mathcal{M}=\partial f$. The result was later considered by  Moudafi  \cite{Moudafi} for the  case of general maximal monotone operator $\mathcal{M}$. The authors found that
+%\beq\label{commou}
+%J_{C^T\mathcal{M}C}y=y-\mu C^T u,
+%\eeq
+%where $u$ is the fixed point of $\mathcal{Q}$ where $\mathcal{Q}:=(I-J_{\mathcal{\frac{1}{\mu}M}} )\circ F$ and $F(u):=Cy+(I-\mu CC^T)u$, for some  $\mu>0$. Then $u$ can be computed  by using well-known fixed point algorithms, such as Krasnoselskii--Mann algorithm to obtain the weak convergence, under the condition $\Vert I-\mu CC^T\Vert \le 1$. Consequently, to compute $J_{\lambda C^T\mathcal{M}C}$, we can apply formula (\ref{commou}) by considering $\mathcal{M}':=\lambda\mathcal{M}$. \tcb{\Large Note that  we cannot apply $C'=\sqrt{\lambda} C$ since  $\mathcal{M}$ is nonlinear in general}. The result was extended to compute $J_{\mathcal{P}+C^T\mathcal{M}C}$ in \cite{chen} with an explicit condition $\mu\in (0, 2/\Vert C\Vert^2)$ with the strong convergence by using averaged operators, where $\mathcal{P}$ is also a maximal monotone operator. We can show that (Lemma \ref{lem1}) the condition $\Vert I-\mu CC^T\Vert \le 1$ is  weaker than the explicit condition $\mu\in (0, 2/\Vert C\Vert^2)$. \tcr{However, one of the limit of this approach is  the very small $\mu$ if the size of $ C$ is big.}
+%This fact motivates us to propose a new direct fixed-point approach to compute $J_{\lambda C^T\mathcal{M}C}$ for any $\lambda >0$, based on the equality $(\mathcal{M}^{-1}+\lambda I)^{-1}=\frac{1}{\lambda}(I-J_{\lambda \mathcal{M}})$. We prove that $J_{\lambda C^T\mathcal{M}C}y=y-\lambda C^T u$, where $u$ is the fixed point of the  operator $\mathcal{N}(u):=\frac{1}{\mu}(I-J_{\mu \mathcal{M}}) (Cy+(\mu I-\lambda CC^T)u)=\mathcal{M}_\mu (Cy+(\mu I-\lambda CC^T)u)$ for some $\mu>0$ and thus provide a new fixed-point based algorithm. Under the condition $\Vert I-\frac{\lambda}{\mu} CC^T\Vert \le 1$, we can have the weak and strong convergence of our algorithm. In addition, if $CC^T$ is invertible, we can choose $\lambda$ and $\mu$   such that the linear convergence is obtained. Note that Micchelli-Chen-Xu's approach concerns only $\mu$ in the convergence condition $\Vert I-\mu CC^T\Vert \le 1$ while our approach uses both parameters $\lambda$ and $\mu$ which make us flexible to choose these parameters not very big nor very small, especially when the size of $C$ is big. 
+%\tcr{The obtained results can be applied to the L1/TV image denoising model.}
+%}
+%\vskip 2mm
+In \cite{Micchelli}, Micchelli, Chen, and Xu introduced an new efficient approach using fixed-point techniques to address certain limitations in the case where $\mathcal{M} = \partial f$. This methodology was further explored by A. Moudafi in \cite{Moudafi} for a general maximal monotone operator $\mathcal{M}$. They established that
+\begin{equation}\label{commou}
+J_{C^T \mathcal{M} C} y = y - \mu C^T u,
+\end{equation}
+where $u$ is the fixed point of the operator $\mathcal{Q}$, defined by 
+\begin{equation}\label{commou1}
+\mathcal{Q} := (I - J_{\mathcal{\frac{1}{\mu} M}}) \circ F \mbox{ with } F(u) := Cy + (I - \mu CC^T)u,
+\end{equation}
+ for some $\mu > 0$. The fixed point $u$ can be determined using well-known algorithms such as the Krasnoselskii--Mann algorithm to obtain weak convergence, provided that 
+\beq\label{fc}
+\| I - \mu CC^T \| \leq 1.
+\eeq
+ To compute $J_{\lambda C^T \mathcal{M} C}$, equation (\ref{commou}) can be applied by setting $\mathcal{M}:= \lambda \mathcal{M}$ and the convergence condition  still involves only the parameter $\mu$ while the parameter $\lambda$ is not used. {It is crucial to note that the substitution $C' = \sqrt{\lambda} C$ is not feasible because $\mathcal{M}$ is generally nonlinear}. Thus this approach is limited by the necessity of a very small $\mu$ if $\Vert C\Vert $ is large. The method was extended to compute $J_{\mathcal{P} + C^T \mathcal{M} C}$ in \cite{chen}, where $\mathcal{P}$ is also a maximal monotone operator, with the explicit condition $\mu \in (0, 2/\| C \|^{2})$ for strong convergence using averaged operators. It is demonstrated (Lemma \ref{lem1}) that the condition $\| I - \mu CC^T \| \leq 1$ is weaker than the explicit condition $\mu \in (0, 2/\| C \|^{2})$. However the explicit condition can be easily used  in practice. We prove that the conditions $\mu \in [0, 2/\| C \|^{2}]$ and  $\| I - \mu CC^T \| \leq 1$ are equivalent if $C$ is a matrix (Proposition \ref{lem1}). 
+
+Motivated by these considerations, we propose a new direct fixed-point approach to compute $J_{\lambda C^T \mathcal{M} C}$ for any $\lambda > 0$, based on the identity $(\mathcal{M}^{-1} + \alpha I)^{-1} = \frac{1}{\alpha}(I - J_{\alpha \mathcal{M}})$. We show that (Corollary \ref{algo2n}) 
+\begin{equation}\label{oural}
+J_{\lambda C^T \mathcal{M} C} y = y - \lambda \mu C^T u,
+\end{equation}
+where $u$ is the fixed point of the operator 
+\beq\label{oural1}
+\mathcal{Q}(u) :=  (I - J_{\frac{1}{\mu} \mathcal{M}}) \Big(Cy + ( I - \lambda \mu CC^T) u\Big).
+\eeq
+ {Our associated algorithm is strongly convergent under the condition 
+ \beq
+ \| I - {\lambda}{\mu} CC^T \| \leq 1.
+ \eeq} 
+ This condition is flexible since it uses both parameters $\lambda$ and $\mu$ especially beneficial when $\Vert C \Vert$ is large. If $\lambda=1$, our fixed-point equation  (\ref{oural}) - (\ref{oural1}) becomes the  fixed-point algorithm (\ref{commou}) - (\ref{commou1}). Furthermore, our algorithm is showed to be more stable (Example \ref{ex1}).
+ In addition, if $CC^T$ is positive definite, $\lambda$ and $\mu$ can be selected to achieve linear convergence.  We also provide an application of our results to compute  equilibria of set-valued Lur'e dynamical systems (Example \ref{ex2}). {The technique can be applied similarly to compute the resolvent $\mathcal{M}_1+C^T\mathcal{M}_2C$ where $\mathcal{M}_1:  H_1 \rightrightarrows H_1, \mathcal{M}_2:  H_2 \rightrightarrows H_2$ are maximal monotone operators. }
+% This advancement has potential applications in the traffic equilibrium model.
+
+
+
+The paper is organized as follows.  In Section \ref{sec2}  we recall some definitions and useful results in the theory of monotone operators.  In Section \ref{sec3}, we provide a new way to compute the resolvent of the composite operators efficiently. The paper  ends in Section \ref{sec5} with some conclusions.
+
+\section{Notations and preliminaries} \label{sec2}
+Let  be  given  a {real} Hilbert space  $H$ with {the inner product $\langle \cdot,\cdot \rangle$ and the associated norm $\Vert \cdot \Vert$.}  
+%Let $K$ be a closed convex subset of $H$. 
+%One defines the distance and the projection from a point $s$ to $K$ as follows
+%$${ d}(s,K):=\inf_{x\in K} \|s-x\|, \;\;{\rm proj}_K(s):={\bar{x}} \in K \;\;{\rm such \;that \;} { d}(s,K)= \|s-{\bar{x}}\|.$$
+%The normal cone  to  $K$ at $x\in K$ is defined  by
+%\beq
+%N_K(x):=\{x^*\in H: \langle x^*, y-x \rangle\le 0,\;\;\forall\;y\in K\}.
+%\eeq
+%It is easy to see that if ${\rm proj}_K(s):={\bar{x}}$ then $s-\bar{x}\in N_K(\bar{x})$.  A  mapping  $f: H\to H$ is called $L$-Lipschitz continuous ($L>0$) provided
+%\beq
+%\Vert f(x)-f(y)\Vert \le L \Vert x-y \Vert,\;\;\forall\;x, y\in H.
+%\eeq
+%If $L\le 1$ then $f$ is called nonexpansive.  It  is called $\mu$-strongly monotone ($\mu>0$) if
+%\beq
+%\langle  f(x)-f(y), x-y \rangle \ge \mu\Vert x-y \Vert^2,\;\;\forall\;x, y\in H.
+%\eeq
+%It follows that if $f$ is $\mu$-strongly monotone then 
+%\beq
+%\Vert f(x)-f(y) \Vert \ge \mu\Vert x-y \Vert.
+%\eeq
+\noindent The domain, the range, the graph and the inverse of a set-valued mapping $\mathcal{M}: {H}\rightrightarrows {H}$ are defined respectively by
+$${\rm dom}(\mathcal{M})=\{x\in {H}:\;\mathcal{M}(x)\neq \emptyset\},\;\;{\rm rge}(\mathcal{M})=\displaystyle\bigcup_{x\in{H}}\mathcal{M}(x)\;\;$$
+ and
+ $$\;\;{\rm gph}(\mathcal{M})=\{(x,y): x\in{H}, y\in \mathcal{M}(x)\},\;\;\;\mathcal{M}^{-1}(y)=\{ x\in H: y\in \mathcal{M}(x) \}.$$
+
+
+
+\noindent {The mapping $\mathcal{M}$ is called monotone if 
+$$
+\langle x^*-y^*,x-y \rangle \ge 0, \;\;\forall \;x, y\in H, x^*\in \mathcal{M}(x) \;{\rm and}\;y^*\in \mathcal{M}(y).
+$$
+Furthermore, if there is no monotone operator $\mathcal{N}$ such that the graph of $\mathcal{M}$ is strictly {included} in  the graph of $\mathcal{N}$, then $\mathcal{M}$ is called maximal monotone. The subdifferential of a proper lower semicontinuous convex function is an important example of maximal monotone mappings.
+ \noindent {The resolvent  of $\mathcal{M}$ is defined  as follows
+$$
+J_\mathcal{M}:=(I+\mathcal{M})^{-1}.
+$$
+}
+It is known that (see, e.g, \cite{Rockafellar}) $J_\mathcal{M}$ is firmly-nonexpansive, i.e., 
+$$
+\langle J_\mathcal{M} x-J_\mathcal{M}y, x-y \rangle \ge \Vert  J_\mathcal{M} x-J_\mathcal{M}y \Vert^2.
+$$
+{We summarize several classical properties of maximal monotone operators in the proposition below (we refer to \cite{AC} for example).}
+{
+\begin{proposition}{\rm (\cite{AC})}\label{Yosida}
+Let $\mathcal{M}:  {H} \rightrightarrows  {H}$ be a maximal monotone operator and let $\lambda>0$. Then
+\begin{enumerate}
+  \item[{\rm (i)}]  The {resolvent} $J_{\lambda \mathcal{M}}:=(I+\lambda \mathcal{M})^{-1} $ is a {nonexpansive}  and single-valued map from $ {H}$ to $ {H}$.
+\item[{\rm (i)}]  The {Yosida approximation} of $\mathcal{M}$  (of index $\lambda$) defined by $$\mathcal{M}_\lambda:=\frac{1}{\lambda}(I-J_{\lambda \mathcal{M}})=(\lambda I+\mathcal{M}^{-1})^{-1}$$ satisfies\\
+\begin{enumerate}
+  \item[{\rm (a)}]  for all $x\in \mathcal{H}$, $\mathcal{M}_\lambda(x)\in \mathcal{M}(J_{\lambda \mathcal{M}} (x))$;
+\item[{\rm (b)}]  $\mathcal{M}_\lambda$ is $\frac{1}{\lambda}$-Lipschitz continuous   and also maximal monotone. 
+\end{enumerate} 
+\end{enumerate}
+\end{proposition}
+}
+\noindent  A linear bounded mapping $D: H\to H$  is called
+ \begin{itemize}
+\item  {{\textit{positive semidefinite}, denoted}  $D\succeq 0$}, if 
+$$\langle Dx,x \rangle \ge 0,\;\;\forall\;x\in H;$$
+\item {{\textit{positive definite},  denoted}  $D\succ 0$}, if there exists $c>0$ such that 
+$$
+\langle Dx,x \rangle \ge c\|x\|^2,\;\;\forall\;x\in H.
+$$
+\end{itemize}
+%\begin{definition}  The resolvent  of $\mathcal{M}$ (of index $\lambda$) with respect to $E$ is defined by 
+%$$
+%J^E_{\lambda\mathcal{M}}:=(I+\lambda E\mathcal{M})^{-1}.
+%$$
+%\end{definition}
+%{We note that if $y=J^E_{\lambda\mathcal{M}}x=(I+\lambda E\mathcal{M})^{-1}x$, $x\in H$ then 
+%\begin{equation}
+%\label{def1Res}
+%x\in y+\lambda E\mathcal{M} (y).
+%\end{equation}}
+\begin{proposition}
+Let {$E\succ 0$}, $\lambda >0$ and $\mathcal{M}:  {H} \rightrightarrows  {H}$ be a maximal monotone operator. Then  $J_{\lambda E\mathcal{M}}:=(I+\lambda E\mathcal{M})^{-1}$ is single-valued and Lipschitz continuous.
+\end{proposition}
+\begin{proof}
+Let $y_i\in J_{\lambda E\mathcal{M}}x_i, i=1, 2.$ Then we have 
+$$
+x_i\in y_i+\lambda E\mathcal{M} (y_i) \Leftrightarrow \frac{1}{\lambda}E^{-1}(x_i-y_i)\in \mathcal{M}(y_i).
+$$
+The {operator} $E^{-1}$ is positive definite since $E$ is positive definite.  Using the monotonicity of $\mathcal{M}$, we have 
+$$
+\langle E^{-1}(x_1-x_2-y_1+y_2), y_1-y_2 \rangle \ge 0.
+$$
+Thus 
+$$
+c\Vert y_1-y_2\Vert^2\le \langle E^{-1}(y_1-y_2), y_1-y_2\rangle\le \langle E^{-1}(x_1-x_2), y_1-y_2 \rangle \le \Vert  E^{-1}\Vert \Vert x_1-x_2\Vert \Vert y_1-y_2\Vert,
+$$
+for some $c>0$ and the conclusion follows. 
+\end{proof}
+% The following result provides a way to characterize the one-sided parallel sum $(\mathcal{M}^{-1}+\lambda E)^{-1}$, which is similar to the classical equality $(\mathcal{M}^{-1}+\lambda I)^{-1}=\frac{1}{\lambda}(I-J_{\lambda \mathcal{M}})$ in Proposition 1.
+{The subsequent result offers a characterization of  $(\mathcal{M}^{-1} + \lambda E)^{-1}$, analogous to the classical identity $(\mathcal{M}^{-1} + \lambda I)^{-1} = \frac{1}{\lambda}(I - J_{\lambda \mathcal{M}})$ presented in Proposition \ref{Yosida}.}
+\begin{proposition}\label{formula}
+If {$E\succ0, \lambda>0$} and $\mathcal{M}:  {H} \rightrightarrows  {H}$ is a maximal monotone operator,  then 
+$$
+(\mathcal{M}^{-1}+\lambda E)^{-1}=\frac{1}{\lambda}E^{-1}(I-J_{\lambda E\mathcal{M}}).
+$$
+\end{proposition}
+\begin{proof}
+{It is easy to see that both operators in the last equality are single-valued}. Let $x\in H$ and $y:=\frac{1}{\lambda}E^{-1}(I-J_{\lambda E\mathcal{M}})(x)$. 
+{We have,
+%Indeed 
+\baqn
+(\mathcal{M}^{-1}+\lambda E)^{-1}(x)=y &\Leftrightarrow& x\in (\mathcal{M}^{-1}+\lambda E)(y).\\
+&\Leftrightarrow&x\in (\mathcal{M}^{-1}+\lambda E)(\frac{1}{\lambda}E^{-1}-\frac{1}{\lambda}E^{-1}J_{\lambda E\mathcal{M}})(x)\\
+&\Leftrightarrow& x\in x-J_{\lambda E\mathcal{M}}x+\mathcal{M}^{-1}(\frac{1}{\lambda}E^{-1}-\frac{1}{\lambda}E^{-1}J_{\lambda E\mathcal{M}})(x) \\
+&\Leftrightarrow& E^{-1}x \in E^{-1}J_{\lambda E\mathcal{M}}x+ \lambda \mathcal{M} (J_{\lambda E\mathcal{M}}x) \\
+&\Leftrightarrow& x\in J_{\lambda E\mathcal{M}}x+\lambda E\mathcal{M} (J_{\lambda E\mathcal{M}}x).
+\eaqn
+The last inclusion is valid as it directly follows from the definition of $J_{\lambda E\mathcal{M}}$.
+}
+\end{proof}
+\section{Main results} \label{sec3}
+In this section, we establish a new general fixed-point equation  to compute efficiently the resolvents of the composite operators  $C^T\mathcal{M}C$ and  $\mathcal{M}_1+C^T\mathcal{M}_2C$ where $C: H_1\to H_2$ is a linear bounded mapping, $\mathcal{M}, \mathcal{M}_2: H_2 \rightrightarrows H_2, \mathcal{M}_1:  H_1 \rightrightarrows H_1$ are maximal monotone operators and $H_1, H_2$ are real Hilbert spaces. The key tool is the   Yosida approximation $\mathcal{M}_\alpha:=\frac{1}{\alpha}(I-J_{\alpha \mathcal{M}})=(\mathcal{M}^{-1}+\alpha I)^{-1}$, $\alpha>0$. 
+\subsection{Resolvent of $C^T\mathcal{M}C$}
+First we  show that the explicit condition $\alpha\in [0,2/\Vert C \Vert^2]$ is stronger than the condition $\Vert I-\alpha CC^T \Vert \le 1$. However the explicit condition can be easily used in practice. These conditions are equivalent if $C$ is a matrix.
+%\begin{lemma}\label{lem1}
+%If $\alpha \in [0,2/\Vert C \Vert^2]$, then  $\Vert I-\alpha CC^T \Vert \le 1$. In addition, if $C$ is a matrix then two condition are equivalent. 
+%\end{lemma}
+%\begin{lemma}\label{lem1}
+%If $\alpha \in \left[0, \frac{2}{\|C\|^2}\right]$, then $\|I - \alpha CC^T\| \leq 1$. \tcb{In addition, if $C$ is a linear operator on finite-dimensional Hilbert spaces (i.e., $C$ can be represented as a matrix)}, then the two conditions are equivalent.
+%\end{lemma}
+%
+%\begin{proof}
+%Suppose that $\alpha \in [0,2/\Vert C \Vert^2]$. For all $x\in H_1$, we have 
+%\baqn
+%\Vert x-\alpha CC^T x\Vert^2&=&\Vert x\Vert^2-2\alpha \langle x, CC^T x \rangle+\alpha^2 \Vert CC^T x\Vert^2\\
+%&\le&\Vert x\Vert^2-2\alpha \Vert C^T x\Vert^2+\alpha^2 \Vert C\Vert^2\Vert C^T x\Vert^2\\
+%&\le&\Vert x\Vert^2
+%\eaqn
+%and thus $\|I - \alpha CC^T\| \leq 1$.  
+%
+%\tcb{Next  suppose that if $H_1$ and $H_2$ are finite-dimensional Hilbert spaces (in which case C can be represented as a matrix) and $\|I - \alpha CC^T\|  \leq 1$, we will prove that $\alpha \in [0,2/\Vert C \Vert^2]$. Assume that $\alpha>2/\Vert C \Vert^2$. Let $B=CC^T$ then $B$ is a symmetric, positive semi-definite matrix and  $\Vert B \Vert=\Vert C \Vert^2$. There exists $x^*\in H_1$ such that $Bx^*=\Vert B \Vert x^*$. Then 
+%$$
+%x^*-\alpha Bx^*=(1-\alpha \Vert B \Vert)x^*
+%$$
+%where $1-\alpha \Vert B \Vert<1-\frac{2}{ \Vert B \Vert}{ \Vert B \Vert}=-1.$ Consequently $\|I - \alpha CC^T\|  > 1$, a contradiction and the conclusion follows. }
+%\end{proof}
+%%%%%%%%%%%%%%%
+% New readction of the Lemma
+{
+\begin{proposition}\label{lem1}
+Let $C: H_1 \to H_2$ be a linear bounded mapping between Hilbert spaces. If $\alpha \in \left[0, \frac{2}{\|C\|^2}\right]$, then $\|I - \alpha CC^T\| \leq 1$. In addition, if $H_1=\R^n$ and $H_2=\R^m$ (i.e., $C$ can be represented as a matrix), then the two conditions are equivalent.
+\end{proposition}
+\begin{proof}
+First, suppose that $\alpha \in [0,2/\|C\|^2]$. For all $x\in H_1$, we have 
+\begin{align*}
+\|x-\alpha CC^T x\|^2 &= \|x\|^2 - 2\alpha \langle x, CC^T x \rangle + \alpha^2 \|CC^T x\|^2 \\
+&\leq \|x\|^2 - 2\alpha \|C^T x\|^2 + \alpha^2 \|C\|^2\|C^T x\|^2 \\
+&= \|x\|^2 - \alpha \|C^T x\|^2 (2 - \alpha \|C\|^2) \\
+&\leq \|x\|^2
+\end{align*}
+where the last inequality follows from $\alpha \leq 2/\|C\|^2$. Thus, $\|I - \alpha CC^T\| \leq 1$.\\
+Next, suppose that $H_1=\R^n$ and $H_2=\R^m$ and $\|I - \alpha CC^T\| \leq 1$. We will prove that $\alpha \in [0,2/\|C\|^2]$ by contradiction. Assume that $\alpha > 2/\|C\|^2$. Let $B = CC^T$; then $B$ is a symmetric, positive semi-definite matrix and $\|B\| = \|C\|^2$. By the spectral theorem, there exists a unit vector $x^* \in H_1$ such that $Bx^* = \|B\| x^*$. Then 
+\[
+(I - \alpha B)x^* = (1 - \alpha \|B\|)x^*
+\]
+where $1 - \alpha \|B\| < 1 - \frac{2}{\|B\|}\|B\| = -1$. Consequently,
+\[
+\|I - \alpha CC^T\| = \|I - \alpha B\| \geq \|(I - \alpha B)x^*\| = |1 - \alpha \|B\|| > 1.
+\]
+This contradicts our assumption that $\|I - \alpha CC^T\| \leq 1$. Therefore, we must have $\alpha \in [0,2/\|C\|^2]$.
+\end{proof}
+}
+%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%\tcb{
+%}
+%\begin{theorem}\label{tmf}
+%Let be given $\lambda>0$ and $y\in H_1$. Then $J_{\lambda C^T\mathcal{M}C}y=y-\lambda C^T u$, where $u$ is the fixed point of the  operator $\mathcal{N}(u):=\mathcal{M}_\mu (Cy+(\mu I-\lambda CC^T)u)$, i.e., 
+%\beq\label{fixp}
+%u=\mathcal{M}_\mu (Cy+(\mu I-\lambda CC^T)u)
+%\eeq
+%for any $\mu>0$ and $\mathcal{M}_\mu$ denotes the Yosida approximation of $\mathcal{M}$ (of index $\mu$). In addition, if $\frac{\lambda}{\mu}\le 2/\Vert C\Vert^2$ then $\Vert I-\frac{\lambda}{\mu} CC^T \Vert \le 1$ and thus $\mathcal{N}$ is nonexpansive.
+%\end{theorem}
+{{
+\begin{theorem}\label{tmf}
+Let $\lambda > 0$ and $y \in H_1$ be given. Then, the operator $J_{\lambda C^T \mathcal{M} C} y$ can be expressed as $y - \lambda C^T v$, where $v$ is the fixed point of the operator $\mathcal{N}:H_2\to H_2$ defined by
+$$v\mapsto\mathcal{N}(v) := \mathcal{M}_{\frac{1}{\mu}} \Big(Cy + (\frac{1}{\mu} I - \lambda CC^T)v\Big),$$
+% that is,
+%\begin{equation}\label{fixp}
+%u = \mathcal{M}_\mu (Cy + (\mu I - \lambda CC^T)u),
+%\end{equation}
+for any $\mu > 0$ and $\mathcal{M}_{\frac{1}{\mu}}$ denotes the Yosida approximation of $\mathcal{M}$ with index $\frac{1}{\mu}$.\\
+ Furthermore, if ${\lambda}{\mu} \leq \frac{2}{\|C\|^2}$, then $\left\|I - {\lambda}{\mu} CC^T\right\| \leq 1$, thereby ensuring that $\mathcal{N}$ is {nonexpansive}.
+\end{theorem}
+}}
+\begin{proof} 
+%From (\ref{lmiso}), we deduce  that $u \in \mathcal{M}(Cy-\lambda CC^Tu)$. 
+%One has 
+%\baqn
+%&&u \in \mathcal{M}(Cy-\lambda CC^Tu) \Leftrightarrow Cy-\lambda CC^Tu \in \mathcal{M}^{-1}(u)\\
+%&&\Leftrightarrow Cy+(\mu I-\lambda CC^T)u\in (\mathcal{M}^{-1}+\mu I)u  \Leftrightarrow u = (\mathcal{M}^{-1}+\mu I)^{-1}(Cy+(\mu I-\lambda CC^T)u)\\
+%&& \Leftrightarrow u=\mathcal{M}_\mu (Cy+(\mu I-\lambda CC^T)u),
+%\eaqn
+{From (\ref{lmiso}), we deduce that $v \in \mathcal{M}(Cy - \lambda CC^T v)$. We have
+\begin{align*}
+v \in \mathcal{M}(Cy - \lambda CC^T v) 
+&\Leftrightarrow Cy - \lambda CC^T v \in \mathcal{M}^{-1}(v) \\
+&\Leftrightarrow Cy + (\frac{1}{\mu} I - \lambda CC^T)v \in (\mathcal{M}^{-1} + \frac{1}{\mu} I)v \\
+&\Leftrightarrow v = (\mathcal{M}^{-1} + \frac{1}{\mu} I)^{-1}(Cy + (\frac{1}{\mu} I - \lambda CC^T)v) \\
+&\Leftrightarrow v = \mathcal{M}_{\frac{1}{\mu}} (Cy + (\frac{1}{\mu} I - \lambda CC^T)v),
+\end{align*}
+where  $\mathcal{M}_{\frac{1}{\mu}}=(\mathcal{M}^{-1}+\frac{1}{\mu} I)^{-1}$ (see Proposition \ref{Yosida}).} \\
+If ${\lambda}{\mu}\le 2/\Vert C\Vert^2$, then  $\Vert I-{\lambda}{\mu} CC^T \Vert \le 1$ (Lemma \ref{lem1}) and the mapping $L(u):=Cy+(\frac{1}{\mu} I-\lambda CC^T)u$ is $\frac{1}{\mu}$-Lipschitz continuous. Since $\mathcal{M}_{\frac{1}{\mu}}$ is ${\mu}$-Lipschitz continuous, $\mathcal{N}$ is {nonexpansive}. 
+\end{proof}
+Theorem \ref{tmf} can be used to design a numerical algorithm to compute a fixed point of the operator $\mathcal{N}$ and hence the resolvent  $J_{\lambda C^T\mathcal{M}C}$.
+%\begin{theorem}\label{algokm}
+%Let be given $\lambda>0$ and $y\in H_1$.  Choose $\mu$ such that $\frac{\lambda}{\mu}\in (0,2/\Vert C\Vert^2)$ and the sequence $(\alpha_k)\subset (0,1)$ satisfying $\sum_{k=1}^\infty \alpha_k(1-\alpha_k)=\infty$. We construct the sequence $(u_k)$ as follows
+%$$
+%\bold{Algorithm \;1:} \;\;\;\;\; u_0\in H, \;\;u_{k+1}=(1-\alpha_k)u_k+\alpha_k\mathcal{N}(u_k),\;\;\; k=0, 1,2\ldots.
+%$$
+%Then ($u_k$) converges weakly to a fixed point $u$ of $\mathcal{N}$ and  $J_{\lambda C^T\mathcal{M}C}y=y-\lambda C^T u$.\\
+% In addition, if $\inf \alpha_k >0$ then the sequence $(x_k)$ defined by $x_k:=y-\lambda C^T u_k$ converges strongly to  $J_{\lambda C^T\mathcal{M}C}y$.
+%\end{theorem}
+{
+\begin{theorem}\label{algokm}
+Let $\lambda > 0$ and $y \in H_1$ be given. Choose $\mu>0$ such that ${\lambda}{\mu} \in (0, 2/\|C\|^2)$, and let $(\alpha_k) \subset (0,1)$ satisfy $\sum_{k=1}^\infty \alpha_k (1 - \alpha_k) = \infty$. We construct the sequence $(v_k)$ as follows:
+\begin{equation*}
+\textbf{Algorithm 1:} \quad v_0 \in H, \quad v_{k+1} = (1 - \alpha_k)v_k + \alpha_k \mathcal{N}(v_k), \quad k = 0, 1, 2, \ldots.
+\end{equation*}
+Then, the sequence $(v_k)$ converges weakly to a fixed point $v$ of $\mathcal{N}$, and $J_{\lambda C^T \mathcal{M} C} y = y - \lambda C^T v$.\\
+Furthermore, if $\inf \alpha_k > 0$, then the sequence $(x_k)$ defined by $x_k := y - \lambda C^T v_k$ converges strongly to $J_{\lambda C^T \mathcal{M} C} y$.
+\end{theorem}
+}
+\begin{proof}
+Using Theorem  \ref{tmf} and Krasnoselskii-Mann algorithm (see, e.g., \cite{Bauschke}), the weak convergence of ($u_k$) to some  fixed point $u$ of $\mathcal{N}$ follows. It remains to prove the strong convergence of $(v_k)$. We have 
+\beq\label{udecre}
+\Vert v_{k+1}-v\Vert\le(1-\alpha_k) \Vert v_{k}-v\Vert+\alpha_k\Vert \mathcal{N}(v_k)-\mathcal{N}(v)\Vert\le \Vert v_{k}-v\Vert,
+\eeq
+ where we use the fact that  $v=\mathcal{N}(v)$. Thus the sequence $( \Vert v_{k}-v\Vert)$ is decreasing and converges. On the other hand,  (\ref{udecre}) can be rewritten as follows
+ \baqn
+ \Vert v_{k+1}-v\Vert 
+ & \le&  \Vert v_{k}-v\Vert+\alpha_k(\Vert \mathcal{N}(v_k)-\mathcal{N}(v)\Vert- \Vert v_{k}-v\Vert)\\
+ &\le&  \Vert v_{k}-v\Vert.
+ \eaqn
+{Let $k\to \infty$, we obtain 
+\baq
+\alpha_k(\Vert \mathcal{N}(v_k)-\mathcal{N}(v)\Vert- \Vert v_{k}-v\Vert)\to 0.
+\eaq
+Since $\inf \alpha_k =\alpha> 0$ and $\Vert \mathcal{N}(v_k)-\mathcal{N}(v)\Vert\le \Vert v_{k}-v\Vert$, we imply that
+\baq
+0=\lim_{k\to \infty}\alpha_k( \Vert v_{k}-v\Vert-\Vert \mathcal{N}(v_k)-\mathcal{N}(v)\Vert)\ge \lim_{k\to \infty}\alpha( \Vert v_{k}-v\Vert-\Vert \mathcal{N}(v_k)-\mathcal{N}(v)\Vert)\ge 0,
+\eaq
+which deduces that $ \lim_{k\to \infty}\Vert \mathcal{N}(v_k)-\mathcal{N}(v)\Vert= \lim_{k\to \infty} \Vert v_{k}-v\Vert.$
+Note that
+$$
+\Vert CC^T(v_k-v)\Vert \le \Vert C \Vert \Vert C^T(v_k-v)\Vert. 
+$$
+Thus 
+\baqn
+ \Vert \mathcal{N}(v_k)-\mathcal{N}(v)\Vert^2&\le& {\mu^2}\Vert (\frac{1}{\mu} I-\lambda CC^T)(v_k-v)\Vert^2\\
+  &\le& \Vert v_{k}-v\Vert^2- 2 {\lambda}{\mu} \Vert C^T(v_k-v)\Vert^2 + {\lambda^2}{\mu^2}\Vert CC^T(v_k-v)\Vert^2\\
+   &\le& \Vert v_{k}-v\Vert^2-  2 \frac{\lambda\mu}{ \Vert C \Vert^2}\Vert CC^T(v_k-v)\Vert^2+ {\lambda^2}{\mu^2}\Vert CC^T(v_k-v)\Vert^2\\
+ &\le& \Vert v_{k}-v\Vert^2-{\lambda^2}{\mu^2}(\frac{2}{\lambda\mu\Vert C\Vert^2}-1)\Vert CC^T(v_k-v)\Vert^2.
+\eaqn
+Let $k\to \infty$, since ${\lambda}{\mu} \in (0, 2/\|C\|^2)$ we obtain that $\Vert CC^T(v_k-v)\Vert\to 0$. \\
+Note that $(v_k)$ is bounded, we infer that $\Vert C^T(v_k-v)\Vert^2=\langle CC^T(v_k-v), v_k-v \rangle\le   \Vert CC^T(v_k-v)\Vert \Vert  v_k-v \Vert \to 0$, {which means that $C^Tv_k\to C^Tv$ strongly}. Therefore $x_k= y - \lambda C^T v_k$ converges strongly to $J_{\lambda C^T\mathcal{M}C}y=y-\lambda C^T v$.}
+\end{proof}
+%\begin{remark}\normalfont
+%{Micchelli-Chen-Xu's algorithm is established for $\lambda=1$ with  one parameter  $\mu$ in the convergence condition and the convergence is  weak under the condition $\| I - \mu CC^T \| \leq 1$ or more explicitly $\mu\in  (0, 2/\|C\|^2)$. Let us note that for general $\lambda>0$, this approach is also involved only  one parameter $\mu$. It is impossible for computers if $\|C\|$ is big. On the other hand, Theorem \ref{algokm} allows us to directly compute $J_{\lambda C^T\mathcal{M}C}$ with strong convergence under the condition ${\lambda}/{\mu} \in (0, 2/\|C\|^2)$.  Since both parameters $\mu$ and $\lambda$ are involved in the convergence condition, we are more flexible to choose them not very big nor very small, especially when $\Vert C\Vert$ is  big. Note that in most of  optimization algorithms, $\lambda>0$ is not fixed and can be chosen arbitrarily.}
+%\end{remark}
+
+Using Theorems \ref{tmf} and \ref{algokm},  by letting $v=\mu u$ and the fact that $\mathcal{M}_{\frac{1}{\mu}}=\mu  (I - J_{\frac{1}{\mu} \mathcal{M}})$, we obtain the following results.
+
+\begin{corollary}\label{algo2n}
+Let $\lambda > 0$ and $y \in H_1$ be given. Then, the operator $J_{\lambda C^T \mathcal{M} C} y=y - \lambda \mu C^T u$, where $u$ is the fixed point of the operator $\mathcal{Q}:H_2\to H_2$ defined by
+$$u\mapsto\mathcal{Q}(u) :=  (I - J_{\frac{1}{\mu} \mathcal{M}}) \Big(Cy + ( I - \lambda \mu CC^T) u\Big), \mu>0.$$
+ Furthermore, if ${\lambda}{\mu} \leq \frac{2}{\|C\|^2}$, then $\left\|I - {\lambda}{\mu} CC^T\right\| \leq 1$, thereby ensuring that $\mathcal{Q}$ is {nonexpansive}.
+\end{corollary}
+
+\begin{corollary}\label{alkm}
+Let $\lambda > 0$ and $y \in H_1$ be given. Choose $\mu>0$ such that ${\lambda}{\mu} \in (0, 2/\|C\|^2)$, and let $(\alpha_k) \subset (0,1)$ satisfy $\sum_{k=1}^\infty \alpha_k (1 - \alpha_k) = \infty$. We construct the sequence $(u_k)$ as follows:
+\begin{equation*}
+\textbf{Algorithm 2:} \quad u_0 \in H_2, \quad u_{k+1} = (1 - \alpha_k)u_k + \alpha_k \mathcal{Q}(u_k), \quad k = 0, 1, 2, \ldots.
+\end{equation*}
+Then, the sequence $(u_k)$ converges weakly to a fixed point $u$ of $\mathcal{Q}$, and $J_{\lambda C^T \mathcal{M} C} y = y - \lambda \mu C^T u$.\\
+Furthermore, if $\inf \alpha_k > 0$, then the sequence $(x_k)$ defined by $x_k := y - \lambda \mu C^T u_k$ converges strongly to $J_{\lambda C^T \mathcal{M} C} y$.
+\end{corollary}
+{
+\begin{remark}\normalfont
+The algorithm developed by Micchelli-Chen-Xu \cite{Micchelli} and later by Moudafi \cite{Moudafi} is formulated using only a single parameter $\mu$ within the convergence condition. The convergence is weak under the condition $\| I - \mu CC^T \| \leq 1$.  However, when $\|C\|$ is large, this can be computationally infeasible. In contrast, Theorem \ref{algokm} allows for the direct computation of $J_{\lambda C^T\mathcal{M}C}$ with strong convergence under the condition  $\| I - \lambda \mu CC^T \| \leq 1$. This condition, which involves both parameters $\mu$ and $\lambda$, offers greater flexibility in their selection, enabling them to be neither excessively large nor small, especially when $\|C\|$ is substantial. It is also noteworthy that if $\lambda=1$, Algorithm  2 becomes the algorithm used in \cite{Micchelli,Moudafi}, which is an important algorithm in computing the resolvent of the composite operators. Note that even $C$ is not big, our algorithms are also more stable as showed in the following example. 
+\end{remark}
+}
+\begin{example} \label{ex1}
+ Let us provide a simple example to show the advantage of our extension over the  Micchelli-Chen-Xu's approach. Let $\mathcal{M}=\partial \Vert \cdot \Vert_1$ and
+$$
+C=\begin{bmatrix}
+1\;\;\; 3\;\;\; 7\;\; \;0\;\; \;8 \\
+2 \;\;\;4 \;\;\;5 \;\;\;8\; \;\;7 \\
+7\;\;\; 9\; \;\;6\; \;\;0 \;\;\;1 \\
+2\;\;\; 0\;\; \;1\;\; \;4 \;\;\;7 \\
+2 \;\;\;5\; \;\;8\; \;\;3\; \;\;8 \\
+\end{bmatrix}.
+$$
+Then 
+$$
+CC^T=\begin{bmatrix}
+123& 105 &84&65&137 \\
+105  &158 &87  & 90 & 144 \\
+ 84  & 87 & 167  &27  & 115 \\
+ 65&  90  & 27&  70&   80 \\
+137&144& 115&   80 & 166
+\end{bmatrix}.
+$$
+and $\Vert CC^T\Vert=532.64.$
+It is known that (see, e.g., \cite{Micchelli})
+$$
+J_{{\frac{1}{\mu}} \mathcal{M}}(x)=\Big(\max\big(\vert x_1 \vert-\frac{1}{\mu}, 0\big){ \rm sign}(x_1), \ldots, \max\big(\vert x_5 \vert-\frac{1}{\mu}, 0\big){ \rm sign}(x_5)\Big),
+$$
+where $x=(x_1,\ldots,x_5).$
+We want to calculate $J_{\lambda C^T \mathcal{M} C} y$ where $y=[2; 4; -5; 3; 9]$. First we consider 
+ $\lambda=1$, our Algorithm 2 becomes Micchelli-Chen-Xu's algorithm. To find the fixed point $u$ of $\mathcal{Q}$, we use $\alpha_k=0.3$ in  Algorithm 2 and stop after $500$ iterations or $\Vert u_{k+1}-u_k\Vert \le 10^{-3}$. Although Micchelli-Chen-Xu's algorithm converges, its output are different with different $\mu$ while they must have the same value if the convergence condition   $ \left\|I - {}{\mu} CC^T\right\| \le 1$ is satisfied.
+ \begin{center}
+    \begin{tabular} { | c | c | c | c |  c | }
+    \hline
+     $\mu$ & $10^{-2}$ &$10^{-3}$ \\
+    \hline
+  $ \left\|I - {}{\mu} CC^T\right\| $ & $4.33$ &$1$\\
+  \hline
+   % \multirow {3} {4em} 
+    $J_{ C^T \mathcal{M} C} y$ & $( 8.73, 15.31, 9.13, 9.45, 22.85)$&$(-0.85, 3.66, -5.01, -1.26, 3.23)$ \\
+    \hline
+    \end{tabular}
+    \end{center}
+     \begin{center}
+    \begin{tabular} { | c | c | c | c |  c | }
+    \hline
+     $\mu$ & $10^{-4}$ &$10^{-5}$ \\
+    \hline
+  $ \left\|I - {}{\mu} CC^T\right\| $ & $1$ &$1$\\
+  \hline
+   % \multirow {3} {4em} 
+    $J_{ C^T \mathcal{M} C} y$ & $( 0.25, 3.69, -5.76, -1.53, 3.34)$&$(0.99, 2.61, -7.20, 0.82, 5.45)$ \\
+    \hline
+    \end{tabular}
+    \end{center}
+    Next we use our Algorithm 2 with $\lambda=0.01$. Our algorithm converges and the outputs are the same with different values of $\mu$, even the convergence condition   $ \left\|I - {\lambda}{\mu} CC^T\right\| \le 1$ is not satisfied.
+     \begin{center}
+    \begin{tabular} { | c | c | c | c |  c | }
+    \hline
+     $\mu$ & $1$ &$10^{-1}$ \\
+    \hline
+  $ \left\|I - {}{\lambda\mu} CC^T\right\| $ & $4.33$ &$1$\\
+  \hline
+   % \multirow {3} {4em} 
+    $J_{ \lambda C^T \mathcal{M} C} y$ & $( 1.86, 3.79, -5.27, 2.85, 8.69)$&$( 1.86, 3.79, -5.27, 2.85, 8.69)$ \\
+    \hline
+    \end{tabular}
+    \end{center}
+     \begin{center}
+    \begin{tabular} { | c | c | c | c |  c | }
+    \hline
+     $\mu$ & $10^{-2}$ &$10^{-3}$ \\
+    \hline
+  $ \left\|I - {\lambda}{\mu} CC^T\right\| $ & $1$ &$1$\\
+  \hline
+   % \multirow {3} {4em} 
+    $J_{ \lambda C^T \mathcal{M} C} y$ & $( 1.86, 3.79, -5.27, 2.85, 8.69)$&$( 1.86, 3.79, -5.27, 2.85, 8.69)$ \\
+    \hline
+    \end{tabular}
+    \end{center}
+    It means that our Algorithm 2 is not only more general but also more stable than Micchelli-Chen-Xu's algorithm. \qed
+\end{example}
+
+Note that $CC^T$ is symmetric and positive semidefinite. If $CC^T$ is positive definite, we even obtain the linear rate convergence of our algorithm.
+\begin{theorem}\label{linear}
+  If  $\Vert I-{\lambda}{\mu} CC^T \Vert < 1$, then Algorithm 1  in Theorem \ref{algokm} converges with linear rate. Particularly, if  {$E:=CC^T\succ 0$}, we can choose $\lambda>0, \mu >0$ such that the convergence rate of Algorithm 1   is linear.
+\end{theorem}
+\begin{proof}
+If $\Vert I-{\lambda}{\mu} CC^T \Vert < 1$, then $\mathcal{N}$ is a contraction and thus Algorithm 1  in Theorem \ref{algokm} converges with linear rate. 
+
+If $CC^T$ is positive definite there exists $c>0$ such that 
+$$
+\langle Ex,x \rangle \ge c \Vert x \Vert^2, \;\;\forall\;\;x\in H_1.
+$$
+{Let  $\gamma:={\lambda}{\mu}$.  We choose $\mu>0$ such that  $\gamma=\frac{c}{\Vert E\Vert^2} \Leftrightarrow \mu=\frac{c}{\lambda \Vert E\Vert^2}$}. Then
+\baqn
+\Vert (I-\gamma E)x\Vert^2&=&x^2-2\gamma\langle Ex, x \rangle+\gamma^2\Vert Ex\Vert^2.\\
+&\le & (1-2\gamma c+\gamma^2\Vert E\Vert^2)\Vert x\Vert^2\\
+&\le & (1-\frac{c^2}{ \Vert E\Vert ^2})\Vert x \Vert^2,
+\eaqn
+where $\Vert E\Vert$ denotes the induced norm of the linear bounded operator $E$.
+It means that  $\Vert I-{\lambda}{\mu} CC^T \Vert < 1$, and the conclusion follows. 
+\end{proof}
+\begin{remark}\normalfont
+The condition {$CC^T\succ 0$} holds, for example when $C\in\R^{m\times n}$ is a matrix with full row rank. 
+\end{remark}
+Next we provide an application of our development to compute equilibria of set-valued Lur'e dynamical systems.
+\begin{example}  \label{ex2}
+Let us consider a class of set-valued Lur'e dynamical systems of the  following form  
+\begin{subequations}
+\label{eq:tot}
+\begin{empheq}[left={({\mathcal L})}\empheqlbrace]{align}
+  & \dot{x}(t) = -f(x(t))+B\lambda(t),\; {\rm a.e.} \; t \in [0,+\infty); \label{1a}\\
+  & y(t)=Cx(t),\\
+  &  \lambda(t)   \in -\mathcal{M}(y(t)), \;t\ge 0;\\
+  & x(0) = x_0.
+\end{empheq}
+\end{subequations}
+where $x: [0,\infty)\to H_1$ is the state variable and $f: H_1\to H_1$ is Lipschitz continuous. The operators $B:H_2\to H_1, C: H_1\to H_2$ are linear bounded and there exists a positive definite linear bounded operator $P$ such that $PB=C^T$ while the set-valued mapping $\mathcal{M}: H_2 \rightrightarrows H_2$ is maximal monotone. Set-valued Lur'e dynamical systems have been a  fundamental model in control theory, engineering and applied mathematics (see, e.g., \cite{ahl2,br0,BT,L1} and  references therein).    Note that  $({\mathcal L})$ can be rewritten as follows
+\beq
+\dot{x} \in -\mathcal{H}(x), \;\;\;x(t_0) = x_0,
+\eeq
+where $\mathcal{H}(x)=f(x)+BFCx$. An equilibrium point $x^*$ of $({\mathcal L})$ satisfies 
+\beq\label{lure}
+0 \in f(x^*)+B\mathcal{M}(Cx^*)\Leftrightarrow 0\in Pf(x^*) + C^T\mathcal{M}(Cx^*).
+\eeq
+In order to solve (\ref{lure}), it requires to compute the resolvent of the composite operator $C^T\mathcal{M}C$.\qed 
+\end{example}
+
+\subsection{Resolvent of $\mathcal{M}_1+C^T\mathcal{M}_2C$}
+Next we want to compute the resolvent of $\mathcal{M}_1+C^T\mathcal{M}_2C$ where $\mathcal{M}_1: H_1 \rightrightarrows H_1, \mathcal{M}_2: H_2 \rightrightarrows H_2$ are maximal monotone and $C: H_1\to H_2$ is a linear bounded mapping. For given $\lambda>0$, $y\in H_1$ we want to find $x:=J_{\lambda (\mathcal{M}_1 + C^T \mathcal{M}_2 C)} y\in H_1$ such that 
+\beq\label{sum}
+y\in x+\lambda\mathcal{M}_1x+\lambda C^T\mathcal{M}_2Cx.
+\eeq 
+
+%\begin{theorem}\label{tmf2}
+%Let be given $\lambda>0$ and $y\in H_1$. Then $J_{\lambda (\mathcal{M}_1+ C^T\mathcal{M}_2C)}y=J_{\lambda\mathcal{M}_1}(y-\lambda C^T u)$, where $u$ is the fixed point of the  operator $\mathcal{P}(u):=(\mathcal{M}_2)_\mu (CJ_{\lambda\mathcal{M}_1}(y-\lambda C^Tu)+ \mu u))$, i.e., 
+%\beq\label{fixp2}
+% u=(\mathcal{M}_2)_\mu (CJ_{\lambda\mathcal{M}_1}(y-\lambda C^Tu)+ \mu u)).
+%\eeq
+%for any $\mu>0$. In addition, if $\frac{\lambda}{\mu}\le 2/\Vert C\Vert^2$ then $\Vert I-\frac{\lambda}{\mu} CC^T \Vert \le 1$ and thus $\mathcal{P}$ is nonexpansive.
+%\end{theorem}
+{
+\begin{theorem}\label{tmf2}
+Let $\lambda > 0$ and $y \in H_1$ be given. Then we have
+$$J_{\lambda (\mathcal{M}_1 + C^T \mathcal{M}_2 C)} y=J_{\lambda \mathcal{M}_1}(y - \lambda C^T u),$$
+where $u$ is the fixed point of the operator $\mathcal{P}: H_2 \to H_2$ defined by
+$$u\mapsto \mathcal{P}(u) := (\mathcal{M}_2)_\kappa \Big(C J_{\lambda \mathcal{M}_1}(y - \lambda C^T u) + \kappa u\Big),$$
+ that is for any $\kappa > 0$,
+\begin{equation}\label{fixp2}
+u = (\mathcal{M}_2)_\kappa \Big(C J_{\lambda \mathcal{M}_1}(y - \lambda C^T u) + \kappa u\Big).
+\end{equation}
+Furthermore, if $\frac{\lambda}{\kappa} \leq \frac{2}{\|C\|^2}$, then $\|I - \frac{\lambda}{\kappa} CC^T \| \leq 1$, and thus $\mathcal{P}$ is {nonexpansive}.
+\end{theorem}
+}
+\begin{proof}
+Note that (\ref{sum}) can be rewritten as follows  
+\begin{equation}
+\left\{
+\begin{array}{l}
+y\in  x+\lambda\mathcal{M}_1x+\lambda C^Tu\\ \\
+u\in \mathcal{M}_2Cx,
+\end{array}\right.
+\end{equation}
+which is equivalent to
+\begin{equation}
+\left\{
+\begin{array}{l}
+ x=J_{\lambda\mathcal{M}_1}(y-\lambda C^Tu)\\ \\
+u\in \mathcal{M}_2(CJ_{\lambda\mathcal{M}_1}(y-\lambda C^Tu)). 
+\end{array}\right.
+\end{equation}
+Similarly as in the proof of Theorem \ref{tmf}, we have 
+\baqn
+u \in \mathcal{M}_2(CJ_{\lambda\mathcal{M}_1}(y-\lambda C^Tu)) &\Leftrightarrow& CJ_{\lambda\mathcal{M}_1}(y-\lambda C^Tu) \in   \mathcal{M}_2^{-1}(u)\\
+&\Leftrightarrow& CJ_{\lambda\mathcal{M}_1}(y-\lambda C^Tu)+ \kappa u\in (\mathcal{M}_2^{-1}+\kappa I)u \\
+& \Leftrightarrow& u=(\mathcal{M}_2)_\kappa \Big(CJ_{\lambda\mathcal{M}_1}(y-\lambda C^Tu)+ \kappa u\Big).
+\eaqn
+Let $P_1(u):=CJ_{\lambda\mathcal{M}_1}(y-\lambda C^Tu)$.  We prove that   $P_2(u):=P_1(u)+\kappa u$ is $\kappa$-Lipschitz continuous if $\frac{\lambda}{\kappa}\le 2/\Vert C\Vert^2$  . Indeed, since $J_{\lambda\mathcal{M}_1}$ is firmly-nonexpansive 
+we have 
+{
+\begin{small}
+\baqn
+ \langle P_1(u_1)-P_1(u_2), u_1-u_2 \rangle 
+&=& \langle CJ_{\lambda\mathcal{M}_1}(y-\lambda C^Tu_1)-CJ_{\lambda\mathcal{M}_1}(y-\lambda C^Tu_2), u_1-u_2\rangle\\
+&=&-\frac{1}{\lambda} \langle J_{\lambda\mathcal{M}_1}(y-\lambda C^Tu_1)-J_{\lambda\mathcal{M}_1}(y-\lambda C^Tu_2), (y-\lambda C^Tu_1)-(y-\lambda C^Tu_2)\rangle\\
+&\le& -\frac{1}{\lambda} \Vert J_{\lambda\mathcal{M}_1}(y-\lambda C^Tu_1)-J_{\lambda\mathcal{M}_1}(y-\lambda C^Tu_2)\Vert^2.
+\eaqn
+\end{small}
+}
+Thus if $\frac{\lambda}{\kappa}\le 2/\Vert C\Vert^2$, one has 
+{
+\baq\nonumber
+\Vert P_2(u_1)-P_2(u_2)\Vert^2&=&\kappa^2\Vert u_1-u_2 \Vert^2+2\kappa \langle P_1(u_1)-P_1(u_2), u_1-u_2 \rangle+\Vert P_1(u_1)-P_1(u_2)\Vert^2\\\nonumber
+&\le&\kappa^2\Vert u_1-u_2 \Vert^2-(\frac{2\kappa}{\lambda}-\Vert C\Vert^2) \Vert J_{\lambda\mathcal{M}_1}(y-\lambda C^Tu_1)-J_{\lambda\mathcal{M}_1}(y-\lambda C^Tu_2)\Vert^2\\
+&\le&\kappa^2\Vert u_1-u_2 \Vert^2.
+\label{estsum}
+\eaq
+}
+Consequently, $P_2$ is $\kappa$-Lipschitz continuous and hence $\mathcal{P}$ is {nonexpansive}. 
+\end{proof}
+%\begin{theorem}\label{algokm2}
+%Let be given $\lambda>0$ and $y\in H_1$.  Choose $\mu>0$ such that $\frac{\lambda}{\mu}\in (0,2/\Vert C\Vert^2)$ and the sequence $(\alpha_k)\subset (0,1)$ satisfying $\sum_{k=1}^\infty \alpha_k(1-\alpha_k)=\infty$. We construct the sequence $(u_k)$ as follows
+%$$
+%\bold{Algorithm \;2:} \;\;\;\;\; u_0\in H, \;\;u_{k+1}=(1-\alpha_k)u_k+\alpha_k\mathcal{P}(u_k),\;\;\; k=0, 1,2\ldots
+%$$
+%where $\mathcal{P}(u):=(\mathcal{M}_2)_\mu (CJ_{\lambda\mathcal{M}_1}(y-\lambda C^Tu)+ \mu u))$.
+%Then ($u_k$) converges weakly to a fixed point $u$ of $\mathcal{P}$ and  $J_{\lambda (\mathcal{M}_1+ C^T\mathcal{M}_2C)}(y)=J_{\lambda\mathcal{M}_1}(y-\lambda C^T u)$.
+%\end{theorem}
+{
+\begin{theorem}\label{algokm2}
+Let $\lambda > 0$ and $y \in H_1$ be given. Choose $\kappa > 0$ such that $\frac{\lambda}{\kappa} \in (0, 2/\|C\|^2)$, and let the sequence $(\alpha_k) \subset (0,1)$ such that $\sum_{k=1}^\infty \alpha_k(1 - \alpha_k) = \infty$. We construct the sequence $(u_k)$ as follows:
+\begin{equation*}
+\textbf{Algorithm 3:} \quad u_0 \in H, \quad u_{k+1} = (1 - \alpha_k)u_k + \alpha_k\mathcal{P}(u_k), \quad k = 0, 1, 2, \ldots
+\end{equation*}
+where $\mathcal{P}(u) := (\mathcal{M}_2)_\kappa \Big(C J_{\lambda \mathcal{M}_1}(y - \lambda C^T u) + \kappa u\Big)$.
+Then, the sequence $(u_k)$ converges weakly to a fixed point $u$ of $\mathcal{P}$. In addition, if  $\inf \alpha_k > 0$, then $J_{\lambda \mathcal{M}_1}(y - \lambda C^T u_k)\to J_{\lambda (\mathcal{M}_1 + C^T \mathcal{M}_2 C)} (y)$ strongly.
+\end{theorem}
+}
+\begin{proof}
+{The weak convergence of $(u_k)$ is easily obtained. For the remain, we do similarly as in the proof of Theorem \ref{algokm}. The sequence $( \Vert u_{k}-u\Vert)$ is decreasing, converges and 
+$$ \lim_{k\to \infty}\Vert \mathcal{P}(u_k)-\mathcal{P}(u)\Vert= \lim_{k\to \infty} \Vert u_{k}-u\Vert.$$
+Similarly as in (\ref{estsum}), we have 
+\baq\nonumber
+\Vert \mathcal{P}(u_k)-\mathcal{P}(u)\Vert^2&=&\Vert u_k-u \Vert^2+\frac{2}{\kappa} \langle P_1(u_k)-P_1(u), u_k-u \rangle+\frac{1}{\kappa^2}\Vert P_1(u_k)-P_1(u)\Vert^2\\\nonumber
+&\le&\Vert u_k-u \Vert^2-\frac{1}{\kappa^2}(\frac{2\kappa}{\lambda}-\Vert C\Vert^2) \Vert J_{\lambda\mathcal{M}_1}(y-\lambda C^Tu_k)-J_{\lambda\mathcal{M}_1}(y-\lambda C^Tu)\Vert^2\\
+&\le&\Vert u_k-u \Vert^2.
+\label{estm}
+\eaq
+Let $k\to\infty$, we must have $ \Vert J_{\lambda\mathcal{M}_1}(y-\lambda C^Tu_k)-J_{\lambda\mathcal{M}_1}(y-\lambda C^Tu)\Vert\to 0$ and the conclusion follows. }
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Application to Traffic Equilibrium Problem}
+%
+%We consider a traffic network represented by a directed graph $G = (N, A)$, where $N$ is the set of nodes and $A \subseteq N \times N$ is the set of arcs. Let $x \in \mathbb{R}^{|A|}$ denote the vector of arc flows, where each component $x_a$ represents the flow on arc $a \in A$. 
+%
+%The traffic equilibrium problem can be formulated as an optimization problem:
+%
+%\[
+%\min_{x \in \mathbb{R}^{|A|}} \{f(x) := c(x) + (\phi \circ C)(x)\}
+%\]
+%
+%where:
+%
+%\begin{itemize}
+%\item $c: \mathbb{R}^{|A|} \to \mathbb{R}$ is a convex, possibly nonsmooth function representing the total cost of flow in the network.
+%\item $C: \mathbb{R}^{|A|} \to \mathbb{R}^{|N|}$ is the node-arc incidence matrix, mapping arc flows to node flows.
+%\item $\phi: \mathbb{R}^{|N|} \to \mathbb{R} \cup \{+\infty\}$ is a proper, lower semicontinuous, convex function incorporating network-wide objectives and constraints.
+%\end{itemize}
+%
+%The cost function $c(x)$ is defined as the sum of individual arc cost functions:
+%
+%\[
+%c(x) = \sum_{a \in A} c_a(x_a)
+%\]
+%
+%where each $c_a: \mathbb{R} \to \mathbb{R}$ is convex and potentially nonsmooth, allowing for realistic modeling of traffic costs including congestion effects.
+%The function $\phi$ is defined as:
+%
+%\tcr{$$
+%\phi(y) =\|y\|_1 + \sum_{i=1}^{|N|}\mu_i( y_i - \kappa_i)^2.
+%$$
+%Here:
+%\begin{itemize}
+%\item $\|y\|_1 = \sum_{i=1}^{|N|} |y_i|$ is the  $\ell_1$-norm of $y$, introducing a sparsity-promoting penalty on node flows.
+%\item $\mu_i > 0$ is a penalty parameter for each node.
+%\item $\kappa_i > 0$ is a network capacity threshold for each node.
+%\end{itemize}}
+%
+%%The function $\phi$ is defined as:
+%%
+%%%\[
+%%%\phi(y) = \begin{cases}
+%%%\|y\|_1 + \mu \max(0, \sum_{i=1}^{|N|} y_i - \kappa) & \text{if } Ky \leq d \\
+%%%+\infty & \text{otherwise}
+%%%\end{cases}
+%%%\]
+%%$$
+%%\phi(y) =\|y\|_1 + \sum_{i=1}^{|N|}\mu_i( y_i - \kappa_i)^2.
+%%$$
+%%Here:
+%%\begin{itemize}
+%%\item $\|y\|_1 = \sum_{i=1}^{|N|} |y_i|$ is the  $\ell_1$-norm of $y$, introducing a sparsity-promoting penalty on node flows.
+%%\item $\mu_i > 0$ is a penalty parameter.
+%%\item $\kappa_i > 0$ is a network capacity threshold.
+%%%\item $K \in \mathbb{R}^{m \times |N|}$ is a constraint matrix encoding flow conservation and demand requirements.
+%%%\item $d \in \mathbb{R}^m$ is the corresponding right-hand side vector.
+%%\end{itemize}
+%
+%%The matrix $K$ and vector $d$ jointly encode the network's flow conservation constraints and origin-destination (OD) demand requirements. Specifically:
+%
+%%\begin{itemize}
+%%\item The first $|N|$ rows of $K$ and entries of $d$ represent flow conservation at each node.
+%%\item The remaining rows correspond to OD pair constraints, with $d$ entries specifying the demand for each OD pair.
+%%\end{itemize}
+%
+%This optimization problem can be reformulated in terms of maximal monotone operators. Let $\mathcal{M}_1 = \partial c$ be the subdifferential of the cost function $c$, and $\mathcal{M}_2 = \partial \phi$ be the subdifferential of $\phi$. Both of these operators are maximal monotone due to the convexity assumptions on $c$ and $\phi$. Our problem can now be expressed as: Find $x^* \in \mathbb{R}^{|A|}$ such that (see, e.g, \cite[Theorem 2.8.3]{Zalinescu})
+%\[
+%0 \in \mathcal{M}_1(x^*) + (C^T\mathcal{M}_2C)(x^*).
+%\]
+%%\tcr{We should justify why $\partial \phi\circ C=C^T\partial \phi C$}.\\
+%
+%This formulation falls within the class of problems involving the sum of maximal monotone operators, for which various solution methods exist. In particular, we are interested in methods that involve computing the resolvents of these operators, specifically $J_{\lambda C^T\mathcal{M}_2C}$ and $J_{\lambda(\mathcal{M}_1 + C^T\mathcal{M}_2C)}$ for some $\lambda > 0$.
+%
+%The abstract nature of this formulation allows for great flexibility in modeling various traffic scenarios, from simple linear cost functions to complex, nonsmooth congestion models, and from basic flow conservation to sophisticated network-wide constraints or objectives.
+%
+%\tcr{
+%This model combines several key features:
+%\begin{enumerate}
+%\item It allows for nonsmooth, convex arc cost functions, capable of modeling complex congestion effects.
+%\item The $\ell_1$-norm in $\phi$ promotes sparsity in node flows, potentially leading to more concentrated traffic patterns.
+%\tcr{\item The quadratic term in $\phi$ penalizes deviations from the capacity threshold at each node, allowing for node-specific congestion control.}
+%\item The reformulation in terms of maximal monotone operators opens up a wide range range of solution methods from convex analysis and monotone operator theory.
+%\end{enumerate}
+%}
+%%This model combines several key features:
+%%\begin{enumerate}
+%%\item It allows for nonsmooth, convex arc cost functions, capable of modeling complex congestion effects.
+%%\item The $\ell_1$-norm in $\phi$ promotes sparsity in node flows, potentially leading to more concentrated traffic patterns.
+%%\item The max term in $\phi$ penalizes excessive total flow in the network.
+%%\item Hard constraints on flow conservation and demand satisfaction are elegantly incorporated through the indicator function in $\phi$.
+%%\item The reformulation in terms of maximal monotone operators opens up a wide range of solution methods from convex analysis and monotone operator theory.
+%%\end{enumerate}
+%
+%
+%\subsection{A Concrete Example}
+%
+%To illustrate the application of our abstract model, we present a specific instance of a traffic equilibrium problem. Consider a network $G = (N, A)$ with the following characteristics:
+%
+%\begin{itemize}
+%\item Set of nodes: $N = \{1, 2, 3, 4, 5\}$
+%\item Set of arcs: $A = \{(1,2), (1,3), (2,3), (2,4), (3,4), (3,5), (4,5), (5,1)\}$
+%\end{itemize}
+%
+%For each arc $a \in A$, we define a cost function $c_a: \mathbb{R} \to \mathbb{R}$ of the form:
+%
+%\[
+%c_a(x_a) = \alpha_a x_a + \beta_a \max(0, x_a - \gamma_a) + \delta_a
+%\]
+%
+%where $\alpha_a > 0$ is the base cost coefficient, $\beta_a > 0$ is the congestion cost coefficient, $\gamma_a > 0$ is the threshold at which congestion effects become significant, and $\delta_a \geq 0$ is a fixed cost. The specific parameters for each arc are as follows:
+%
+%\begin{center}
+%\begin{tabular}{c|cccc}
+%Arc $(i,j)$ & $\alpha_{ij}$ & $\beta_{ij}$ & $\gamma_{ij}$ & $\delta_{ij}$ \\
+%\hline
+%(1,2) & 2 & 1 & 5 & 1 \\
+%(1,3) & 3 & 1.5 & 4 & 2 \\
+%(2,3) & 1 & 0.5 & 6 & 0 \\
+%(2,4) & 2 & 1 & 5 & 1 \\
+%(3,4) & 1 & 0.5 & 7 & 0 \\
+%(3,5) & 3 & 1.5 & 4 & 2 \\
+%(4,5) & 2 & 1 & 5 & 1 \\
+%(5,1) & 1 & 0.5 & 8 & 0
+%\end{tabular}
+%\end{center}
+%
+%The node-arc incidence matrix $C \in \mathbb{R}^{5 \times 8}$ for this network is given by:
+%
+%\[
+%C = \begin{bmatrix}
+%    -1 & -1 &  0 &  0 &  0 &  0 &  0 &  1 \\
+%     1 &  0 & -1 & -1 &  0 &  0 &  0 &  0 \\
+%     0 &  1 &  1 &  0 & -1 & -1 &  0 &  0 \\
+%     0 &  0 &  0 &  1 &  1 &  0 & -1 &  0 \\
+%     0 &  0 &  0 &  0 &  0 &  1 &  1 & -1
+%\end{bmatrix}
+%\]
+%
+%%For the function $\phi: \mathbb{R}^5 \to \mathbb{R} \cup \{+\infty\}$, we set $\mu = 0.1$ and $\kappa = 20$. The constraint matrix $K \in \mathbb{R}^{8 \times 5}$ and the right-hand side vector $d \in \mathbb{R}^8$ are defined as:
+%%
+%%\[
+%%K = \begin{bmatrix}
+%%    1 & -1 &  0 &  0 &  0 \\
+%%    1 &  0 & -1 &  0 &  0 \\
+%%    0 &  1 &  1 &  0 &  0 \\
+%%    0 &  1 &  0 & -1 &  0 \\
+%%    0 &  0 &  1 &  1 &  0 \\
+%%    0 &  0 &  1 &  0 & -1 \\
+%%    0 &  0 &  0 &  1 &  1 \\
+%%   -1 &  0 &  0 &  0 &  1
+%%\end{bmatrix}
+%%\quad
+%%d = \begin{bmatrix}
+%%    5 \\ 0 \\ 0 \\ 8 \\ 0 \\ 6 \\ 0 \\ 5
+%%\end{bmatrix}
+%%\]
+%%
+%%The rows of $K$ and entries of $d$ represent:
+%%\begin{itemize}
+%%\item Rows 1-5: Flow conservation constraints at nodes 1-5 respectively.
+%%\item Row 6: Demand constraint for OD pair (1,4) with demand 8.
+%%\item Row 7: Demand constraint for OD pair (2,5) with demand 6.
+%%\item Row 8: Demand constraint for OD pair (3,1) with demand 5.
+%%\end{itemize}
+%
+%This concrete example provides a specific instance of our abstract model, incorporating nonlinear and nonsmooth cost functions, an L1-norm penalty on node flows, a network capacity constraint, and specific flow conservation and demand requirements. It serves as a testbed for implementing and evaluating optimization algorithms designed to solve the traffic equilibrium problem.
+%
+%\tcr{For the function $\phi: \mathbb{R}^5 \to \mathbb{R}$, we define:
+%$$
+%\phi(y) = \|y\|_1 +\frac{1}{2} \sum_{i=1}^5(\mu_i y_i - \kappa_i)^2
+%$$
+%where:
+%\begin{itemize}
+%\item $\mu_i > 0$ are penalty parameters for each node.
+%\item $\kappa_i > 0$ are network capacity thresholds for each node.
+%\end{itemize}
+%The specific values for $\mu_i$ and $\kappa_i$ would need to be defined for this concrete example.}
+%
+%
+%
+%%\begin{figure}
+%%\begin{center}
+%%\begin{tikzpicture}[
+%%    node distance = 4cm,
+%%    thick,
+%%    >=Stealth,
+%%    vertex/.style={circle, draw, minimum size=0.8cm},
+%%    edge/.style={->, bend left=15},
+%%]
+%%
+%%% Nodes
+%%\node[vertex] (1) at (0,0) {1};
+%%\node[vertex] (2) at (4,3) {2};
+%%\node[vertex] (3) at (4,-3) {3};
+%%\node[vertex] (4) at (8,3) {4};
+%%\node[vertex] (5) at (8,-3) {5};
+%%
+%%% Edges
+%%\draw[edge] (1) to (2);
+%%\draw[edge] (1) to (3);
+%%\draw[edge] (2) to (3);
+%%\draw[edge] (2) to (4);
+%%\draw[edge] (3) to (4);
+%%\draw[edge] (3) to (5);
+%%\draw[edge] (4) to (5);
+%%\draw[edge] (5) to[bend left=45] (1);
+%%
+%%% OD pairs
+%%\draw[->, dashed, thick, red] (1) to[bend right=30] node[midway, below, text=red] {Demand: 8} (4);
+%%\draw[->, dashed, thick, blue] (2) to[bend left=30] node[midway, above, text=blue] {Demand: 6} (5);
+%%\draw[->, dashed, thick, green] (3) to[bend right=45] node[midway, left, text=green] {Demand: 5} (1);
+%%
+%%% Network info
+%%\node[text width=8cm, align=center, below=1cm of 3] {
+%%    $\phi(y) = \|y\|_1 + \sum_{i=1}^5\mu_i( y_i - \kappa_i)^2.$
+%%};
+%%
+%%\end{tikzpicture}
+%%\caption{ }
+%%\label{ }
+%%\end{center}
+%%\end{figure}
+%
+%%%%%%%%%%%%%%%%%%%%
+%\begin{figure}
+%\begin{center}
+%\begin{tikzpicture}[
+%    node distance = 4cm,
+%    thick,
+%    >=Stealth,
+%    vertex/.style={circle, draw, minimum size=0.8cm},
+%    edge/.style={->, bend left=15},
+%]
+%
+%% Nodes
+%\node[vertex] (1) at (0,0) {1};
+%\node[vertex] (2) at (4,3) {2};
+%\node[vertex] (3) at (4,-3) {3};
+%\node[vertex] (4) at (8,3) {4};
+%\node[vertex] (5) at (8,-3) {5};
+%
+%% Edges
+%\draw[edge] (1) to (2);
+%\draw[edge] (1) to (3);
+%\draw[edge] (2) to (3);
+%\draw[edge] (2) to (4);
+%\draw[edge] (3) to (4);
+%\draw[edge] (3) to (5);
+%\draw[edge] (4) to (5);
+%\draw[edge] (5) to[bend left=45] (1);
+%
+%% Network info
+%\node[text width=8cm, align=center, below=1cm of 3] {
+%    $\phi(y) = \|y\|_1 +\frac{1}{2} \sum_{i=1}^5(\mu_i y_i - \kappa_i)^2.$
+%};
+%
+%\end{tikzpicture}
+%\caption{ }
+%\label{ }
+%\end{center}
+%\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%\tcr{TODO: We should code in matlab and solve nuùerically the problem and compare it with other algorithms}.
+%
+%Some fact: if $v={\rm prox}_{\alpha \Vert \cdot \Vert_1 }(u)$ then the components of $v$ is
+%$$
+%v_i=\max \{ \vert u_i \vert -\alpha, 0\} {\rm sign}(u_i)
+%$$
+%
+%
+%\tcr{This concrete example provides a specific instance of our abstract model, incorporating nonlinear and nonsmooth cost functions, an L1-norm penalty on node flows, and quadratic penalties for exceeding node capacities. It serves as a testbed for implementing and evaluating optimization algorithms designed to solve the traffic equilibrium problem.}
+%
+%The optimality condition is: (just for check)
+%$$  0 \in \partial c(y^*)+ C^\top(\partial \phi)\:C\:(y^*)$$
+%where 
+%$$
+%{\rm prox}_{\gamma c}(b)= ({\rm prox}_{\gamma c_1}(b_1),\cdots, {\rm prox}_{\gamma c_5}(b_5))
+%$$
+%$$
+%\partial c_a (x_a)=
+%\left\{
+%\begin{array}{l}
+%\alpha_a \;\;{\rm if} \;\; x_a < \gamma_a\\ \\
+%\alpha_a,\alpha_a+\beta_a] \;\;{\rm if} \;\; x_a=\gamma_a  \\ \\
+%\alpha_a+\beta_a \;\;{\rm if} \;\; x_a>\gamma_a
+%\end{array}\right.
+%$$
+%$$
+%{\rm prox}_{\gamma c_a}(y)=\left\{
+%\begin{array}{l}
+%y- \gamma \alpha_a \;\;{\rm if} \;\; y < \gamma_a+\gamma\alpha_a\\ \\
+%\gamma_a \;\;{\rm if} \;\; \gamma_a+\gamma\alpha_a \le y \le \gamma_a+\gamma(\alpha_a+\beta_a)\\ \\
+%y- \gamma(\alpha_a+\beta_a)  \;\;{\rm if} \;\; x_a>\gamma_a+\gamma(\alpha_a+\beta_a)
+%\end{array}\right.
+%$$
+%$$
+%{\rm prox}_{\gamma \phi}(y)=(x_1,\ldots, x_5), \;\;\;\;\;\;x_i=\left\{
+%\begin{array}{l}
+%(y_i+\kappa_i-1)/(1+\mu_i) \;\;{\rm if} \;\; y > -\kappa_i+1\\ \\
+%0 \;\;{\rm if} \;\; -\kappa_i-1\le y_i \le-\kappa_i+1 \\ \\
+%(y_i+\kappa_i+1)/(1+\mu_i) \;\;{\rm if} \;\; y < -\kappa_i-1
+%\end{array}\right.
+%$$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The algorithm converged with a test arrest value less then the threshold of \(10^{-7}\). The final arc flows obtained are as follows:
+%
+%\begin{table}[h]
+%\centering
+%\begin{tabular}{@{}cc@{}}
+%\toprule
+%Arc & Flow \\ % Notice the use of double backslashes
+%\midrule
+%1 & 0.1397 \\
+%2 & 0.0499 \\
+%3 & 0.0081 \\
+%4 & 7.7617 \\
+%5 & 7.6548 \\
+%6 & 3.8820 \\
+%7 & 0 \\
+%8 & 0 \\
+%\bottomrule
+%\end{tabular}
+%\caption{Final arc flows after algorithm convergence}
+%\label{tab:flows}
+%\end{table}
+%
+%\vskip 2mm
+%The total cost at the optimal solution is \( f(x^*) = 14.1985 \), which includes both the arc costs and the network-wide penalty for exceeding node capacity constraints.
+%
+%The algorithm has successfully converged. This indicates that the solution has stabilized, and further iterations are unlikely to significantly change the results. The flow distribution shows a clear preference for certain arcs:
+%
+%\begin{itemize}
+%\item Arcs 4 and 5 carry the highest flows (7.7617 and 7.6548, respectively), indicating that they are the most utilized routes in the network.
+%\item Arc 6 also carries a significant flow (3.8820), marking it as an important secondary route.
+%\item Arcs 1, 2, and 3 carry relatively low flows, while Arcs 7 and 8 carry no flow, suggesting they are less favorable or redundant routes in the current network configuration.
+%\end{itemize}
+%
+%This distribution implies a non-uniform utilization of the network, which is common in traffic scenarios where certain routes are preferred due to factors such as higher capacity, shorter distance, or lower travel costs.
+%
+%%\newpage
+
+%\section{Numerical Examples} \label{sec4}
+%
+%\section{Application: The L1/TV image denoising model}
+%%It is known that the resolvent computation of composite operators can be used to compute the resolvent of the sum and can be applied  in the image denoising, image reconstruction, traffic equilibrium \ldots  In this section, we provide two applications of computing  resolvents of composite operators. The first one concerns the  L1/TV image denoising model and the second one concerns the finding  equilibria of set-valued Lur'e systems.
+%It is a well-established fact that the computation of resolvents for composite operators finds applications in determining the resolvent of their sum, and this application extends to various domains, including image denoising, image reconstruction, traffic equilibrium, and more. In the forthcoming section, we present two notable applications that use the computation of resolvents for composite operators. The initial application consists in the L1/TV image denoising model, while the subsequent one addresses the identification of equilibria within set-valued Lur'e systems.
+%
+%
+%
+%%\subsection{The L1/TV image denoising model}
+%This section is dedicated to applying the previously developed general methods and theoretical frameworks to the specific case of the L1/TV image denoising model.
+%
+%We start by conceptualizing a digital image as an \( n \times n \) matrix, where \( n \) is a positive integer. For analytical ease, we transform this image matrix into a vector within \( \mathbb{R}^{n^2} \). Here, the element at the \( ij \)-th position in the matrix corresponds to the \( (i+(j - 1)n) \)-th element in the vector form. This model, either the standard L1/TV or its modified version, is a specialized instance of the broader L1/\(\phi \circ B\) framework, wherein we identify specific forms for the convex function \(\phi\) and the matrix \( B \).
+%
+%To articulate the total variation of an image via the convex function \(\phi\) and the matrix \( B \), we introduce a local difference matrix \( D \) of dimensions \( n \times n \):
+%
+%\[
+%D := \begin{bmatrix}
+%0 &  & &\\
+%-1&1& &\\
+%& \ddots &\ddots &\\
+%&  & -1&1 \\
+%\end{bmatrix}
+%\]
+%
+%Matrix \( D \) serves the purpose of differentiating rows or columns within the image matrix. In the context of matrices \( P \) and \( Q \), their Kronecker product is denoted as \( P \otimes Q \). Correspondingly, we define a global difference matrix \( B \), which is a \( 2n^2 \times n^2 \) matrix, using the identity matrix \( I_n \) and the local difference matrix \( D \):
+%
+%\[
+%C := \begin{bmatrix}
+%I_n \otimes D \\
+%D \otimes I_n
+%\end{bmatrix}
+%\]
+%
+%This matrix \( C \) is utilized for differentiating the entire image matrix. In this model, the total variation for an image \( u \in \mathbb{R}^{n^2} \) is expressed as \(\phi(Bu)\). The definition of the convex function \(\phi\) varies based on whether the total variation is anisotropic or isotropic. Specifically, for an image \( z \in \mathbb{R}^{2n^2} \), \(\phi\) is defined as:
+%
+%\[
+%\phi(z) := \|z\|_1 \quad \text{(Anisotropic)} \quad \text{and} \quad \phi(z) := \sum_{i \in \mathbb{N}_{n^2}} \| [z_i, z_{n^2 + i}]^\top\|_2 \quad \text{(Isotropic)}
+%\]
+%
+%Therefore, in the L1/TV image denoising model, we employ the above-defined convex function \(\phi\) and the matrix \( C \).
+%
+%For a given \( x \in \mathbb{R}^d \), we consider the following minimization problem:
+%
+%\[
+%\min \left\{  (\phi \circ C)(u)+\lambda \| u - x \|_1\;:\; u \in \mathbb{R}^d \right\}.
+%\]
+%The optimality condition is:
+%$$  0 \in C^\top(\partial \phi)\:C\:(u^*)+ \lambda \partial (\| \cdot- x \|_1)(u^* ).$$
+%%\tcr{Explain later that the qualification condition is satisfied and that we have $\partial (\phi \circ C) = C^*\:(\partial \phi)\:C$ and the subdifferential of the sum is the sum of the subdifferentials.}
+%
+%For each $x$, we set $S_x=  \lambda \partial (\| \cdot- x \|_1)$ and $T=C^\top(\partial \phi)\:C$. We are looking to find a zero of the the sum of the following maximal monotone operators, i.e. find $u^*$ such that 
+%\begin{equation}
+%\label{zero}
+%0\in S_x(u^*)+T(u^*).
+%\end{equation}
+%For this purpose, we can use the Douglas-Rachford algorithm, which consists in
+%\begin{align*}
+%v_n &= J_{\gamma S_x}(u_n), & (\forall n \in \mathbb{N}) \\
+%w_n &= J_{\gamma T}(2v_n - u_n), \\
+%u_{n+1} &= u_n + \lambda_n(w_n - v_n),
+%\end{align*}
+%where  \((\lambda_n)_{n \in \mathbb{N}}\) is a sequence in \([0, 2]\) such that \(\sum_{n \in \mathbb{N}} \lambda_n (2 - \lambda_n) = +\infty\), 
+% \(\gamma >0\), and  \(u_0 \in \R^d\). It is well-known that \((u_n)_{n \in \mathbb{N}}\) converges weakly to some \(u\) and that \(J_{\gamma S_x}(u)\) is a solution of \eqref{zero}. Since $T=C^\top(\partial \phi)\:C$, we can use Theorem \ref{algokm}, to compute the resolvent $ J_{\gamma T}$.\\
+% 
+% We've conducted some numerical tests to evaluate and compare the performance of our proposed image restoration algorithms against two advanced methods found in current literature. These tests were carried out on a computer running on an iMac Pro and MATLAB R2020a, equipped with a 3.2 GHz Intel Xeon W and 64 GB of RAM.
+%
+%Our focus was on image restoration, specifically addressing the issue of salt-and-pepper noise. We used two a standard 256x256 image ``Lena'' as a test case. The effectiveness of the image restoration was quantitatively assessed using the Peak Signal-to-Noise Ratio (PSNR). PSNR is a common metric in image processing that measures the quality of a restored or reconstructed image compared to the original. It's calculated using the formula:
+%
+%\[
+%\text{PSNR} = 10 \log_{10} \left( \frac{255^2}{\| u - \tilde{u} \|_2^2} \right)
+%\]
+%where \(u\) is the original image, and \(\tilde{u}\) is the restored image. $\lambda = 0.5, \mu=0.08$ maxIter = 500. \\
+%%\begin{table}[h]
+%%\centering
+%%\begin{tabular}{|c|c|c|}
+%%\hline
+%%\textbf{Lambda} & \textbf{PSNR (dB)} & \textbf{SSIM} \\
+%%\hline
+%%0.0010 & 20.33 & 0.3125 \\
+%%0.0028 & 20.34 & 0.3126 \\
+%%0.0077 & 20.35 & 0.3128 \\
+%%0.0215 & 20.38 & 0.3135 \\
+%%0.0599 & 20.48 & 0.3158 \\
+%%0.1668 & 20.98 & 0.3280 \\
+%%0.4642 & 25.48 & 0.4562 \\
+%%1.2915 & 24.37 & 0.4056 \\
+%%3.5938 & 21.85 & 0.3056 \\
+%%10.0000 & 22.50 & 0.3116 \\
+%%\hline
+%%\end{tabular}
+%%\caption{Image Denoising Results (PSNR of noisy image: 20.01 dB)}
+%%\label{tab:denoising_results}
+%%\end{table}
+%
+%%\textbf{Best lambda for PSNR:} 0.4642 (PSNR: 25.48 dB)\\
+%%\textbf{Best lambda for SSIM:} 0.4642 (SSIM: 0.4562)
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=4in]{figure/Mou1}
+%\caption{Moudafi: PSNR : 22.6795 dB, bruitGaussien = 0.1} 
+%\label{swp_rem5}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=4in]{figure/Our1}
+%\caption{Our: PSNR : 25.886 dB, bruitGaussien = 0.1} 
+%\label{swp_rem5}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=4in]{figure/Mou2}
+%\caption{Moudafi: PSNR : 20.1315  dB, bruitGaussien = 0.2} 
+%\label{swp_rem5}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=4in]{figure/Our2}
+%\caption{Our: PSNR : 21.7973 dB, bruitGaussien = 0.2} 
+%\label{swp_rem5}
+%\end{center}
+%\end{figure}
+%\section{Conclusions}\label{sec5}
+%In this paper,  using a different technique we  provide a new  general fixed-point approach to compute the resolvent of  composite operators, which is an extension of Micchelli-Chen-Xu's fixed-point equation. The weak, strong and linear convergence of our algorithm are obtained under more flexible parameters.  We also provide an example to show that our proposed algorithms are not only more general but also more stable. \\
+
+\section{Conclusions}\label{sec5}
+{This paper  introduced a new fixed-point approach for computing the resolvent of composite operators, advancing beyond the classical framework of Micchelli-Chen-Xu \cite{Micchelli,Micchelli1,Moudafi}. The proposed methodology offers several significant theoretical and practical contributions to the field of monotone operator theory and optimization, building upon fundamental work in resolvent operator theory \cite{Bauschke,Robinson}. The primary theoretical contribution lies in the development of a two-parameter fixed-point formulation that generalizes existing single-parameter approaches. We have established that for any $\lambda > 0$ and $y \in H_1$, the resolvent $J_{\lambda C^T\mathcal{M}C}y$ can be expressed as $y - \lambda\mu C^Tu$, where $u$ is the fixed point of a carefully constructed operator $\mathcal{Q}$. This formulation provides enhanced flexibility through the incorporation of both $\lambda$ and $\mu$ parameters, enabling effective computation even when dealing with operators having large norms, a limitation noted in previous works \cite{chen,Moudafi}.}
+
+{Our convergence analysis demonstrates that the proposed algorithms exhibit weak, strong, and linear convergence under verifiable conditions, extending classical results from monotone operator theory \cite{IT,Tseng}. Specifically, when $\|I - \lambda\mu CC^T\| \leq 1$, we prove weak convergence of the iterative sequence, while additional mild conditions on the relaxation parameters ensure strong convergence. Furthermore, we establish that when $CC^T$ is positive definite, appropriate parameter selection yields linear convergence, significantly improving the practical efficiency of the method.}
+
+{The theoretical framework has been extended to address the computation of resolvents for operators of the form $\mathcal{M}_1 + C^T\mathcal{M}_2C$, encompassing a broader class of problems in optimization and control theory \cite{ab,Attouch0}. This extension maintains the convergence properties of the base algorithm while accommodating more complex operator structures encountered in applications such as set-valued Lur'e systems \cite{ahl2,br0,BT}.}
+
+{Several theoretical questions remain open for future investigation. The characterization of optimal parameter selection strategies, particularly the relationship between convergence rates and parameter choices, warrants further study following approaches similar to those in \cite{Attouch1,Chen}. The possibility of weakening the positive definiteness assumption on $CC^T$ in infinite-dimensional settings presents another avenue for theoretical development. Additionally, the connection between our approach and other splitting methods \cite{Fukushima,Tseng} may yield insights into unified frameworks for handling composite operators. From an applications perspective, the development of adaptive parameter selection schemes and the extension to more general classes of structured operators, particularly those arising in hierarchical optimization and multi-leader-follower games \cite{Pang}, represent promising directions for future research. The potential application of our methodology to set-valued Lur'e dynamical systems {\cite{BT,L1} }and traffic equilibrium problems also merits further investigation.}
+
+{In conclusion, this work provides a significant advancement in the computation of resolvent operators, offering both theoretical insights and practical algorithms with provable convergence properties. The framework developed here lays the groundwork for future research in both theoretical and applied aspects of monotone operator theory and optimization.}
+
+\begin{thebibliography}{}
+
+
+
+\bibitem{ab} { \sc S. Adly, L. Bourdin},  \textit{On a Decomposition Formula for the Resolvent Operator of the Sum of Two Set-Valued Maps with Monotonicity Assumptions}. Appl Math Optim 80, 715--732 (2019)
+%
+\bibitem{ahl2}  { \sc S. Adly, A. Hantoute, B. K. Le}, \textit{Maximal Monotonicity and Cyclic-Monotonicity Arising in Nonsmooth Lur'e Dynamical Systems"}, Journal of Mathematical Analysis and Applications, 448 (2017), no. 1, 691--706
+
+
+
+\bibitem{Attouch0}   {\sc Hedy Attouch, Luis M. Briceno-Arias}, \textit{Patrick Louis Combettes. A Parallel Spitting Method for
+Coupled Monotone Inclusions}. SIAM Journal on Control and Optimization, 2010, 48 (5), pp.3246-
+3270.
+
+\bibitem{Attouch1}   {\sc  H. Attouch, A. Cabot}, \textit{Convergence Rates of Inertial Forward-Backward Algorithms}, SIAM J Optim, 28(1), 849--874, 2018
+
+\bibitem{AC} {\sc J. P. Aubin, A. Cellina}, {\it Differential Inclusions. Set-Valued Maps and Viability Theory}, Spinger-Verlag, Berlin, 1984
+
+\bibitem{Bauschke}   {\sc H. H. Bauschke, P. L. Combettes}, \textit{Convex Analysis and Monotone Operator
+Theory in Hilbert Spaces}, Springer Berlin, 2011
+
+
+
+\bibitem{Brezis}{\sc H. Brezis}, {\it Functional Analysis, Sobolev Spaces and Partial Differential Equations,} Springer New York, NY, 2010 
+
+\bibitem{br0} { \sc B. Brogliato}, {\it Absolute stability and the Lagrange-Dirichlet theorem with monotone multivalued mappings}, Systems and Control Letters 2004, 51 (5), 343-353
+
+
+
+\bibitem{BT}{\sc B. Brogliato, A. Tanwani}, {\it Dynamical systems coupled with monotone set-valued operators: Formalisms, applications, well-posedness, and stability}. SIAM Review, 2020, 62 (1), pp.3--129
+
+\bibitem{chen}{\sc B. Chen, Y. Tang}, {\it Iterative Methods for Computing the Resolvent of the Sum of a Maximal Monotone Operator and Composite Operator with Applications}, Mathematical Problems in Engineering, Volume 2019, Article ID 7376263
+
+
+\bibitem{Chen}   {\sc G. H. G. Chen, R. T. Rockafellar}, \textit{Convergence Rates in Forward-Backward Splitting}, SIAM J Optim, 7(2), 421--444, 1997
+
+\bibitem{Fukushima}   {\sc M. Fukushima}, \textit{The Primal Douglas-Rachford Splitting Algorithm for a Class of Monotone Operators
+with Application to the Traffic Equilibrium Problem}, Mathematical Programming, Vol.72
+(1996) 1-15
+
+
+
+\bibitem{IT}    {\sc H. Iiduka, W. Takahashi}, \textit{Strong convergence theorems for {nonexpansive}  mappings and
+inverse-strongly-monotone mappings}, Nonlinear Anal. 61 (2005), 341--350
+
+
+
+\bibitem{L1} {\sc B. K. Le}, {\it On a class of  Lur'e dynamical systems with state-dependent set-valued feedback}, Set-Valued Var  Anal 28, 537--557, 2020
+
+
+
+
+
+
+
+
+ 
+  \bibitem{Micchelli}   {\sc Ch. A. Micchelli, L. Chen and Y. Xu}, \textit{Proximity algorithms for image models: Denoising}, Inverse
+Problems, Vol. 27(4) 045009, 2011
+
+  \bibitem{Micchelli1}   {\sc  Ch. A.Micchelli, L. Shen, Y.Xu, X. Zeng}, \textit{Proximity algorithms for the L1/TV image denoising
+model}, Adv Comput Math 38 (2013) 401--426
+
+   \bibitem{Moudafi}   {\sc A. Moudafi}, \textit{Computing the resolvent of composite operators,}
+Cubo: A Mathematical Journal , vol. 16, no. 3, pp. 87--96, 2014
+
+
+
+
+\bibitem{Pang}   {\sc J. S. Pang, M. Fukushima},  \textit{Quasi-variational inequalities, generalized Nash equilibria and Multi-leader-follower
+games}, Comput Manag Sci  2, 21--56, 2005
+
+
+
+
+ 
+  \bibitem{Robinson}   {\sc S.M. Robinson}, \textit{Composition duality and maximal monotonicity}, Math. Programing Ser. A 85
+(1999) 1--13
+
+\bibitem{Rockafellar} {\sc R. T. Rockafellar},  {\it Monotone operators and the proximal point algorithm}, SIAM J.
+Control Optimization 14(5), 877--898, 1976
+
+
+
+\bibitem{Tseng} {\sc P. Tseng},   \textit{A modified forward-backward splitting method for maximal monotone mappings}, SIAM J.
+Control Optim. 38, 431--446, 2000
+
+\bibitem{Zalinescu} {\sc C. Zalinescu},  \textit{Convex Analysis in General Vector Spaces. World Scientiic}, River Edge, NJ,
+2002.
+
+\end{thebibliography}
+
+\end{document}

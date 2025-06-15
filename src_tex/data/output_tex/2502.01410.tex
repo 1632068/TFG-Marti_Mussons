@@ -1,0 +1,83 @@
+\documentclass[a4paper]{amsart}
+\pdfoutput=1
+\usepackage[T1]{fontenc}
+\usepackage{amstext}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[scr=boondoxo]{mathalpha} 
+\usepackage[foot]{amsaddr}
+\usepackage[sort&compress,numbers]{natbib}
+\def\bibfont{\small}
+
+\usepackage[colorlinks=true,linkcolor=black,citecolor=blue,urlcolor=blue]{hyperref}
+\urlstyle{same}
+\usepackage[nameinlink]{cleveref}
+\crefname{equation}{}{}
+
+\widowpenalty=1000
+\clubpenalty=1000
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{problem}{Problem}[section]
+\newtheorem{claim}{Claim}[section]
+\newtheorem{lemma}{Lemma}[section]
+
+\theoremstyle{definition}
+\newtheorem{assumption}{Assumption}[section]
+\crefname{assumption}{assumption}{assumptions}
+\Crefname{assumption}{Assumption}{Assumptions}
+\crefname{figure}{figure}{figures}
+\Crefname{figure}{Figure}{Figures}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\DeclareMathOperator{\rank}{rank}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\abs}[1]{\left\vert #1 \right\vert}
+\newcommand{\alert}[1]{\textcolor{red}{#1}}
+\newcommand{\comment}[1]{\alert{\textbf{[#1]}}}
+\newcommand{\riesz}[1]{\mathcal{L}_{#1}}
+\newcommand{\mommat}{\mathbb{M}}
+\newcommand{\proj}[1]{P_{#1}}
+\renewcommand{\emptyset}{\varnothing}
+
+\title[Finite convergence in sparse moment relaxations]{On finite convergence and minimizer extraction in moment relaxations with correlative sparsity}
+\author{Giovanni Fantuzzi}
+\address{Dept. of Mathematics\\Friedrich--Alexander Universit\"at Erlangen--N\"urnberg}
+\email{\href{mailto:giovanni.fantuzzi@fau.de}{giovanni.fantuzzi@fau.de}}
+
+\author{Federico Fuentes}
+\address{Institute for Mathematical and Computational Engineering (IMC)\\School of Engineering and Faculty of Mathematics\\Pontificia Universidad Cat\'olica de Chile}
+\email{\href{mailto:federico.fuentes@uc.cl}{federico.fuentes@uc.cl}}
+
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{abstract}
+We provide a new sufficient condition to detect the finite convergence of moment relaxations of polynomial optimization problems with correlative sparsity. The condition requires that certain moment matrices in the relaxation admit a flat extension, and that the variable cliques used to construct the relaxation satisfy a `running intersection' property. The proof also reveals an algorithm to extract at least as many minimizers for the original polynomial optimization problem as the smallest rank of the moment matrices in its relaxation. The necessity of the running intersection property is demonstrated with an illustrative example. 
+\end{abstract}
+
+\maketitle
+
+\input{intro}
+\input{preliminaries}
+\input{proof}
+\input{counterexample}
+\appendix
+\input{appendix}
+
+% Bibliography
+\bibliographystyle{abbrvnat}
+\bibliography{refs-no-doi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

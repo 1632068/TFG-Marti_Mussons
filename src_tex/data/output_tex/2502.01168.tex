@@ -1,0 +1,1648 @@
+%%%%%%%% ICML 2025 EXAMPLE LATEX SUBMISSION FILE %%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+
+% Recommended, but optional, packages for figures and better typesetting:
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{subcaption}
+\usepackage{booktabs} % for professional tables
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{dsfont}
+
+% hyperref makes hyperlinks in the resulting PDF.
+% If your build breaks (sometimes temporarily if a hyperlink spans a page)
+% please comment out the following usepackage line and replace
+% \usepackage{icml2025} with \usepackage[nohyperref]{icml2025} above.
+\usepackage{hyperref}
+
+
+% Attempt to make hyperref and algorithmic work together better:
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% Use the following line for the initial blind version submitted for review:
+%\usepackage{icml2025}
+
+% If accepted, instead use the following line for the camera-ready submission:
+%\usepackage[accepted]{icml2025}
+\usepackage[preprint]{icml2025}
+
+% For theorems and such
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{dsfont}
+
+% if you use cleveref..
+\usepackage[capitalize,noabbrev]{cleveref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Todonotes is useful during development; simply uncomment the next line
+%    and comment out the line below the next line to turn off comments
+%\usepackage[disable,textsize=tiny]{todonotes}
+\usepackage[textsize=tiny]{todonotes}
+
+\newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\C}[0]{\mathbb{C}}
+\newcommand{\N}[0]{\mathbb{N}}
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\Q}[0]{\mathbb{Q}}
+\newcommand{\Prob}[0]{\mathbb{P}}
+\newcommand{\prob}[0]{\mathbb{p}}
+\newcommand{\E}[0]{\mathbb{E}}
+\newcommand{\V}[0]{\mathbb{V}}
+\newcommand{\Ind}[0]{\mathds{1}}
+\newcommand{\argmin}[0]{\operatorname{argmin}}
+\newcommand{\argmax}[0]{\operatorname{argmax}}
+\newcommand{\eqdef}{\vcentcolon=}
+\newcommand{\defeq}{=\vcentcolon}
+\def\P{\mathbb{P}}
+\def\one{\mathbb{1}}
+\newcommand\mech[1]{{#1}}
+\newcommand\vect[1]{\mathbf{#1}}
+\newcommand\dom[1]{\operatorname{dom}\left({#1}\right)}
+\newcommand\codom[1]{\operatorname{codom}\left({#1}\right)}
+\newcommand\ninf[0]{n \rightarrow +\infty}
+\newcommand\conv[1]{\overset{}{\underset{#1}{\longrightarrow}}}
+\newcommand\distconv[1]{\overset{\mathcal{L}}{\underset{#1}{\longrightarrow}}}
+\newcommand\probconv[1]{\overset{\Prob}{\underset{#1}{\longrightarrow}}}
+\newcommand\asconv[1]{\overset{\text{a.s.}}{\underset{#1}{\longrightarrow}}}
+\newcommand{\iid}{\stackrel{{\text{i.i.d.}}}{\sim}}
+\newcommand\tv[2]{\mathrm{TV}\left( {#1}, {#2} \right)}
+\newcommand\kl[2]{\mathrm{KL}\left( \left. {#1}\right\Vert {#2} \right)}
+\newcommand\renyi[3]{\text{D}_{#1}\left( \left. {#2}\right\Vert {#3} \right)}
+\newcommand\ham[2]{d_\mathrm{ham}\left( {#1}, {#2} \right)}
+\newcommand\hamext[1]{d_\mathrm{ham}\left( {#1}\right)}
+\newcommand\intslice[2]{\left\{ {#1}, \dots,  {#2} \right\}}
+\newcommand\p[1]{\left( {#1}\right)}
+\newcommand\ceil[1]{\left\lceil {#1}\right\rceil}
+\newcommand\floor[1]{\left\lfloor {#1}\right\rfloor}
+\newcommand\card[1]{\# \left( {#1}\right)}
+\newcommand\myop{\ensuremath\mathrel{\raisebox{1pt}{\stackunder{$<$}{\rotatebox{-27}{\resizebox{7pt}{2pt}{$\sim$}}}}}}
+\newenvironment{sproof}{%
+  \renewcommand{\proofname}{Sketch of proof}\proof}{\endproof}
+\newcommand\set[1]{\mathcal{#1}}
+\newcommand\vol[0]{\operatorname{Vol}}
+\newcommand\proj[0]{\operatorname{Proj}}
+\newcommand\deter[0]{\operatorname{Det}}
+\newcommand\tr[0]{\operatorname{tr}}
+\newcommand\vspan[0]{\operatorname{Span}}
+
+
+
+\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
+\newcommand\green[1]{\textcolor{ao(english)}{#1}}
+\newcommand\red[1]{\textcolor{red}{#1}}
+\newcommand\orange[1]{\textcolor{orange}{#1}}
+\newcommand\blue[1]{\textcolor{blue}{#1}}
+\newcommand\purple[1]{\textcolor{purple}{#1}}
+
+
+% The \icmltitle you define below is probably too long as a header.
+% Therefore, a short form for the running title is supplied here:
+\icmltitlerunning{On the Private Estimation of Smooth Transport Maps}
+
+\begin{document}
+
+\twocolumn[
+\icmltitle{On the Private Estimation of Smooth Transport Maps}
+
+% It is OKAY to include author information, even for blind
+% submissions: the style file will automatically remove it for you
+% unless you've provided the [accepted] option to the icml2025
+% package.
+
+% List of affiliations: The first argument should be a (short)
+% identifier you will use later to specify author affiliations
+% Academic affiliations should list Department, University, City, Region, Country
+% Industry affiliations should list Company, City, Region, Country
+
+% You can specify symbols, otherwise they are numbered in order.
+% Ideally, you should not use this facility. Affiliations will be numbered
+% in order of appearance and this is the preferred way.
+\icmlsetsymbol{equal}{*}
+
+\begin{icmlauthorlist}
+\icmlauthor{Clément  Lalanne}{aff1}
+\icmlauthor{Franck Iutzeler}{aff1}
+\icmlauthor{Jean-Michel Loubes}{aff2,aff1}
+\icmlauthor{Julien Chhor}{aff3}
+\end{icmlauthorlist}
+
+\icmlaffiliation{aff1}{Institut de Mathématiques de Toulouse, UMR5219, Université de Toulouse, CNRS, UPS, F-31062 Toulouse Cedex 9, France}
+\icmlaffiliation{aff2}{INRIA, France}
+\icmlaffiliation{aff3}{Toulouse School of Economics, Université Toulouse Capitole, France}
+
+\icmlcorrespondingauthor{Clément Lalanne}{clement.lalanne@math.univ-toulouse.fr}
+
+% You may provide any keywords that you
+% find helpful for describing your paper; these are used to populate
+% the "keywords" metadata in the PDF but will not be shown in the document
+\icmlkeywords{Machine Learning, ICML}
+
+\vskip 0.3in]
+
+
+% this must go after the closing bracket ] following \twocolumn[ ...
+
+% This command actually creates the footnote in the first column
+% listing the affiliations and the copyright notice.
+% The command takes one argument, which is text to display at the start of the footnote.
+% The \icmlEqualContribution command is standard text for equal contribution.
+% Remove it (just {}) if you do not need this facility.
+
+\printAffiliationsAndNotice{}  % leave blank if no need to mention equal contribution
+%\printAffiliationsAndNotice{\icmlEqualContribution} % otherwise use the standard text.
+
+\begin{abstract}
+
+
+Estimating optimal transport maps between two distributions from respective samples is an important element for many machine learning methods. 
+To do so, rather than extending discrete transport maps, it has been shown that estimating the Brenier potential of the transport problem and obtaining a transport map through its gradient is near minimax optimal for smooth problems. 
+In this paper, we investigate the private estimation of such potentials and transport maps with respect to the distribution samples.
+We propose a differentially private transport map estimator achieving an $L^2$ error of at most $n^{-1} \vee n^{-\frac{2 \alpha}{2 \alpha - 2 + d}} \vee (n\epsilon)^{-\frac{2 \alpha}{2 \alpha + d}} $ up to poly-logarithmic terms where $n$ is the sample size, $\epsilon$ is the desired level of privacy, $\alpha$ is the smoothness of the true transport map, and $d$ is the dimension of the feature space. 
+We also provide a lower bound for the problem.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+
+
+Given two probability measures $P, Q$ on $\R^d$, the question of ``how to optimally move the mass'' from $P$ to $Q$, i.e. to find a map $T_0: \R^d \rightarrow \R^d$ that solves the Monge \cite{monge1781memoire} problem
+\begin{equation}
+\label{eq:monge_problem}
+    \begin{aligned}
+T_0 \in \argmin &\int_{\R^d} \| T(x) - x \|^2 dP(x)\\
+\textrm{s.t.} \quad & T_{\#} P = Q
+\end{aligned}
+\end{equation}
+where $ T_{\#} P$ denotes the \emph{push-forward} of $P$ by $T$ is of high interest in both theoretical and more numerical branches of mathematics.
+The problem is referred to as an \emph{Optimal Transport Problem}, and the optimal mapping $T_0$ is referred to as the \emph{Optimal Transport Map}; we refer the reader to the textbooks \cite{villani2003topics,villani2009optimal,santambrogio2015optimal,peyre2019computational} for a general introduction to optimal transport and its computational aspects. % F. I removed ,DBLP:conf/aistats/RoletCP16,10.1093/imaiai/iaz006
+
+
+Because of its utility in measuring geometrical discrepancies between measures, and because of recent algorithmic developments \cite{cuturi2013sinkhorn,DBLP:conf/nips/AltschulerWR17,DBLP:conf/icml/DvurechenskyGK18}, it has become a standard tool in Computer Science \cite{DBLP:conf/miccai/FeydyCVP17,DBLP:journals/tog/LavenantCCS18,DBLP:journals/tog/SolomonGPCBNDG15,DBLP:journals/tog/SolomonPKS16}, Machine Learning \cite{DBLP:journals/corr/abs-1811-01124,DBLP:conf/aistats/Alvarez-MelisJJ18,arjovski2017WGAN,DBLP:conf/nips/CanasR12,gordaliza2019obtainingFairness,DBLP:journals/ml/FlamaryCCR18,DBLP:conf/aistats/GenevayPC18,DBLP:conf/aistats/GraveJB19,DBLP:conf/aistats/JanatiCG19,DBLP:conf/nips/MontavonMC16,DBLP:journals/siamis/SchmitzHBMCCPS18,DBLP:conf/nips/StaibCSJ17,DBLP:conf/iclr/LeNSHHX24} and Statistics \cite{del2024central,del2024centralb,DBLP:journals/siamsc/CazellesSBCP18,DBLP:journals/ma/BarrioGLL19,DBLP:journals/simods/KlattTM20,Kroshnin2019StatisticalIF,annurev:/content/journals/10.1146/annurev-statistics-030718-104938,DBLP:journals/entropy/RamdasTC17,RIGOLLET20181228,DBLP:conf/nips/SeguyC15,DBLP:conf/dsw/TamelingM18,DBLP:conf/colt/WeedB19,10.3150/17-BEJ1009}.
+
+When dealing with real-world data, the true distributions $P$ and $Q$ are often accessible only through samples \cite{NIPS2017_0070d23b,DBLP:conf/pkdd/CourtyFT14,courty2017OTDomainAdapt,DBLP:conf/eccv/DamodaranKFTC18,DBLP:conf/aistats/ForrowHNRSW19,DBLP:conf/nips/PerrotCFH16,DBLP:conf/iclr/SeguyDFCRB18,hutter2021minimax}. In this article, we suppose that we have access to \[X_1, \dots, X_n \iid P \quad \text{ and } ~~~  Y_1, \dots, Y_n \iid Q\]
+such that the $X_i$s and the $Y_i$s are mutually independent.\footnote{For simplicity, we take the same number of samples for both distributions. Our results naturally extend to the case where the two sample sizes are different, at the cost of using more involved notation.} 
+In this scenario, the problem \eqref{eq:monge_problem} cannot be solved directly to obtain an optimal transport map; instead, it must be estimated using the available samples. 
+To do so, a crude approach would be to replace $P$ and $Q$ with their empirical counterparts. 
+This approach has two main drawbacks: first, it does not specify how to move points across the entire support of $P$; second, it is affected by the curse of dimensionality \cite{10.3150/21-BEJ1433}. To resolve these issues, \cite{hutter2021minimax} proposed incorporating smoothness and regularity assumptions into the optimal transport map 
+$T_0$ and leveraging functional estimators. 
+
+
+At the same time, deriving estimators from real user data raises new challenges, especially regarding privacy. 
+It is well-documented that sharing statistics based on such data without adequate protections can lead to serious privacy leakages \cite{narayanan2006break,backstrom2007wherefore,fredrikson2015model,dinur2003revealing,homer2008resolving,loukides2010disclosure,narayanan2008robust,sweeney2000simple,wagner2018technical,sweeney2002k}.
+
+To mitigate these concerns, differential privacy (DP) \cite{dwork2006calibrating} has become the benchmark to ensure privacy protection. 
+DP introduces randomness into computations, ensuring that the released statistics are determined not solely by the dataset but also by the added randomness. 
+This limits the influence of any single data point on the outcome, thereby preserving privacy. 
+Major organizations, including the US Census Bureau~\citep{abowd2018us}, Google~\citep{erlingsson2014rappor}, Apple~\citep{thakurta2017learning}, and Microsoft~\citep{ding2017collecting}, have embraced this methodology.
+
+This work investigates the problem of estimating smooth optimal transport maps from samples under differentially privacy. In particular, we prove that the optimal estimation rate is expected to degrade under specific regimes.
+
+\subsection{Contributions}
+
+The main contributions of this article can be summarized as follows:
+\begin{itemize}
+    \item  \textbf{A Differentially Private Estimator for Transport Maps.} We introduce a private mechanism (under so-called pure differential privacy) which is aimed at solving the problem of smooth optimal transport maps estimation (see \Cref{sec:privatemechanism}). This estimator is then adapted to be implementable in practice in \Cref{sec:experiments}.
+    \item \textbf{Statistical Upper Bound.}  We analyze this estimator in  \Cref{sec:upperbound} and provide an upper bound on its convergence rate.
+    \item \textbf{Minimax Lower Bound.} We provide in \Cref{sec:lowerbound} a minimax lower bound on the private optimal transport map problem in order to characterize the difficulty of the problem.
+\end{itemize}
+
+\subsection{Related Work}
+
+\paragraph{Differential Privacy and Statistics/Learning.}
+
+Over the past decade, there has been growing interest in estimating various quantities while ensuring differential privacy. Examples of relevant works include, but are not limited to, the following references \cite{wasserman2010statistical,barber2014privacy,diakonikolas2015differentially,karwa2017finite,bun2019privatehypothesis,bun2021privatehypothesis,kamath2019highdimensional,biswas2020coinpress,kamath2020heavytailed,acharya2021differentially,lalanne:thesis,adenali2021unbounded,cai2021cost,brown2021covariance,cai2021cost,kamath2022improved,lalanne2023private,lalanne2022private,lalanne2024privatedensity,singhal2023polynomial,kamath2023biasvarianceprivacy,kamath2023new}. 
+
+More specifically, this article falls into the scope of private nonparametric statistics \cite{tsybakov2003introduction}, where the quantities of interest live in \emph{infinite} dimensional vector spaces, necessitating the use of approximation techniques alongside estimation. 
+The problem of non-parametric density estimation under differential privacy has been studied in various works \cite{wasserman2010statistical,barber2014privacy,lalanne2023about,lalanne2024privatedensity}, both in the setting of this article and in the setup of local privacy (without a trusted server) \cite{10.1145/773153.773174,4690986,duchi2013local,duchi2018minimax,butucea2020local,kroll2021density,schluttenhofer2022adaptive,gyorfi2023multivariate}. Additional works include studies on nonparametric regression \cite{berrett2021strongly,gyorfi2022rate}, nonparametric tests \cite{lam2022minimax}, interactions between robustness and privacy~\cite{chhor2023robust} and recent advances in locally private Bayesian modeling \cite{beraha2023mcmc}.
+
+To the best of our knowledge, our work is the first to address private estimation of smooth transport maps with statistical guarantees. A noteworthy exception is the article \cite{xian2024DPfairRegression} which uses elements of optimal transport in a private way in order to obtain fairness with statistical guarantees. Their approach is discussed in the next paragraph.
+
+\paragraph{Differential Privacy and Optimal Transport}
+A line of work \cite{rakotomamonjy2021DPslicedWasserstein}, building on the ideas from \cite{harder2021dp} provides privacy guarantees for the values of the sliced Wasserstein distance and MMD, respectively. 
+
+On another note, other research has explored task-specific private methods utilizing optimal transport. 
+For instance, \cite{segag2023gradientFlow} employs the sliced Wasserstein distance for data generation using an approach based on gradient flows. 
+Additionally, \cite{tien2019DPOTdomainAdapt} addresses differentially private domain adaptation via optimal transport by perturbing the optimal coupling between noisy datasets. 
+
+More recently, \cite{xian2024DPfairRegression} investigated fair and private regression, using tools from optimal transport theory. More precisely, they build private histogram estimators of the distributions $P$ and $Q$ and then compute the maps to their Wasserstein barycenter (which has applications in fairness). Their work is not directly related to our study, since the authors focus on fairness guarantees rather than on the problem of learning transport maps.
+
+Beyond these efforts, optimal transport has also been explored within novel privacy paradigms outside the scope of our work \cite{pierquin2024Pufferfish,Kawamoto2019localObfuscation,yang2024wassersteinDP}.
+
+\subsection{Notation}
+
+The symbols $\N$, $\Z$, $\R$ and $\C$ are respectively used to refer to the sets of natural numbers (including $0$), relative numbers, real numbers, and complex numbers.
+For any $k \in \N$, $\mathcal{C}^k(\mathcal{S})$ denotes the set of functions from a space $\mathcal{S}$ to $\C$ that are $k$ times continuously differentiable, and $\mathcal{C}^{\infty}(\mathcal{S})$ is defined as $\cap_{k \in \N} \mathcal{C}^k(\mathcal{S})$. 
+Whenever applicable, $\nabla$ and $\nabla^2$ are used to refer to gradient and Hessian operators, respectively.
+For a subset $S$ of a normed vector space, $|S|$ refers to $\sup_{x \in S} \|x\|$ for the inherited norm. 
+For any set $S$, $\card{S}$ denotes its cardinality. 
+For a family $F$ of vectors, $\vspan(F)$ refers to the smallest vector space containing $F$.
+For a closed convex set of an Hilbert space, $\proj_C$ refers to the convex projection onto $C$.
+The Hölder norm of order $\alpha$ on $S$ (see Appendix B in \cite{hutter2021minimax}) is denoted by $\| T \|_{C^{\alpha}(S)}$. 
+For a measure $\mu$, $\|  \cdot \|_{L^2(\mu)}$ is the usual $L^2$ norm with reference measure $\mu$. 
+With a small overlap of notation, for a measurable $S \subset \R^d$, $\|\cdot\|_{L^2(S)}$ refers to the $L^2$ norm with reference measure $\Ind_S \cdot \lambda$ where $\lambda$ is Lebesgue's measure.
+The asymptotic regimes are considered when $n \rightarrow + \infty$ and $n \epsilon \rightarrow + \infty$. 
+
+
+
+\section{Smooth Transport Maps Estimation}
+\label{sec:problem}
+
+In this section, we cover some basic theory on optimal transport and the minimax estimation of smooth transport maps. 
+Following \cite{hutter2021minimax}, we set the feature space\footnote{As in \cite{hutter2021minimax}, $\Omega$ can be replaced by any bounded and connected Lipschitz domain. In this case, $\tilde{\Omega}$ can be replaced by an hypercube containing $\Omega$ in its interior.} $\Omega = [0, 1]^d$ and define $\tilde{\Omega} = [-1, 2]^d$. The notation $M$ (resp. $R$) will refer to a positive constant strictly greater than $2$ (resp. $\| \text{ Identity } \|_{C^{\alpha}(\tilde{\Omega})}$) throughout the paper. 
+The constants will hide terms that depend on $\Omega$, $\tilde{\Omega}$, $M$, $\alpha$ and $d$, which was also the case in \cite{hutter2021minimax}.
+
+\subsection{Semi-Dual Problem and Smoothness}
+
+In the case where $P$ and $Q$ are supported in $\Omega$ and are absolutely continuous with respect to Lebesgue's measure, Brenier's theorem \cite{brenier1991polar} ensures that the solution to Problem \eqref{eq:monge_problem} is a transport map $ T_0 = \nabla f_0 $ where $f_0$ is a convex function. Furthermore, $f_0$ can be equivalently obtained by solving the semi-dual problem
+\begin{equation}
+\label{eq:semi_dual_problem}
+    \begin{aligned}
+f_0 \in \argmin & \underbrace{\int f(x) dP(x) + \int f^*(y) dQ(y)}_{\defeq S(f)}\\
+\textrm{s.t.} \quad & f \in L^1(P)
+\end{aligned}
+\end{equation}
+where for all $y$
+\begin{equation}
+    f^*(y) = \sup_{x \in \tilde{\Omega}} \langle x, y \rangle - f(x)
+\end{equation}
+is the Fenchel-Legendre transform of $f$;\footnote{We restrict the $\sup$ to $\tilde{\Omega}$ because we are considering extended functions as in Appendix A in~\cite{hutter2021minimax}.} see e.g. \cite{ruschendorf1990characterization}. In this problem, $f$ is called the \emph{(Brenier) potential}. 
+
+
+In order to estimate transport maps through Brenier potentials and obtain convergence rates, we need to enforce some regularity conditions, which we detail below. 
+First, we require the first probability distribution to be absolutely continuous with lower and upper bounded density.
+
+\begin{definition}[Admissible source distributions]
+    We denote by $\mathcal{M}$ the set of probability measures $P$ on $\R^d$ that are supported on $\Omega$, that are absolutely continuous w.r.t. Lebesgue's measure and whose density $\rho_P$ verifies $\frac{1}{M} \leq \rho_P(x) \leq M$ for almost all $x$ in $\Omega$.
+\end{definition}
+
+Furthermore, we control the bias by imposing smoothness assumptions on the optimal transport map. 
+The following definition introduces the class of admissible smooth transport maps.
+
+\begin{definition}[Admissible smooth transport maps]\label{def:admtransport}
+    We denote by $\mathcal{T}$ the set of differentiable mappings $T: \tilde{\Omega} \rightarrow \R^d$ such that $T = \nabla f$ for some differentiable convex function $f: \tilde{\Omega} \rightarrow \R^d$ and 
+    \begin{itemize}
+        \item % (Bounded transport map) 
+        $\forall x \in \tilde{\Omega}, \quad \|T(x)\| \leq M$,
+        \item  $\forall x \in \tilde{\Omega}, \frac{1}{M} \preceq \nabla^2 f (x) \preceq M$,
+        \item ${P_{\# T}}(\Omega) = 1$.
+    \end{itemize}
+    Furthermore, for $\alpha > 1$ and $R > 1$,  we define %the class of admissible transport maps as
+    \begin{equation}
+        \set{T}_{\alpha}(R) = \left\{ T \in \set{T}: 
+        \begin{cases} 
+        T \text{ is } \floor{\alpha}  \text{ times differentiable,}\\
+        \text{and } \| T \|_{C^{\alpha}(\tilde{\Omega})} \leq R
+        \end{cases}    \right\} \;.
+    \end{equation}
+\end{definition}
+
+In words, admissible transport maps have to be bounded (first item), come from a smooth and strongly convex potential (second item), and have a stable support (third item). 
+In addition, we will assume that the optimal transport map belongs to the set $ \set{T}_{\alpha}(R)$ of admissible transport maps whose Hölder norm of order $\alpha$ is bounded by $R$. 
+
+\subsection{Empirical Semi-Dual}
+
+\citet{hutter2021minimax} observed that the objective in \eqref{eq:semi_dual_problem} consists of the sum of an expectation over $P$ and an expectation over $Q$, which can thus be approximated using Monte-Carlo averages.
+This led them to propose an estimator of the form 
+\begin{equation}
+    \hat{T}_0 \eqdef \nabla \hat{f}_0 \;,
+\end{equation}
+where
+\begin{equation}
+    \label{empiricalsemidualproblem}
+    \begin{aligned}
+\hat{f}_0 \in \argmin \quad & \underbrace{ \frac{1}{n} \sum_{i = 1}^n f(X_i) + \frac{1}{n} \sum_{i = 1}^n f^*(Y_i)}_{\defeq \hat{S}(f | X_{1:n}, Y_{1:n})}\\
+\textrm{s.t.} \quad & f \in \hat{V}_0
+\end{aligned}
+\end{equation}
+and where $\hat{V}_0 \subset L^2(\R^d)$ is a functional space to be specified later.
+Note that $S$ and $\hat{S}$ are linked by the relation 
+\begin{equation}
+    \forall f, \quad S(f) = \E_{X_{1:n}, Y_{1:n}} \p{\hat{S}(f | X_{1:n}, Y_{1:n})} \;.
+\end{equation}
+
+Controlling the deviations of $\hat{S}$ from its expectation, as well as using $S(f) - S(f_0)$ effectively as a  for the transport maps suboptimality, typically requires regularity of the admissible potentials. This is formalized in the following definition mirroring \cref{def:admtransport}.
+
+\begin{definition}[Admissible potentials]
+    We denote by $\mathcal{X}(M)$ the set of twice continuously differentiable functions $f: \tilde{\Omega} \rightarrow \R$ such that $\forall x \in \tilde{\Omega} $
+    \begin{itemize}
+        \item $\quad |f(x)| \leq 2M^2$,
+        \item $ \quad \| \nabla f(x) \| \leq M$,
+        \item $\frac{1}{M} \preceq \nabla^2 f (x) \preceq M$.
+    \end{itemize}
+\end{definition}
+
+Next, we specify how $\hat{V}_0$ can be chosen to obtain an implementable estimator.
+
+
+\subsection{Wavelet Decompositions and Subspace Approximations}\label{sec:empricalestimator}
+
+In line with standard approaches in nonparametric estimation, and in order to exploit the smoothness of the optimal map, \citet{hutter2021minimax} suggested using successive approximations over nested subspaces $V_1 \subset V_2 \subset \dots \subset V_J \subset \dots \subset L^2(\R^d)$ of $L^2(\R^d)$, where $J \geq 1$ denotes an integer controlling the resolution of the approximation space. %
+
+Given a pair $\psi_M$ and $\psi_F$ of smooth enough mother and father wavelets with compact supports, one can define a wavelet Hilbert basis of $L^2(\R)$ of the form
+\begin{equation}
+    (\Psi_k^{j, g})_{j \in \N, k \in \Z^d, g \in G^j}
+\end{equation}
+ where $\forall j$, $G^j$ is finite. The exact construction is presented in Appendix B of \cite{hutter2021minimax}, with complements given in the present  \Cref{sec:details_wavelet_decomposition}. We do not include it in the main body of this article as we believe that it is not essential to understanding the core message.
+
+Importantly, since we are interested in guarantees in $L^2(\tilde{\Omega})$ rather than $L^2(\R^d)$, and because the supports of the father and mother wavelets are compact, the basis can be restricted to the indices such that $k \in K_j$ for some \textit{finite} $K_j \subset \Z^d$.
+
+Thus, defining 
+\begin{equation}
+    V_J \eqdef \vspan \p{(\Psi_k^{j, g})_{{j \leq J}, k \in K_j, g \in G^j} }
+\end{equation}
+yields a sequence of \emph{finite-dimensional} nested approximation spaces.
+
+The estimator proposed by \citet{hutter2021minimax} is the solution of \eqref{empiricalsemidualproblem} where $\hat{V}_0$ is replaced with $V_J \cap \mathcal{X}(2M)$. 
+We denote the solution of the resulting problem and its associated transport map by $\hat{f}_J$ and $\hat{T}_J \eqdef \nabla \hat{f}_J$, respectively.  
+
+Finally, measuring the \textit{utility} (or error) of a candidate transport map $T$ by its squared $L^2(P)$ distance
+\begin{equation}
+    d(T, T_0)^2 \eqdef \int \| T - T_0 \|^2 dP \;,
+\end{equation}
+we can guarantee that such a transport map estimator has a (near) minimax optimal rate. 
+
+\begin{theorem}[{Th. 2 of \cite{hutter2021minimax}}]
+    For any $\alpha>1$, the minimax rate of smooth optimal transport map estimation is
+    \begin{align}
+         \inf_{\hat{T}} \sup_{P\in\mathcal{M},T_0\in\mathcal{T}_\alpha} \E_{X_{1:n}, Y_{1:n}} &\p{d(\hat{T, T_0)^2}} \gtrsim \frac{1}{n} \vee n^{- \frac{2 \alpha}{2 \alpha - 2 + d}} \, . 
+    \end{align} 
+    Moreover, if $P\in\mathcal{M}$ and $T_0\in\mathcal{T}_{\alpha}$, the estimator $\hat{T}_J \eqdef \nabla \hat{f}_J$ defined above achieves this rate up to polylogarithmic factors. Here, the constants also hide a dependence on $R$.
+\end{theorem}
+
+ 
+
+
+\subsection{Towards the Analysis of a Private Estimator}
+
+In this paper, we extend this approach to the context of differential privacy. We derive a private estimator $\hat{f}_{\text{\normalshape priv}}$ for the optimal Brenier potential and deduce the corresponding private optimal transport map $\hat{T}_{\text{\normalshape priv}} = \nabla \hat{f}_{\text{\normalshape priv}}$.
+To understand how privacy will affect the utility of the estimation, we propose the following risk decomposition.
+
+\newcommand{\Priv}{\mathsf{P}\text{\normalshape riv}}
+
+\begin{lemma}
+\label{lemma:risk_decomposition}
+Suppose that there exists a random variable $\Priv $ independent of all the other sources of randomness such that $\hat{f}_{\text{\normalshape priv}}$ is $( X_{1:n}, Y_{1:n}, \Priv )$-measurable
+and there exists $U \geq 0$ that is $\Priv $-measurable such that 
+\begin{equation}
+    \underbrace{\hat{S}(\hat{f}_{\text{\normalshape priv}} | X_{1:n}, Y_{1:n}) - \hat{S}(\hat{f}_{J} | X_{1:n}, Y_{1:n})}_{\text{Suboptimality on the semi-dual}} \leq U
+\end{equation}
+almost surely. If $\hat{f}_{\text{\normalshape priv}} \in V_J \cap \mathcal{X}(2M)$ almost surely, then 
+    \begin{equation}
+    \begin{aligned}
+        \E_{X_{1:n}, Y_{1:n}} &\p{d(\hat{T}_{\text{\normalshape priv}}, T_0)^2} \\
+        &\lesssim 
+        U + \frac{J 2^{J (d-2)}\ln(1 + C n)}{n}+ \frac{1}{n} \\
+        &\qquad\qquad\qquad + \inf_{T \in V_J \cap \mathcal{X}(2M)} d(T, T_0)^2
+    \end{aligned}
+    \end{equation}
+    $\Priv $-almost surely for some positive constant $C$. 
+    Here, $\E_{X_{1:n}, Y_{1:n}}$ denotes the expectation w.r.t. the data, i.e. conditional on $\Priv $.
+\end{lemma}
+\begin{proof}
+    See \Cref{proof_of_risk_decomposition}.
+\end{proof}
+
+In the next section, we propose a private estimator $\hat{f}_{\text{\normalshape priv}}$ and explain how to control $\hat{S}(\hat{f}_{\text{\normalshape priv}} | X_{1:n}, Y_{1:n}) - \hat{S}(\hat{f}_{J} | X_{1:n}, Y_{1:n})$. In particular, this estimator will satisfy the hypotheses of \Cref{lemma:risk_decomposition}.
+
+\section{Private Estimator}
+\label{sec:privatemechanism}
+
+This section presents some background on differential privacy and introduces our private estimator.
+
+\subsection{Differential Privacy}
+
+Given a (randomized) mechanism $\mech{M}$ (i.e. a conditional kernel of probabilities), $\dom{\mech{M}}$ denotes its domain (i.e. the set of admissible inputs) and $\codom{\mech{M}}$ refers to its codomain (i.e. the set of admissible outputs). 
+The set $\dom{\mech{M}}$ represents the space of all possible data sets and is equipped with a binary symmetric relation $\cdot \sim \cdot$ called \emph{neighboring} relations. 
+Informally, two datasets are neighboring if they contain the same data except for at most one individual. 
+Formally, we say that $(X_{1:n}, Y_{1:n}) \sim (X_{1:n}', Y_{1:n}')$ if $\ham{(X_{1:n}, Y_{1:n})}{(X_{1:n}', Y_{1:n}')} \leq 1$, where $\ham{\cdot}{\cdot}$ to denote the Hamming distance, 
+\begin{definition}[Differential Privacy \cite{dwork2006calibrating}]
+     Given $\epsilon \geq 0$, a randomized mechanism $\mech{M}: \dom{\mech{M}} \rightarrow \codom{\mech{M}}$ is $\epsilon$-differentially private (or $\epsilon$-DP) if for all $D \sim D' \in \dom{M}$ and all measurable $S \subset \codom{\mech{M}}$ we have
+\begin{equation}
+\begin{aligned}
+    \Prob_{\mech{M}}\p{\mech{M}(D) \in S} \leq e^\epsilon \Prob_{\mech{M}}\p{\mech{M}(D') \in S} \;.
+\end{aligned}
+\end{equation}
+\end{definition}
+
+Here, $\epsilon \geq 0$ is a parameter that controls the privacy level: Lower values of $\epsilon$ correspond to more private mechanisms $M$. 
+
+We will rely on the standard \emph{report noisy max} mechanism \cite{dwork2014algorithmic,mcsherry2007mechanism,mckenna2020permuteandflip,ding2021permuteandflip}. 
+We give its version instantiated with Laplace noise below.
+\begin{lemma}[Report Noisy Argmin with Laplace Noise]
+\label{lemma:report_noisy_max}
+    Let $f_1, \dots, f_N$ be queries with sensitivities that are uniformly bounded by $\Delta$, that is, for any of neighboring datasets $D \sim D'$ and for any $i \in \{1,\dots,n\}$,
+    \begin{equation}
+    \label{eq:kjhfkjsbhjdhgfjhqbshdbfbfbfbf}
+         |f_i(D) - f_i(D')| \leq \Delta \;.
+    \end{equation}
+    Then, if $L_1, \dots, L_N$ are independent and identically distributed random variables with standard Laplace distribution, the mechanism $\hat{i}$ defined as
+    \begin{equation}
+        \hat{i}(D) \in \argmin \left\{ f_i(D) + \frac{2 \Delta}{\epsilon} L_i \right\}
+    \end{equation}
+    is $\epsilon$-DP,  with the convention that we return a random index in the $\argmin$ when it is not unique.
+\end{lemma}
+In particular, we will use this mechanism as a building block to construct a private estimator of $\hat{f}_J$.
+
+\subsection{Noisy semi-dual estimator}
+
+In this section, we construct our private estimator, building on the empirical semi-dual one presented above.
+
+The first step is to provide an upper bound on the sensitivity of $\hat{S}(f | X_{1:n}, Y_{1:n})$, which is established in the lemma below.
+\begin{lemma}[Sensitivity of the semi-dual objective]
+\label{lemma:sensitivitysemidual}
+    For any $f\in\mathcal{X}(2M)$, it holds that
+    \begin{equation}
+    \begin{aligned}
+        \sup_{(X_{1:n}, Y_{1:n}) \sim (X_{1:n}', Y_{1:n}')} &\left| \hat{S}(f | X_{1:n}, Y_{1:n}) - \hat{S}(f | X_{1:n}', Y_{1:n}') \right|
+         \\
+         &\qquad\qquad\leq 
+        \frac{2 \| f \|_{\infty} \vee 2 | \tilde{\Omega} |^2}{n} \;.
+    \end{aligned}
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    See \Cref{sec:proof_of_sensitivitysemidual}.
+\end{proof}
+
+Now, recalling \cref{sec:empricalestimator}, let $C_{J, M}$ be a \emph{finite} subset of $V_J \cap \mathcal{X}(2M)$. We can enumerate this set as 
+\begin{equation}
+    C_{J, M} = \{f_1, \dots, f_{\card{C_{J, M}}} \} \;.
+\end{equation}
+Considering independent random variables $L_1, \dots$, $ L_{\card{C_{J, M}}}$ with Laplace distribution that are also independent of all the other sources of randomness, we define
+\begin{equation}
+\begin{aligned}
+\hat{i}_{\text{\normalshape priv}}(D) \in \argmin &\left\{\hat{S}(f_i | D) + \frac{32 M^2 \vee 36 d}{n \epsilon} L_i \right\} \;.\\
+\textrm{for} \quad & i \in \{1, \dots, \card{C_{J, M}} \}
+\end{aligned}
+\end{equation}
+
+\begin{theorem}[Privacy of the noisy semi-dual estimator]
+    The mechanism returning the pair
+    \begin{equation}
+\label{eq:private_estimator_definition}
+    (\hat{f}_{\text{\normalshape priv}} \eqdef f_{\hat{i}_{\text{\normalshape priv}}}, \hat{T}_{\text{\normalshape priv}} \eqdef \nabla \hat{f}_{\text{\normalshape priv}})
+\end{equation}
+is $\epsilon$-DP.
+\end{theorem}
+\begin{proof}
+    It follows as a direct consequence of \Cref{lemma:report_noisy_max} and of \Cref{lemma:sensitivitysemidual} that $\hat{i}_{\text{\normalshape priv}}$ is $\epsilon$-DP. 
+    Hence, $(\hat{f}_{\text{\normalshape priv}}, \hat{T}_{\text{\normalshape priv}})$ is $\epsilon$-DP by the post-processing property of differential privacy \cite{dwork2014algorithmic}.
+\end{proof}
+We will use the estimator defined in \Cref{eq:private_estimator_definition} as our estimator for both the optimal Brenier potential and the optimal transport map. 
+
+A question that remains unanswered in this section is how to choose $J$ and $C_{J, M}$. 
+So far, we have treated these quantities as hyperparameters. 
+The next section explains how to choose them in order to optimize the bias-variance trade-off.
+
+\section{Statistical Upper Bound}
+\label{sec:upperbound}
+
+\begin{figure*}[h!]
+        \centering
+        \includegraphics[width=0.94\linewidth]{X_and_Y_points.pdf}  
+    \\
+    \centering
+    $n = 200000$, $\alpha_1=\alpha_2 = 0.005$, $\sigma= \sigma_1=\sigma_2 = 0.1$.
+    \caption{Kernel density estimators of the samples used in the experiments}
+    \label{fig:samples}
+    \end{figure*}
+
+
+
+This section details the construction of $C_{J, M}$ and gives an upper bound on the utility of the proposed private estimator.
+
+\subsection{Covering construction}
+
+We now construct the set $C_{J, M}$ such that it forms a \emph{$\delta$-covering} of the space $V_J \cap \mathcal{X}(2M)$ with respect to the empirical criterion $\hat{S}(\cdot | X_{1:n}, Y_{1:n})$. 
+Specifically, we aim to ensure that $C_{J, M} \subset V_J \cap \mathcal{X}(2M)$ and that
+\begin{equation}
+\begin{aligned}
+    \forall f \in &V_J \cap \mathcal{X}(2M), \exists f_c \in C_{J, M} \text{ s.t. } \\
+    &| \hat{S}(f | X_{1:n}, Y_{1:n}) - \hat{S}(f_c | X_{1:n}, Y_{1:n}) | \leq \delta \;.
+\end{aligned}
+\end{equation}
+A first step towards this goal is to observe that $\hat{S}(\cdot | X_{1:n}, Y_{1:n})$ is Lipschitz-continuous with respect to the $L^\infty$ norm, as shown in the following lemma.
+\begin{lemma}
+\label{lemma:from_semidual_to_infty}
+    For any $f_1, f_2 \in \mathcal{X}(2M)$, 
+    \begin{equation}
+        \left| \hat{S}(f_1 | X_{1:n}, Y_{1:n}) - \hat{S}(f_2 | X_{1:n}, Y_{1:n}) \right| \leq 2 \| f_1 - f_2\|_{\infty}
+    \end{equation}
+    for any dataset $(X_{1:n}, Y_{1:n})$.
+\end{lemma}
+\begin{proof}
+See \Cref{proof_of_from_semidual_to_infty}
+\end{proof}
+Thus, a $\delta >0$-covering of $V_J \cap \mathcal{X}(2M)$ for $\hat{S}(\cdot | X_{1:n}, Y_{1:n})$ can be built from a $\frac{\delta}{2}$-covering of $V_J \cap \mathcal{X}(2M)$ for $\| \cdot\|_{\infty}$. 
+The following lemma bounds the cardinality of a specific covering of this form.
+\begin{lemma}
+\label{lemma:covering_cardinality}
+    There exists a $\delta$-covering of $V_J \cap \mathcal{X}(2M)$ for $\| \cdot\|_{\infty}$ of cardinality at most $N$ where 
+    \begin{equation}
+        \ln(N) \lesssim 2^{Jd} \ln \p{\frac{C 2^{J d / 2} }{\delta} + 1}
+    \end{equation}
+    for some constant $C$ that does not depend on $J$ or $\delta$ 
+\end{lemma}
+\begin{proof}
+See \Cref{proof_of_covering_cardinality}
+\end{proof}
+
+\subsection{Main result}
+
+
+
+We now have all the pieces to bound the error of $\hat{T}_{\text{\normalshape priv}}$. Indeed, we can apply \Cref{lemma:risk_decomposition} with an lower bound on the empirical semi-dual error ($U$) that depends on (i) the resolution $\delta$ of the covering, and (ii) the uncertainty created by privacy $\max \left\{ |L_1|, \dots, |L_{\card{C_{J, M}}}| \right\}$. The remaining approximation bias $ \inf_{T \in V_J \cap \mathcal{X}(2M)} d(T, T_0)^2$ is controlled as in \cite{hutter2021minimax}.
+
+\begin{theorem}
+\label{theorem:bias_variance_tradeoff}
+    Let $P\in\mathcal{M},T_0\in\mathcal{T}_\alpha$. 
+    By choosing $\delta$ appropriately, the estimator $\hat{T}_{\text{\normalshape priv}}$ has a utility satisfying
+    \begin{equation}
+    \begin{aligned}
+        \E &\p{\int \| T_0 - \hat{T}_{\text{\normalshape priv}}  \|^2 dP} \\
+        &\lesssim R^2 2^{-2 J \alpha} + \frac{J 2^{J (d-2)}\ln(n)}{n}+ \frac{1}{n} +  \frac{2^{Jd} \ln (n \epsilon) }{n \epsilon}  
+    \end{aligned}
+    \end{equation}
+for $J$ larger than a sufficiently large constant that also depend on $R$.
+\end{theorem}
+\begin{proof}
+    See \Cref{proof_of_bias_variance_tradeoff}
+\end{proof}
+
+
+Ignoring poly-logarithmic terms and treating $R$ as a constant for conciseness, we can optimize over $J$ to obtain an asymptotic upper bound on the error as follows
+\begin{equation}
+\label{eq:upper_bound}
+    \begin{aligned}
+        \E &\p{\int \| T_0 - \hat{T}_{\text{\normalshape priv}}  \|^2 dP} \\
+        &\qquad\lesssim n^{-1} \vee n^{-\frac{2 \alpha}{2 \alpha - 2 + d}} \vee (n\epsilon)^{-\frac{2 \alpha}{2 \alpha + d}}   \;.
+    \end{aligned}
+    \end{equation}
+
+    \begin{remark}
+    It is possible to obtain similar bounds that hold with high probability with minimal adaptations to the proofs.
+\end{remark}
+
+\section{Lower Bound}
+\label{sec:lowerbound}
+
+
+
+Packing arguments from \cite{hutter2021minimax} as well as coupling arguments \cite{acharya2018differentially,acharya2021differentially,lalanne2022statistical} can be applied to handle the DP nature of the constraint, and yield the following lower bound.
+
+\begin{theorem}[Lower Bound]
+\label{theorem:lowerbound}
+Asymptotically,
+\begin{equation}
+\begin{aligned}
+    \inf_{\hat{T}_{\text{\normalshape priv}}} \sup_{P \in \mathcal{M}, T_0 \in \mathcal{T}_{\alpha}}
+   &\E\p{\int \| T_0 - \hat{T}_{\text{\normalshape priv}}  \|^2 dP} \\
+   &\gtrsim  \frac{1}{n} \vee n^{- \frac{2 \alpha}{2 \alpha - 2 + d}} \vee (n\epsilon)^{- \frac{2 \alpha}{\alpha - 1 + d}}
+\end{aligned}
+\end{equation}
+    where the infimum is taken over all estimators $\hat{T}_{\text{\normalshape priv}}$'s that are $\epsilon$-DP.
+\end{theorem}
+\begin{proof}
+    See \Cref{sec:proof_of_lowerbound}
+\end{proof}
+
+We observe that the term in $n\epsilon$ in the lower bound above does not match the corresponding term in the upper bound \eqref{eq:upper_bound}. 
+It remains unclear which, if any, of these bounds is tight. 
+However, it is worth noting that similar coupling arguments have given optimal lower bounds in other non-parametric problems \cite{lalanne2023about,lalanne2024privatedensity}. We thus believe that the lower bound is more likely to be optimal than the upper bound. 
+
+Following this conjecture, the suboptimality may arise from a suboptimal analysis of the estimator, a suboptimal choice of a covering, or limitations of the proposed estimator itself. Furthermore, our estimator is, to the best of our knowledge, the only one that has been proposed to solve the problem.
+
+Another consequence of this lower bound is that the estimation is provably degraded by privacy (even with the best estimator) when $\epsilon \lesssim n^{- \frac{\alpha - 1}{2 \alpha - 2 + d}} \wedge n^{- \frac{\alpha +1 - d}{2 \alpha}}$. 
+
+\section{Experiments}
+\label{sec:experiments}
+
+\begin{figure*}[h!]
+    \begin{subfigure}{}
+        \centering
+        \includegraphics[width=0.48\linewidth]{true_transport_map.pdf}  
+        \label{fig:sub-first}
+    \end{subfigure}
+    \begin{subfigure}{}
+        \centering
+        \includegraphics[width=0.48\linewidth]{estimated_private_transport_map.pdf}  
+        \label{fig:sub-second}
+    \end{subfigure} 
+    \\
+    \centering
+    On the left: The true optimal transport map between the underlying distributions in the Gaussian attraction / repulsion model described in \Cref{sec:gaussian_attraction_repulsion_model}. On the right: The transport map that is privately estimated using the approximation algorithm described in \Cref{sec:discretized_approximation_algorithm}.
+    For the numerical values, $\tilde{\Omega}^{(\text{grid})}$ is a uniform grid in $[-1/2, 1/2]^2$ with $64^2$ points, 
+    $\epsilon = 1.$, $n = 200000$, $\alpha_1=\alpha_2 = 0.005$, $\sigma=  \sigma_1=\sigma_2 = 0.1$, $T = 2000$, and $C=0.25$.
+    \caption{Optimal Transport Map VS Estimated Private Map}
+    \label{fig:true_vs_estimates}
+    \end{figure*}
+
+This section focuses on how to numerically approximate $\hat{f}_{\text{\normalshape priv}}$ and $\hat{T}_{\text{\normalshape priv}}$ defined in \eqref{eq:private_estimator_definition} and presents numerical results to illustrate the proposed method.
+
+\subsection{Discretization}
+\label{sec:discretized_approximation_algorithm}
+
+The main difficulty in computing $\hat{f}_{\text{\normalshape priv}}$ and $\hat{T}_{\text{\normalshape priv}}$ is that the Fenchel-Legendre transform $f^*$ of a candidate Brenier potential $f$ may not always have a closed-form expression. 
+To address this issue, \cite{hutter2021minimax} approximate $f^*$ by restricting the supremum in its definition to a grid. 
+This subsection develops similar ideas to adapt this method to the context of differential privacy.
+
+Let $\tilde{\Omega}^{(\text{grid})} \subset \tilde{\Omega}$ be a \emph{finite} approximation set. 
+In practice it is taken to be a uniform grid.
+We then define
+\begin{equation}
+    f^*_{(\text{grid})}(y) = \sup_{x \in \tilde{\Omega}^{(\text{grid})}} \langle x, y \rangle - f(x), \quad \forall y \in \tilde{\Omega}.
+\end{equation}
+Note that the sensitivity analysis in \Cref{lemma:sensitivitysemidual} still holds under this approximation of the Fenchel dual.
+
+We represent potentials $f$ by storing their discretization $f_{(\text{grid})}$ on the grid $\tilde{\Omega}^{(\text{grid})}$. Their gradients are approximated using finite differences, denoted by $\nabla_{(\text{grid})} f_{(\text{grid})}$.
+
+Since we now only store the value of the potential and its (approximate) dual on a grid, we need to clip the points to this grid. We thus denote by $X_{1:n}^{(\text{grid})}$ and $Y_{1:n}^{(\text{grid})}$ the modified versions of the datasets $X_{1:n}$ and $Y_{1:n}$ where each point is replaced with its closest neighbor in $\tilde{\Omega}^{(\text{grid})}$.
+
+Finally, if one wishes to apply \Cref{lemma:sensitivitysemidual} but cannot guarantee that $f \in \mathcal{X}(2M)$, we propose introducing a clipping constant $C$ in order to safeguard privacy. 
+
+This procedure leads to the following practical algorithm: Start with a finite family of candidate discretized potentials
+\begin{equation}
+    F = \left\{ f_{(\text{grid}), 1}, \dots, f_{(\text{grid}), N} \right\} \;,
+\end{equation}
+then compute
+\begin{equation}
+\label{eq:juihgfkjhqgsjkdf}
+\begin{aligned}
+\hat{i} \in \argmin &\bigg\{\hat{S}_{(\text{grid})}^C(f_{(\text{grid}), i} | X_{1:n}^{(\text{grid})}, Y_{1:n}^{(\text{grid})})  + \frac{4 C}{n \epsilon} L_i \bigg\}
+\end{aligned}
+\end{equation}
+where for any $f$, $X_{1:n}$ and $Y_{1:n}$
+\begin{equation}
+\begin{aligned}
+    &\hat{S}_{(\text{grid})}^C(f | X_{1:n}, Y_{1:n})  \eqdef \frac{1}{n} \sum_{i = 1}^n \proj_{[-C, C]} f(X_i)  \\ 
+    &\qquad\qquad\qquad\qquad\qquad+ \frac{1}{n} \sum_{i = 1}^n  \proj_{[-C, C]}f^*_{(\text{grid})}(Y_i)
+\end{aligned}
+\end{equation}
+and where $L_1, \dots, L_N$ are independent Laplace random variables.
+By \Cref{lemma:report_noisy_max}, $\hat{i}$ is $\epsilon$-DP, and by post-processing, so is $\hat{T} \eqdef \nabla_{(\text{grid})} f_{(\text{grid}), \hat{i}}$, which we use as an estimator.
+
+\subsection{Gaussian Attraction / Repulsion Model}
+\label{sec:gaussian_attraction_repulsion_model}
+
+We illustrate the behavior of the estimator $\hat{T}$ defined in Section~\ref{sec:discretized_approximation_algorithm} on the following model, which we refer to as the Gaussian attraction/repulsion model.
+
+We begin with a simple quadratic potential $f_{\text{quad}}(x) = \frac{1}{2} \| x \|^2$ for which the mapping induced by its gradient is the identity. 
+For any $\mu$ and $\sigma > 0$, denoting the Gaussian potential by $f_{\mathcal{N}}(x| \mu, \sigma) = e^{ - \| x - \mu \|^2 / (2 \sigma^2)}$, we consider potentials of the form 
+\begin{equation}
+\begin{aligned}
+    &f(x | \alpha_1, \alpha_2, \mu_1, \mu_2, \sigma_1, \sigma_2 ) = \\
+    &\qquad\qquad f_{\text{quad}}(x) + \alpha_1 f_{\mathcal{N}}(x| \mu_1, \sigma_1) - \alpha_2 f_{\mathcal{N}}(x| \mu_2, \sigma_2)
+\end{aligned}
+\end{equation}
+where $\alpha_1, \alpha_2, \sigma_1, \sigma_2$ are positive numbers and $\mu_1, \mu_2 \in \R^d$ are location parameters. 
+
+Then, a random potential is generated by sampling two independent copies $\mu_1, \mu_2 \sim \mathcal{N}(0, \sigma I_2)$. 
+This defines the ``true'' potential, which is the target of the estimation. 
+
+We then sample $n$ i.i.d. uniform random variables $X_{1:n}$ over $[-1/2, 1/2]^2$, and generate the observations $Y_{1:n}$ by applying the gradient of the previously defined potential to $n$ new i.i.d. uniform random variables over $[-1/2, 1/2]^2$. 
+This is illustrated in \Cref{fig:samples}, where we represent two kernel density estimators constructed on the datasets $X_{1:n}$ and $Y_{1:n}$, respectively. 
+
+We then apply the algorithm defined in Section~\ref{sec:discretized_approximation_algorithm} where $F$ is a collection of $T$ independent potentials that are generated according to the same distribution as the true potential. 
+
+The result of the algorithm and the optimal transport map are represented in \Cref{fig:true_vs_estimates}. 
+This simulation confirms that the estimated transport map is close to the optimal one.
+
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+In this paper, we have introduced a private estimator for the problem of privately estimating smooth optimal transport maps. 
+We have analyzed the utility of this estimator and derived a lower bound on the difficulty of the statistical problem. 
+Finally, we proposed an adaptation of this theoretical estimator that is implementable in practice.
+
+This work opens up several research directions. 
+One of them is the quest for an optimal private mechanism, and another one is the design of numerically efficient algorithms.
+In both cases, we believe that investigating \emph{regularization} techniques such as \emph{entropic regularization} would be an important step forward as it could help stabilize the problem, reduce the amount of privacy noise, and enable the use of numerically efficient algorithms such as Sinkhorn's algorithm \cite{cuturi2013sinkhorn}.
+
+
+
+%After this it does not count for the page limit.
+%\newpage
+
+\section*{Acknowledgements}
+
+This paper has been partially funded by the Agence Nationale de la Recherche under grants ANR-17-EURE-0010 (Investissements d'Avenir program), ANR-23-CE23-0029 Regul-IA, and ANR-24-CE23-1529 MAD. The authors also acknowledge the support of the AI Cluster ANITI (ANR-19-PI3A-0004).
+
+\section*{Impact Statement}
+
+This paper presents work whose goal is to advance the field
+ of Privacy-Preserving Machine Learning. There are many potential societal
+ consequences of our work, none which we feel must be
+ specifically highlighted here.
+
+\bibliography{biblio}
+\bibliographystyle{icml2025}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APPENDIX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\appendix
+\onecolumn
+
+\section{Details on Wavelet Decomposition}
+\label{sec:details_wavelet_decomposition}
+
+In this article, we adopt the same conventions for functional spaces as in \cite{hutter2021minimax}. 
+In particular, we encourage the reader to consult Appendix B in \cite{hutter2021minimax} for formal definitions of the functional spaces considered in this paper. 
+
+A notable difference from \cite{hutter2021minimax} is that all the functions considered in this work are supported on $\tilde{\Omega}$, which is a hypercube rather than a more general Lipschitz domain. 
+Therefore, we can restrict the wavelet basis to functions whose support is included in $\tilde{\Omega}$ only, thus avoiding overlaps with the complement: for any function in this basis, its support is either included in $\Tilde{\Omega}$ or in $\Bar{\Tilde{\Omega}} \cup \partial \Tilde{\Omega}$. 
+
+
+As a consequence, if $f \in V_J$, and if $(\gamma_k^{j, g})_{k, j, g}$ denotes its wavelet coefficients in the corresponding wavelet basis, then 
+\begin{equation}
+    \| f \|_{L^2(\tilde{\Omega})}^2 = \|(\gamma_k^{j, g})_{k, j, g}\|_2^2 \;.
+\end{equation}
+
+\section{Technical Tools}
+
+\begin{lemma}
+    \label{lemma:linearizationdeterminant}
+    There exists an open neighborhood $O$ of $0$ in $\R^{q \times q}$ such that 
+    \begin{equation}
+        M \in O \quad \implies \quad | \det(I_q + M) - 1 - \tr(M)| \leq \| M \| \;,
+    \end{equation}
+    where $O$ is only affected by the choice of $\| \cdot \|$.
+\end{lemma}
+\begin{proof}
+    By computing the partial derivatives of $M \mapsto \det(I_q + M)$ in the canonical basis of $\R^{q \times q}$, we immediately see that the gradient of $M \mapsto \det(I_q + M)$ at $0$ for the Euclidean structure induced by the Frobenius inner product is $I_d$. Consequently, since $M \mapsto \det(I_q + M)$ is $\mathcal{C}^1$ (it has a polynomial expression in the coefficients of $M$), 
+    \begin{equation}
+        \det(I_q + M) = 1 + \tr(M) + o(\| M \|) \;.
+    \end{equation}
+    The equivalence of norms in finite dimension allows us to conclude.
+\end{proof}
+
+\begin{lemma}
+\label{lemma:maximumlaplace}
+    Let $L_1, \dots, L_{M}$ be $M$ independent random variables with Laplace distribution (that is, with pdf $t \mapsto \frac{1}{2} e^{- |t|}$ w.r.t. Lebesgue's measure). Then 
+    \begin{equation}
+        \E \p{\max_{i = 1 , \dots, N} |L_i|  } \leq  1 + \ln \p{N} \;.
+    \end{equation}
+\end{lemma}
+\begin{proof}
+Let $\delta \geq 0$, by independence,
+\begin{equation}
+\begin{aligned}
+    \Prob \p{\max_{i = 1 , \dots, N} |L_i| \leq \delta } 
+    &= \Prob \p{\bigcap_{i = 1 , \dots, N} (|L_i| \leq \delta) } \\
+    &= \prod_{i = 1}^N \Prob \p{ (|L_i| \leq \delta) } \\
+    &= \p{1 - e^{-\delta}}^N \;.
+\end{aligned}
+\end{equation}
+Thus, 
+\begin{equation}
+    \begin{aligned}
+        \E \p{\max_{i = 1 , \dots, N} |L_i|  }
+        &= \int_{[0, +\infty)} \Prob \p{\max_{i = 1 , \dots, N} |L_i| > \delta } d\delta \\
+        &= \int_{(0, +\infty)} \p{1 - \p{1 - e^{-\delta}}^N} d\delta \\
+        &\stackrel{u = e^{- \delta}}{=} \int_{(0, 1)} \p{1 - \p{1 - u}^N} \frac{du}{u} \\
+        &\stackrel{\p{1 - u}^N \geq \max(0, 1 - Nu)}{=} \int_{(0, 1)} \p{1 - \max(0, 1 - Nu)} \frac{du}{u} \\
+        &\stackrel{}{=} \int_0^{\frac{1}{N}} \p{1 - \max(0, 1 - Nu)} \frac{du}{u} + \int_{\frac{1}{N}}^1 \p{1 - \max(0, 1 - Nu)} \frac{du}{u} \\
+        &\leq 1 + \ln \p{N} \;.
+    \end{aligned}
+\end{equation}
+\end{proof}
+
+\begin{lemma}
+\label{lemma:comparison_of_norms}
+    Let $f \in V_J$, and denote by $(\gamma_k^{j, g})_{k, j, g}$ its wavelet coefficients for compactly supported mother and father wavelets, and with support adequation to $\tilde{\Omega}$ as described in \Cref{sec:details_wavelet_decomposition}. 
+    Then 
+    \begin{equation}
+        \| (\gamma_k^{j, g})_{k, j, g}\|_{\infty}
+        \leq 
+         \| (\gamma_k^{j, g})_{k, j, g}\|_{2}
+         \lesssim 
+          \| f\|_{\infty}
+          \lesssim 
+          2^{\frac{J d}{2}} \| (\gamma_k^{j, g})_{k, j, g}\|_{\infty} \;.
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    \begin{equation}
+        \begin{aligned}
+            \| f\|_{\infty} 
+            &= \sqrt{\| f^2\|_{\infty} } \\
+            &\geq \sqrt{ \frac{1}{\vol \p{\tilde{\Omega}}}  \int_{\tilde{\Omega}} f^2 } \\
+            &\stackrel{\text{Parseval}}{=} {\sqrt{ \frac{1}{\vol \p{\tilde{\Omega}}}  \| (\gamma_k^{j, g})_{k, j, g}\|_{2}^2 }} \\
+            &\gtrsim \| (\gamma_k^{j, g})_{k, j, g}\|_{2} \\
+            &\geq \| (\gamma_k^{j, g})_{k, j, g}\|_{\infty} \;.
+        \end{aligned}
+    \end{equation}
+
+The inequality 
+\begin{equation}
+    \| f\|_{\infty}
+          \lesssim 
+          2^{\frac{J d}{2}} \| (\gamma_k^{j, g})_{k, j, g}\|_{\infty}
+\end{equation}
+comes from Lemma 24 in \cite{hutter2021minimax}.
+
+\end{proof}
+
+\section{Proofs of \Cref{sec:problem}}
+
+\subsection{Proof of \Cref{lemma:risk_decomposition}}
+\label{proof_of_risk_decomposition}
+
+Following subsection 5.4 in \cite{hutter2021minimax}, we use $\| \cdot \| \eqdef \| \cdot \|_{L^2(P)}$ and we define 
+\begin{equation}
+    \forall f, \quad S_0(f) \eqdef S(f) - S(f_0), \quad \hat{S}_0(f) \eqdef \hat{S}(f | X_{1:n}, Y_{1:n}) - \hat{S}(f_0 | X_{1:n}, Y_{1:n}) \;,
+\end{equation}
+\begin{equation}
+    \forall \tau \geq 0, \quad \mathcal{F}_J(\tau^2) \eqdef \{ f \in V_J \cap \mathcal{X}(2M): S_0(f) \leq \tau^2 \} \;,
+\end{equation}
+and 
+\begin{equation}
+    \Bar{f} \in \argmin_{f \in V_J \cap \mathcal{X}(2M)} S_0(f)   \;,
+\end{equation}
+Furthermore, we define $\hat{f} = \hat{f}_J \in V_J \cap \mathcal{X}(2M)$, and, for $\sigma > 0$, we also let
+\begin{equation}
+    \hat{f}_s = s \hat{f}_{\text{\normalshape priv}} + (1 - s) \Bar{f}, \quad \text{ where } \quad s = \frac{\sigma}{ \sigma + \| \nabla \hat{f}_{\text{\normalshape priv}} - \nabla \Bar{f} \|} \;.
+\end{equation}
+
+Following the same steps as in Proposition 11 from \cite{hutter2021minimax}, we obtain
+\begin{equation}
+    \| \nabla \hat{f}_s - \nabla \Bar{f} \| = s \| \nabla \hat{f}_{\text{\normalshape priv}} - \nabla \Bar{f} \| = \frac{\sigma \| \nabla \hat{f}_{\text{\normalshape priv}} - \nabla \Bar{f} \|}{\sigma + \| \nabla \hat{f}_{\text{\normalshape priv}} - \nabla \Bar{f} \|} \leq \sigma
+\end{equation}
+and
+\begin{equation}
+    S_0 (\hat{f}_s) \leq 4 M (\sigma^2 + \|  \nabla \Bar{f} - \nabla {f}_0 \|^2) \defeq \tau^2 \;.
+\end{equation}
+
+It follows that, $\hat{f}_s \in \mathcal{F}_J(\tau^2)$ and, therefore, $\Bar{f} \in \mathcal{F}_J(\tau^2)$ since we have $S_0(\bar f) \leq S_0(\bar f_s) \leq \tau^2$ by the definition of $\bar f$. 
+We now turn to controlling the error of the semi-dual. 
+We have
+\begin{equation}
+    \begin{aligned}
+        \hat{S}(\hat{f}_s)
+        &= s \hat{S}(\hat{f}_{\text{\normalshape priv}}) + (1-s) \hat{S}(\Bar{f}) \\
+        & \leq  s \p{\hat{S}(\hat{f}_{\text{\normalshape priv}} | X_{1:n}, Y_{1:n}) - \hat{S}(\hat{f} | X_{1:n}, Y_{1:n})} + s \hat{S}(\hat{f}) + (1-s) \hat{S}(\Bar{f}) \\
+        & \leq U + \hat{S}(\Bar{f}) \\
+    \end{aligned}
+\end{equation}
+where the last inequality comes from the optimality of $\hat{f}$ for the empirical semi-dual problem.
+
+Hence,
+\begin{equation}
+    {S}_0(\hat{f}_s) \leq {S}_0(\Bar{f}) + U + 2 \sup_{f \in \mathcal{F}_J(\tau^2)} | S_0(f) - \hat{S}_0(f) | \;.
+\end{equation}
+
+The rest of the proof follows the same lines as the end of Section 5.4 in \cite{hutter2021minimax}, replacing ${S}_0(\Bar{f})$ with ${S}_0(\Bar{f}) + U$ and $\hat{f}$ with $\hat{f}_{\text{\normalshape priv}}$.
+
+
+
+
+\section{Proofs of \Cref{sec:privatemechanism}}
+
+\subsection{Proof of \Cref{lemma:report_noisy_max}}
+This result is folklore in the literature of differential privacy, we include its proof for the sake of completeness.
+To simplify the notation, let us look at the case where the scaling factor in front of the Laplace random variables in \eqref{eq:kjhfkjsbhjdhgfjhqbshdbfbfbfbf} is one. The general case will be obtained by scaling.
+Let $D \sim D'$ be a pair of neighboring datasets, 
+let $k \in \{1 , \dots, N \}$.
+We will condition on $(L_{k'})_{k' \neq k}$. All that follow holds almost surely.
+\begin{equation}
+    \Prob \p{\hat{i}(D) = k | (L_{k'})_{k' \neq k}} 
+    =
+    \Prob \p{\cap_{k' \neq k} \p{f_k(D) + L_k < f_{k'}(D) + L_{k'}}| (L_{k'})_{k' \neq k}} \;.
+\end{equation}
+Notice that we took strict inequalities ($<$) because $L_k$ is absolutely continuous w.r.t. Lebesgue's measure conditionally on $(L_{k'})_{k' \neq k}$, and hence, ties occur only with null probability.
+
+Thus,
+\begin{equation}
+\begin{aligned}
+    \Prob \p{\hat{i}(D) = k | (L_{k'})_{k' \neq k}} 
+    &=
+    \Prob \p{L_k < \min_{k' \neq k} \p{f_{k'}(D) - f_{k}(D) + L_{k'}} \bigg| (L_{k'})_{k' \neq k}} \\
+    &= \frac{1}{2} \int_{-\infty}^{\min_{k' \neq k} \p{f_{k'}(D) - f_{k}(D) + L_{k'}}} e^{- |t|} dt\;.
+\end{aligned}
+\end{equation}
+Hence, two cases occur
+
+\paragraph{Case A: $\min_{k' \neq k} \p{f_{k'}(D) - f_{k}(D) + L_{k'}}\leq 0$}
+\begin{equation}
+\label{eq:uoqshdofihquosdhfsq}
+\begin{aligned}
+    \Prob \p{\hat{i}(D) = k | (L_{k'})_{k' \neq k}} 
+    &=
+    \frac{1}{2} e^{\min_{k' \neq k} \p{f_{k'}(D) - f_{k}(D) + L_{k'}}}\;.
+\end{aligned}
+\end{equation}
+
+\paragraph{Case B: $\min_{k' \neq k} \p{f_{k'}(D) - f_{k}(D) + L_{k'}} > 0$}
+\begin{equation}
+\label{eq:uoqshdofihquosdhfsqjndsq}
+\begin{aligned}
+    \Prob \p{\hat{i}(D) = k | (L_{k'})_{k' \neq k}} 
+    &=
+    1 - \frac{1}{2} e^{- \min_{k' \neq k} \p{f_{k'}(D) - f_{k}(D) + L_{k'}}} \;.
+\end{aligned}
+\end{equation}
+
+Now, we can look at the ratio $\frac{\Prob \p{\hat{i}(D) = k | (L_{k'})_{k' \neq k}} }{\Prob \p{\hat{i}(D') = k | (L_{k'})_{k' \neq k}} }$. First, we can notice that
+\begin{equation}
+\label{eq:jbckvjhbihuqbisubdhfhjqsbdjhfbdhjskq}
+    \begin{aligned}
+        \left| \p{\min_{k' \neq k} \p{f_{k'}(D) - f_{k}(D) + L_{k'}}} - \p{\min_{k' \neq k} \p{f_{k'}(D') - f_{k}(D') + L_{k'}}} \right| \leq 2 \Delta \;.
+    \end{aligned}
+\end{equation}
+Indeed, since the sensitivities of $(f_k)_k$ are uniformly bounded, for any $k' \neq k$,
+\begin{equation}
+    f_{k'}(D) - f_{k}(D) \leq (f_{k'}(D') + \Delta) - (f_{k}(D') - \Delta) = f_{k'}(D') - f_{k}(D') + 2 \Delta \;,
+\end{equation}
+and taking the minimum yields half of the result. The other half is given by swapping $D$ and $D'$.
+
+Then, by using $t(D)$ as a short for $\min_{k' \neq k} \p{f_{k'}(D) - f_{k}(D) + L_{k'}}$, we can look at the following four cases:
+
+\paragraph{Case 1: $t(D), t(D') \leq 0$}
+
+\begin{equation}
+    \begin{aligned}
+        \frac{\Prob \p{\hat{i}(D) = k | (L_{k'})_{k' \neq k}}}{\Prob \p{\hat{i}(D') = k | (L_{k'})_{k' \neq k}}}
+        &\stackrel{\eqref{eq:uoqshdofihquosdhfsq}}{=}
+        \frac{\frac{1}{2} e^{t(D)}}{\frac{1}{2} e^{t(D')}}
+        \leq e^{|t(D) - t(D')|}
+        \stackrel{\eqref{eq:jbckvjhbihuqbisubdhfhjqsbdjhfbdhjskq}}{\leq} e^{2 \Delta} \;.
+    \end{aligned}
+\end{equation}
+
+\paragraph{Case 2: $t(D)\leq 0 < t(D')$}
+
+\begin{equation}
+    \begin{aligned}
+        \frac{\Prob \p{\hat{i}(D) = k | (L_{k'})_{k' \neq k}}}{\Prob \p{\hat{i}(D') = k | (L_{k'})_{k' \neq k}}}
+        &\stackrel{\eqref{eq:uoqshdofihquosdhfsq} \& \eqref{eq:uoqshdofihquosdhfsqjndsq}}{=}
+        \frac{\frac{1}{2} e^{t(D)}}{1 - \frac{1}{2} e^{-t(D')}}
+        =
+        e^{t(D') - t(D)} \frac{\frac{1}{2} e^{t(D)-t(D')}}{e^{-t(D)} - \frac{1}{2} e^{-t(D')-t(D)}} \;.
+    \end{aligned}
+\end{equation}
+Since $t(D)\leq 0 < t(D')$, 
+\begin{equation}
+    e^{t(D)-t(D')} \leq 1 \;.
+\end{equation}
+Furthermore, a simple study of the function $x \mapsto e^{-x} - \frac{1}{2} e^{-t(D')-x}$ on $(-\infty, 0]$ shows that it is non-increasing (because $t(D') > 0$), and thus that 
+\begin{equation}
+    e^{-t(D)} - \frac{1}{2} e^{-t(D')-t(D)} \geq 1 - \frac{1}{2} e^{-t(D')} \geq \frac{1}{2} \;.
+\end{equation}
+
+In the end, 
+\begin{equation}
+    \begin{aligned}
+        \frac{\Prob \p{\hat{i}(D) = k | (L_{k'})_{k' \neq k}}}{\Prob \p{\hat{i}(D') = k | (L_{k'})_{k' \neq k}}}
+        \leq
+        e^{t(D') - t(D)} 
+        \stackrel{\eqref{eq:jbckvjhbihuqbisubdhfhjqsbdjhfbdhjskq}}{\leq} e^{2 \Delta}
+        \;.
+    \end{aligned}
+\end{equation}
+
+
+\paragraph{Case 3: $t(D')\leq 0 < t(D)$}
+
+\begin{equation}
+    \begin{aligned}
+        \frac{\Prob \p{\hat{i}(D) = k | (L_{k'})_{k' \neq k}}}{\Prob \p{\hat{i}(D') = k | (L_{k'})_{k' \neq k}}}
+        &\stackrel{\eqref{eq:uoqshdofihquosdhfsq} \& \eqref{eq:uoqshdofihquosdhfsqjndsq}}{=}
+        \frac{1 - \frac{1}{2} e^{-t(D)}}{\frac{1}{2} e^{t(D')}}
+        =
+        e^{t(D) - t(D')} \frac{e^{-t(D)} - \frac{1}{2} e^{-t(D')-t(D)}}{\frac{1}{2}} \\
+        &\leq e^{t(D) - t(D')} \frac{e^{-t(D)} - \frac{1}{2} e^{-t(D)}}{\frac{1}{2}} = e^{t(D) - t(D')} \frac{\frac{1}{2} e^{-t(D)}}{\frac{1}{2}} \\
+        &\leq e^{t(D) - t(D')} \stackrel{\eqref{eq:jbckvjhbihuqbisubdhfhjqsbdjhfbdhjskq}}{\leq} e^{2 \Delta}\;.
+    \end{aligned}
+\end{equation}
+
+\paragraph{Case 4: $t(D), t(D') > 0$}
+
+\begin{equation}
+    \begin{aligned}
+        \frac{\Prob \p{\hat{i}(D) = k | (L_{k'})_{k' \neq k}}}{\Prob \p{\hat{i}(D') = k | (L_{k'})_{k' \neq k}}}
+        &\stackrel{\eqref{eq:uoqshdofihquosdhfsqjndsq}}{=}
+        \frac{1 - \frac{1}{2} e^{-t(D)}}{1 - \frac{1}{2} e^{-t(D')}} \\
+        &\leq \min \left\{ e^{t(D') - t(D)} \underbrace{\frac{e^{-t(D')} - \frac{1}{2} e^{-t(D)-t(D')}}{e^{-t(D)} - \frac{1}{2} e^{-t(D')-t(D)}}}_{\leq 1 \text{ if } t(D') \geq t(D)}, e^{t(D) - t(D')} \underbrace{\frac{e^{-t(D)} - \frac{1}{2} e^{-2 t(D)}}{e^{-t(D')} - \frac{1}{2} e^{-2 t(D')}}}_{\leq 1 \text{ if } t(D) \geq t(D')} \right\} \\
+        &\leq e^{|t(D) - t(D')|} \\
+        &\stackrel{\eqref{eq:jbckvjhbihuqbisubdhfhjqsbdjhfbdhjskq}}{\leq} e^{2 \Delta} \;.
+    \end{aligned}
+\end{equation}
+
+Thus, we have shown that $\frac{\Prob \p{\hat{i}(D) = k | (L_{k'})_{k' \neq k}} }{\Prob \p{\hat{i}(D') = k | (L_{k'})_{k' \neq k}} } \leq e^{2 \Delta}$. 
+
+
+Integrating over $(L_{k'})_{k' \neq k}$ yields
+\begin{equation}
+    \E_{(L_{k'})_{k' \neq k}} \p{\Prob \p{\hat{i}(D) = k | (L_{k'})_{k' \neq k}}}
+    \leq e^{2 \Delta} \E_{(L_{k'})_{k' \neq k}} \p{\Prob \p{\hat{i}(D') = k | (L_{k'})_{k' \neq k}}} \;,
+\end{equation}
+which translates to 
+\begin{equation}
+    \Prob \p{\hat{i}(D) = k}
+    \leq e^{2 \Delta} \Prob \p{\hat{i}(D') = k }\;.
+\end{equation}
+
+
+Finally, since this is true for any $k$, $\hat{i}$ is $\epsilon$-DP when $\Delta \leq \frac{\epsilon}{2}$. This concludes the proof by scaling appropriatetly.
+
+\subsection{Proof of \Cref{lemma:sensitivitysemidual}}
+\label{sec:proof_of_sensitivitysemidual}
+
+Let $(X_{1:n}, Y_{1:n}) \sim (X_{1:n}', Y_{1:n}')$ be two neighboring datasets. 
+By definition, they contain the same data points except for one individual. 
+Suppose first that $Y_{1:n}' = Y_{1:n}'$ and that, for some $i\in [n]$, the datasets $X_{1:n}$ and $X_{1:n}'$ differ in the $i$-th coordinate only.
+Then the term $\frac{2 \| f \|_{\infty} }{n}$ is obtained by noting that, by the triangular inequality
+    \begin{align*}
+        \left| \hat{S}(f | (X_{1:n}, Y_{1:n})) - \hat{S}(f | (X_{1:n}, Y_{1:n})) \right| = \frac{1}{n} \left|f(X_i) - f(X'_i)\right| \leq \frac{2 \| f \|_{\infty} }{n}.
+    \end{align*}
+    
+    In the opposite case, it holds that $X_{1:n} = X_{1:n}'$ and that the datasets $Y_{1:n}$ and $Y_{1:n}'$ differ in one of the coordinates $i \in [n]$. 
+     We first prove that $f^*$ is $| \Tilde{\Omega} |$-Lipschitz on $\tilde{\Omega}$.
+
+    
+    Let $y_1, y_2 \in \tilde{\Omega}$, let $x \in \tilde{\Omega}$,
+    \begin{equation}
+        \begin{aligned}
+            \langle x, y_1 \rangle - f(x)
+            &=
+            \langle x, y_1 - y_2 \rangle + \langle x, y_2 \rangle - f(x) \\
+            &\stackrel{\text{Cauchy-Schwarz}}{\leq}
+            \| x \| \| y_1 - y_2 \| + \langle x, y_2 \rangle - f(x) \\
+            &\stackrel{}{\leq}
+            |\tilde{\Omega}| \| y_1 - y_2 \| + \langle x, y_2 \rangle - f(x) \;.
+        \end{aligned}
+    \end{equation}
+    Thus, taking the $\sup$ with respect to $x$ on the left-hand side and on the right-hand side yields
+    \begin{equation}
+        \begin{aligned}
+            f^*(y_1)
+            &\stackrel{}{\leq}
+            |\tilde{\Omega}| \| y_1 - y_2 \| + f^*(y_2) \;,
+        \end{aligned}
+    \end{equation}
+    and since $y_1$ and $y_2$ play symmetric roles, 
+    \begin{equation}
+        \begin{aligned}
+            f^*(y_2)
+            &\stackrel{}{\leq}
+            |\tilde{\Omega}| \| y_1 - y_2 \| + f^*(y_1) \;.
+        \end{aligned}
+    \end{equation}
+    Hence, $\hat{S}(f | X_{1:n}, Y_{1:n})$ is $\frac{| \tilde{\Omega} |}{n}$-Lipschitz w.r.t. any of the $Y$s, and therefore, changing the value of any of the $Y$s can only affect the value of $\hat{S}(f | X_{1:n}, Y_{1:n})$ by at most $\frac{2 |\tilde{\Omega} |^2}{n}$ by a triangular inequality.
+
+
+
+\section{Proofs of \Cref{sec:upperbound}}
+
+\subsection{Proof of \Cref{lemma:from_semidual_to_infty}}
+\label{proof_of_from_semidual_to_infty}
+
+Let $f_1, f_2 \in \mathcal{X}$. 
+We observe that $\| f_1^* - f_2^*\|_{\infty} \leq \| f_1 - f_2\|_{\infty}$, since 
+    for any $y\in \Tilde{\Omega}$,
+     \begin{align*}
+        f_1^*(y) - f_2^*(y) &\defeq \sup_x  ~ \Big\{\langle x, y \rangle - f_1(x) \Big\}  +  \inf_{x'} ~  \Big\{-\langle x', y \rangle + f_2(x') \Big\} \\
+        &=  \sup_x \inf_{x'} ~ \langle x-x', y \rangle + f_2(x') - f_1(x)  \\
+        & \leq \sup_x \inf_{x' = x} ~ \langle x-x', y \rangle + f_2(x') - f_1(x) \\
+        &= \sup_x  ~ f_2(x) - f_1(x). 
+    \end{align*}    
+    Thus,
+    \begin{equation}
+        \begin{aligned}
+            \left| \hat{S}(f_1 | X_{1:n}, Y_{1:n}) - \hat{S}(f_2 | X_{1:n}, Y_{1:n}) \right| 
+            &=
+            \left| \frac{1}{n} \sum_{i = 1}^n (f_1(X_i) - f_2(X_i)) + \frac{1}{n} \sum_{i = 1}^n (f_1^*(Y_i) - f_2^*(Y_i)) \right| \\
+            &\leq \| f_1 - f_2\|_{\infty} + \| f_1^* - f_2^*\|_{\infty}\\
+            &\leq 2  \| f_1 - f_2\|_{\infty} \;.
+        \end{aligned}
+    \end{equation}
+
+\subsection{Proof of \Cref{lemma:covering_cardinality}}
+\label{proof_of_covering_cardinality}
+
+
+
+By \Cref{lemma:comparison_of_norms}, we have
+\begin{equation}
+    V_J \cap \mathcal{X}(2M) \subset B_{V_J, \| \cdot\|_{\infty,J}}(0, C M^2)
+\end{equation}
+for a positive constant $C$, 
+where $B_{V_J, \| \cdot\|_{\infty,J}}(0, r)$ refers to the closed ball of $V_J$ with center $0$ and radius $r \geq 0$ for the norm $\| \cdot\|_{\infty,J}$ (the infinite norm of the vector of coefficients in the wavelet basis). 
+
+Since this is a ball in a finite-dimensional space for a distance in infinite norm, it is possible to build a $\delta$-covering of this ball with a $\delta$-grid on the coefficients of the wavelet decomposition, which is of cardinality
+\begin{equation}
+    C_J \eqdef \p{\left\lceil\frac{2 C M^2}{\delta} \right\rceil}^{\dim (V_J)}.
+\end{equation}
+Furthermore, because of the bounded support of the father and mother wavelets, $\dim (V_J) \lesssim 2^{Jd}$ (see page 30 in \cite{hutter2021minimax}). 
+Thus, 
+\begin{equation}
+    C_J \leq \p{\left\lceil\frac{2 C M^2}{\delta} \right\rceil}^{C' 2^{Jd}}
+\end{equation}
+where $C'$ is a constant that does not depend on $J$ and $\delta$.
+
+Let us consider the following construction: for each element of this covering, if there exists a point in $V_J \cap \mathcal{X}(2M)$ at distance not more than $\delta$, we replace the original element by this new point (we choose any point that satisfies this condition in case of non uniqueness). 
+Else, we remove this element if no point in $V_J \cap \mathcal{X}(2M)$ satisfies this condition. 
+By the triangular inequality, this construction yields a $2 \delta$ covering of $V_J \cap \mathcal{X}(2M)$ for $\| \cdot\|_{\infty,J}$ of cardinality at most $C_J$.
+
+Furthermore, by \Cref{lemma:comparison_of_norms}, a $\frac{\delta}{2^{Jd/2}}$-covering of $V_J \cap \mathcal{X}(2M)$ for $\| \cdot\|_{\infty,J}$ is a $\delta$-covering of $V_J \cap \mathcal{X}(2M)$ for the usual infinite norm $\| \cdot\|_{\infty}$.
+
+Scaling $\delta$ appropriately concludes the proof.
+
+\subsection{Proof of \Cref{theorem:bias_variance_tradeoff}}
+\label{proof_of_bias_variance_tradeoff}
+
+We will control
+\begin{equation}
+    {\hat{S}(\hat{f}_{\text{\normalshape priv}} | X_{1:n}, Y_{1:n}) - \hat{S}(\hat{f}_{J} | X_{1:n}, Y_{1:n})} \;.
+\end{equation}
+
+We work conditionally on $X_{1:n}, Y_{1:n}$. 
+All the relations below hold almost surely.
+
+
+Since $C_{J, M}$ is a $\delta$-covering of $V_J \cap \mathcal{X}(2M)$ with respect to $\| \cdot\|_{\infty}$, it is also a $2 \delta$-covering of $V_J \cap \mathcal{X}(2M)$ with respect to $\hat{S}(\cdot | X_{1:n}, Y_{1:n})$ by Lemma~\ref{lemma:from_semidual_to_infty}. 
+Thus,
+\begin{equation}
+    \begin{aligned}
+        \hat{S}(\hat{f}_{\text{\normalshape priv}} &| X_{1:n}, Y_{1:n}) - \hat{S}(\hat{f}_{J} | X_{1:n}, Y_{1:n}) \\
+        & = \min_{i \in \{1, \dots, \card{C_{J, M}} \}} \left\{\hat{S}(f_i | D) + \frac{32 M^2 \vee 36 d}{n \epsilon} L_i \right\} -
+        \hat S(\hat f_J|X_{1:n}, Y_{1:n})\\
+        & \leq \min_{i \in \{1, \dots, \card{C_{J, M}} \}} \left\{\hat{S}({f}_{i} | X_{1:n}, Y_{1:n}) - \hat S(\hat f_J|X_{1:n}, Y_{1:n}) \right\} + \max_{i} \left| \frac{32 M^2 \vee 36 d}{n \epsilon} L_i \right|\\
+        & \leq 2\min_{i \in \{1, \dots, \card{C_{J, M}} \}} \| f_i - \hat f_J\|_\infty+ \max_{i} \left| \frac{32 M^2 \vee 36 d}{n \epsilon} L_i \right|\\
+        &\leq 
+        \underbrace{2 \delta + \max_{i} \left| \frac{32 M^2 \vee 36 d}{n \epsilon} L_i \right|}_{\defeq D} \;.
+    \end{aligned}
+\end{equation}
+By integrating over the source of privacy and by \Cref{lemma:maximumlaplace},
+\begin{equation}
+    \begin{aligned}
+        \E_{L_{1:\card{C_{J, M}}}} \p{D}
+        &\lesssim 
+        \delta + \frac{\ln(\card{C_{J, M}})}{n \epsilon} \\
+        &\lesssim 
+        \delta + \frac{2^{Jd} \ln \p{\frac{C 2^{J d / 2} }{\delta} + 1}}{n \epsilon} \;,
+    \end{aligned}
+\end{equation}
+where $C\geq 0$ is a constant independent of $J$ and $\delta$. 
+Fixing $\delta = \frac{C 2^{J d / 2} }{n \epsilon}$ yields
+\begin{equation}
+    \begin{aligned}
+        \E_{L_{1:\card{C_{J, M}}}} \p{D}
+        &\lesssim 
+        \frac{2^{Jd} \ln(n \epsilon)}{n \epsilon}  \;.
+    \end{aligned}
+\end{equation}
+
+By \Cref{lemma:risk_decomposition} and subsection 5.5 in \cite{hutter2021minimax} in order to control the bias, 
+\begin{equation}
+    \begin{aligned}
+        \E &\p{d(\hat{T}_{\text{\normalshape priv}}, T_0)^2} 
+        \lesssim 
+        \frac{2^{Jd} \ln(n \epsilon)}{n \epsilon}  + \frac{J 2^{J (d-2)}\ln(n)}{n}+ \frac{1}{n} + R^2 2^{-2 J \alpha}
+    \end{aligned}
+    \end{equation}
+for $J$ larger than a suitable constant depending only on the dimension.
+
+\newpage
+
+\section{Proofs of \Cref{sec:lowerbound}}
+
+\subsection{Proof of \Cref{theorem:lowerbound}}
+\label{sec:proof_of_lowerbound}
+
+The proof of the lower bounding terms $\frac{1}{n}$ and $n^{- \frac{2 \alpha}{2 \alpha - 2 + d}}$ uses standard packing arguments \cite{tsybakov2003introduction} with a specific packing for the problem at hand. It may be found in \cite{hutter2021minimax}. We only provide the proof for the additional term $(n\epsilon)^{-\frac{2 \alpha}{2 \alpha + d}}$. It is based on packing arguments for differential privacy standardized via couplings in \cite{acharya2018differentially,acharya2021differentially,lalanne2022statistical}. 
+We start by building a packing similar to the one from \cite{hutter2021minimax}, which is later analyzed with TV distances instead of the traditional KL divergences in order to highlight the effect of differential privacy.
+
+
+    \paragraph{Packing construction.}
+
+    Let $m$ be an integer that will be specified later in the proof and let $N = m^d$. 
+    We consider the grid $\p{\p{\frac{k_1}{m+1}, \dots, \frac{k_d}{m+1}}}_{1 \leq k_1, \dots, k_d \leq m}$.
+This grid has cardinality $N$, therefore we can enumerate its elements as $(p_1,\dots, p_N) \in (\R^d)^N$. 
+By construction, we have that 
+\begin{equation}
+    \forall i, j \in \{1, \dots, N \}, \quad i \neq j \implies \| p_i - p_j\|_{\infty} \geq \frac{1}{m+1} \;.
+\end{equation}
+
+
+Now, we consider a $C^\infty$ ``bump'' function $B$ defined over $\R$ and supported on $[-1, 1]$, taking positive values over $(-1,1)$. 
+For such a function, there exists $x_0 \in (-1, 1)$ such that $B(x_0) \neq 0$ and $B'(x_0) \neq 0$. 
+
+For some sufficiently small constant $a>0$ whose value will be fixed later, we define the function 
+\begin{equation}
+    \psi(x_1, \dots, x_d) = a \prod_{i=1}^d B \p{\frac{x_i}{2}}.
+\end{equation}
+and for some $h\in(0,1]$ and any $\theta \in \{0, 1 \}^{N}$, we define the potential $ \phi_{\theta}:\tilde{\Omega}\to\R$ as  
+\begin{equation}
+\label{eq:definitionpacking}
+    \phi_{\theta}(\cdot) \eqdef \frac{1}{2} \| \cdot\|^2 + h^{\alpha + 1} \sum_{i = 1}^{N} \theta_i \psi \p{\frac{\cdot - p_i}{h}} \;.
+\end{equation}
+To ensure that the functions $ \psi \p{\frac{\cdot - p_i}{h}}$ for $i \in \{1,\dots,N\}$ have disjoint supports, we take $h < \frac{1}{2(m+1)} \lesssim \frac{1}{m}$.
+
+First, we show that for any $\theta \in \{0, 1 \}^{N}$, $\nabla \phi_{\theta} \in \mathcal{T}_{\alpha}$:
+\begin{itemize}
+\item (Bounded transport map) $\forall \theta \in \{0, 1 \}^{N}, \forall x \in \tilde{\Omega},$
+    \begin{equation}
+    \begin{aligned}
+        \nabla \phi_{\theta}(x) = x + h^{\alpha} \sum_{i = 1}^{N} \theta_i \nabla \psi \p{\frac{x - p_i}{h}} \;,
+    \end{aligned}
+    \end{equation}
+    and since the supports are disjoint, only one term in the sum is non-zero, which yields
+    \begin{equation}
+    \label{eq:packingGradientVSIdentity}
+        \forall \theta \in \{0, 1 \}^{N}, \forall x \in \tilde{\Omega}, \quad \| \nabla \phi_{\theta}(x) - x \| \leq h^{\alpha} \|\nabla \psi \|_{\infty}.
+    \end{equation}
+    Choosing $a$ small enough ensures that $\forall \theta \in \{0, 1 \}^{N}, \forall x \in \tilde{\Omega}, \|T(x)\| \leq M$.
+
+    \item (Strong convexity of the potential) $\forall \theta \in \{0, 1 \}^{N}, \forall x \in \tilde{\Omega},$
+    \begin{equation}
+    \begin{aligned}
+        \nabla^2 \phi_{\theta}(x) = I_d + h^{\alpha - 1} \sum_{i = 1}^{N} \theta_i \nabla^2 \psi \p{\frac{x - p_i}{h}}
+    \end{aligned}
+    \end{equation}
+    and thus, since the supports are disjoint,
+    \begin{equation}
+        \forall \theta \in \{0, 1 \}^{N}, \forall x \in \tilde{\Omega}, \quad \| \nabla^2 \phi_{\theta}(x) - I_d \|_{\text{op}} \leq h^{\alpha - 1} \sup \|\nabla^2 \psi \|_{\text{op}} \;,
+    \end{equation}
+    where the right-hand side can be made arbitrarily close to $0$ by taking $a$ small enough (since $h^{\alpha-1}\leq 1$), which ensures that $\forall \theta \in \{0, 1 \}^{N}, \forall x \in \tilde{\Omega}, \frac{1}{M} \preceq \nabla^2 \phi_\theta (x) \preceq M$. 
+    
+    
+
+    \item (Stability of the support) Let $\theta \in \{0, 1 \}^{N}$. It follows from \eqref{eq:packingGradientVSIdentity} that, when $h \leq \frac{1}{m+1}$, one can take $a$ small enough to ensure that 
+    \begin{equation}
+        \forall i, \nabla \phi_{\theta} \p{B_{\infty}\p{p_i, \frac{h}{2}}} \subset B_{\infty}\p{p_i, h} \;.
+    \end{equation}
+    Furthermore, since outside the balls of the form $\p{B_{\infty}\p{p_i, \frac{h}{2}}}$, $\nabla \phi_{\theta}$ is the identity, we have that $\nabla \phi_{\theta}(\Omega) \subset \Omega$ and that 
+    \begin{equation}
+        \forall i, \nabla \phi_{\theta} \p{B_{\infty}\p{p_i, h}} \subset B_{\infty}\p{p_i, h} \;.
+    \end{equation}
+    
+    We now give additional details on the properties of $\nabla \phi_{\theta}$. 
+    We have proved above that $\phi_\theta$ is strongly convex for any $\theta \in \{0,1\}^N$. 
+    It follows that $\nabla \phi_{\theta}$ is injective and that, for any $x \in \tilde{\Omega}$, the Hessian $\nabla^2 \phi_{\theta} (x) \succ 0$ is invertible. 
+    Since $\nabla \phi_{\theta}$ is $\mathcal{C}^{\infty}$ over $\tilde{\Omega}$, the global inversion theorem states that $\nabla \phi_{\theta}$ is a $\mathcal{C}^{\infty}$ diffeomorphism from $\tilde{\Omega}$ to $\nabla \phi_{\theta}(\tilde{\Omega})$.
+    
+    
+    We may also see that the inclusion $\nabla \phi_{\theta}(\Omega) \subset \Omega$ is in fact an equality using arguments borrowed from basic algebraic topology. 
+    First, $\nabla \phi_{\theta}$ is the identity over $\partial \Omega$. 
+    Suppose for the sake of contradiction that $\Omega \setminus \nabla \phi_{\theta}(\Omega) \neq \emptyset$ and let $x \in \Omega \setminus \nabla \phi_{\theta}(\Omega)$ ($x\notin \partial \Omega$ since $\nabla \phi_{\theta}$ is the identity over $\partial \Omega$). 
+    Then, letting $r_x$ be a retraction of $\Omega \setminus \{ x \}$ on $\partial \Omega$ (which exists), we obtain that $r_x \circ \nabla \phi_{\theta}$ is a retraction of $\Omega$ (which is homeomorphic to $B(0, 1)$) to $\partial \Omega$ (which is homeomorphic to $ \partial B(0, 1)$), which is impossible by Brouwer's theorem (see Theorem 7.6.2 in \cite{randalwilliams2024algebraictopology}).
+        
+    As a consequence, 
+    \begin{equation}
+        \forall \theta \in \{0, 1 \}^{N}, \quad \nabla \phi_{\theta}(\Omega) = \Omega \;.
+    \end{equation}
+    By injectivity of the functions $\phi_\theta$'s, this immediately yields
+    \begin{equation}
+        \forall \theta \in \{0, 1 \}^{N}, \quad (\nabla \phi_{\theta})^{-1} \p{\Omega} = \Omega \;.
+    \end{equation}
+    Finally, the same arguments applied to the supports of the functions $\psi \p{\frac{\cdot - p_i}{h}}$ 
+ ensure that, for a small enough $a>0$, we have
+    \begin{equation}
+        \forall \theta \in \{0, 1 \}^{N}, \forall i, \quad \nabla \phi_{\theta} \p{B_{\infty}\p{p_i, h}} = B_{\infty}\p{p_i, h} \;.
+    \end{equation}
+    By injectivity of the functions $\phi_\theta$'s, we similarly obtain
+    \begin{equation}
+        \forall \theta \in \{0, 1 \}^{N}, \forall i, \quad (\nabla \phi_{\theta})^{-1} \p{B_{\infty}\p{p_i, h}} = B_{\infty}\p{p_i, h} \;.
+    \end{equation}
+
+    
+    \item (Smoothness) Let $\theta \in \{0, 1 \}^{N}$. Using multi-index notation (see \cite{hutter2021minimax}),
+    \begin{equation}
+        \| \nabla \phi_{\theta} \|_{C^{\alpha}(\tilde{\Omega})}
+        = 
+        \sum_{i = 1}^d 
+        \p{
+        \sum_{|b| \leq \alpha} \underbrace{\| \partial^b \p{\nabla \phi_{\theta}}_i \|_{\infty}}_{\defeq A_{i, b}}
+        + 
+        \sum_{|b| = \floor{\alpha}}
+        \underbrace{
+        \sup_{x \neq y, x, y \in \tilde{\Omega}}
+        \frac{|\partial^b \p{\nabla \phi_{\theta}}_i(x) - \partial^b \p{\nabla \phi_{\theta}}_i(y) |}{|x - y|^{\alpha - \floor{\alpha}}}}_{\defeq B_{i, b}}
+        } \;.
+    \end{equation}
+
+    Furthermore, 
+    \begin{equation}
+        A_{i, b} = \left\|\partial^b \text{ Coord.}_i + h^{\alpha - |b|} \sum_{j = 1}^{N} \theta_j \partial^b (\nabla \psi)_i \p{\frac{\cdot - p_j}{h}}\right\|_{\infty}
+    \end{equation}
+    where $\text{ Coord.}_i$ is the projection along the $i^{\text{th}}$ canonical vector.
+    Thus, $A_{i, b}$ can be made as close as we want to $\left\|\partial^b \text{ Coord.}_i\right\|_{\infty}$ granted that the constant $a$ is taken small enough.
+
+    Finally, 
+    \begin{equation}
+        \begin{aligned}
+            &B_{i, b} = \sup_{x \neq y, x, y \in \tilde{\Omega}}\\
+            &\frac{\left|\partial^b \text{ Coord.}_i(x) + h^{\alpha - |b|} \sum_{j = 1}^{N} \theta_j \partial^b (\nabla \psi)_i \p{\frac{x - p_j}{h}} - \partial^b \text{ Coord.}_i(y) + h^{\alpha - |b|} \sum_{j = 1}^{N} \theta_j \partial^b (\nabla \psi)_i \p{\frac{y - p_j}{h}} \right|}{|x - y|^{\alpha - \floor{\alpha}}} \\
+        &= \sup_{x \neq y, x, y \in \tilde{\Omega}}
+        \frac{\left|h^{\alpha - |b|} \sum_{j = 1}^{N} \theta_j \partial^b (\nabla \psi)_i \p{\frac{x - p_j}{h}} - h^{\alpha - |b|} \sum_{j = 1}^{N} \theta_j \partial^b (\nabla \psi)_i \p{\frac{y - p_j}{h}} \right|}{|x - y|^{\alpha - \floor{\alpha}}} \\
+        &\leq 
+        h^{\alpha - |b|}
+        \sup_{x \neq y, x, y \in \tilde{\Omega}}
+        \frac{ \sum_{j = 1}^{N} \left|\partial^b (\nabla \psi)_i \p{\frac{x - p_j}{h}} -   \partial^b (\nabla \psi)_i \p{\frac{y - p_j}{h}} \right|}{|x - y|^{\alpha - \floor{\alpha}}} \\
+        &\stackrel{\text{ Disjoint Supports \& Continuity}}{\leq}
+        h^{\alpha - |b|}
+         \max_i \sup_{x \neq y, x, y \in \tilde{\Omega}}
+        \frac{  \left|\partial^b (\nabla \psi)_i \p{\frac{x - p_j}{h}} -   \partial^b (\nabla \psi)_i \p{\frac{y - p_j}{h}} \right|}{|x - y|^{\alpha - \floor{\alpha}}} \\
+        &\leq
+        h^{\alpha - |b|}
+         \max_i \sup_{x \neq y, x, y \in \R^d}
+        \frac{  \left|\partial^b (\nabla \psi)_i \p{\frac{x - p_j}{h}} -   \partial^b (\nabla \psi)_i \p{\frac{y - p_j}{h}} \right|}{|x - y|^{\alpha - \floor{\alpha}}} \\
+        &= 
+        h^{\alpha - |b|}
+         \max_i h^{-(\alpha - \floor{\alpha})} \sup_{x \neq y, x, y \in \R^d}
+        \frac{  \left|\partial^b (\nabla \psi)_i \p{x} -   \partial^b (\nabla \psi)_i \p{y} \right|}{|x - y|^{\alpha - \floor{\alpha}}} \\
+        &= 
+         \max_i\sup_{x \neq y, x, y \in \R^d}
+        \frac{  \left|\partial^b (\nabla \psi)_i \p{x} -   \partial^b (\nabla \psi)_i \p{y} \right|}{|x - y|^{\alpha - \floor{\alpha}}} \;.
+        \end{aligned}
+    \end{equation}
+    Hence, $B_{i, b}$ can be made as small as we want to $0$ granted that the constant $a$ is taken small enough.
+
+    All in all, if the constant $a$ is taken small enough, $\sup_{\theta} \| \nabla \phi_{\theta} \|_{C^{\alpha}(\tilde{\Omega})}$ can be made as close as we want to $\| \text{ Identity } \|_{C^{\alpha}(\tilde{\Omega})}$, which guarantees that $\sup_{\theta} \| \nabla \phi_{\theta} \|_{C^{\alpha}(\tilde{\Omega})} \leq R$ if $a$ is small enough.
+\end{itemize}
+
+Similarly as in \cite{hutter2021minimax}, we consider the family of statistics $(S_{\theta} \eqdef P^{\otimes n} \otimes Q_{\theta}^{\otimes n})_{\theta \in \{0, 1 \}^{N}}$ on the problem where
+\begin{equation}
+    P = \text{Unif}([0, 1]^d) \;,
+\end{equation}
+and 
+\begin{equation}
+    \forall \theta \in \{0, 1 \}^{N}, \quad 
+    Q_{\theta} = {P}_{\# \nabla \phi_{\theta}} \;.
+\end{equation}
+
+It is thus possible to simplify the lower-bounding problem as
+\begin{equation}
+\label{eq:familytopacking}
+\inf_{\hat{T}} \sup_{P \in \mathcal{M}, T_0 \in \mathcal{T}_{\alpha}}
+    \E\p{\int \| T_0 - \hat{T}  \|^2 dP}
+        \geq
+        \inf_{\hat{T}} \sup_{\theta \in \{0, 1 \}^{N}} \E_{S_{\theta}} \p{\int \| \nabla \phi_{\theta} - \hat{T}  \|^2 dP}
+    \end{equation}
+where the supremum is now taken over a finite family only.
+
+We verify that this family of statistics forms a packing 
+for the pseudo metric defined below (with some overlap in the notation)
+\begin{equation}
+    d(S_{\theta_1}, S_{\theta_2})^2 \eqdef d(\theta_1, \theta_2)^2
+        \eqdef \int \| \nabla \phi_{\theta_1} - \nabla \phi_{\theta_2}  \|^2 dP
+\end{equation}
+
+\begin{lemma}
+\label{lemma:packingdistance}
+    For any $\theta_1, \theta_2 \in \{0, 1 \}^{N}$, 
+    \begin{equation}
+        d(S_{\theta_1}, S_{\theta_2})^2
+        \gtrsim \ham{\theta_1}{\theta_2} h^{2 \alpha + d} \;.
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    Let $\theta_1, \theta_2\in \{0, 1 \}^{N}$, then
+\begin{equation}
+\label{eq:distkernelsaw}
+\begin{aligned}
+    \int_{[0, 1]^d} \| \nabla \phi_{\theta_1} - \nabla \phi_{\theta_2}  \|^2 
+    &\stackrel{\text{Disjoint supports}}{=}
+    \sum_{i=1}^{N} \int_{[0, 1]^d}
+    \left\|(\theta_1^i-\theta_2^i) h^{\alpha } \nabla \psi\p{\frac{x-p_i }{h}} \right\|^2 dx \\
+    &\stackrel{\text{Change of variables}}{=}
+    \ham{\theta_1}{\theta_2} h^{2 \alpha + d} \underbrace{\int \|\nabla \psi\|^2}_{> 0} \\
+    &\gtrsim \ham{\theta_1}{\theta_2} h^{2 \alpha + d} \;.
+\end{aligned}
+\end{equation}
+\end{proof}
+From line $1$ to line $2$, we used that $|\theta_1^i-\theta_2^i|$ is equal to $1$ only $\ham{\theta_1}{\theta_2}$ times, and is it equal to $0$ in the other cases. The change of variable $u = \frac{x-p_i }{h}$ in each of the remaining terms yields the term $h^d$.
+
+
+
+
+    \paragraph{Upper bounding the TV distances.}
+
+    To proceed with the lower-bound argument, it remains to lower-bound the testing difficulty between the hypotheses of this packing. Techniques for bounding the testing difficulties usually require bounding the KL-divergences between the statistical models of the packing and a reference measure. 
+    This is the approach proposed in \cite{hutter2021minimax}, which leads to a lower bound of the order of $\frac{1}{n} \vee n^{- \frac{2 \alpha}{2 \alpha - 2 + d}}$. 
+    However, under differential privacy, the test difficulty is characterized by the TV distances between the \emph{untensorized} marginals of the statistical models. 
+    This part of the proof is dedicated to controlling these terms.
+
+    
+
+    \begin{lemma}
+    \label{lemma:tvpacking}
+    For any $\theta_1, \theta_2 \in \{0, 1 \}^{N}$, it holds that
+    \begin{equation}
+        \tv{Q_{\theta_1}}{Q_{\theta_2}}
+        \lesssim \ham{\theta_1}{\theta_2} h^{\alpha - 1 + d} \;.
+    \end{equation}
+\end{lemma}
+\begin{proof}
+By the change of variables formula, for any $\theta \in \{0, 1 \}^{N}$, the density of $Q_{\theta}$  with respect to $P$ is
+\begin{equation}
+    \frac{d Q_{\theta}}{dP}(y) = \frac{\Ind_{[0, 1]^d} ((\nabla \phi_{\theta})^{-1}(y))}{\det(\nabla^2 \phi_{\theta}((\nabla \phi_{\theta})^{-1}(y)))}
+\end{equation}
+for $P$-almost all $y$. 
+Let $\theta_1, \theta_2\in \{0, 1 \}^{N}$,
+\begin{equation}
+    \begin{aligned}
+        &\tv{Q_{\theta_1}}{Q_{\theta_2}}
+        = 
+        \frac{1}{2} \int_{(-1,2)^d} \left| \frac{d Q_{\theta_1}}{dP}(y) - \frac{d Q_{\theta_2}}{dP}(y) \right| dP(y) \\
+        &\quad\quad= 
+        \frac{1}{2} \int_{[0, 1]^d} \left| \frac{\Ind_{[0, 1]^d} ((\nabla \phi_{\theta_1})^{-1}(y))}{\det(\nabla^2 \phi_{\theta_1}((\nabla \phi_{\theta_1})^{-1}(y)))} - \frac{\Ind_{[0, 1]^d} ((\nabla \phi_{\theta_2})^{-1}(y))}{\det(\nabla^2 \phi_{\theta_2}((\nabla \phi_{\theta_2})^{-1}(y)))} \right| dy \;,
+    \end{aligned}
+\end{equation}
+and by stability of $[0, 1]^d$ and of its complement by either $\nabla \phi_{\theta_1}$ or $\nabla \phi_{\theta_2}$, this expression can be further simplified as 
+\begin{equation}
+    \begin{aligned}
+        &\tv{Q_{\theta_1}}{Q_{\theta_2}} 
+        = \frac{1}{2} \int \displaylimits_{[0, 1]^d} \left| \frac{1}{\det(\nabla^2 \phi_{\theta_1}((\nabla \phi_{\theta_1})^{-1}(y)))} - \frac{1}{\det(\nabla^2 \phi_{\theta_2}((\nabla \phi_{\theta_2})^{-1}(y)))} \right| dy \;.
+    \end{aligned}
+\end{equation}
+Then, since both $\nabla \phi_{\theta_1}$ and $\nabla \phi_{\theta_2}$ are the identity outside balls of the form $B_{\infty}(p_i, h)$, and since these balls and their complements are stable by $\nabla \phi_{\theta_1}$ and by $\nabla \phi_{\theta_2}$, this can be rewritten as
+\begin{equation}
+    \begin{aligned}
+        &\tv{Q_{\theta_1}}{Q_{\theta_2}} 
+        = \frac{1}{2} \sum_{i=1}^{N} \int \displaylimits_{B_{\infty}(p_i, h)} \left| \frac{1}{\det(\nabla^2 \phi_{\theta_1}((\nabla \phi_{\theta_1})^{-1}(y)))} - \frac{1}{\det(\nabla^2 \phi_{\theta_2}((\nabla \phi_{\theta_2})^{-1}(y)))} \right| dy
+        \;.
+    \end{aligned}
+\end{equation}
+This expression finally further simplifies as
+\begin{equation}
+\label{eq:ojhkfjqhsdlkjblkjqsdg}
+    \begin{aligned}
+        &\tv{Q_{\theta_1}}{Q_{\theta_2}} 
+        = \\
+        &\quad\quad \frac{1}{2} \sum_{i=1}^{N} \Ind_{\theta_1^{(i)} \neq \theta_2^{(i)}} \underbrace{\int \displaylimits_{B_{\infty}(p_i, h)} \left| \frac{1}{\det(\nabla^2 \phi_{\theta_1}((\nabla \phi_{\theta_1})^{-1}(y)))} - \frac{1}{\det(\nabla^2 \phi_{\theta_2}((\nabla \phi_{\theta_2})^{-1}(y)))} \right| dy}_{\eqdef \Delta_i}
+        \;.
+    \end{aligned}
+\end{equation}
+We treat the case $\theta_1^{(i)}=0$, $\theta_2^{(i)}=1$, the other case being treated similarly.
+In this case, 
+\begin{equation}
+    \begin{aligned}
+        \Delta_i &= \int_{B_{\infty}(p_i, h)} \left| 1 - \frac{1}{\det(\nabla^2 \phi_{\theta_2}((\nabla \phi_{\theta_2})^{-1}(y)))} \right| dy \\
+        &= \int_{B_{\infty}(p_i, h)} \left| 1 - \frac{1}{\det(\nabla^2 \phi_{\theta_2}(x))} \right| |\det(\nabla^2 \phi_{\theta_2}(x))| dx \;,
+    \end{aligned}
+\end{equation}
+   where the last line comes from a change of variables and from the stability of $B_{\infty}(p_i, h)$ and of its complement.
+
+
+   For any $x \in B_{\infty}(p_i, h)$,
+   \begin{equation}
+       \nabla^2 \phi_{\theta_2}(x) = I_d + h^{\alpha-1} \nabla^2 \psi \p{\frac{x-p_i}{h}} \;.
+   \end{equation}
+   By \Cref{lemma:linearizationdeterminant}, we see that if $a$ is chosen small enough, then we have $|\det(\nabla^2 \phi_{\theta_2}(\cdot))| \leq 2$ uniformly over $B_{\infty}(p_i, h)$.
+   Finally, and again by \Cref{lemma:linearizationdeterminant}, if $a$ is chosen small enough, $\forall x \in B_{\infty}(p_i, h)$,
+   \begin{equation}
+       \left| 1 - \frac{1}{\det(\nabla^2 \phi_{\theta_2}(x))} \right| \leq h^{\alpha - 1} \p{ \left| \tr \p{\nabla^2\psi \p{\frac{x-p_i}{h}}} \right| + \left\| \nabla^2\psi \p{\frac{x-p_i}{h}} \right\|} \;,
+   \end{equation}
+   which entails, by a change of variables,
+   \begin{equation}
+       \Delta_i \leq \frac{h^{\alpha - 1 + d}}{2} \int \p{ \left| \tr \p{\nabla^2 \psi} \right| + \left\| \nabla^2\psi  \right\|} \lesssim h^{\alpha - 1 + d} \;.
+   \end{equation}
+   Plugging this result back into \eqref{eq:ojhkfjqhsdlkjblkjqsdg} yields
+   \begin{equation}
+       \begin{aligned}
+        \tv{Q_{\theta_1}}{Q_{\theta_2}} 
+        &\lesssim h^{\alpha - 1 + d} \sum_{i=1}^{N} \Ind_{\theta_1^{(i)} \neq \theta_2^{(i)}} \\
+        &= \ham{\theta_1}{\theta_2}  h^{\alpha - 1 + d} \;.
+    \end{aligned}
+   \end{equation}
+\end{proof}
+
+    
+
+    \paragraph{Private distributional tests and private Assouad method.}
+
+    \begin{lemma}[Assouad's Lemma]
+\label{lemma:Assouad}
+    Assume that there exists $\tau > 0$ such that for any $\theta_1, \theta_2 \in \{0, 1 \}^{N}$, 
+    \begin{equation}
+        d(S_{\theta_1}, S_{\theta_2})^2
+        \gtrsim \ham{\theta_1}{\theta_2} \tau.
+    \end{equation}
+    Let $\hat{T}$ be any estimator and define $\hat{\theta} = \argmin_{\theta \in \{0,1\}^N} d(\hat T, \nabla \phi_\theta)$. 
+    Then it holds that
+    \begin{equation}
+    \label{jhbkqjshdf}
+        \sup_{\theta \in \{0, 1 \}^{N}} \E_{S_{\theta}} \p{\int \| \nabla \phi_{\theta} - \hat{T}  \|^2 dP}
+        \gtrsim \tau \sum_{i=1}^{N} \p{\Prob_{{{\theta_{-i}}}} (\hat{\theta}^i \neq 0) + \Prob_{{{\theta_{+i}}}} (\hat{\theta}^i \neq 1)},
+    \end{equation}
+    where $\Prob_{{{\theta_{+i}}}}$ and $\Prob_{{{\theta_{-i}}}}$ are the mixture distributions
+    \begin{equation}
+        \Prob_{{{\theta_{+i}}}} \eqdef \frac{1}{2^{N-1}} \sum_{\theta: \theta^{(i)} = 1} S_{\theta}, \quad \text{ and } \quad \Prob_{{{\theta_{-i}}}} \eqdef \frac{1}{2^{N-1}} \sum_{\theta: \theta^{(i)} = 0} S_{\theta}\;.
+    \end{equation}
+    Note that in \eqref{jhbkqjshdf} there is a second layer or randomness that is implicit, and that is w.r.t. the estimator itself (for privacy for instance).
+\end{lemma}
+\begin{proof}
+    The proof can be directly adapted from \cite{acharya2021differentially} by substituting the notation with that used in the present paper.
+\end{proof}
+
+\begin{lemma}
+\label{lemma:lecamassouad}
+    If $\hat{T}$ satisfies $\epsilon$-DP, then for any $i$,
+    \begin{equation}
+    \begin{aligned}
+    &\Prob_{{{\theta_{-i}}}} (\hat{\theta}^i \neq 0) + \Prob_{{{\theta_{+i}}}} (\hat{\theta}^i \neq 1)
+    \geq \\
+    &\quad\quad
+    \frac{1}{2^{N-1}}\sum_{\theta^1, \dots, \theta^{i-1}, \theta^{i+1} \dots, \theta^{N} \in \{0, 1 \}} e^{-n \epsilon \tv{Q_{(\theta^1, \dots, \theta^{i-1}, 0, \theta^{i+1} \dots, \theta^{N})}}{Q_{(\theta^1, \dots, \theta^{i-1}, 1, \theta^{i+1} \dots, \theta^{N})}}} \;,
+    \end{aligned}
+\end{equation}
+where $\hat{\theta}$ is built from $\hat{T}$ as in \Cref{lemma:Assouad}.
+\end{lemma} 
+
+\begin{proof}
+This proof builds on coupling arguments from \cite{acharya2018differentially,acharya2021differentially,lalanne2022statistical}.
+    Let us consider the coupling $\mathcal{C}$ that selects $\theta^1, \dots, \theta^{i-1}, \theta^{i+1} \dots, \theta^{N} \in \{0, 1 \}$ uniformly at random, and then 
+    samples accordingly
+    \begin{equation}
+        X_1, \dots, X_n \sim P
+    \end{equation}
+    and
+    \begin{equation}
+        (Y_1, Y_1'), \dots, (Y_n, Y_n') \sim Q
+    \end{equation}
+    where $Q$ is the optimal coupling between $Q_{(\theta^1, \dots, \theta^{i-1}, 0, \theta^{i+1} \dots, \theta^{N})}$ and $Q_{(\theta^1, \dots, \theta^{i-1}, 1, \theta^{i+1} \dots, \theta^{N})}$. Here, the optimality means that if $(Y, Y') \sim Q$, then 
+    \begin{equation}
+        \Prob(Y = Y') = 1 -\tv{Q_{(\theta^1, \dots, \theta^{i-1}, 0, \theta^{i+1} \dots, \theta^{N})}}{Q_{(\theta^1, \dots, \theta^{i-1}, 1, \theta^{i+1} \dots, \theta^{N})}} \;.
+    \end{equation}
+    The existence of such a coupling is well known (see, \textit{e.g.} \cite{lindvall2002lectures}).
+    Furthermore, we let $X_1', \dots, X_n'$ be copies of $X_1, \dots, X_n$.
+
+    Then $\p{(X_1, \dots, X_n, Y_1, \dots, Y_n), (X_1', \dots, X_n', Y_1', \dots, Y_n')}$ (whose distribution is $\mathcal C$) is a coupling between $\Prob_{{{\theta_{+i}}}}$ and $\Prob_{{{\theta_{-i}}}}$.
+
+    Thus, we may write
+    \begin{equation}
+        \begin{aligned}
+            &\Prob_{{{\theta_{-i}}}} (\hat{\theta}^i \neq 0) + \Prob_{{{\theta_{+i}}}} (\hat{\theta}^i \neq 1) = \\
+            &\quad\quad
+            \E_{\mathcal{C}} \p{\Prob (\hat{\theta}^i \neq 0 | X_1, \dots, X_n, Y_1, \dots, Y_n) + \Prob (\hat{\theta}^i \neq 1 | X_1', \dots, X_n', Y_1', \dots, Y_n')}
+        \end{aligned}
+    \end{equation}
+    where the inner randomness (i.e. inside the expectation) is only w.r.t. $\hat{\theta}^i$. Since $\hat{T}$ is $\epsilon$-DP, then so is $\hat{\theta}^i$ by post-processing. Thus, by group privacy and the characteristic property of differential privacy,
+    \begin{equation}
+        \begin{aligned}
+            &\Prob_{{{\theta_{-i}}}} (\hat{\theta}^i \neq 0) + \Prob_{{{\theta_{+i}}}} (\hat{\theta}^i \neq 1) = \\
+            &\quad\quad \E_{\mathcal{C}} \p{\Prob (\hat{\theta}^i((X_1, \dots, X_n, Y_1, \dots, Y_n)) \neq 0) + \Prob (\hat{\theta}^i((X_1', \dots, X_n', Y_1', \dots, Y_n')) \neq 1)} \\
+            &\quad\quad \geq \E_{\mathcal{C}} \Bigg(e^{- \epsilon \ham{(X_1, \dots, X_n, Y_1, \dots, Y_n)}{(X_1', \dots, X_n', Y_1', \dots, Y_n')}}\Prob (\hat{\theta}^i((X_1', \dots, X_n', Y_1', \dots, Y_n')) \neq 0) \\
+            &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad+ \Prob (\hat{\theta}^i((X_1', \dots, X_n', Y_1', \dots, Y_n')) \neq 1)\Bigg) \\
+            &\quad\quad \geq \E_{\mathcal{C}} \Bigg(e^{- \epsilon \ham{(X_1, \dots, X_n, Y_1, \dots, Y_n)}{(X_1', \dots, X_n', Y_1', \dots, Y_n')}} \\
+            &\qquad\qquad\qquad\qquad\qquad 
+            \underbrace{\p{\Prob (\hat{\theta}^i((X_1', \dots, X_n', Y_1', \dots, Y_n')) \neq 0)+ \Prob (\hat{\theta}^i((X_1', \dots, X_n', Y_1', \dots, Y_n')) \neq 1)}}_{=1}\Bigg) \\
+            &\quad\quad = \E_{\mathcal{C}} \p{e^{- \epsilon \ham{(X_1, \dots, X_n, Y_1, \dots, Y_n)}{(X_1', \dots, X_n', Y_1', \dots, Y_n')}}} \\
+            &\quad\quad = \E_{\theta^1, \dots, \theta^{i-1}, \theta^{i+1} \dots, \theta^{N}} \Bigg(  \\
+            &\quad\quad\quad\quad\quad\quad\E_{{(X_1, \dots, X_n, Y_1, \dots, Y_n)}{(X_1', \dots, X_n', Y_1', \dots, Y_n')}} \p{e^{- \epsilon \ham{(X_1, \dots, X_n, Y_1, \dots, Y_n)}{(X_1', \dots, X_n', Y_1', \dots, Y_n')}}} \Bigg)\\
+            &\quad\quad \stackrel{\text{Jensen}}{\geq}
+            \E_{\theta^1, \dots, \theta^{i-1}, \theta^{i+1} \dots, \theta^{N}} \Bigg( \\
+            &\quad\quad\quad\quad\quad\quad e^{- \epsilon  \E_{{(X_1, \dots, X_n, Y_1, \dots, Y_n)}{(X_1', \dots, X_n', Y_1', \dots, Y_n')}} \p{\ham{(X_1, \dots, X_n, Y_1, \dots, Y_n)}{(X_1', \dots, X_n', Y_1', \dots, Y_n')}}}\bigg) \\
+            &\quad\quad =\frac{1}{2^{N-1}}\sum_{\theta^1, \dots, \theta^{i-1}, \theta^{i+1} \dots, \theta^{N} \in \{0, 1 \}} e^{- n \epsilon \tv{Q_{(\theta^1, \dots, \theta^{i-1}, 0, \theta^{i+1} \dots, \theta^{N})}}{Q_{(\theta^1, \dots, \theta^{i-1}, 1, \theta^{i+1} \dots, \theta^{N})}}} \;,
+        \end{aligned}
+    \end{equation}
+    where the last line comes from a simple computation.
+\end{proof}
+
+    \paragraph{Conclusion of the proof.}
+
+    As a consequence of \Cref{lemma:packingdistance}, \Cref{lemma:tvpacking}, \Cref{lemma:Assouad} and \Cref{lemma:lecamassouad},
+    \begin{equation}
+        \inf_{\hat{T}} \sup_{\theta \in \{0, 1 \}^{N}} \E_{S_{\theta}} \p{\int \| \nabla \phi_{\theta} - \hat{T}  \|^2 dP}
+        \gtrsim N h^{2 \alpha + d} e^{- C n \epsilon h^{\alpha-1+d}} \;,
+    \end{equation}
+    where $C > 0$ is a positive constant.
+    Finally, since $N \asymp h^{-d}$, taking $h \asymp (n \epsilon)^{- \frac{1}{\alpha - 1 + d}}$ yields
+    \begin{equation}
+        \inf_{\hat{T}} \sup_{\theta \in \{0, 1 \}^{N}} \E_{S_{\theta}} \p{\int \| \nabla \phi_{\theta} - \hat{T}  \|^2 dP}
+        \gtrsim (n \epsilon)^{- \frac{2 \alpha}{\alpha - 1 + d}} \;,
+    \end{equation}
+and \eqref{eq:familytopacking} then concludes the proof.
+
+
+
+\end{document}

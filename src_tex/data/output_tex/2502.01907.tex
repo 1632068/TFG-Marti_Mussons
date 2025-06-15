@@ -1,0 +1,10 @@
+\begin{abstract}
+Spacecraft operations are influenced by uncertainties such as dynamics modeling, navigation, and maneuver execution errors. 
+Although mission design has traditionally incorporated heuristic safety margins to mitigate the effect of uncertainties, particularly before/after crucial events, it is yet unclear whether this practice will scale in the cislunar region, which features locally chaotic nonlinear dynamics and involves frequent lunar flybys. 
+This paper applies chance-constrained covariance steering and sequential convex programming to simultaneously design an optimal trajectory and trajectory correction policy 
+that can probabilistically guarantee safety constraints under the assumed physical/navigational error models. 
+The results show that the proposed method can effectively control the state uncertainty in a highly nonlinear environment and
+provide a trajectory with better local stability properties than a trajectory designed without considering uncertainties.
+The framework allows faster computation and lossless covariance propagation compared to existing methods, enabling a rapid and accurate comparison of $\Delta V_{99}$ costs for different uncertainty parameters.
+We demonstrate the algorithm on several transfers in the Earth-Moon Circular Restricted Three Body Problem. 
+\end{abstract}

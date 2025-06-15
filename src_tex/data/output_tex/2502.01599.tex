@@ -1,0 +1,152 @@
+\documentclass[12pt]{amsart}
+\usepackage{amssymb,amsmath,amsthm,latexsym}
+%\usepackage[cp1251]{inputenc}
+\usepackage{dsfont}
+\usepackage{amssymb}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz-cd}
+\hypersetup{citecolor=red,}   
+\usepackage{amsfonts, array, hhline} 
+\usepackage{color}
+\usepackage{lmodern}
+\usepackage[left=1in,right=1in,top=1in,bottom=1.5in]{geometry}
+%\usepackage{mathrsfs}
+\usepackage[mathscr]{euscript}
+\usepackage{makecell}
+
+\makeatletter
+\theoremstyle{definition}
+\newtheorem*{rep@theorem}{\rep@title}
+\newcommand{\newreptheorem}[2]{%
+\newenvironment{rep#1}[1]{%
+ \def\rep@title{#2 \ref{##1}}%
+ \begin{rep@theorem}}%
+ {\end{rep@theorem}}}
+\makeatother
+
+\numberwithin{equation}{section}
+
+\theoremstyle{definition}
+\newtheorem{dfn}{Definition}[section]
+\newtheorem{exmp}[dfn]{Example}
+%\theoremstyle{Theorem}
+\newtheorem{thm}[dfn]{Theorem}
+\newtheorem{lm}[dfn]{Lemma}
+\newtheorem{prop}[dfn]{Proposition}
+\newtheorem{crl}[dfn]{Corollary}
+\newtheorem{cnj}[dfn]{Assumption}
+\newtheorem{prob}[dfn]{Problem}
+\newtheorem{thml}{Theorem}
+\newtheorem{question}{Question}
+\newreptheorem{lm}{Lemma}
+\renewcommand*{\thethml}{\Alph{thml}}
+\newtheorem{crll}{Corollary}
+\renewcommand*{\thecrll}{\Alph{thml}}
+\renewcommand{\proofname}{Proof}
+\theoremstyle{remark}
+\newtheorem{rmk}[dfn]{Remark}
+\newtheorem{cla}{Claim}[dfn]
+\renewcommand{\theprop}{\arabic{prop}}
+
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cM}{\mathcal{M}}
+
+
+\newcommand{\e}{\varepsilon}
+\newcommand{\pt}{\partial}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\rar}{\rightarrow}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\S}{\mathbb{S}}
+\newcommand{\len}{{\rm len}}
+\newcommand{\vol}{{\rm vol}}
+\newcommand{\diam}{{\rm diam}}
+\newcommand{\area}{{\rm area}}
+\newcommand{\conv}{{\rm conv}}
+\newcommand{\clconv}{\overline{\rm conv}}
+\newcommand{\ang}{{\angle}}
+\newcommand{\dev}{{\rm dev}}
+\renewcommand{\area}{{\rm area}}
+\newcommand{\curv}{{\rm curv}}
+\newcommand{\inter}{{\rm int}}
+\newcommand{\dist}{{\rm dist}}
+\newcommand{\dS}{d\mathbb{S}}
+\newcommand{\ads}{\mathbb{A}d\mathbb{S}}
+\renewcommand{\hat}{\widehat}
+\renewcommand{\tilde}{\widetilde}
+\newcommand{\fff}{\mathrm{I}}
+\newcommand{\sff}{\mathrm{I\!I}}
+\newcommand{\tff}{\mathrm{I\!I\!I}}
+\newcommand{\ms}[1]{\mathscr{#1}}
+\newcommand{\psl}{\rm PSL}
+\renewcommand{\sl}{\rm SL}
+
+\newcounter{notes}%
+\newcommand{\marginnote}[1]{
+\refstepcounter{notes}  % Comme \addtocounter, mais permet d'utiliser \label{...} dans la note
+\nolinebreak
+$\hspace{-5pt}{}^{\text{\tiny \rm \arabic{notes}}}$
+\marginpar{\tiny \arabic{notes}) #1}
+}
+
+\title[]{Rigidity of anti-de Sitter (2+1)-spacetimes with convex boundary near the Fuchsian locus}
+
+
+\author{Roman Prosanov}
+\address{University of Vienna, Faculty of Mathematics, Oskar-Morgenstern-Platz 1, 1090 Vienna, Austria}
+\email{roman.prosanov@univie.ac.at}
+
+\author{Jean-Marc Schlenker}
+\address{Jean-Marc Schlenker:
+University of Luxembourg, FSTM, Department of Mathematics, 
+Maison du nombre, 6 avenue de la Fonte,
+4364 Esch-sur-Alzette, Luxembourg}
+\email{jean-marc.schlenker@uni.lu}
+
+
+%\date{v0, \today}
+
+\begin{document}
+
+\begin{abstract}
+We prove that globally hyperbolic compact anti-de Sitter (2+1)-spacetimes with strictly convex spacelike boundary that is either smooth or polyhedral and whose holonomy is close to Fuchsian are determined by the induced metric on the boundary.
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
+
+\input{adsrigpol1} %% introduction
+
+\input{adsrigpol2} %% preliminaries
+
+\input{adsrigpol3} %% inf rigidity
+
+\input{adsrigpol4} %% rigidity near fuchsian
+
+\input{adsrigpol5} %% polyhedral
+
+
+
+
+
+\bibliographystyle{abbrv}
+\bibliography{AdsRigidity}
+
+\end{document}

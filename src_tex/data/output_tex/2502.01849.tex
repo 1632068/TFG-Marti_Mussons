@@ -1,0 +1,284 @@
+\documentclass[11pt,letterpaper]{amsart}
+
+\setlength{\oddsidemargin}{.0in}
+\setlength{\evensidemargin}{.0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.3in}
+\setlength{\headsep}{.20in}
+\setlength{\textheight}{9.in}
+\usepackage[leqno]{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[all]{xy}
+\usepackage{graphicx}
+%\usepackage{kpfonts}
+
+\usepackage{xpatch}
+\usepackage{amsaddr}
+\makeatletter
+\xpatchcmd{%
+\@maketitle}{%
+\ifx\@empty\authors \else \@setauthors \fi
+}{%
+  \ifx\@empty\authors \else \@setauthors \fi
+
+  \ifx\@empty\addresses \else\@setaddresses\fi
+}{\typeout{Patch successful}}{\typeout{Patch failed}}
+\makeatother
+
+\DeclareMathOperator*{\mystar}{*}
+
+\makeatletter
+%Table of Contents
+\setcounter{tocdepth}{3}
+
+% Add bold to \section titles in ToC and remove . after numbers
+\renewcommand{\tocsection}[3]{%
+  \indentlabel{\@ifnotempty{#2}{\bfseries\ignorespaces#1 #2\quad}}\bfseries#3}
+% Remove . after numbers in \subsection
+\renewcommand{\tocsubsection}[3]{%
+  \indentlabel{\@ifnotempty{#2}{\ignorespaces#1 #2\quad}}#3}
+%\let\tocsubsubsection\tocsubsection% Update for \subsubsection
+%...
+
+\newcommand\@dotsep{4.5}
+\def\@tocline#1#2#3#4#5#6#7{\relax
+  \ifnum #1>\c@tocdepth % then omit
+  \else
+    \par \addpenalty\@secpenalty\addvspace{#2}%
+    \begingroup \hyphenpenalty\@M
+    \@ifempty{#4}{%
+      \@tempdima\csname r@tocindent\number#1\endcsname\relax
+    }{%
+      \@tempdima#4\relax
+    }%
+    \parindent\z@ \leftskip#3\relax \advance\leftskip\@tempdima\relax
+    \rightskip\@pnumwidth plus1em \parfillskip-\@pnumwidth
+    #5\leavevmode\hskip-\@tempdima{#6}\nobreak
+    \leaders\hbox{$\m@th\mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill
+    \nobreak
+    \hbox to\@pnumwidth{\@tocpagenum{\ifnum#1=1\fi#7}}\par% <-- \bfseries for \section page
+    \nobreak
+    \endgroup
+  \fi}
+\AtBeginDocument{%
+\expandafter\renewcommand\csname r@tocindent0\endcsname{0pt}
+}
+\def\l@subsection{\@tocline{2}{0pt}{2.5pc}{5pc}{}}
+\makeatother
+
+\makeatletter
+\renewcommand{\@evenhead}{\hfill\textsc{\small Quasi-isometric rigidity for lamplighters with lamps of polynomial growth} \hfill \small{\thepage}}
+\renewcommand{\@oddhead}{\hfill \small \textsc{Vincent Dumoncel} \hfill \small{\thepage}}
+\makeatother
+
+
+\usepackage[backend=biber, style=alphabetic, sorting=nty]{biblatex}
+
+\usepackage[colorlinks=true,
+            citecolor=red,
+            linkcolor=blue,
+            linktocpage=true]{hyperref}
+
+% References here 
+\addbibresource{main.bib}
+
+\usepackage{
+  amsmath, amsthm, amssymb, mathtools, dsfont, units,          % Math typesetting
+  graphicx, wrapfig, subfig, float,                            % Figures and graphics formatting
+  listings, color, inconsolata, pythonhighlight,               % Code formatting
+  fancyhdr,enumerate, enumitem, tcolorbox, framed, thmtools} 
+
+%\usepackage[T1]{fontenc}
+%\usepackage{newpxtext,newpxmath}
+%\usepackage[p,osf]{scholax}
+%\usepackage[p,osf]{scholax}
+% T1 and textcomp are loaded by package. Change that here, if you want
+% load sans and typewriter packages here, if needed
+%\usepackage{amsmath,amsthm}% must be loaded before newtxmath
+% amssymb should not be loaded
+%\usepackage[scaled=1.075,ncf,vvarbb]{newtxmath}% need to scale up math package
+% vvarbb selects the STIX version of blackboard bold.
+\usepackage{setspace}
+\usepackage[T1]{fontenc}
+\usepackage{heuristica}
+\usepackage[heuristica,vvarbb,bigdelims]{newtxmath}
+\renewcommand*\oldstylenums[1]{\textosf{#1}}
+
+%Here are some user-defined notations
+\newcommand{\RR}{\mathbf R}%bold R
+\newcommand{\CC}{\mathbf C}  %bold C
+\newcommand{\ZZ}{\mathbf Z}   %bold Z
+\newcommand{\QQ}{\mathbf Q}   %bold Q
+\newcommand{\rr}{\mathbb R}     %blackboard bold R
+\newcommand{\cc}{\mathbb C}    %blackboard bold R
+\newcommand{\zz}{\mathbb Z}    %blackboard bold R
+\newcommand{\qq}{\mathbb Q}   %blackboard bold Q
+\newcommand{\ZZn}[1]{\ZZ/{#1}\ZZ}
+\newcommand{\zzn}[1]{\zz/{#1}\zz}
+\newcommand{\calM}{\mathcal M}  %calligraphic M
+\newcommand{\sm}{\setminus} 
+\newcommand{\bfa}{\mathbf a}
+\newcommand{\bfb}{\mathbf b}
+\newcommand{\bfc}{\mathbf c}
+\newcommand{\dist}{\mathrm{d}}
+
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+                     \raisebox{0.3ex}{$\m@th\cdot$}}%
+                     \raisebox{-0.3ex}{$\m@th\cdot$}}%
+                     =}
+\makeatother
+%improving spacing in tables (space above and below characters in a row)
+\newcommand{\tfix}{\rule{0pt}{2.6ex}}
+\newcommand{\bfix}{\rule[-1.2ex]{0pt}{0pt}}
+
+
+
+%Here are commands with variable inputs 
+\newcommand{\intf}[1]{\int_a^b{#1}\,dx}
+\newcommand{\intfb}[3]{\int_{#1}^{#2}{#3}\,dx}
+\newcommand{\marginalfootnote}[1]{%
+        \footnote{#1}
+        \marginpar[\hfill{\sf\thefootnote}]{{\sf\thefootnote}}}
+\newcommand{\edit}[1]{\marginalfootnote{#1}}
+
+
+%Here are some user-defined operators
+\newcommand{\Tr}{\operatorname {Tr}}
+\newcommand{\GL}{\operatorname {GL}}
+\newcommand{\SL}{\operatorname {SL}}
+\newcommand{\Prob}{\operatorname {Prob}}
+\newcommand{\re}{\operatorname {Re}}
+\newcommand{\im}{\operatorname {Im}}
+
+
+%These commands deal with theorem-like environments (i.e., italic)
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+%These deal with definition-like environments (i.e., non-italic)
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{fact}[theorem]{Fact}
+
+%This numbers equations by section
+\numberwithin{equation}{section}
+
+
+
+%This is for hypertext references
+\usepackage{color}
+\usepackage{hyperref}
+
+% Dessin 
+\usepackage{tikz}
+\usepackage{amsmath}
+\usetikzlibrary{shapes.geometric, positioning}
+\usepackage{graphicx}
+
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={blue},
+    linktoc=page
+    %citecolor={blue!50!black},
+    %urlcolor={blue!80!black}   
+}
+
+\begin{document}
+\newcommand{\R}{\mathbb{R}}% Real numbers
+\newcommand{\dis}{\displaystyle} 
+\newcommand{\Si}{\mathbb{S}}
+\newcommand{\intB}{\overset{\circ}{B}}
+\newcommand{\Po}{\mathcal{P}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\Hi}{\mathcal{H}}
+\newcommand{\ind}{\mathbf{1}}
+
+\newcommand{\Q}{\mathbb{Q}}	% Rational numbers
+\newcommand{\Z}{\mathbb{Z}}	% Integers
+\newcommand{\N}{\mathbb{N}}	% Natural numbers
+\newcommand{\M}{\mathcal{M}}	% Moyennes sur X
+\newcommand{\F}{\mathcal{F}}
+% Calligraphic F for a sigma algebra
+\newcommand{\El}{\mathcal{L}}	% Calligraphic L, e.g. for L^p spaces
+
+% Math mode symbols for probability
+\newcommand{\pr}{\mathbb{P}}% Probability measure
+\newcommand{\E}{\mathbb{E}}	% Expectation, e.g. $\E(X)$
+\newcommand{\var}{\text{Var}}	% Variance, e.g. $\var(X)$
+\newcommand{\cov}{\text{Cov}}	% Covariance, e.g. $\cov(X,Y)$
+\newcommand{\corr}{\text{Corr}}	% Correlation, e.g. $\corr(X,Y)$
+
+\newcommand{\rem}{\backslash\backslash}
+
+% Other miscellaneous symbols
+\newcommand{\tth}{\text{th}}	% Non-italicized 'th', e.g. $n^\tth$
+\newcommand{\Oh}{\mathcal{O}}	% Big-O notation, e.g. $\O(n)$
+
+\newcommand{\Address}{{
+\begin{center}
+            \textsc{Vincent Dumoncel - Université Paris Cité}
+		\textsc{Institut de Mathématiques de Jussieu-Paris Rive Gauche} 
+            \textsc{8, Place Aurélie Nemours} 
+            \textsc{75013 Paris, France}
+		\textit{E-mail address}: \texttt{vincent.dumoncel@imj-prg.fr}
+\medskip
+\end{center}
+}}
+
+
+
+\begin{titlepage}
+\setcounter{page}{1}
+\title[Quasi-isometric rigidity for lamplighters with lamps of polynomial growth]{Quasi-isometric rigidity for lamplighters with lamps \\ of polynomial growth}
+\author{\small{Vincent Dumoncel}}
+\address{Institut de Mathématiques de Jussieu-Paris Rive Gauche \\ \texttt{vincent.dumoncel@imj-prg.fr}}
+
+
+\date{February 2025}
+\maketitle
+
+\textsc{Abstract.} A quasi-isometry between two connected graphs is measure-scaling if one can control precisely the sizes of pre-images of finite subsets. Such a notion is motivated by the work of Eskin-Fysher-Whyte on lamplighters over $\Z$ ~\cite{EFW12, EFW13} and the work of Dymarz on biLipschitz equivalences of amenable groups ~\cite{Dym05, Dym10}, and led Genevois and Tessera to introduce the scaling group $\text{Sc}(X)$ of an amenable bounded degree graph $X$ in ~\cite{GT22}. The main result of our article is a rigidity property for quasi-isometries between lamplighters with lamps of polynomial growth. Under assumptions on $G$ and $H$, any such quasi-isometry $N\wr G\longrightarrow M\wr H$ must be measure-scaling for some scaling factor depending on the growth degrees of $N$ and $M$. In particular, the scaling group of such wreath products is reduced to $\lbrace 1\rbrace$. As applications, we obtain additional examples of pairs of quasi-isometric groups that are not biLipschitz equivalent. We also give applications to the quasi-isometric classification of some iterated wreath products, and we exhibit the first example of an amenable finitely generated group $H$ which is \textit{lamplighter-rigid}, in the sense that $\Z/n\Z\wr H$ and $\Z/m\Z\wr H$ are quasi-isometric if and only if $n=m$.
+
+% or \hypersetup{linkcolor=black}, if the colorlinks=true option of hyperref is used
+
+\begin{spacing}{1.3}
+\tableofcontents 
+\end{spacing}
+
+
+
+
+
+\input{part1}
+\input{part2}
+\input{part3}
+\input{part4}
+\input{part5}
+\input{part6}
+
+
+\begin{spacing}{1.3}
+\printbibliography
+\end{spacing}
+
+
+
+
+% OLD BIBLOGRAPHY 
+\end{titlepage}
+\end{document}

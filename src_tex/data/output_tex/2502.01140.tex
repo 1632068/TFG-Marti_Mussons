@@ -1,0 +1,849 @@
+ %------------------------------------------------------------------------------
+% Beginning of journal.tex
+%------------------------------------------------------------------------------
+%
+% AMS-LaTeX version 2 sample file for journals, based on amsart.cls.
+%
+%        ***     DO NOT USE THIS FILE AS A STARTER.      ***
+%        ***  USE THE JOURNAL-SPECIFIC *.TEMPLATE FILE.  ***Fal90
+%
+% Replace amsart by the documentclass for the target journal, e.g., tran-l.
+%
+\documentclass{amsart}
+
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{psfrag}
+\usepackage{color,xcolor}
+\usepackage{verbatim}
+\usepackage{epstopdf}
+%\usepackage{ctex}
+
+
+\newtheorem{thm}{Theorem}[section]
+%\newtheorem{theo*}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+
+
+\theoremstyle{definition}
+\newtheorem{defi}[thm]{Definition}
+\newtheorem{example}[thm]{Example}
+\newtheorem{xca}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{ques}{Question}[section]
+\newtheorem{exam}{Example}[section]
+\newtheorem{conj}{Conjecture}[section]
+
+\numberwithin{equation}{section}
+
+%    Absolute value notation
+\newcommand{\abs}[1]{\lvert#1\rvert}
+
+%    Blank box placeholder for figures (to avoid requiring any
+%    particular graphics capabilities for printing this document).
+\newcommand{\blankbox}[2]{%
+  \parbox{\columnwidth}{\centering
+%    Set fboxsep to 0 so that the actual size of the box will match the
+%    given measurements more closely.
+    \setlength{\fboxsep}{0pt}%
+    \fbox{\raisebox{0pt}[#2]{\hspace{#1}}}%
+  }%
+}
+
+%-----------------boldsymbol---------------%
+\newcommand{\blambda}{{\boldsymbol{\lambda}}}
+\newcommand{\bbeta}{{\boldsymbol{\beta}}}
+\newcommand{\balpha}{{\boldsymbol{\alpha}}}
+\newcommand{\brho}{{\boldsymbol{\rho}}}
+\newcommand{\btau}{{\boldsymbol{\tau}}}
+
+%------------mathbb--------------%
+%\newcommand{\bR}{{\mathbb R}}
+\newcommand{\Z}{{\mathbb Z}}
+%\newcommand{\bZp}{{{\mathbb Z}^+}}
+
+%\newcommand{\bN}{{\mathbb N}}
+%------------mathbf--------------%
+%\newcommand{\bfx}{{\mathbf x}}
+
+%--------------- math capitals -----------------------%
+\newcommand{\D}{{\mathcal D}}
+\newcommand{\B}{{\mathcal B}}
+
+%\newcommand{\M}{{\mathcal M}}
+%\newcommand{\leb}{\mathcal{L}}
+
+%\def\C{\mathcal{C}}
+\def\N{\mathcal{N}}
+\def\B{\mathcal{B}}
+\def\A{\mathcal{A}}
+%\def\O{\mathcal{O}}
+
+\def\R{\mathbb{R}}
+
+\def\upy{\overline{A}}
+\def\lowy{\underline{A}}
+
+\newcommand{\gray}{\textcolor{gray}}
+\newcommand{\green}{\textcolor{green}}
+\newcommand{\blue}{\textcolor{blue}}
+\newcommand{\red}{\textcolor{red}}
+
+\def\vep{\varepsilon}
+
+\def\g{\mathcal{G}}
+
+\def\bfc{\mathbf{c}}
+
+%\def\gtr{{\mathcal{G} {T_r}}}
+%\def\gtnr{{\mathcal{G} {T_{r,n}}}}
+%\def\gtnmr{{\mathcal{G} {T_{r,n+m}}}}
+
+%\newcommand{\sgn}{{\mathrm{sgn}}}
+%\newcommand{\Var}{\mathrm{Var}}
+%\def\gt{{\mathcal{G} T}}
+\def\wdt{\widetilde}
+%\def\wdtx{\widetilde x}
+
+
+\newcommand{\card}{{\rm card\,}}
+\newcommand{\dist}{{\rm dist}}
+
+\newcommand{\Var}{{\rm Var}}
+
+\begin{document}
+
+%\title[Construction and Box dimension of RFIS]{Construction and Box dimension of \\ recurrent fractal interpolation surfaces}
+\title[Assouad dimension of the graph for Takagi function]{Assouad dimension of the graph for Takagi function}
+
+
+
+\author{Lai Jiang}
+\address{School of Fundamental Physics and Mathematical Sciences, Hangzhou Institute for Advanced Study, University of Chinese Academy of Sciences, Hangzhou 310024, China}
+\email{jianglai@ucas.ac.cn}
+
+
+
+
+
+
+%\thanks{Corresponding author: Lai Jiang}%Huo-Jun Ruan}
+\subjclass[2010]{Primary 28A80; Secondary 41A30.}
+\date{}
+
+
+\keywords{Takagi function, van der Waerden function, Assouad dimension}%, box dimension}
+
+
+\begin{abstract}
+For any integer $b\geq2$ and real series $\{c_n\}$ such that $\sum_{n=0}^\infty|c_n|<\infty$, the generalized Takagi function $f_{{\mathbf c},b}(x)$ is defined by
+$$
+	f_{{\mathbf c},b}(x):=\sum_{n=0}^\infty  c_n\phi(b^n x), \quad x\in [0,1],
+$$
+where $\phi(x)=\dist(x,\mathbb{Z})$ is the distance from $x$ to the nearest integer. 
+The collection of functions with the form are called the Takagi class.
+In this paper, we show that in the case that $\varlimsup_{n \to \infty} b^n |c_n|<\infty$, the Assouad dimension of the graph ${\mathcal G} f_{{\mathbf c},b}=\{(x,f_{{\mathbf c},b}(x)):x\in[0,1]\}$ for the generalized Takagi function $f_{{\mathbf c},b}(x)$ is equal to one, that is,
+$$
+\dim_A {\mathcal G} f_{{\mathbf c},b}=1.
+$$
+In particular, for each $0<a<1$ and integer $b \geq 2$, we define Takagi function $T_{a,b}$ as followed,
+$$
+	T_{a,b}(x):=\sum_{n=0}^\infty a^n \phi(b^n x),  \quad x\in [0,1].
+$$
+Then
+$
+	\dim_A {\mathcal G} T_{a,b}=1
+$ 
+if and only if $0<a \leq 1/b$.
+
+\end{abstract}
+
+
+\maketitle
+
+
+\section{Introduction}
+Takagi function, which is a nowhere differentiable function like Weierstrass function, has been studied extensively after being introduced by Takagi \cite{T1903}. In this paper, we focus on the Assouad dimension of the graph for Takagi function, and our main result gives the precise Assouad dimension.
+
+
+\subsection{Takagi function}
+It was a very well-known classical question whether continuous functions must be differentiable. Weierstrass \cite{W1872} constructed a famous nowhere differentiable function to give a negative answer for this question. Later, Takagi \cite{T1903} introduced another nowhere differentiable function defined by
+$$T(x):=\sum_{n=0}^{\infty} \frac{\phi(2^n x)}{2^n}, \quad x \in [0,1],$$
+where $\phi(x)=\dist(x,\mathbb{Z})$ is the distance from $x$ to the nearest integer.  Takagi \cite{T1903} proved its nowhere differentiability and Billingsley \cite{B82} gave a simplified proof later. 
+
+The classical Takagi function $T(x)$ has attracted widespread attention. Hata and Yamaguti \cite{HY84} regarded the Takagi function as a solution of the discrete boundary value problem. Buczolich \cite{B08} found that the level set of the Takagi function is a finite set. Allaart and Kawamura \cite{AK11} studied further properties of these level sets.
+
+There is a further generalization of the classical Takagi function, which expands its properties and applications. More precisely, for each integer $b\geq2$, the generalized Takagi function is defined by
+$$
+T_b(x):=\sum_{n=0}^\infty\frac{\phi(b^n x)}{b^n}, \quad x\in [0,1].
+$$
+When $b=2$, the function $T_2$ is the classical Takagi function. When $b=10$, the function $T_{10}$ is the van der Waerden function \cite{V30}. Baba \cite{B84} studied the maximum value of $T_b$. 
+Shidfar and Sabetfakhri \cite{SS86} showed that $T_b$ is H$\ddot{\mbox{o}}$lder continuous with any order $\alpha<1$.
+Allaart \cite{A14} studied the level sets of $T_b$.
+
+
+{
+Furthermore, let $a,b$ are real parameters such that $a<1$, $b>1$, $ab \geq 1$.
+We can defined 
+\begin{equation}
+	T_{a,b}:=\sum_{n=0}^\infty a^n \phi(b^n x),  \quad x\in [0,1].
+\end{equation}
+}
+Another direct generalization of the Takagi function is obtained by replacing
+the factor $a^n$ with a sequence real constant $\{c_n\}_{n=0}^\infty$ such that $\sum_{n=0}^\infty |c_n|<\infty$. 
+This gives functions of the form
+\begin{equation}\label{eq:takagi-class}
+	f_{\bfc,b}(x) := \sum_{n=0}^\infty c_n \phi(b^nx),\quad x\in [0,1] .	
+\end{equation}
+The collection of functions with the form in Eq.\eqref{eq:takagi-class} is called the \emph{Takagi class}.
+
+Kôno \cite{K87} studied the continuity of $f_{\bfc,2}$.
+If $\{2^n c_n\} \in \ell^2$, then $f_{\bfc,2}$ is absolutely continuous and hence differentiable almost everywhere.
+If $\{2^n c_n\} \notin \ell^2$ and $\lim_{n \to \infty} 2^n c_n=0$, 
+$f_{\bfc,2}$ is differentiable on an uncountably large set, while
+$f_{\bfc,2}$ is not differentiable at almost
+every point of $[0, 1]$.
+If $\varlimsup_{n \to \infty }2^n|c_n| > 0$, then $f_{\bfc,2}$ is nowhere differentiable.
+
+The signal Takagi function \cite{A13} is an important application of Takagi function, we give a example in end of this paper.
+
+
+%\textcolor{red}{Add more reference of properties or applications for $T_r(x)$, two examples if possible.}
+
+For each function $f$ defined on $D$, denote the graph of the function $f(x)$ by
+$$
+\g f:=\{(x,f(x)): x \in D\}.
+$$
+Note that for any integer $b \geq2$, the closed set $\g T_b\subset\mathbb{R}^2$ is a fractal set and both the Hausdorff dimension and box dimension of $\g T_b$ are equal to one, see, e.g., \cite{B15,KMY84}. However, the Assouad dimension of $\g f_{\bfc,b}$ and $\g T_{a,b}$ is still unknown and is computed for the first time in this paper.
+
+
+\subsection{Assouad dimension}
+We now recall the definition of the Assouad dimension. In our context, by writing $U(p,q,t)\lesssim V(p,q,t)$, we mean that there exists a constant $C>0$ which is independent on $p,q,t$ such that $U(p,q,t)\leq CV(p,q,t)$ for all $p,q,t$.
+
+Let $d\geq1$ be a fixed integer used to represent dimensionality.
+For any bounded set $E\subset\mathbb{R}^d$ and any $\delta>0$, a finite or countable collection of open sets $\{U_i\}_i$ is called a $\delta$-cover of $E$ if $E\subset\bigcup_{i} U_i$ and the diameter of each $U_i$ is not more than $\delta$: 
+$$
+	\mathrm{diam}(U_i)\leq\delta.
+$$
+Let $N_\delta(E)$ be the least number of the open sets in all possible $\delta$-covers of $E$. We denote the closed ball with center $x \in \R^d$ and radius $\rho>0$ by
+$$B(x,\rho)=\{y \in \R^d : |y- x| \leq \rho\}.$$
+Then for any bounded set $F\subset\mathbb{R}^d$, its Assouad dimension is defined by
+$$
+\dim_A F:=\inf\Big\{\alpha>0:\mbox{ for all }0<r<R\mbox{ and }x\in F,\,N_r\big(B(x,R)\cap F\big)\lesssim\Big(\frac{R}{r}\Big)^\alpha\Big\}.
+$$
+We refer the reader to \cite{F21} for more details of the Assouad dimension.
+%, ???two classical books
+
+There is another equivalent definition of Assouad dimension by \cite{F90,F21}. For any $\delta>0$, a $\delta$-mesh or $\delta$-grid in $\R^d$ is the family of cubes of the form
+$$
+[m_1 \delta, (m_1+1) \delta ] \times [m_2 \delta,(m_2+1) \delta ]  \times \cdots \times [m_d \delta,(m_d+1) \delta ]	
+$$
+with integers $m_1,m_2, \ldots ,m_d\in\mathbb{Z}$. For any bounded set $E\subset\mathbb{R}^d$, let $\N_\delta(E)$ be the least number of the cubes in all possible $\delta$-meshs that cover $E$. We denote the closed cube with center $x=(x_1\ldots,x_d)\in\mathbb{R}^d$ and side length $2\rho$ by
+$$Q(x,\rho)=[x_1-\rho,x_1+\rho]\times\cdots\times[x_d-\rho,x_d+\rho].$$
+Then for any fixed positive integer $b\geq2$, we have
+$$
+\dim_A F=\inf\big\{\alpha>0:\mbox{ for all }n,m\in\Z^+\mbox{ and }x\in F,\,\N_{b^{-n-m}}\big(Q(x,b^{-n})\cap F\big)\lesssim b^{\alpha m}\big\}. 
+$$
+Note that here the value of Assouad dimension is independent of the choice of $b$.
+
+For any bounded set $F\subset\mathbb{R}^d$, denote $\dim_H F$, $\dim_B F$, $\underline\dim_B F$ and $\overline\dim_B F$ the  Hausdorff dimension, box dimension, lower box dimension and upper box dimension of $F$ respectively. Note that 
+\begin{align}\label{eq:dim_H<B<F}
+	\dim_H F\leq\underline\dim_B F\leq\overline\dim_B F\leq\dim_A F.
+\end{align}
+See \cite{F90,F21} for this inequality as well as the definitions of Hausdorff dimension and box dimension. 
+{The inequality in Eq.~\eqref{eq:dim_H<B<F} can be strict.}
+Mitchell and Olsen \cite{MO18} constructed a fractal set $X$ by using iteration such that
+$$
+	\dim_H X <\underline\dim_B X<\overline\dim_B X<\dim_A X.
+$$
+  Yu \cite{Y20} proved that there exists Takagi function $T_{a,b}$ such that the box dimension is strictly smaller than the Assouad dimension for certain $a,b$. We refer the reader to \cite{ABK24, BC23, CFY22, R23, S18} for more details of the fractal dimensions.
+
+
+\subsection{Main result}
+We now turn to the graph $\g f_{\bfc,b}$ of the generalized Takagi function $f_{\bfc,b}$ with any integer $b \geq2$. Since for each integer $b\geq2$, the Hausdorff dimension and box dimension of the graph $\g T_b $ are equal to one \cite{B15,KMY84}, by Eq.~\eqref{eq:dim_H<B<F},
+$$
+\dim_A \g T_b \geq\dim_B\g T_b=\dim_H\g T_b=1.
+$$
+Our main result is the following.
+
+
+
+
+\begin{thm}\label{thm:assouad}
+For any integer $b\geq2$ and $\bfc=\{c_k\} $ such that 
+$\varlimsup_{k \to \infty}  b^k|c_k |  <\infty$, we have
+$$\dim_A\g T_{\bfc,b}=1.$$
+\end{thm}
+
+\begin{cor}\label{cor:assouad-old}
+For each integer $b \geq2$, we have
+$$\dim_A\g T_b=1.$$
+\end{cor}
+
+In the case that $ab>1$,
+the box dimension of graphs of $T_{a,b}$ \cite{B15,KMY84} is equal to
+$$
+	\dim_B \g T_{a,b}=2+\frac{\log a}{\log b}>1.
+$$
+
+\begin{cor}\label{cor:assouad}
+For each integer $b\geq2$, 
+$\dim_A\g T_{a,b}=1$
+if and only if $0 \leq a \leq b^{-1} $.
+\end{cor}
+
+
+\subsection*{Acknowledgements.} 
+\medskip
+The author would like to thank Prof. Huo-Jun Ruan and Prof. Yanqi Qiu for helpful discussions.
+%The author would like to thank Dr. Zhaofeng Lin for helpful advices.
+
+
+
+
+
+
+\section{The Assouad dimension of $T_{\bfc}$}
+For the remainder of this paper, we fix integer $b \geq 2$.
+Let $\bfc:=\{c_k\}_{k=0}^\infty$ be a sequence of real numbers such that
+\begin{equation*}
+	\varlimsup_{k \to \infty}  b^k|c_k |  <\infty.
+\end{equation*}
+Write $\eta=\max\big\{1,\varlimsup_{k \to \infty} b^k|c_k|\big\}$.
+
+For any $n \in \Z^+$,
+we define the partial sum sequences of $f_{\bfc,b}$ as
+$$
+	H_{n}(x):=\sum_{k=0}^{n-1} c_k \phi(b^k x), \quad x\in [0,1].
+$$
+For any $n,m \in \Z^+$,
+we define another partial sum sequences of $f_{\bfc,b}$ as
+$$
+	H_{n,m}(x):=\sum_{k=n}^{n+m-1} c_k \phi(b^k x), \quad x\in [0,1].
+$$
+We denote by $S_{n}$ the set
+$$
+	S_{n}:=\big\{  (x,y):   x \in  [0,1] \mbox{ and } |H_{n}(x) -y | \leq \eta \cdot b^{-n}  \big\}.
+$$
+This section will explore the properties of these partial sums, which are essential for understanding the behavior of the Takagi function.
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.4]{Figure_314_1.png}
+\caption{Classical Takagi function $T$, $H_4$ and $S_{4}$.}
+\end{figure}
+
+
+\begin{lem}\label{lem:cover}
+For any $n \in \mathbb{Z}^+$, we have 
+$
+	\g f_{\bfc,b} \subset S_{n}.
+$ 
+
+
+\end{lem}
+\begin{proof}
+Notice that $\phi(t) \leq 1/2$ for all $ t \in \R$.
+Choose an arbitrary $x \in [0,1]$,
+we have
+$$ 
+	\big|f_{\bfc,b}(x)-H_{n}(x)\big|
+	=\bigg|\sum_{k=n}^\infty  c_k \phi(b^k x)\bigg|
+	\leq \sum_{k=n}^\infty \frac{|c_k|}{2}
+	\leq \sum_{k=n}^\infty \frac{\eta}{2b^k}
+	= \frac{\eta \cdot b^{-n}}{2(1-\frac{1}{b})}
+	 \leq \eta \cdot  b^{-n}. 
+$$
+Thus, $(x,f_{\bfc,b}(x)) \in S_{n}$.
+For the arbitrariness of $x$, we have completed the proof.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{lem}\label{lem:linear}
+
+For any $n \in \Z^+$ and $1 \leq i \leq 2r^n$, 
+$H_n$ is  is linear on the interval $[\frac{i-1}{2 b^n} , \frac{i}{2 b^n} ]$.
+
+
+
+
+\end{lem}
+
+\begin{proof}
+
+Let
+$x_1=( i-1)/(2b^n)$ and $x_2=i/(2b^n)$.
+Fix integer $0 \leq k \leq n-1$.
+From
+\[
+  b^k x_1=\frac{i-1}{2b^{n-k}} \mbox{ and } b^k x_2=\frac{i}{2b^{n-k}},
+\]
+we observe that there is no point $x \in (x_1,x_2)$ such that $b^k x=j/(2b^{n-k})$ for some $j\in \Z$. 
+Combining this with $n-k \geq 1$, we find that $0<\phi(b^k x) < 1/2$ for all $x\in (x_1,x_2)$. 
+Summing over $k$ from $0$ to $n-1$,
+$$
+	H_n(x)=\sum_{k=0}^{n-1} c_k \phi(b^k x),
+$$
+is linear on the interval 
+ $[x_1,x_2]$.  
+Thus, the proof is complete.
+\end{proof}
+
+
+
+
+
+\begin{lem}\label{lem:lips}
+
+For any $  n,m \in \Z^+$, function $H_{n}$ and $H_{n,m}$ are Lipschitz functions. More precisely, for any $x_1,x_2 \in [0,1]$, we have
+$$
+	\big|H_{n}(x_1)-H_{n}(x_2)\big|\leq n \eta |x_1-x_2|
+	 \mbox{ and } 
+	\big|H_{n,m}(x_1)-H_{n,m}(x_2)\big|\leq m \eta |x_1-x_2|.
+$$
+\end{lem}
+
+
+\begin{proof}
+For any $t_1,t_2 \in \R$, we have 
+$$
+	\big|\phi(t_1)-\phi(t_2)\big| =\big|\dist(t_1,\Z)-\dist(t_2,\Z)\big| \leq \big|\dist(t_1,t_2)\big|=|t_1-t_2|.
+$$
+Hence, for any $k \in \Z^+$ and $x_1,x_2 \in [0,1]$, we have
+\begin{align*}
+	\big| c_k\phi ( b^k x_1 )-c_k\phi ( b^k x_2)    \big| 
+	 \leq \big| c_k b^k (x_1 - x_2 )    \big|
+	 \leq  \eta |x_1-x_2|   .
+\end{align*}
+Summing over $k$ from $0$ to $n-1$,
+$$
+	\big| H_n(x_1)-H_n(x_2)\big|
+	=\bigg|\sum_{k=0}^{n-1} c_k \phi(b^k x)- c_k \phi(b^k x)\bigg|
+	\leq \sum_{k=0}^{n-1} \big| c_k b^k (x_1 - x_2 )    \big|
+	\leq n \eta |x_1 - x_2 |.
+$$
+Similarly, summing over $k$ from $n$ to $n+m-1$,
+$$
+	\big| H_{n,m}(x_1)-H_{n,m}(x_2)\big|
+	\leq \sum_{k=n}^{n+m-1} \big| c_k b^k (x_1 - x_2 )    \big|
+	\leq m \eta |x_1 - x_2 |.
+$$
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Let $O(g,E)=\sup_{x,x' \in E } \big|g(x)-g(x')\big|$ be the \emph{oscillation} of the function $g$ on set $E$.
+Let $O(g,\emptyset)=0$ by default.
+
+We can quickly make connection between $\N_r(\g g)$ and the oscillation of $g$, which is widely used in obtaining the box dimension of the graphs of continuous functions.
+Similar results can be find in \cite{B15,F90}.
+\begin{lem}\label{lem:osci}
+Let $d \in \R$ and $r >0 $.
+Assume $g$ is a continuous function defined on $[d,d+r]$, then we have
+$$
+	\N_r(\g g ) \leq O\big(g,[d,d+r]\big)/r+2.
+$$
+\end{lem}
+
+
+
+
+  \begin{lem}\label{lem:tkey-new}
+
+
+For any $n \in \mathbb{Z}^+\cup \{0 \}$, $m \in \Z^+$, $1 \leq i \leq b^n$, and $y \in \R$, we have
+$$
+	\N_{b^{-n-m}} \bigg(S_{n+m} \cap \Big(\Big[\frac{i-1}{b^n}, \frac{i}{b^n}\Big] \times \Big[y-\frac{\eta}{b^{n}},y+\frac{\eta}{b^{n}}\Big] \Big) \bigg)  \leq  (10\eta +m \eta +4  )  b^m.
+$$
+\end{lem}
+\begin{proof}
+
+Fix $n \in \mathbb{Z}^+\cup \{0 \}$, $m \in \Z^+$, and $1 \leq i \leq b^n$.
+For each $1 \leq j\leq b^m$, we write 
+$$
+	I_{j}=\Big[\frac{i-1}{b^n}+\frac{j-1}{b^{n+m}}    ,\frac{i-1}{b^n}+\frac{j}{b^{n+m}}   \Big].
+$$
+Define
+$$
+ 	R_j=I_{j} \times [y  -  \eta  \cdot  b^{-n},y+ \eta  \cdot  b^{-n}].
+$$
+By the definition of $S_{n+m}$, we can see that if 
+$$
+  \g H_{n+m}\cap R_j \subset I_{j}\times \Big[ \frac{p}{b^{n+m}}, \frac{q}{b^{n+m}}\Big]
+$$
+for some $p,q\in \R$, then 
+$$
+  S_{n+m}\cap R_j \subset I_{j}    \times \Big[ \frac{p-\eta}{b^{n+m}}, \frac{q+\eta}{b^{n+m}}\Big].
+$$
+Hence,  
+$$
+	\N_{b^{-n-m}}(S_{n+m}\cap R_j) \leq 2+2\eta+ \N_{b^{-n-m}}(\g H_{n+m} \cap R_j).
+$$
+Let $I=[\frac{i-1}{b^n}    ,\frac{i-1}{b^n}] $ and $\wdt{R}=I \times [y-b^{-n},y+b^{-n}]$.
+By summing $j$ over $1$ to $b^m$,
+\begin{equation}\label{eq:Lem4.7-1}
+  \N_{b^{-n-m}}(S_{n+m}\cap \wdt{R}) \leq (2+2\eta)b^m+ \sum_{j=1}^{b^m} \N_{b^{-n-m}}(\g H_{n+m} \cap R_j).
+\end{equation}
+
+
+
+Fix $y \in \R$.
+We write 
+$$D:=D(y,n)=\big\{x\in I:  |H_{n}(x)-y| \leq 2\eta\cdot b^{-n}  \big\}.$$
+Let $J_1=[\frac{i-1}{b^n}    ,\frac{2i-1}{2b^n}] $ and $J_2=[\frac{2i-1}{2b^n}    ,\frac{i}{b^n}] $. 
+It is clear that 
+$$I=J_1 \cup J_2 =\bigcup_{j=1}^{b^m}  I_j.    $$
+From Lemma~\ref{lem:linear}, $H_{n}$ is linear on both $J_1$ and $J_2$.
+Thus, we have
+\begin{align}
+	&\sum_{j=1}^{b^m} O\big(H_{n}, I_{j} \cap D \big) \label{eq:count-1}  \\
+	\leq&\Var\big(H_{n},J_1\cap D\big)+\Var\big(H_{n}, J_2 \cap D\big)\\
+	\leq & 4\eta\cdot b^{-n}+ 4\eta\cdot b^{-n} = 8\eta\cdot b^{-n},
+\end{align}
+where $\Var(g,E)$ represents the variation of $g$ on $E$.
+From Lemma~\ref{lem:lips}, $H_{n,m}$ is Lipschitz on $I$.
+Moreover, we have
+\begin{equation}\label{eq:count-2}
+	\sum_{j=1}^{b^m} O\big(H_{n,m}, I_{j}  \big)
+	\leq \sum_{j=1}^{b^m} m  \eta   \cdot  | I_{j} |
+	=m\eta  \cdot  |I|=  m \eta \cdot b^{-n}.
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+%Fix $n \in \mathbb{Z}^+\cup \{0 \}$, $m \in \Z^+$, and $y\in \R$. 
+
+From Lemma~\ref{lem:cover}, for any $ x \notin D$, we have 
+$$
+	\big| H_{n+m}(x) -y\big|\geq \big| H_{n}(x)-y \big|-\big| H_{n}-H_{n-m}(x) \big| > 2\eta \cdot b^{-n}-\eta \cdot b^{-n}=\eta \cdot b^{-n},
+$$
+which implies that
+$	
+	H_{n+m}(x) \notin [y-\eta \cdot b^{-n},y+ \eta \cdot b^{-n}].
+$
+Hence, we have
+$$
+	\g H_{n+m} \cap R_j \subset   \g H_{n+m} \cap \big( ( I_j\cap D)\times \R\big)   
+$$
+Combining with Lemma~\ref{lem:osci}, we have
+\begin{align*}
+	& \N_{b^{-n-m}}(\g H_{n+m} \cap R_j)  \\
+	%\leq &  \N_{b^{-n-m}}\big(\g T_{n+m} \cap \big( ( I_j\cap D(y,n))\times \R\big)   \big) \\ 
+	\leq & O( H_{n+m},I_j\cap D)/b^{-n-m}+2   \\ 
+	\leq &b^{n+m} \big( O( H_{n},I_j\cap D)+O( H_{n,m},I_j\cap D)\big)+2  .
+\end{align*}
+Combining with Eq.~\eqref{eq:count-1} and Eq.~\eqref{eq:count-2}, by
+summing $j$ over $1$ to $b^m$, we have
+\begin{align*}
+ &\sum_{j=1}^{b^m} \N_{b^{-n-m}}(S_{n+m} \cap R_j) \\
+  \leq & (2\eta+2)  b^m+2b^m+ \sum_{j=1}^{b^m} b^{n+m}\Big(  O (H_{n}, I_{j} \cap D ) + O(H_{n,m}, I_j \cap D ) \Big) \\
+  \leq & (2\eta+4) b^m+  b^{n+m}(  8\eta \cdot b^{-n}+m\eta \cdot b^{-n})\\
+  =&(10\eta +m \eta +4  )b^m.
+\end{align*}
+This completes the proof of the lemma.
+\end{proof}
+
+
+\begin{proof}[Proof of Theorem~\ref{thm:assouad}]
+
+
+
+For any $x_0 \in [0,1]$ and $n \in \mathbb{Z}^+$,
+there exists $0 \leq i \leq b^n$ such that
+$$\Big[x_0-\frac{1}{b^n},x_0+\frac{1}{b^n}\Big]  \subset \Big[ \frac{i-1}{b^n},\frac{i+2}{ b^n} \Big]. $$
+Let $y_0=f_\bfc(x_0)$, then we have
+$$
+	Q\big((x_0,y_0),b^{-n}\big) 
+	%=\Big[x_0-\frac{1}{b^n},x_0+\frac{1}{b^n}\Big] \times \Big[y_0-\frac{1}{b^n},y_0+\frac{1}{b^n}\Big]
+	\subset \Big[ \frac{i-1}{b^n},\frac{i+2}{ b^n} \Big] \times  \Big[y_0- \frac{\eta}{b^n},y_0+\frac{\eta}{ b^n} \Big].
+$$
+
+
+
+
+
+
+
+
+
+%Therefore, 
+From Lemma~\ref{lem:tkey-new}, for any $m \in \mathbb{Z}^+$, we have
+\begin{align*}
+	&\N_{b^{-n-m}} \Big( \g f_{\bfc,b} \cap Q\big((x_0,y_0),b^{-n}\big) \Big) \\
+	\leq& \sum_{\ell=i}^{i+2} \N_{b^{-n-m}} \bigg( S_{n+m} \cap \Big(\Big[\frac{\ell-1}{b^n},\frac{\ell}{b^n}\Big] \times \Big[y_0- \frac{\eta}{b^n},y_0+\frac{\eta}{b^n} \Big] \Big) \bigg) \\
+	%\leq &\sum_{\ell=i+1}^{i+3}  (m+8)b^m\\
+	\leq &  3(10\eta +m \eta +4  )  b^m.
+\end{align*}
+
+For any $\vep>0$, there exists a constant that $C_\vep>0$ such that 
+$$C_\vep b^{m\vep} \geq 3(10\eta +m \eta +4  )  ,\quad \forall m \in \Z^+.$$ 
+Thus,
+$$\N_{b^{-n-m}} \Big( \g f_{\bfc,b} \cap Q\big( x,b^{-n}\big) \Big) \leq C_\vep b^{(1+\vep)m},$$
+for all $x \in \g T_{a,b}$ and $n,m \in \Z^+$.
+This implies $1+\vep$ lies in the following set:
+$$
+	\big\{ \alpha:  \mbox{ for all } n,m \in \Z^+ \mbox{ and } x \in \g f_{\bfc,b} ,
+\N_{b^{-n-m}}\big(Q(x,b^{-n})\cap  \g f_{\bfc,b}  \big) \lesssim  b^{\alpha m}  \big\}.
+$$
+Therefore, we have $ \dim_A \g  f_{\bfc,b} \leq  1 +\vep$.
+For the arbitrariness of $\vep$, it follows that
+$$\dim_A \g f_{\bfc,b}  \leq 1.$$
+On the other hand,
+it is clear that $\dim_A \g  f_{\bfc,b} \geq \underline\dim_B \g  f_{\bfc,b} \geq 1$.
+Thus, $$\dim_A \g  f_{\bfc,b}=1.$$
+\end{proof}
+
+
+
+
+\begin{exam}
+The signal Takagi function\cite{A13}, with the following form
+$$
+	f_{\mathbf r}(x):=\sum_{n=0}^\infty \frac{r_n}{2^n} \phi(2^n x), \quad x \in [0,1],
+$$
+where $r_n =\pm 1$ for each $n$.
+We have $\eta=1$.
+The Assouad dimension of graph of $f_{\mathbf r}$ is one, that is, 
+$$ \dim_A \g f_{\mathbf r}=1.$$
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.4]{Figure_314_2.png}
+\caption{Signal Takagi function $f_{\mathbf r}$, $H_4$ and $S_{4}$, where $r_n=(-1)^n$.}
+\end{figure}
+
+\end{exam}
+
+
+
+
+
+
+
+
+
+
+
+%\begin{lem}
+
+%For any $r \geq 2$, $n \in \Z^+$ and $ 1 \leq i \leq r^n$. 
+
+%\end{lem}
+
+
+
+
+%\newpage
+
+
+
+
+
+\bibliographystyle{amsplain}
+\begin{thebibliography}{11}
+
+
+\bibitem{AK11}
+P. Allaart and K. Kawamura.
+\newblock {\em  The Takagi function: a survey}.
+\newblock  Real Anal. Exchange, {\bf  37} (2011/12), No. 1, 1--54.
+%MR3016850
+
+\bibitem{A13}
+P. Allaart.
+\newblock {\em  Level sets of signed Takagi functions}.
+\newblock  Acta Math. Hungar., {\bf  141} (2013), No. 4, 339--352.
+%MR3122292
+
+
+
+
+
+\bibitem{A14}
+P. Allaart.
+\newblock {\em  On the level sets of the Takagi-van der Waerden functions}.
+\newblock  J. Math. Anal. Appl., {\bf  419} (2014), No. 2, 1168–1180.
+%MR3225427
+
+
+\bibitem{ABK24}
+R. Anttila, B. Bárány and A. Käenmäki.
+\newblock {\em  Slices of the Takagi function}.
+\newblock  Ergodic Theory Dynam. Systems, {\bf  44} (2024), No. 9, 2361--2398.
+%MR4802758
+
+
+\bibitem{B15}
+K. Barański.
+\newblock {\em Dimension of the graphs of the Weierstrass-type functions}.
+\newblock  Progr. Probab., {\bf  70} (2015), Springer, Cham, 77-91.
+%MR3558151
+
+
+
+
+\bibitem{B84}
+Y. Baba.
+\newblock {\em  On maxima of Takagi-van der Waerden functions}.
+\newblock  Proc. Amer. Math. Soc., {\bf 91} (1984), No. 3, 373--376.
+%MR0744632
+
+\bibitem{BC23}
+A. Banaji and H. Chen.
+\newblock {\em  Dimensions of popcorn-like pyramid sets}.
+\newblock  J. Fractal Geom, {\bf 10} (2023), No. 1-2, 151--168.
+%MR4627104
+
+
+
+\bibitem{B82}
+P. Billingsley.
+\newblock {Notes: Van der Waerden's continuous nowhere differentiable function}.
+\newblock  Amer. Math. Monthly, {\bf  89} (1982), No. 9, 691--691.
+%MR1540053
+
+\bibitem{B08}
+Z. Buczolich.
+\newblock {\em   Irregular $1$-sets on the graphs of continuous functions}.
+\newblock  Acta. Math. Hungar., {\bf 121} (2008), No. 4, 371--393.
+%MR2461441
+
+\bibitem{CFY22}
+H. Chen, J. M. Fraser and H. Yu.
+\newblock {\em  Dimensions of the popcorn graph}.
+\newblock  Proc. Amer. Math. Soc., {\bf 150} (2022), No. 11, 4729--4742.
+%MR4489308
+
+\bibitem{F90}
+K. Falconer.
+\newblock {\em Fractal Geometry: Mathematical foundations and applications}. 
+%(third edition)}.%: Mathematical Foundation and Applications}.
+\newblock John Wiley \& Sons, Ltd., Chichester, 1990, xxii+288 pp.
+%MR1102677 
+
+\bibitem{F21}
+J. M. Fraser.
+\newblock {\em Assouad dimension and fractal geometry}. 
+\newblock Cambridge University Press, Cambridge, 2021, xvi+269 pp.
+%MR4411274 
+
+\bibitem{HY84} 
+M. Hata and M. Yamaguti.
+\newblock {\em     Takagi function and its generalization}.
+\newblock  Japan J. Appl. Math., {\bf 1} (1984), No. 1, 183--199.
+%MR0839313
+
+
+\bibitem{KMY84}
+J. L. Kaplan, J. Mallet-Paret and J. A. Yorke.
+\newblock {\em  The Lyapunov dimension of a nowhere differentiable attracting torus}.
+\newblock Ergodic Theory Dynam. Systems, {\bf 4} (1984), No. 2, 261-281.
+%MR0766105
+
+
+
+\bibitem{K87}
+N. Kôno.
+\newblock {\em  On generalized Takagi functions}.
+\newblock Acta Math. Hungar., {\bf 49} (1987), No. 3-4, 315-324.
+%MR0891041
+
+
+
+
+
+\bibitem{MO18} 
+A. Mitchell and L. Olsen.
+\newblock {\em      Coincidence and noncoincidence of dimensions in compact subsets of $[0,1]$}.
+\newblock  (2018), preprint, arXiv:1812.09542.
+%MR0839313
+
+
+%\bibitem{MW86}
+%R. Mauldin and S. Williams.
+%\newblock {\em     On the Hausdorff dimension of some graphs}.
+%\newblock  Trans. Amer. Math. Soc. J., {\bf 298} (1986), 793--803.
+
+\bibitem{R23}
+H. Ren.
+\newblock {\em  Box dimension of the graphs of the generalized Weierstrass-type functions}.
+\newblock Discrete Contin. Dyn. Syst., {\bf 43} (2023), No. 10, 3830-3838.
+%MR4618683
+
+\bibitem{S18}
+W. Shen.
+\newblock {\em   Hausdorff dimension of the graphs of the classical Weierstrass functions}.
+\newblock Math. Z., {\bf 289} (2018), No. 1-2, 223--266.
+%MR3803788
+
+\bibitem{SS86}
+A. Shidfar and K. Sabetfakhri.
+\newblock {\em   Notes: On the continuity of Van der Waerden's function in the Holder sense}.
+\newblock Amer. Math. Monthly, {\bf 93} (1986), No. 5, 375--376.
+%MR1540866
+
+
+\bibitem{T1903}
+T. Takagi.
+\newblock {\em     A simple example of the continuous function without derivative}.
+\newblock Proc. Phys.-Math. Soc. Japan, {\bf 1} (1903), 5--6.
+
+
+\bibitem{V30}
+B. L. van der Waerden.
+\newblock {\em     Ein einfaches Beispiel einer nicht-differenzierbaren stetigen Funktion}.
+\newblock Math. Z., {\bf 32} (1930), No. 1, 474--475.
+%MR1545179
+
+\bibitem{W1872}
+K. Weierstrass.
+\newblock {\em    On continuous functions of a real argument that do not have a well-defined differential quotient}.
+\newblock Presented at the Royal Prussian Academy of Sciences. July 18, 1872.
+%MR
+
+
+
+\bibitem{Y20}
+H. Yu.
+\newblock {\em   Weak tangent and level sets of Takagi functions}.
+\newblock Monatsh. Math., {\bf 192} (2020), No. 1, 249--264.
+%MR4087472
+
+\end{thebibliography}
+\end{document}

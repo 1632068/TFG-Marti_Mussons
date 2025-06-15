@@ -1,0 +1,1637 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{amssymb,amsmath,amscd,amsfonts,amsthm,bbm,mathrsfs,yhmath}
+\input{Macros.tex}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage[utf8]{inputenc} 
+\usepackage{cleveref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{physics}
+\usepackage{nicefrac}
+\usepackage{subcaption}
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={160mm,247mm},
+	left=26mm,
+	right=26mm,
+	top=20mm,
+}
+\usepackage{multirow}
+
+\usepackage[affil-it]{authblk}
+
+\usepackage[table]{xcolor}
+\setlength{\arrayrulewidth}{0.5mm}
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{2.5}
+
+
+
+
+
+\usepackage{fullpage}
+\usepackage[table]{xcolor}
+\setlength{\arrayrulewidth}{0.5mm}
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{2.5}
+\newcommand{\normmsq}[1]{\left\| #1 \right\|_2^2}
+\newcommand{\normm}[1]{\left\| #1 \right\|_2}
+\newcommand{\inner}[2]{\left< #1 , #2 \right>}
+\newcommand{\cV}{{\mathscr{V}}^*}
+\newcommand{\dist}[1]{\operatorname{dist}(#1)}
+\newcommand{\sv}{V^*}
+\newcommand{\Ep}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\cP}{\mathcal{P}_R}
+\newcommand{\cv}{\mathcal{V}}
+
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cC}{\mathcal{C}}
+
+\newcommand{\cc}{C_{\mathrm{large}}}
+\newcommand{\R}{\tilde{R}}
+\newcommand{\rr}{\dot{r}}
+
+
+
+\newcommand{\Cone}{\vartheta}
+\newcommand{\Ctwo}{C_1}
+\newcommand{\Cthree}{C_2}
+\newcommand{\Cfour}{C_3}
+\newcommand{\Cfive}{C_4}
+\newcommand{\Csix}{C_5}
+\newcommand{\Cseven}{C_6}
+\newcommand{\Ceight}{C_7}
+\newcommand{\Cnine}{C_8}
+\newcommand{\Cten}{C_9}
+\newcommand{\Celeven}{C_{10}}
+\newcommand{\Ctwelve}{C_{11}}
+\newcommand{\Cthirteen}{C_{12}}
+\newcommand{\Cfourteen}{C_{13}}
+\newcommand{\Cfifteen}{C_{14}}
+\newcommand{\Csixteen}{C_{15}}
+\newcommand{\Cseventeen}{C_{16}}
+\newcommand{\Ceightteen}{C_{17}}
+\newcommand{\Cnineteen}{C_{18}}
+\newcommand{\Ctwenty}{C_{19}}
+\newcommand{\Ctwentyone}{C_{20}}
+\newcommand{\Ctwentytwo}{C_{21}}
+\newcommand{\Ctwentythree}{C_{22}}
+\newcommand{\Ctwentyfour}{C_{23}}
+\newcommand{\Ctwentyfive}{C_{24}}
+\newcommand{\Ctwentysix}{C_{25}}
+
+\newcommand{\Cctr}{C_{\mathrm{a}}}
+\newcommand{\Csmall}{C_{\mathrm{b}}}
+\newcommand{\Cexp}{C_{\mathrm{exp}}}
+\newcommand{\Cerr}{C_{\mathrm{err}}}
+\newcommand{\Cd}{C_{\mathrm{sup}}}
+
+\newcommand{\sml}{\ell}
+\newcommand{\mm}{Z}
+
+
+
+
+
+
+
+
+\usepackage[colorinlistoftodos,bordercolor=orange,backgroundcolor=orange!20,linecolor=orange,textsize=scriptsize]{todonotes}
+\newcommand{\lukang}[1]{\todo[inline]{\textbf{Lukang: }#1}} 
+
+%\newcommand{\revised}[1]{{\color{red}#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Comments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\comm}[1]{\ifdraft{\marginpar{\tiny{\textcolor{blue}{#1}}}}{\marginpar{\tiny{\textcolor{blue}{#1}}}}}
+\newcommand{\change}[2][{}]{\ifdraft{\comm{#1}\textcolor{red}{#2}}{#2}}
+\newcommand{\hide}[2][{}]{\ifdraft{\comm{#1}}{}}
+\newcommand{\new}[1]{\textcolor{green}{{#1}}}
+\newcommand{\MF}[1]{\marginpar{\scriptsize\textcolor{blue}{MF: {#1}}}}
+\newcommand{\LS}[1]{\marginpar{\scriptsize\textcolor{green}{LS: {#1}}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% revised
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newif\ifrevised
+\newcommand{\revised}[1]{%
+	\ifrevised
+	{\color{blue} #1} \color{black} %
+	\else
+	#1%
+	\fi}
+%\revisedtrue
+\revisedfalse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Specific Commands and Definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% overlining
+%\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand{\overbar}[1]{\makebox[0pt]{$\phantom{#1}\mkern 1.5mu\overline{\mkern-1.5mu\phantom{#1}\mkern-1.5mu}\mkern 1.5mu$}#1}
+%\renewcommand{\underbar}[1]{\mkern 1.5mu\underline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\renewcommand{\underbar}[1]{\makebox[0pt]{$\phantom{#1}\mkern 1.5mu\underline{\mkern-1.5mu\phantom{#1}\mkern-1.5mu}\mkern 1.5mu$}#1}
+
+
+
+\newcommand{\sign}{\text{sign}}
+\DeclareMathOperator*{\Law}{Law}
+%\DeclareMathOperator{\divergence}{div}
+
+
+%% Special commands
+% stochastic processes
+%\newcommand{\V}[0]{\overbar V}
+\newcommand{\Vbar}[1]{\overbarsuperscriptt #1}
+\newcommand{\Vibar}[1]{\overbarsuperscriptit #1}
+\newcommand{\Vjbar}[1]{\overbarsuperscriptjt #1}
+
+\newcommand{\overbarscript}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 0mu}
+\newcommand{\underbarscript}[1]{\mkern 1.5mu\underline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+% objective function
+\newcommand{\globmin}{v^*}
+
+\newcommand{\minobj}{\underbar \CE}
+\newcommand{\maxobj}{\overbar \CE}
+
+
+% SDE dynamics
+\newcommand{\cutoff}[1]{H\!\left({#1}\right)}
+\newcommand{\cutoffnoarg}{H}
+
+
+% measures
+\newcommand{\indivmeasure}[0]{\varrho} %\widetilde\rho already used
+
+\newcommand{\empmeasurenoarg}[0]{\widehat\rho^N}
+\newcommand{\empmeasure}[1]{\widehat\rho_{#1}^N}
+
+\newcommand{\monopmeasurenoarg}[0]{\overbar\rho^N}
+\newcommand{\monopmeasure}[1]{\overbar\rho_{#1}^N}
+
+
+% consensus point
+\newcommand{\omegaa}[0]{\omega_{\alpha}}
+
+\newcommand{\conspoint}[1]{v_{\alpha}({#1})}
+\newcommand{\conspointnoarg}{v_{\alpha}}
+\newcommand{\textconspoint}[1]{v_{\alpha}({#1})}
+
+
+
+%\renewcommand{\underbar}[1]{\mkern 1.5mu\underline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\renewcommand{\underbar}[1]{\makebox[0pt]{$\phantom{#1}\mkern 1.5mu\underline{\mkern-1.5mu\phantom{#1}\mkern-1.5mu}\mkern 1.5mu$}#1}
+
+
+
+\newcommand{\OV}{\overbar{V}}
+
+
+%
+
+\newcommand{\objective}[1]{\CV\left({#1}\right)}
+\newcommand{\textobjective}[1]{\CV({#1})}
+
+\newcommand{\zonea}{\mathcal{Z}_1}
+\newcommand{\zoneb}{\mathcal{Z}_2}
+
+
+
+\newcounter{results}[section] 
+\renewcommand{\theresults}{\thesection.\arabic{results}}
+
+\theoremstyle{plain}
+\newtheorem{theorem}[results]{Theorem}
+\newtheorem{deftheo}[results]{Definition - Theorem}
+\newtheorem{lemma}[results]{Lemma}
+\newtheorem{proposition}[results]{Proposition}
+\newtheorem{corollary}[results]{Corollary}
+\newtheorem{assumption}[results]{Assumption}
+
+\theoremstyle{remark}
+\newtheorem{remark}[results]{Remark}
+\newtheorem{example}[results]{Example}
+
+\theoremstyle{definition}
+\newtheorem{definition}[results]{Definition}
+\newtheorem{experiment}{Experiment}[section]
+
+
+
+\renewcommand{\div}{\mathrm{div}}
+\newcommand{\intd}{\int_{\mathbb{R}^d}}
+\newcommand{\intt}{\int_0^T}
+\newcommand{\summ}{\sum_{i=1}^d}
+\newcommand{\bv}{\bar{v}}
+\newcommand{\intr}{\int_{B_R(0)}}
+\renewcommand{\H}{H}
+\newcommand{\e}{e}
+\newcommand{\Q}{Q}
+\newcommand{\J}{\boldsymbol{J}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{
+	Regularity and positivity of solutions of the Consensus-Based Optimization equation: unconditional global convergence
+}
+
+%\date{March, 5 2024}
+
+
+\author[1,2,3]{Massimo Fornasier\thanks{Email: \texttt{massimo.fornasier@cit.tum.de} }}
+\author[1]{Lukang Sun\thanks{Email: \texttt{lukang.sun@tum.de} }}
+
+\affil[1]{Technical University of Munich, School of Computation, Information and Technology, Department of Mathematics, Munich, Germany}
+\affil[2]{Munich Center for Machine Learning, Munich, Germany}
+\affil[3]{Munich Data Science Institute, Germany}
+
+\renewcommand\Authands{ and }
+
+\begin{document}
+	\maketitle
+	\begin{abstract} 
+Introduced in 2017 \cite{B1-pinnau2017consensus}, Consensus-Based Optimization (CBO) has rapidly emerged as a significant breakthrough in global optimization. This straightforward yet powerful multi-particle, zero-order optimization method draws inspiration from Simulated Annealing and Particle Swarm Optimization. Using a quantitative mean-field approximation, CBO dynamics can be described by a nonlinear Fokker-Planck equation with degenerate diffusion, which does not follow a gradient flow structure.  
+
+In this paper, we demonstrate that solutions to the CBO equation remain positive and maintain full support. Building on this foundation, we establish the { unconditional} global convergence of CBO methods to global minimizers. Our results are derived through an analysis of solution regularity and the proof of existence for smooth, classical solutions to a broader class of drift-diffusion equations, despite the challenges posed by degenerate diffusion.
+	\end{abstract}
+	
+	
+	
+	{\noindent\small{\textbf{Keywords:} nonlinear Fokker--Planck equations,  consensus-based optimization, regularity and \\positivity of solutions,	degenerate diffusion,global optimization,
+			}}\\
+	
+	{\noindent\small{\textbf{AMS subject classifications:} 35B65, 35Q84, 35Q91, 35Q93, 37N40, 60H10}}
+	\tableofcontents
+	
+	
+	%\newpage
+	\section{Introduction}
+
+
+    
+Traditional mathematical optimization techniques, such as gradient descent and quasi-Newton methods, rely on local higher-order information to guide the search for minimizers. However, due to their reliance on local information, these approaches often fail when applied to nonconvex and nonsmooth problems, which pose the greatest challenge in mathematical optimization.
+Metaheuristic algorithms, including Simulated Annealing, Genetic Algorithms, Particle Swarm Optimization, Ant Colony Optimization, and various evolutionary strategies \cite{GendPotv13,blum2003metaheuristics}, have demonstrated remarkable empirical success and have been extensively evaluated on benchmarking platforms like COCO \cite{COCO21}. Despite their success, most of these methods lack strong theoretical guarantees or reliable convergence rates, particularly for high-dimensional global nonconvex optimization problems. Effectively overcoming nonconvexity and locality barriers with theoretical guarantees would enable us to tackle applications that have, until now, been beyond the reach of { rigorous} mathematical approaches.
+
+A major breakthrough in global optimization occurred in 2017 with the introduction of Consensus-Based Optimization (CBO) \cite{B1-pinnau2017consensus}. CBO is a simple, zero-order, multi-particle optimization method inspired by the principles of Simulated Annealing and Particle Swarm Optimization. It not only demonstrates strong empirical success in solving a wide range of global optimization problems \cite{totzeck2018numerical,B1-fornasier2020consensus_sphere_convergence,B1-riedl2022leveraging,B1-carrillo2019consensus,B1-fornasier2021anisotropic,B1-riedl2022leveraging,JMLR:v25:23-0764,B1-kim2020stochastic, B1-ha2021emergent, B1-borghi2021constrained,B1-bostan2013asymptotic,B1-borghi2022consensus, B1-borghi2022adaptive,B1-qiu2022Saddlepoints,B1-carrillo2022sampling,B1-totzeck2020consensus, B1-grassi2021mean,B1-chen2020consensus,B1-schillings2022Ensemble}\footnote{The body of literature on CBO and its testing on applications is growing rapidly, making it challenging to track and report all the latest developments. Here, we cite a selection of recent noteworthy contributions. We refer to \cite{totzeck2021trends} for a  review and \cite{totzeck2018numerical} for a comparison with other multi-agent global optimization algorithms.} but, even more surprisingly, also comes with rigorous theoretical guarantees and convergence rates for a broad class of nonconvex and nonsmooth optimization problems; see our discussion below for details.
+
+The equations defining the iterates $V^i_k$ of the CBO algorithm read ($i=1,\dots,N$ labelling the particles, and $k=0,\dots,K$ denoting the iterates)
+\begin{align}
+\label{eq:B1-CBO1}
+V^i_{k+1} &= V^i_{k} - \Delta t \lambda(V^i_k-v_{\alpha}(\widehat \rho_k^N)) + \sqrt{\Delta t}\sigma \|V^i_k-v_{\alpha}(\widehat  \rho_k^N)\|_2  B_k^i, 
+\end{align}
+where
+\begin{align}
+v_{\alpha}(\widehat \rho_k^N) = \frac{1 }{\sum_{i=1}^N \omega_\alpha^f(V_k^i)} \sum_{i=1}^N V_k^i \omega_\alpha^f(V_k^i), 
+\end{align}
+and $f$ is the objective function to be minimized, $v_{\alpha}(\widehat \rho_k^N)$ is the so-called consensus point, $\omega_\alpha^f(v)=e^{-\alpha {f}(v)}$ is  the Gibbs weight, and $B^i_k$ is an independent standard Gaussian random vector. The initial {particles} $V_0^i$ are drawn i.i.d. at random according to a given probability distribution $\rho_0$.
+
+
+The algorithm \eqref{eq:B1-CBO1} has a straightforward formulation (it can be implemented in just a few lines of code \cite{CBX2024code}) with a complexity of $\mathcal O(N)$ and is highly parallelizable; see, for instance, \cite{benfenati22,JMLR:v25:23-0764}. Additionally, it relies exclusively on pointwise evaluations of the objective function $f$, meaning that no higher-order derivatives are required.  
+
+The core mechanism of CBO involves a combination of a relaxed drift toward the weighted mean of the particles and their stochastic perturbation, embodying an exploitation-exploration strategy. Notably, the original formulation of CBO, given in equation \eqref{eq:B1-CBO1}, was developed under the restrictive assumption that the objective function $f$ possesses a { unique} minimizer $v^*$. More recent adaptations extend the approach to accommodate multiple global minimizers \cite{B1-bungert2022polarized,B1-fornasierSun25}.  
+
+The proofs of convergence to global minimizers as devised in \cite{carrillo2018analytical,B1-fornasier2021global} rely on the following three-level approximation argument. The first approximation goes for $\Delta t \to 0$: standard results, see \cite{platen1999introduction}, allow to interpret \eqref{eq:B1-CBO1} as  the Euler--Maruyama numerical approximation  for $\Delta t \to 0$ to solutions $V_t^i$, $i=1,\dots,N$ of the empirical system
+\begin{equation}
+d {V}^i_t
+		=-\lambda\left(V^i_t-v_\alpha(\hat \rho_t^N )\right)dt+\sigma \|V^i_t-v_\alpha(\widehat \rho^N_t)\|_2 d B_t^i, \quad v_\alpha(\widehat \rho_t^N ) =  \frac{1 }{\sum_{i=1}^N \omega_\alpha^f(V_t^i)} \sum_{i=1}^N V_t^i \omega_\alpha^f(V_t^i).
+\end{equation}
+The second approximation level comes as a quantitative mean-field limit for $N \to \infty$, see \cite[Proposition 3.11]{B1-fornasier2021global} and also \cite[Theorem 2.6]{gerber2023propagation},
+\begin{equation}\label{eq:qmfl}
+   \sup_{t \in [0,T]}\sup_{i=1,\dots,N} \mathbb E\left [ \| \overline V^i_t -V^i_t\|_2^2\right ]  \leq CN^{-1}, 
+\end{equation}
+{where $\overline V^i_t$ are $N$ particles satisfying the self-fulfilling mono-particle dynamics
+\begin{equation}\label{eq:B1-CBO2}
+		d \overline{V}_t
+		=-\lambda\left(\overline{V}_t-v_\alpha(\rho_t)\right)dt+\sigma \|\overline{V}_t-v_\alpha(\rho_t)\|_2 d B_t,
+	\end{equation}
+ with $\overline V^i_0=V_0^i, i=1,\ldots,N$,}   
+ and  $v_\alpha(\rho)=\frac{\int v \omega^{f}_\alpha(v) d\rho(v)}{\int \omega^f_\alpha(v) d\rho(v)}$ and $\rho_t= \operatorname{Law}(\overline{V}_t)$, which fulfills the nonlinear Fokker--Planck equation
+ \begin{align} \label{eq:B1-fokker_planck}
+	\partial_t\rho_t
+	= \lambda\operatorname{div} \big(\!\left(v - v_\alpha(\rho_t)\right)\rho_t\big)
+	+ \frac{\sigma^2}{2}\Delta\big(\|v-v_\alpha(\rho_t)\|_2^2\rho_t\big),
+\end{align}
+{here $v\in\mathbb{R}^d$ is the variable of the equation.} Notably, the existence of probability measure solutions of \eqref{eq:B1-fokker_planck} was established in \cite{carrillo2018analytical} throught the analysis of \eqref{eq:B1-CBO2}. 
+The third and last approximation level is provided by the large time asymptotics of the solution $\rho_t$. Namely, the global convergence is resulting from the quantification of the approximation $v_\alpha(\rho_t) \approx v^*$ at all times, for $\alpha>0$ large enough, obtained  through a quantitative Laplace's principle \cite[Proposition 4.5]{B1-fornasier2021global} and the crucial technical assumption that $\rho_0$ has mass around 
+the global minimizer $v^*$, i.e.,
+\begin{equation}\label{eq:techass}
+\rho_0(B_r(v^*)) >0, \quad r>0.
+\end{equation}
+See \cite[Proposition 4.6]{B1-fornasier2021global} for details.
+Consequently, under mild assumptions on the objective function $f$ --local Lipschitz continuity and a local growth around the global minimizer--, \cite[Theorem 3.7]{B1-fornasier2021global} shows that the Wasserstein distance $W_2^2(\rho_t, \delta_{v^*})$ is a natural Lyapunov functional for \eqref{eq:B1-fokker_planck} at finite time, with exponential decay
+\begin{equation}\label{eq:contr}
+W_2^2(\rho_t, \delta_{v^*}) \leq W_2^2(\rho_0, \delta_{v^*}) e^{-(1-\theta)(2\lambda - d \sigma^2) t}, 
+\end{equation}
+for a suitable $\theta \in (0,1)$ for $t \in [0,T^*]$ and 
+\begin{equation}\label{eq:finerr}
+    W_2^2(\rho_{T^*}, \delta_{v^*}) \leq \epsilon.
+\end{equation}
+The combination of these three level approximation as in \cite[Theorem 3.8]{B1-fornasier2021global} yields the quantitative convergence in probability of the algorithm \eqref{eq:B1-CBO1}
+\begin{equation}\label{B1-ownresult2}
+  \mathbb P\Bigg( \|\frac{1}{N} \sum_{i=1}^N V_{K}^i-v^*\| \leq \varepsilon\Bigg) \geq 1 - \left [ \varepsilon^{-1} (C_{\mathrm{NA}}\Delta t+C_{\mathrm{MFA}} N^{-1}+\epsilon) -\delta \right ].
+\end{equation}
+
+At this point, we turn our attention to the technical assumption \eqref{eq:techass}, which was introduced in the earlier work \cite{carrillo2018analytical,B1-fornasier2021global}. This condition constrains the initial distribution \(\rho_0\) used for sampling particles, requiring it to include the global minimizer \(v^*\) in its support (for instance $\rho_0$ may be a Gaussian distribution). However, from the results of practical numerical experiments, this assumption did not seem necessary for the method to achieve global convergence. This suggests that CBO actually converges { unconditionally}.
+The difficulty in providing an obvious statement about condition \eqref{eq:techass} comes from the degeneracy of the diffusion in equation \eqref{eq:B1-fokker_planck}. 
+\\
+
+One of the results of this paper is to prove that, as long as $\rho_0$ is a smooth density--not necessarily requiring $v^* \in \operatorname{supp}(\rho_0)$)--,  the density $\rho_t(v)>0$ for all $v \in \mathbb R^d \setminus \{v_\alpha(\rho_t)\}$ and for all $t>0$, see Theorem \ref{thm:positivity}. Hence, this positivity property renders \eqref{eq:techass} completely superfluous and, combined with \cite[Theorem 3.7, Theorem 3.8]{B1-fornasier2021global}, we can actually establish the { unconditional} global convergence of CBO to global minimizers, regardless of whether the initial distribution has mass near the global minimizers.\\
+
+The positivity result we obtain leverages  regularity results of solutions of \eqref{eq:B1-fokker_planck}, in particular we show existence and uniqueness of classical solutions. Although, we believe that one could obtain positivity even without such regularity results, the second goal of this paper is in fact to have a finer description of the solution $\rho_t$. Indeed, while existence of probability measure solutions was established in \cite{carrillo2018analytical}, neither well-posedness nor regularity results were known so far.
+We will do that by proving intermediate results for more general (linear) drift-diffusion equations with degenerate diffusion of the type \eqref{eq:g1}-\eqref{eqg:2}. Given their relevance in the development of the paper we consider these findings the main results of the paper. The regularity will be consequence of a nontrivial interplay between the degenerate diffusion and  drift terms. As long as the diffusion term ``dominates" the drift in a controlled manner (see Assumption \ref{asp:g1}), then there is no solution degeneracy occurring. 
+%Once classical solutions are established for the CBO equation, then parabolic Harnack bounds allow to conclude the positivity of solutions. 
+Before describing the main results in details, let us introduce the notations of the paper.
+
+		
+		
+\paragraph{Notations.} We use $\mathbb{N}_0^d$ to denote a $d$-dimension vector with each element non-negative integer.  If $\boldsymbol{\nu}=\left(\nu_1, \ldots, \nu_d\right) \in \mathbb{N}_0^d$ and
+$\mathbf{z}=\left(z_1, \ldots, z_d\right) \in \mathbb{R}^d$,
+then $|\boldsymbol{\nu}|  =\sum_{i=1}^d \nu_i$, $\boldsymbol{\nu}! =\prod_{i=1}^d\left(\nu_{i}!\right)$, $h^{(\boldsymbol{\nu})}=\frac{\partial^{|\boldsymbol{\nu}|}}{\partial v_1^{\nu_1} \cdots \partial v_d^{\nu_d}} h, \boldsymbol{g}^{(\boldsymbol{\nu})}=\left(g_1^{(\boldsymbol{\nu})},\ldots,g_m^{(\boldsymbol{\nu})}\right)$, here $\boldsymbol{g}=(g_1,\ldots,g_m)$, $\mathbf{z}^{\boldsymbol{\nu}} =\prod_{i=1}^d z_i^{\nu_i}$. We use $\mathrm{I}_d$ to denote the $d-$dimensional identity matrix. In the differentiation, for convenience, sometimes, we will use $h^{(s)}$ or $\partial^{s}h$ to denote $h^{(\boldsymbol{\nu})}$ for some $\boldsymbol{\nu}\in\mathbb{N}_0^d$ with$|\boldsymbol{\nu}|=s$, we use $\sum_{s\leq m}h^{(s)}$ to denote $\sum_{\boldsymbol{\nu}\in \{\boldsymbol{\nu}\in\mathbb{N}_0^d:|\boldsymbol{\nu}|\leq m\}}h^{(\boldsymbol{\nu})}$. We use $\norm{\cdot}$ to denote the Euclidean norm on Euclidean space. Unless otherwise specified, we use $C_{\cdot},C(\cdot),C$ to denote some generic constants that do not depend on other explicit parameters~($B_i$ or $K$ to be defined later).
+
+
+
+
+		
+		\section{Main Results}
+        We first introduce the main theorem of this work, then we prove it using Galerkin method, in the end, we apply the main theorem to CBO dynamics.
+        \subsection{Main theorem}
+		Let $G(v,t),f(v,t)$ be scalar functions and $\J(v,t)$ be vector valued function, we study the following equations:
+		\begin{equation}\label{eq:g1}
+			\begin{aligned}
+&\partial_t\rho(v,t)=\div\Big(G(v,t)\nabla\rho(v,t)\Big)+\inner{\J(v,t)}{\nabla\rho(v,t)}+\rho(v,t)+f(v,t),\\
+                &\rho(v,0)=\varrho(v)\in H^m(\mathbb{R}^d),\quad\forall m\geq 0,
+			\end{aligned}
+		\end{equation}
+        and 
+        \begin{equation}\label{eqg:2}
+			\begin{aligned}
+&\partial_t\rho(v,t)=\div\Big(G(v,t)\nabla\rho(v,t)\Big)-\div{\Big(\J(v,t)\rho(v,t)\Big)}+\rho(v,t)+f(v,t),\\
+                &\rho(v,0)=\varrho(v)\in H^m(\mathbb{R}^d),\quad\forall m\geq 0.
+			\end{aligned}
+		\end{equation}
+Let us first define several function classes.
+\begin{definition}Function class $\Gamma$ is defined by
+    \begin{equation}
+	\begin{aligned}
+		\Gamma&:=\Big\{\phi:\forall T>0, \phi\in C^{2,1}(\mathbb{R}^d\times [0,T], \phi\in  W^{1,\infty}(0,T;H^m(\mathbb{R}^d)), \intd G^2\norm{\phi^{(m)}}^2dv<\infty,\\
+        &\forall t\in [0,T],m\geq 0\text{ and }\intt\intd G^3\norm{\phi^{(m)}}^2dvdt<\infty, \forall m\geq0\Big\}.
+	\end{aligned}
+\end{equation}
+\end{definition}
+
+\begin{definition} 		
+Function class $\Gamma'$ is defined by
+\begin{equation}
+	\begin{aligned}
+		\Gamma'&:=\Big\{\phi:\forall T>0, \phi\in C^{2,1}(\mathbb{R}^d\times [0,T]): \phi\in  L^{\infty}(0,T;H^1(\mathbb{R}^d)),\text{ and }\\
+		&\quad \intt\intd G\norm{\nabla\phi}^2dvdt<\infty, \intt\intd G\sum_{i=1}^d\sum_{j=1}^d|\partial_i\partial_j\phi|^2dvdt<\infty\Big\}.
+	\end{aligned}
+\end{equation}
+\end{definition}
+\begin{definition}Function class $\Gamma''$ is defined by
+    \begin{equation}
+	\begin{aligned}
+		\Gamma''&:=\Big\{\phi: \forall T>0, \phi\in C^{2,1}(\mathbb{R}^d\times [0,T]): \phi\in  L^{\infty}(0,T;H^m(\mathbb{R}^d))\cap W^{1,\infty}(0,T;H^m_{loc}(\mathbb{R}^d)),\\
+        &\intt\intd G\norm{\nabla\phi^{(m)}}^2dv<\infty, \forall m\geq 0\Big\}.
+	\end{aligned}
+\end{equation}
+\end{definition}
+
+
+
+        
+The next is the definition of weak solution used in this paper.
+\begin{definition}
+    We say $\rho$ is a weak solution to equation \eqref{eq:g1}, if $\rho(\cdot,t)$ is a Radon measure and for any test function $\psi\in \Gamma$, we have
+    \begin{equation}
+        \begin{aligned}     &\int_0^{s}\intd\Big(\partial_t\psi(v,t)+\div(G(v,t)\nabla\psi(v,t))-\div({\J(v,t)}{\psi(v,t)})+\psi(v,t)\Big)\rho(v,t)dvdt\\
+            &=\intd\rho(v,s)\psi(v,s)dv-\intd\varrho(v)\psi(v,0)dv-\intt\intd f(v,t)\psi(v,t)dvdt,
+        \end{aligned}
+    \end{equation}
+    for any $s\in [0,\infty)$. We say $\rho$ is a weak solution to equation \eqref{eqg:2}, if $\rho(\cdot,t)$ is a Radon measure and for any test function $\psi\in \Gamma$, we have
+    \begin{equation}
+        \begin{aligned}
+&\int_0^{s}\intd\Big(\partial_t\psi(v,t)+\div(G(v,t)\nabla\psi(v,t))+\inner{\J(v,t)}{\nabla\psi(v,t)})+\psi(v,t)\Big)\rho(v,t)dvdt\\
+            &=\intd\rho(v,s)\psi(v,s)dv-\intd\varrho(v)\psi(v,0)dv-\intt\intd f(v,t)\psi(v,t)dvdt,
+        \end{aligned}
+    \end{equation}
+    for any $s\in [0,\infty)$.
+\end{definition}
+
+
+        
+We proved the following the theorem.
+\begin{theorem}[\textbf{Main Theorem}]\label{thm:main}
+    If Assumptions \ref{asp:g1} and \ref{asp:g2} are satisfied, equation \eqref{eq:g1}~(and equation \eqref{eqg:2}) has a unique classical solution in function class $\Gamma'$, and this solution is in function class $\Gamma''$. If Assumptions \ref{asp:g1}, \ref{asp:g2} and \ref{asp:g3} are satisfied, equation \eqref{eq:g1}~(and equation \eqref{eqg:2}) has a unique week solution, and this weak solution is in function class $\Gamma$.
+\end{theorem}
+The proof is based on a Galerkin approximation, to do the approximation, we first introduce the assumptions in the next section.
+
+\subsection{Assumptions and their derivations}\label{sec:aspaddr}
+In this section, we list the assumptions that $G,\J,f$ should be satisfied, and several key lemmas based on these assumptions.
+		\begin{assumption}\label{asp:g1}
+			\begin{itemize}
+                    \item For each fixed $t\in [0,\infty)$, $J(\cdot,t),G(\cdot,t),f(\cdot,t)$ are smooth on $\mathbb{R}^d$ and for each fixed $v\in\mathbb{R}^d$,$J(v,\cdot),G(v,\cdot),f(v,\cdot)$ are locally H\"older continuous in time with H\"older component $\alpha\in [0,1]$, $G\geq 0,f\in L^{\infty}(0,T;H^m(\mathbb{R}^d))$, for any $m\geq0,T>0$.
+                    \item For each fixed $T>0$, there exists uniform constants which may depend on $T$, such that for each $v\in\mathbb{R}^d,t\in [0,T]$, we have
+                    \begin{equation*}
+                        \begin{aligned}
+                            &\norm{G^{(1)}}\leq CG^{1/2}(1+G^{1/2});\\
+                        &\norm{G^{(k)}}\leq C(1+G), \quad k\geq 2\text{ this $C$ may depend on $k$};\\
+                        &\norm{\J}\leq CG^{1/2};\\
+                        &\norm{\J^{(k)}}\leq C(1+G^{1/2}),\quad k\geq 1\text{ this $C$ may depend on $k$},
+                        \end{aligned}
+                    \end{equation*}
+                    here the differentiation is only in the space variable.
+			\end{itemize}
+		\end{assumption}
+		
+		
+		Since $G$ is smooth on $\mathbb{R}^d$, so if we fix $t\in [0,\infty)$, the following two sequences always exist:
+		\begin{itemize}
+			\item a positive sequence $\{n_i\}_{i=1}^{\infty}$ with $n_i\to\infty$ as $i\to\infty$;
+			\item a positive sequence $\{R_i\}_{i=1}^{\infty}$ with $R_i\to\infty$ as $i\to\infty$ and $G(v,t)\leq n_i$ for any $v\in B_{R_i}(0)$.
+		\end{itemize} 
+		
+		The next one is some technical assumption on $G$.
+		\begin{assumption}\label{asp:g2}For any fixed $T>0$, there exists two positive diverging sequences $\{n_i\}_{i=1}^{\infty}$ and $\{R_i\}_{i=1}^{\infty}$, such that for each $t\in [0,T]$, we have $G(v,t)\leq n_i$ for any $v\in B_{R_i}(0)$; and for any $v\in B_{R_i}(0)\setminus B_{R_i-1}(0)$, we have $G(v,t)\leq C_1 \Big(1+G(\frac{R_i v}{\norm{v}},t)\Big), \Big(1+G(\frac{R_i v}{\norm{v}},t)\Big)\leq C_2G(v,t)$, here constants are are uniform for $t\in [0,T]$.
+            % For any $v$ with $\norm{v}$ large enough, we have $\sup_{v+[0,1]^d}G\leq C\inf_{v+[0,1]^d}G$.
+		\end{assumption}
+
+\begin{remark}
+    Following the proof {of Theorem \ref{thm:main}}, it is not hard to see the main theorem also holds when $G(v,t)$ is a {symmetric} square matrix. In this case, the assumptions should be modified in a matrix form: \begin{equation*}
+                        \begin{aligned}
+                            &\qquad\qquad G\text{ is non-negative definite };\\
+                            &-CG^{1/2}(1+G^{1/2})\leq G^{(1)}\leq CG^{1/2}(1+G^{1/2});\\
+                        &-C(1+G)\leq G^{(k)}\leq C(1+G), \quad k\geq 2\text{ this $C$ may depend on $k$};\\
+                        & \J\J^\top\leq CG;\\
+                        & (\J^{(k)})(\J^{(k)})^\top\leq C(1+G),\quad k\geq 1\text{ this $C$ may depend on $k$},
+                        \end{aligned}
+                    \end{equation*}
+    here matrix inequality $A\leq B$ means $v^\top Av\leq v^\top Bv$, for any $v\in\mathbb{R}^d$. The condition $G(v,t)\leq n_i$ in Assumption \ref{asp:g2} should be $G(v,t)\leq n_i\mathrm{I}_d$.
+\end{remark}
+
+        
+Since under the assumptions, for any fixed $T>0$, the constants are all uniform for $t\in [0,T]$, so for simplicity, in the next four lemmas, we will omit $t$ in $G(v,t),\J(v,t)$ and just write them as $G(v),\J(v)$.
+		
+		The following multivariable Faa Di Bruno formula is from \cite[Theorem 2]{constantine1996multivariate}. Let $h(v)=f(u)$, here $u=\boldsymbol{g}(v)=\left(g_1(v),\ldots,g_m(v)\right)\in \mathbb{R}^m$, a linear order on $\mathbb{N}_0^d$ is: if $\boldsymbol{\mu}=\left(\mu_1, \ldots, \mu_d\right)$ and $\boldsymbol{\nu}=$ $\left(\nu_1, \ldots, \nu_d\right)$ are in $\mathbb{N}_0^d$, we write $\boldsymbol{\mu} \prec	\boldsymbol{\nu}$ provided one of the following holds:
+		(i) $|\boldsymbol{\mu}|<|\boldsymbol{\nu}|$;
+		(ii) $|\boldsymbol{\mu}|=|\boldsymbol{\nu}|$ and $\mu_1<\nu_1$; or
+		(iii) $|\boldsymbol{\mu}|=|\boldsymbol{\nu}|, \mu_1=\nu_1, \ldots, \mu_k=\nu_k$ and $\mu_{k+1}<\nu_{k+1}$ for some $1 \leq k<d$.
+		
+		With these notations, the multivariable Faa Di Bruno formula reads:
+		\begin{equation}
+			h^{(\boldsymbol{\nu})}=\sum_{1 \leq|\boldsymbol{\lambda}| \leq n} f^{(\boldsymbol{\lambda})}  \sum_{p(\boldsymbol{\nu}, \boldsymbol{\lambda})}(\boldsymbol{\nu}!) \prod_{j=1}^n \frac{\left[\mathbf{g}^{(\boldsymbol{\ell}_j)}\right]^{\mathbf{k}_j}}{\left(\mathbf{k}_{j}!\right)\left[\boldsymbol{\ell}_{j}!\right]^{\left|\mathbf{k}_j\right|}},
+		\end{equation}where $\boldsymbol{\nu}\in\mathbb{N}_0^d,\boldsymbol{\lambda}\in\mathbb{N}_0^m, n=|\boldsymbol{\nu}|$ and
+		
+		\begin{equation}
+			\begin{aligned}
+				& p(\boldsymbol{\nu}, \boldsymbol{\lambda})=\Big\{\left(\mathbf{k}_1 \ldots, \mathbf{k}_n ; \boldsymbol{\ell}_1, \ldots, \boldsymbol{\ell}_n\right), \mathbf{k}_i\in\mathbb{N}_0^m,\mathbf{\ell}_i\in\mathbb{N}_0^d: \text { for some } 1 \leq s \leq n, \\
+				& \quad \mathbf{k}_i=\mathbf{0} \text { and } \boldsymbol{\ell}_i=\mathbf{0} \text { for } 1 \leq i \leq n-s ;\left|\mathbf{k}_i\right|>0 \text { for } n-s+1 \leq i \leq n ; \\
+				& \quad \text { and } \mathbf{0} \prec \boldsymbol{\ell}_{n-s+1} \prec \cdots \prec \boldsymbol{\ell}_n \text { are such that }  \sum_{i=1}^n \mathbf{k}_i=\boldsymbol{\lambda}, \sum_{i=1}^n\left|\mathbf{k}_i\right| \boldsymbol{\ell}_i=\boldsymbol{\nu}\Big\} .
+			\end{aligned}
+		\end{equation}
+		
+		
+		With the above formula, we will prove the following lemma.
+		\begin{lemma}\label{lem:g1}Under Assumptions \ref{asp:g1} and \ref{asp:g2}, we have $\norm{\Big(G(\frac{R_i v}{\norm{v}})\Big)^{(\boldsymbol{\nu})}}\leq C\Big(1+G(\frac{R_i v}{\norm{v}})\Big)$, for any $v\in B_{R_i-1}^c(0)$, for any vector $\boldsymbol{\nu}=\left(\nu_1, \ldots, \nu_d\right) \in \mathbb{N}_0^d$. When $|\boldsymbol{\nu}|=1$, we have $\norm{\Big(G(\frac{R_i v}{\norm{v}})\Big)^{(\boldsymbol{\nu})}}\leq CG^{1/2}(\frac{R_i v}{\norm{v}})\Big(1+G^{1/2}(\frac{R_i v}{\norm{v}})\Big)$.
+		\end{lemma}
+		\begin{proof}
+			When $|\boldsymbol{\nu}|=0$, the result is immediate; 	we will focus on the rest cases. Let us consider $v\in B^c_{R_i-1}(0)$.
+			
+			First, for each $\boldsymbol{\ell}_j\in\mathbb{N}_0^d$,  it is easy to verify that for each $k\in [d]$, we have 
+			\begin{equation}\label{eq:g74}
+				\norm{\Big(\frac{R_i v_k}{\norm{v}}\Big)^{(\boldsymbol{\ell}_j)}}\leq C\frac{R_i}{\norm{v}^{|\boldsymbol{\ell}_j|}},
+			\end{equation}
+			and thus let $\boldsymbol{g}(v):=\frac{R_i v}{\norm{v}}$ with $m=d$, we have 
+			\begin{equation}
+				\norm{ \prod_{j=1}^n \frac{\left[\mathbf{g}^{(\boldsymbol{\ell}_j)}\right]^{\mathbf{k}_j}}{\left(\mathbf{k}_{j}!\right)\left[\boldsymbol{\ell}_{j}!\right]^{\left|\mathbf{k}_j\right|}}}\leq  \prod_{j=1}^n\frac{CR^{|\boldsymbol{k}_j|}_i}{\norm{v}^{|\boldsymbol{\ell}_j||\boldsymbol{k}_j|}}\leq \frac{CR_i^{|\boldsymbol{\lambda}|}}{\norm{v}^{|\boldsymbol{\nu}|}}\leq C,
+			\end{equation}
+			since $|\boldsymbol{\lambda}| \leq n=|\boldsymbol{\nu}|$ and $v\in B_{R_i-1}^c(0)$.
+			
+			Second, by the Assumption \ref{asp:g1}, we have 
+			\begin{equation}
+				\norm{G^{(\boldsymbol{\lambda})}(\frac{R_i v}{\norm{v}})}\leq C\Big(1+G(\frac{R_i v}{\norm{v}})\Big).
+			\end{equation}
+			
+			So using the Faa Di Bruno formula and the above two inequalities, we have
+			\begin{equation}
+				\norm{\Big(G(\frac{R_i v}{\norm{v}})\Big)^{(\boldsymbol{\nu})}}\leq C\Big(1+G(\frac{R_i v}{\norm{v}})\Big).
+			\end{equation}
+			
+			When $|\boldsymbol{\nu}|=1$, without loss of generality, we will assume $\Big(G(\frac{R_i v}{\norm{v}})\Big)^{(\boldsymbol{\nu})}=\frac{\partial}{\partial v_1}G(\frac{R_i v}{\norm{v}})$, then we have
+			\begin{equation}
+				\frac{\partial}{\partial v_1}G(\frac{R_i v}{\norm{v}})=\sum_{k=1}^d\frac{\partial}{\partial v'_k}G(v')\mid_{v'=\frac{R_iv}{\norm{v}}}\frac{\partial}{\partial v_1}\frac{R_iv_k}{\norm{v}},
+			\end{equation}
+			then using \eqref{eq:g74} and Assumption \ref{asp:g1}, we get $\norm{\Big(G(\frac{R_i v}{\norm{v}})\Big)^{(\boldsymbol{\nu})}}\leq CG^{1/2}(\frac{R_i v}{\norm{v}})\Big(1+G^{1/2}(\frac{R_i v}{\norm{v}})\Big)$.
+			
+			
+			
+			
+		\end{proof}
+		
+		\begin{lemma}\label{lem:g2}Under Assumptions \ref{asp:g1} and \ref{asp:g2}, we have $\norm{\Big(\sqrt{G(\frac{R_i v}{\norm{v}})+1}\Big)^{(\boldsymbol{\nu})}}\leq C\sqrt{(1+G(\frac{R_i v}{\norm{v}}))}$, for any $v\in B_{R_i-1}^c(0)$ and any vector $\boldsymbol{\nu}=\left(\nu_1, \ldots, \nu_d\right) \in \mathbb{N}_0^d$.
+		\end{lemma}
+		\begin{proof}
+			When $\boldsymbol{\nu}=0$, the result is immediate; we will focus on the rest cases. Let us consider $v\in B^c_{R_i-1}(0)$.
+			
+			In this case, the Faa Di Bruno formula reads:
+			\begin{equation}
+				\Big(\sqrt{G(\frac{R_i v}{\norm{v}})+1}\Big)^{(\boldsymbol{\nu})}=\sum_{1 \leq\lambda \leq n} f^{({\lambda})} \ \sum_{p(\boldsymbol{\nu}, {\lambda})}(\boldsymbol{\nu}!) \prod_{j=1}^n \frac{\left[{g}^{(\boldsymbol{\ell}_j)}\right]^{{k}_j}}{\left({k}_{j}!\right)\left[\boldsymbol{\ell}_{j}!\right]^{{k}_j}},
+			\end{equation}
+            here $f(\cdot)=\sqrt{\cdot}, g(v)=G(\frac{R_iv}{\norm{v}})+1$ and $m=1$.
+   %          , then
+			% where $n=|\boldsymbol{\nu}|$ and
+			% \begin{equation}
+			% 	\begin{aligned}
+			% 		& p(\boldsymbol{\nu}, \boldsymbol{\lambda})=\Big\{\left({k}_1 \ldots, {k}_n ; \boldsymbol{\ell}_1, \ldots, \boldsymbol{\ell}_n\right): \text { for some } 1 \leq s \leq n, \\
+			% 		& \quad {k}_i=\mathbf{0} \text { and } \boldsymbol{\ell}_i=\mathbf{0} \text { for } 1 \leq i \leq n-s ;{k}_i>0 \text { for } n-s+1 \leq i \leq n ; \\
+			% 		& \quad \text { and } \mathbf{0} \prec \boldsymbol{\ell}_{n-s+1} \prec \cdots \prec \boldsymbol{\ell}_n \text { are such that } \\
+			% 		& \qquad \sum_{i=1}^n {k}_i=\lambda, \sum_{i=1}^n{k}_i \boldsymbol{\ell}_i=\boldsymbol{\nu}\Big\} .
+			% 	\end{aligned}
+			% \end{equation}
+			
+			First, use Lemma \ref{lem:g1}, we have 
+			\begin{equation}
+				\norm{\prod_{j=1}^n \frac{\left[{g}^{(\boldsymbol{\ell}_j)}\right]^{{k}_j}}{\left({k}_{j}!\right)\left[\boldsymbol{\ell}_{j}!\right]^{{k}_j}}}\leq C\Big(1+G(\frac{R_i v}{\norm{v}})\Big)^{\sum_{j=1}^nk_j}=C\Big(1+G(\frac{R_i v}{\norm{v}})\Big)^{\lambda}.
+			\end{equation}
+			
+			Second, we have
+			\begin{equation}
+				\norm{f^{(\lambda)}(x)\mid_{x=G(\frac{R_i v}{\norm{v}})+1}}= C\Big(G(\frac{R_i v}{\norm{v}})+1\Big)^{\frac{1}{2}-\lambda}.
+			\end{equation}
+			
+			
+			So, finally, we have $\norm{\Big(\sqrt{G(\frac{R_i v}{\norm{v}})+1}\Big)^{(\boldsymbol{\nu})}}\leq C\sqrt{(1+G(\frac{R_i v}{\norm{v}}))}$.
+		\end{proof}
+		
+		Next, let 
+		\begin{equation}
+			\varphi(x)= \begin{cases}e^{-1 /\left(1-|x|^2\right)} / I & \text { if }|x|<1, \\ 0 & \text { if }|x| \geq 1,\end{cases}
+		\end{equation}
+		here $x\in\mathbb{R}$ and $I$ is the normalization constant, and $\varphi_\epsilon(x):=C(\epsilon)\varphi(\frac{x}{\epsilon})$, here $C(\epsilon)$ is the normalization constant.   We define 
+		
+		
+		\begin{equation}
+			S(x):=\Big(\chi_{[\frac{1}{2},\infty)}*\varphi_{\frac{1}{8}}\Big)(x),
+		\end{equation}
+		here $\chi$ is the characteristic function, then it is easy to verify that
+		\begin{eqnarray}
+			&S(x)\in [0,1], \forall x\in \mathbb{R};\\
+			&S(x)=0, S^{(k)}(x)=0, \forall x\leq 0, k\geq 1;\\
+			&S(x)=1,S^{(k)}(x)=0,\forall x\geq 1, k\geq 1;\\
+			&|S^{(k)}(x)|\leq C, \forall x\in \mathbb{R}.
+		\end{eqnarray}
+		
+		Define $S_i(v):=S(\norm{v}-R_i+1)$, then it is easy to verify that 
+		\begin{eqnarray}
+			&S_i(v)\in [0,1], \forall v\in \mathbb{R}^d;\\
+			&S_i(v)=0, S_i^{(k)}(v)=0, \forall v\in B_{R_i-1}(0), k\geq 1;\\
+			&S_i(v)=1,S_i^{(k)}(v)=0,\forall v\in B^c_{R_i}(0), k\geq 1;\\
+			&\norm{S_i^{(k)}(v)}\leq C, \forall v\in B_{R_i}(0)\setminus B_{R_i-1}(0),k\geq 1.
+		\end{eqnarray}
+		
+		Define
+		\begin{eqnarray}
+			&\overline{G}_i(v):=G(v)(1-S_i(v))+\Big(1+G(\frac{R_iv}{\norm{v}})\Big)S_i(v),\\
+			&\overline{\J}_i(v):=\J(v)(1-S_i(v))+\sqrt{G(\frac{R_iv}{\norm{v}})+1}\e S_i(v),
+		\end{eqnarray}
+		here $e:=(1,\ldots,1)\in \mathbb{R}^d$.
+		Then we have the following lemma.
+		\begin{lemma}\label{lem:g25}Under Assumptions \ref{asp:g1} and \ref{asp:g2}, we have for any $v\in\mathbb{R}^d$ that
+			\begin{eqnarray}
+				&\norm{\overline{G}_i^{(1)}}\leq C\overline{G}^{\frac{1}{2}}_i\Big(1+\overline{G}^{\frac{1}{2}}_i\Big);\\
+				&\norm{\overline{G}_i^{(k)}}\leq C\Big(1+{\overline{G}_i}\Big),\quad \forall k\geq 2;\\
+				&\norm{\overline{\J}_i}^2\leq C\overline{G}_i;\\
+				&\norm{\overline{\J}_i^{(k)}}\leq C(1+\overline{G}^{\frac{1}{2}}_i)\quad \forall k\geq 1,
+			\end{eqnarray}
+            here constants are uniform for any $t\in [0,T]$ and may depend on $k$.
+		\end{lemma}
+		\begin{proof}
+			When $v\in B_{R_i-1}(0)$ or $v\in B^c_{R_i}(0)$, the result is a direct consequence of Assumption \ref{asp:g1}, Lemma \ref{lem:g1}, and Lemma \ref{lem:g2}.  So in the next, we will only focus on the case when $v\in B_{R_i}(0)\setminus B_{R_i-1}(0)$.
+			In the following , for simplicity, we will denote $G_i'(v):=1+G(\frac{R_iv}{\norm{v}})$.
+			
+			First, we have
+			\begin{equation}
+				\begin{aligned}
+					\norm{\overline{G}_i^{(1)}}&=\norm{G^{(1)}(1-S_i)-GS_i^{(1)}+G_i'^{(1)}S_i+G_i'S_i^{(1)}}\\
+					&\leq C\Big[\norm{G^{(1)}}+G+\norm{G_i'^{(1)}}+G_i'\Big]\\
+					&\leq C\Big[G^{\frac{1}{2}}(1+G^{\frac{1}{2}})+G_i'^{\frac{1}{2}}(1+G_i'^{\frac{1}{2}})\Big]\\
+					&\leq C\overline{G}^{\frac{1}{2}}_i\Big(1+\overline{G}^{\frac{1}{2}}_i\Big),
+				\end{aligned}
+			\end{equation}
+			the last inequality is due to Assumption \ref{asp:g2}: since by Assumption \ref{asp:g2}, we have 
+			\begin{eqnarray}
+				G&\leq C\overline{G}_i,\\
+				G_i'&\leq C\overline{G}_i.
+			\end{eqnarray}
+			
+			Second, by the Leibniz rule, we have
+			\begin{equation}
+				\begin{aligned}
+					\norm{\overline{G}_i^{(k)}}&\leq C\Big[\sum_{s=0}^k\norm{{G}^{(s)}(1-S_i)^{(k-s)}}+\sum_{s=0}^k\norm{G_i'^{(s)}S_i^{(k-s)}}\Big]\\
+					&\leq C\Big[\sum_{s=0}^k\norm{{G}^{(s)}}+\sum_{s=0}^k\norm{G_i'^{(s)}}\Big]\\
+					&\leq C\Big[1+G+1+G_i'\Big]\\
+					&\leq C(1+\overline{G}_i).
+				\end{aligned}
+			\end{equation}
+			
+			Third, by the convexity of $\norm{\cdot}^2$, we have
+			\begin{equation}
+				\begin{aligned}
+					\norm{\overline{\J}_i}^2&\leq \norm{\J}^2(1-S_i)+dG_i'S_i\\
+					&\leq CG(1-S_i)+dG_i'S_i\\
+					&\leq C\Big(G(1-S_i)+G_i'S_i\Big)\\
+					&\leq C\overline{G}_i,
+				\end{aligned}
+			\end{equation}
+			where we used Assumption \ref{asp:g1}.
+			
+			Lastly, we by the Leibniz rule, Assumption \ref{asp:g1} and Lemma \ref{lem:g2}, we have 
+			\begin{equation}
+				\begin{aligned}
+					\norm{\overline{\J}_i^{(k)}}&\leq C\Big[\sum_{s=0}^k\norm{{\J}^{(s)}(1-S_i)^{(k-s)}}+\sum_{s=0}^k\norm{(\sqrt{G_i'})^{(s)}eS_i^{(k-s)}}\Big]\\
+					&\leq C\Big[\sum_{s=0}^k\norm{{\J}^{(s)}}+\sum_{s=0}^k\norm{(\sqrt{G_i'})^{(s)}}\Big]\\
+					&\leq C\Big[1+G^{\frac{1}{2}}+\sqrt{G_i'}\Big]\\
+					&\leq C\Big(1+\overline{G}_i^{\frac{1}{2}}\Big).
+				\end{aligned}
+			\end{equation}
+			
+		\end{proof}	
+		Next, we define 
+		\begin{equation}
+			\begin{aligned}
+				&\H(x)=(\chi_{[-10,10]}*\varphi)(x),\\
+				&\H_i(x)=\H(\frac{x}{n_i}),
+			\end{aligned}
+		\end{equation}
+		then it is direct to verify that 
+		\begin{itemize}
+			\item ${\H_i(x)}\in [0,1],\quad\forall x\in \mathbb{R}$;
+			\item  For any $k\geq 1$, $\H_i^{(k)}$ has compact support and $\norm{\H^{(k)}_i}<\frac{C}{n_i^k}$, here $C$ does not depend on $i$.
+		\end{itemize}
+		
+		
+		With $H_i$, we define
+		\begin{eqnarray}
+			G_i&:=H^2_i\overline{G}_i,\\
+			\J_i&:=H_i\overline{\J}_i,
+		\end{eqnarray}
+		then we have 
+		\begin{lemma}\label{lem:g4}Under Assumptions \ref{asp:g1} and \ref{asp:g2}, we have for any $v\in\mathbb{R}^d,t\in [0,T]$ that
+			\begin{eqnarray}
+				&\norm{{G}_i^{(1)}}\leq C{G}^{\frac{1}{2}}_i\Big(1+{G}^{\frac{1}{2}}_i\Big);\\
+				&\norm{{G}_i^{(k)}}\leq C\Big(1+{{G}_i}\Big),\quad \forall k\geq 2;\\
+				&\norm{{\J}_i}^2\leq C{G}_i;\\
+				&\norm{{\J}_i^{(k)}}\leq C(1+{G}^{\frac{1}{2}}_i)\quad \forall k\geq 1,
+			\end{eqnarray}
+            here constants are uniform for any $t\in [0,T]$ and may depend on $k$.
+		\end{lemma}
+		\begin{proof}
+			Remember $H_i\in [0,1]$  and $\norm{H_i^{(k)}}\leq \frac{C}{n_i^k}$.
+			
+			First, by Lemma \ref{lem:g25}, we have 
+			\begin{equation}
+				\begin{aligned}
+					\norm{G_i^{(1)}}&\leq 2H_i\overline{G}_i \norm{H_i^{(1)}}+H_i^2\norm{\overline{G}^{(1)}_i}\\
+					&\leq CH_i\overline{G}_i^{\frac{1}{2}} \frac{\overline{G}_i^{\frac{1}{2}}}{n_i}+CH_i^2\overline{G}^{\frac{1}{2}}_i\Big(1+\overline{G}^{\frac{1}{2}}_i\Big)\\
+					&\leq CG_i^{\frac{1}{2}}\Big(1+G_i^{\frac{1}{2}}\Big),
+				\end{aligned}
+			\end{equation}
+			since $G\leq n_i,\forall v\in B_{R_i}(0)$, so $\overline{G}_i\leq n_i+1,\forall v\in\mathbb{R}^d$, and 
+			${\overline{G}_i^{{1}/{2}}}/{n_i}\leq C,\quad\forall v\in \mathbb{R}^d$.
+			
+			Second, by the Leibniz rule, we have by Lemma \ref{lem:g25} that
+			\begin{equation}
+				\begin{aligned}
+					\norm{G_i^{(k)}}&\leq C\Big[H_i^2\norm{\overline{G}_i^{(k)}}+\sum_{s=1}^k\norm{(H_i^2)^{(s)}\overline{G}_i^{(k-s)}}\Big]\\
+					&\leq C\Big[H_i^2(1+\overline{G}_i)+\sum_{s=1}^k\frac{1+\overline{G}_i}{n_i}\Big]\\
+					&\leq C(1+G_i).
+				\end{aligned}
+			\end{equation}
+			
+			Third, we have
+			\begin{eqnarray}
+				\norm{\J_i}^2=H_i^2\norm{\overline{\J}_i}^2\leq CH_i^2\overline{G}_i=CG_i.
+			\end{eqnarray}
+			
+			Fourth, we have
+			\begin{eqnarray}
+				\begin{aligned}
+					\norm{\J_i^{(k)}}&\leq C\Big[H_i\norm{\overline{\J}_i^{(k)}}+\sum_{s=1}^k\norm{H_i^{(s)}\overline{\J}_i^{(k-s)}}\Big]\\
+					&\leq C\Big[H_i(1+\overline{G}_i^{\frac{1}{2}})+\sum_{s=1}^k\frac{1+\overline{G}_i^{\frac{1}{2}}}{n_i}\Big]\\
+					&\leq C(1+G_i^{\frac{1}{2}}).
+				\end{aligned}
+			\end{eqnarray}
+		\end{proof}
+		
+The following lemma guarantees that we can use integration by parts on $\mathbb{R}^d$.
+
+\begin{lemma}\label{lm:27}Under Assumption \ref{asp:g1}, let $\phi,\psi\in\Gamma'''$, here 
+\begin{equation}
+	\begin{aligned}
+		\Gamma'''&:=\Big\{\phi\in C^{2,1}(\mathbb{R}^d\times [0,T]): \phi\in  L^{\infty}(0,T;H^1(\mathbb{R}^d)),\text{ and }\intt\intd G\norm{\phi}^2dvdt<\infty,\\
+		&\quad \intt\intd G\norm{\nabla\phi}^2dvdt<\infty, \intt\intd G\sum_{i=1}^d\sum_{j=1}^d|\partial_i\partial_j\phi|^2dvdt<\infty\Big\}.
+	\end{aligned}
+\end{equation}
+Then we have
+	\begin{align}
+		&\intt\intd \partial_t\phi\psi dvdt=\intd \phi(v,T)\psi(v,T)dv-\intd \phi(v,0)\psi(v,0)dv-\intt\intd \partial_t\psi\phi dvdt;\\
+		&\intt\intd\div\left(\J\phi\right)\psi dvdt=-\intt\intd \inner{\J}{\nabla\psi}\phi dvdt;\\
+		&\intt\intd \Delta\left(G\phi\right)\psi dvdt=-\intt\intd \inner{\nabla\left(G\phi\right)}{\nabla\psi}dvdt;\\
+		&\intt\intd G\phi\Delta\psi dvdt=-\intt\intd \inner{\nabla\left(G\phi\right)}{\nabla\psi}dvdt.
+	\end{align}
+	
+\end{lemma}
+\begin{proof}
+	The first inequality is natural. We only focus on the rest equalities. For the second one, we use finite cube to approximate. For any $R>0$, let $Q_{R}(0):=[-R,R]^d$, then by the divergence theorem, we have
+    \begin{equation*}
+		\intt\int_{Q_R(0)} \div\left(\J\phi\right)\psi dvdt=\intt\int_{\partial Q_R(0)}\inner{\J}{n}\phi\psi dSdt-\intt\int_{Q_R(0)} \inner{\J}{\nabla\psi}\phi dvdt,
+	\end{equation*}
+	here $n$ is the unit outer normal vector of $\partial Q_R(0)$. Next, we will show
+	\begin{equation*}
+		\lim_{R\to\infty}\Big|\intt\int_{\partial B_R(0)}\inner{\J}{n}\phi\psi dSdt\Big|=0,
+	\end{equation*}
+	then the second one is proved by letting $R\to\infty$; we have
+	\begin{equation*}
+		\begin{aligned}
+			&\Big|\intt\int_{\partial Q_R(0)}\inner{\J}{n}\phi\psi dSdt\Big|\\
+			&\leq \intt\int_{\partial Q_R(0)}\norm{\J}^2\phi^2dSdt+\intt\int_{\partial Q_R(0)}\psi^2dSdt\\
+			&\leq \intt\int_{\partial Q_R(0)\cup\partial Q_{R+1}(0)}\norm{\J}^2\phi^2dSdt+\intt\int_{\partial Q_R(0)\cup\partial Q_{R+1}(0)}\psi^2dSdt\\
+			&\leq C\Big(\intt\int_{Q_{R+1}(0)\setminus Q_R(0)}\norm{\J}^2\phi^2+\norm{\nabla(\J\phi)}^2dvdt+\intt\int_{Q_{R+1}(0)\setminus Q_R(0)}\psi^2+\norm{\nabla\psi}^2dvdt\Big)\\
+			&\leq C\Big(\intt\int_{Q_{R+1}(0)\setminus Q_R(0)}\phi^2+G\phi^2+G\norm{\nabla\phi}^2dvdt+\intt\int_{Q_{R+1}(0)\setminus Q_R(0)}\psi^2+\norm{\nabla\psi}^2dvdt\Big)\\
+			&\to 0,\quad \text{as } R\to\infty,
+		\end{aligned}
+	\end{equation*}
+	since $\phi,\psi\in\Gamma$. In the above we used the trace theorem and the constant $C$ in the third inequality in the above is from the trace theorem, we want to comment that $C$ depends $Q_{1/2}(0)$ and does not depend on $R$ here, since we can decompose $Q_{R+1}(0)\setminus Q_R(0)$ into disjoint cubes with side length $1$, then on each this unit cube, we use the trace theorem then take summation to get the third inequality in the above; the fourth inequality in the above is by Assumption \ref{asp:g1}. 
+	
+	The proof of the third one is similar, we have for any finite cube, that
+	\begin{equation*}
+		\begin{aligned}
+			&\intt\int_{Q_R(0)} \Delta\left(G\phi\right)\psi dvdt=\intt\int_{\partial Q_R(0)}G\inner{\nabla\phi}{n}\psi dSdt\\
+			&\quad+\intt\int_{\partial Q_R(0)}\frac{\partial G}{\partial n}\phi\psi dSdt-\intt\int_{Q_R(0)} \inner{\nabla\left(G\phi\right)}{\nabla\psi}dvdt;
+		\end{aligned}
+	\end{equation*}
+	the second term in the right hand side, that is $\intt\int_{\partial Q_R(0)}{\partial G}/{\partial n}\phi\psi dSdt$, we will show it converges to $0$ as $R\to\infty$; using $\norm{\frac{\partial G}{\partial n}}\leq CG^{1/2}(1+G^{1/2})$ and the Cauchy-Schwartz inequality, we have
+	\begin{equation}
+		\begin{aligned}
+			&\intt\int_{\partial Q_R(0)}\frac{\partial G}{\partial n}\phi\psi dSdt\\
+			&\leq C\Big(\intt \int_{\partial Q_R(0)}G\phi^2dvdt+\intt \int_{\partial Q_R(0)}\psi^2dvdt+\intt \int_{\partial Q_R(0)}G\psi^2dvdt\Big)\\
+			&\leq C\Big(\intt\int_{Q_{R+1}(0)\setminus Q_R(0)}G\phi^2+\norm{\nabla(G^{\frac{1}{2}}\phi)}^2dvdt+\intt\int_{Q_{R+1}(0)\setminus Q_R(0)}G\psi^2+\norm{\nabla(G^{\frac{1}{2}}\psi)}^2dvdt\Big)\\
+			&\quad+C\Big(\intt\int_{Q_{R+1}(0)\setminus Q_R(0)} \psi^2+\norm{\nabla\psi}^2dvdt\Big)\\
+			&\leq C\Big(\intt\int_{Q_{R+1}(0)\setminus Q_R(0)}\phi^2+\norm{\nabla\phi}^2+\psi^2+\norm{\nabla\psi}^2dvdt\Big)\\
+			&\quad+C\Big(\intt\int_{Q_{R+1}(0)\setminus Q_R(0)}G\phi^2+G\norm{\nabla\phi}^2+G\psi^2+G\norm{\nabla\psi}^2dvdt\Big)\\
+			&\to 0,\quad \text{as }R\to\infty,
+		\end{aligned}
+	\end{equation}
+	in the above we used the assumption $\norm{\nabla G}\leq CG^{1/2}(1+G^{1/2})$, which is equivalent to $\norm{\nabla G^{1/2}}\leq C(1+G^{1/2})$; for the first term, that is $\intt\int_{\partial Q_R(0)}G\inner{\nabla\phi}{n}\psi dSdt$, converges to $0$ as $R\to\infty$,  just denote $\phi':=\inner{\nabla\phi}{n}$, then $\intt\intd G\norm{\nabla\phi'}^2dvdt\leq C\sum_{i,j}\intt\intd G\norm{\partial_i\partial_j\phi}^2dvdt<\infty$ and the rest proof is similar as in the above; so we proved the third equality.
+	
+	For the last equality, it is enough to show 
+	\begin{equation}
+		\intt\int_{\partial Q_R(0)}G\phi\frac{\partial\psi}{\partial n}dvdt\to 0\quad \text{as } R\to\infty,
+	\end{equation}
+	which is true by following the proof of the third equality.
+\end{proof}
+\begin{remark}
+    Obviously, $\Gamma\subset\Gamma'''$, so the above lemma hold for functions in $\Gamma$.
+\end{remark}
+		\subsection{Proof of the main theorem by Galerkin approximation}
+        We first find a solution on torus, then use the solution on torus to approximate the solution on whole space.
+        \subsubsection{Solution on tori}
+		\renewcommand{\intr}{\int_{B_i}}
+		Denote $B_i:=[-n_i^2,n_i^2]^d$ and
+		\begin{equation}
+			H_{i,K}:=\Big\{1,\cos(\frac{2\pi \boldsymbol{k}\cdot v}{{2n_i^2}}),\sin(\frac{2\pi \boldsymbol{k}\cdot v}{{2n_i^2}}):0<|k|\leq K\Big\},
+		\end{equation}
+		here $\boldsymbol{k}\in\mathbb{N}_0^d$, we can think $B_i$ as a $d$-dimensional torus. Let us emphasize that with this choice of $B_i$, functions $G_i,\J_i$ and $f_i,\varrho_i$~(which will be defined later) equal $0$ near the boundary of $B_i$, hence they are periodic, which allows us to use integration by parts without considering the boundary later.
+		
+		Now, we define function
+		\begin{equation}
+			\rho_i^K(v,t):=\sum_{k=1}^{K}C^K_{i,k}(t)\psi_{i,k}(v),
+		\end{equation}
+		$\psi_{i,k}$ is from $H_{i,K}$. Now, we want for any test function $\psi\in \operatorname{span}(H_{i,K})$ and any $t\in [0,T]$, $\rho_i^K$ satisfies the following condition: 
+		\begin{equation}\label{eq:gg55}
+			\begin{aligned}
+				&\intr \partial_t\rho_i^K(v,t)\psi(v)dv\\
+				&=\intr \Big(\div\Big(G_i(v,t)\nabla\rho^K_i(v,t)\Big)+\inner{\J_i(v,t)}{\nabla\rho^K_i(v,t)}+\rho^K_i(v,t)+f_i(v,t)\Big)\psi(v)dv,\\
+				&\rho_i^K(v,0)=\varrho^K_i(v),
+			\end{aligned}
+		\end{equation}
+		here $f_i(v,t):=f(v,t)(1-S(\norm{v}-n_i))$ and $\varrho_i^K(v)$ is the projection of $\varrho(v)(1-S(\norm{v}-n_i))$ onto $\operatorname{span}(H_{i,K})$. This requires the coefficient $C^K_{i,k}(t)$ satisfies the following equation:
+		\begin{equation}\label{eq:89}
+			\begin{aligned}
+				&\sum_{k=1}^{K} A^K_{i,k,j}\frac{d}{dt}C^K_{i,k}(t)= \sum_{k=1}^{K}B^N_{k,i}(t)C_k^K(t)+F^N_i(t)\\
+				&C_{i,j}^K(0)=I^K_{i,j},
+			\end{aligned}
+		\end{equation}
+		for $i=1,\ldots, K$, here
+		\begin{align}
+			&A^K_{i,k,j}=\intr \psi_{i,k}(v)\psi_{i,j}(v)dv=C_i\delta_{ij},\quad C_i>0,\\
+			&B^K_{i,k,j}(t)=-\intr \inner{{G_i(v,t)}\nabla\psi_{i,k}(v))}{\nabla\psi_{i,j}(v)}dv+\intr \inner{\J_i(v,t)}{\nabla\psi_{i,k}(v)}\psi_{i,j}(v)dv\\
+			&\qquad\qquad\quad+\intr \psi_{i,k}(v)\psi_{i,j}(v)dv,\\
+			&F^K_{i,j}(t):=\intr f_i(v,t)\psi_{i,j}(v)dv,\\
+			&I_{i,j}^K:=\intr \varrho^K_i(v)\psi_{i,j}(v)dv.
+		\end{align}
+		
+		We know by ODE theory, equation \eqref{eq:89} has a unique solution till some time $T'>0$, so
+		$\rho_i^K$ is well-defined in $[0,T')$, and for any $\psi$ such that $\psi(\cdot,t)\in \mathrm{span}(H_{i,K})$, we have for any fixed $t$ that
+		\begin{equation}\label{eq:94}
+			\begin{aligned}
+				\intr \partial_t\rho_i^K(v,t) \psi(v,t)dv&=-\intr \inner{{G_i(v,t)}\nabla\rho_i^K(v,t))}{\nabla\psi(v,t)}dv\\
+				&\quad+\intr \inner{\J_i(v,t)}{\rho_i^K(v,t)}\psi(v,t)dv\\
+				&\quad +\intr\rho_i^K(v,t)\psi(v,t)dv+\intr f_i(v,t)\psi(v,t)dv.
+			\end{aligned}
+		\end{equation}
+		
+		In the next, for simplicity, we will omit $K,i$ in $\rho_i^K$. Choose $\psi=\rho~(=\rho_i^K)\in \operatorname{span}(H_{i,K})$, we then have
+		\begin{equation}\label{eq:95}
+			\begin{aligned}
+				\frac{1}{2}\frac{d}{dt}\intr\rho^2dv&=-\intr\inner{G_i\nabla\rho}{\nabla\rho} dv+\intr\inner{\J_i}{\nabla\rho}\rho dv+\intr \rho^2 dv+\intr f_i\rho dv\\
+				&\leq -\intr G_i\norm{\nabla\rho}^2 dv+\epsilon\intr \norm{\J_i}^2\norm{\nabla\rho}^2dv+\Big(\frac{C}{\epsilon}+2\Big)\intr\rho^2dv+\intr f_i^2dv\\
+				&\leq -(1-C\epsilon)\intr{G_i}\norm{\nabla\rho}^2dv+C(\epsilon)\intr\rho^2dv+\norm{f(\cdot,t)}^2_{L^2(\mathbb{R}^d)},
+			\end{aligned}
+		\end{equation}
+		where in the last inequality, we used Lemma \ref{lem:g4}, then choose $\epsilon$ small enough and by the Gr\"onwall lemma, for any $t\in [0,T']$, we have
+		\begin{align}
+			&\intr\rho^2(v,t)dv\leq C(\norm{f}_{L^\infty(0,T;L^2(\mathbb{R}^d))},T')<\infty\\
+			&\int_0^{T'}\intr G_i\norm{\nabla\rho}^2dvdt\leq C(T',\norm{f}_{L^\infty(0,T;\mathbb{R}^d)})<\infty,
+		\end{align}
+		the constant on the right hand sides are independent of $i,K$. From this, we can derive that $T'$ can be extended to $\infty$, i.e. we have global solutions in time.
+		
+		Next, for $m\geq 1$, we assume
+		\begin{equation}\label{eqs:g66}
+			\begin{aligned}
+					&\sum_{s<m}\intr(\rho^{(s)})^2dv\leq C(T,d,m,\norm{f}_{L^{\infty}(0,T;H^{m-1}(\mathbb{R}^d))})<\infty,\\
+					&\sum_{0<s\leq m}\intt\intr G_i\norm{\rho^{(s)}}^2dvdt\leq C(T,d,m,\norm{f}_{L^{\infty}(0,T;H^{m-1}(\mathbb{R}^d))})<\infty,
+			\end{aligned}
+		\end{equation}
+        then under this assumption, we will prove the above inequalities are also true for $m+1$. When $m=1$, we have proved the above estimates are true.
+		
+		
+		For $m\geq 1$, we choose $\psi=\partial^m\partial^m\rho=:(\partial^m)^2\rho$ as the test function. We know for any $t$, $\psi(\cdot,t)\in \mathrm{span}(H_{i,K})$. Then by periodicity, integration by parts and compensation of signs, we have
+		\begin{equation}\label{eq:99}
+			\begin{aligned}
+				\frac{1}{2}\frac{d}{dt}\intr(\partial^m\rho)^2dv&=-\intr\inner{\nabla\rho^{(m)}}{\partial^m(G_i\nabla\rho)}dv\\
+				&\quad+\intr\partial^m\Big(\inner{\J_i}{\nabla\rho}\Big)\rho^{(m)}dv\\
+				&\quad+\intr(\rho^{(m)})^2dv\\
+				&\quad+\intr f^{(m)}_i\rho^{(m)} dv,
+			\end{aligned}
+		\end{equation}
+        thus
+        \begin{equation}
+            \begin{aligned}
+    \frac{1}{2}\frac{d}{dt}\intr(\partial^m\rho)^2dv&\leq -\intr G_i\norm{\nabla\rho^{(m)}}^2 dv\\
+&\quad-\intr\inner{\J_i}{\nabla\rho^{(m)}}\rho^{(m)}dv\\
+&\quad+\intr(\rho^{(m)})^2dv\\
+&\quad+\intr f_i^{(m)}\rho^{(m)} dv\\
+&\quad +C\norm{\intr\inner{\nabla\rho^{(m)}}{G_i^{(1)}\nabla\rho^{(m-1)}}dv}\\
+&\quad+C\sum_{s=2}^m\norm{\intr \inner{\nabla\rho^{(m)}}{G_i^{(s)}\nabla\rho^{(m-s)}}dv}\\
+&\quad +C\sum_{s=1}^m\norm{\intr\inner{\J_i^{(s)}}{\nabla\rho^{(m-s)}}\rho^{(m)}dv},
+            \end{aligned}
+        \end{equation}
+		note when $m=1$, the sixth term in the right hand side is zero. For the first four terms on the right hand side, just like in the case when $m=0$, we have the summation of them less than
+		\begin{equation}
+			-(1-C\epsilon)\intr G_i\norm{\nabla\rho^{(m)}}^2dv+C(\epsilon)\intr (\rho^{(m)})^2dv+C\norm{f(\cdot,t)}_{H^m(\mathbb{R}^d)};
+		\end{equation}
+		for the fifth term, using Lemma \ref{lem:g4}, we have it less than
+		\begin{equation}
+			\epsilon\intr G_i\norm{\nabla\rho^{(m)}}^2dv+C(\epsilon)\Big(\intr\norm{\nabla \rho^{(m-1)}}^2dv+\intr G_i\norm{\nabla\rho^{(m-1)}}^2dv\Big);
+		\end{equation}
+		for the sixth term, when $m\geq 2$, using integration by parts and Lemma \ref{lem:g4}, we have it less than
+		\begin{equation}
+			\begin{aligned}
+				&\sum_{s=2}^m\norm{\intr \inner{\nabla\rho^{(m)}}{G_i^{(s)}\nabla\rho^{(m-s)}}dv}\\
+				&\leq \sum_{s=2}^m\norm{\intr \rho^{(m)}\inner{\nabla G_i^{(s)}}{\nabla\rho^{(m-s)}}dv}+\sum_{s=2}^m\norm{\intr G_i^{(s)}\rho^{(m)}\Delta\rho^{(m-s)}dv}\\
+                &\leq C\sum_{s=2}^m\norm{\intr \Big(1+G_i\Big)\norm{\rho^{(m)}}\norm{\nabla\rho^{(m-s)}}dv}+\sum_{s=2}^m\norm{\intr \Big(1+G_i\Big)\norm{\rho^{(m)}}\norm{\Delta\rho^{(m-s)}}dv}\\
+				&\leq C\Big(\intr(\rho^{(m)})^2dv+\intr G_i(\rho^{(m)})^2dv+\sum_{s=2}^{m}\int\norm{\nabla \rho^{(m-s)}}^2dv+\sum_{s=2}^m\int G_i\norm{\nabla \rho^{(m-s)}}^2dv\\
+				&\quad +\sum_{s=2}^{m}\int\norm{\Delta \rho^{(m-s)}}^2dv+\sum_{s=2}^m\int G_i\norm{\Delta \rho^{(m-s)}}^2dv\Big)\\
+				&\leq C\sum_{1\leq s\leq m}\Big(\intr (\rho^{(s)})^2dv+\intr G_i(\rho^{(s)})^2dv\Big);
+			\end{aligned}
+		\end{equation}
+		for the last term, using Lemma \ref{lem:g4}, we have it less than
+		\begin{equation}
+			\begin{aligned}
+				&\sum_{s=1}^m\norm{\intr\inner{\J_i^{(s)}}{\nabla\rho^{(m-s)}}\rho^{(m)}dv}\\
+                &\leq C\sum_{s=1}^m\norm{\intr \Big(1+G_i^{\frac{1}{2}}\Big)\norm{\rho^{(m)}}\norm{\nabla\rho^{(m-s)}}dv} \\
+                &\leq C\sum_{1\leq s\leq m}\Big(\intr (\rho^{(s)})^2dv+\intr G_i(\rho^{(s)})^2dv\Big).
+			\end{aligned}
+		\end{equation}
+		So combine all the estimates, integrate both sides from $0$ to $t$ and use condition \eqref{eqs:g66}, we have
+	\begin{equation}\label{eq:g88}
+		\begin{aligned}
+			&\sum_{s=m}\intr(\rho^{(s)}(v,t))^2dv-\sum_{s=m}\intr(\rho^{(s)}(v,0))^2dv\\
+			&\leq -(1-C\epsilon)\sum_{s=m}\int_0^t\intr G_i(v,r)\norm{\nabla\rho^{(s)}(v,r)}^2dvdr\\
+			&\quad+C\sum_{s=m}\int_0^t\intr(\rho^{(s)}(v,r))^2dvdr\\
+			&\quad+C(T,d,m,\epsilon,\norm{f}_{L^{\infty}(0,T;H^{m}(\mathbb{R}^d))}),
+		\end{aligned}
+	\end{equation}
+	then choose $\epsilon$ small enough, and use the Gr\"onwall lemma, we have
+	\begin{eqnarray}
+		&\sum_{s<m+1}\intr(\rho^{(s)})^2dv\leq C(T,d,m+1,\norm{f}_{L^{\infty}(0,T;H^{m}(\mathbb{R}^d))})<\infty,\label{eq:g89}\\
+		&\sum_{0<s\leq m+1}\intt\intr G_i\norm{\rho^{(s)}}^2dvdt\leq C(T,d,m+1,\norm{f}_{L^{\infty}(0,T;H^{m}(\mathbb{R}^d))})<\infty.\label{eq:g90}
+	\end{eqnarray}
+
+
+
+	Next, let the test function $\psi(v,t)=(\partial^{m})^2\partial_t\rho(v,t)$, then use \eqref{eq:gg55}, integration by parts and observe that $\intr\norm{\partial^m\Big(\div(G_i\nabla\rho)\Big)}^2dv\leq C(n_i)\norm{\rho}^2_{L^{\infty}(0,T;H^{m+2}(B_i))}$, we have
+		\begin{equation}\label{eq:g85}
+			\begin{aligned}
+				\intr(\partial_t\partial^m\rho)^2dv&=-\intr\inner{\partial^m\Big(\div(G_i\nabla\rho)\Big)}{\partial_t\rho^{(m)}}dv\\
+				&\quad+\intr\partial^m\Big(\inner{\J_i}{\rho}\Big)\partial_t\rho^{(m)}dv\\
+				&\quad+\intr\rho^{(m)}\partial_t\rho^{(m)}dv+\intr f_i^{(m)}\partial_t\rho^{(m)}dv\\
+				&\leq \epsilon\intr(\partial_t\partial^m\rho)^2dv+\frac{C(n_i)}{\epsilon}\Big(\norm{\rho}^2_{L^{\infty}(0,T;H^{m+2}(B_i))}+\norm{f}^2_{L^{\infty}(0,T;H^m(\mathbb{R}^d))}\Big),
+			\end{aligned}
+		\end{equation}
+		since $G_i\leq n_i+1$, thus, we have
+		\begin{equation}\label{eq:gg106}
+			\intr(\partial_t\partial^m\rho)^2dv\leq \frac{C(n_i)}{\epsilon(1-\epsilon)}\Big(\norm{\rho}^2_{L^{\infty}(0,T;H^{m+2}(B_i))}+\norm{f}^2_{L^{\infty}(0,T;H^{m}(\mathbb{R}^d))}\Big)<\infty.
+		\end{equation}
+		which does not depend on $K$. Thus we have $\rho^K_i\in W^{1,\infty}(0,T;H^{m}(B_i))$, for any $m\geq 0$ integer, and its norm does not depend on $K$, but depends on $i$ in this case.
+
+		
+	Next, we show $\rho_i^K$ has a limit as $K\to\infty$.	We first have
+		\begin{equation}
+			\intr (\rho^K_i)^2dv=\sum_{k=1}^{K}(C_{i,k}^K(t))^2\intr(\psi_{i,k})^2dv\leq C(T,d,\norm{f}_{L^{\infty}(0,T;L^2(\mathbb{R}^d))})<\infty,
+		\end{equation}
+		which does not depend on $i,K$, and thus we have
+		\begin{equation}
+			\norm{C_{i,k}^K(t)}^2\leq\frac{C(T,d,\norm{f}_{L^{\infty}(0,T;L^2(\mathbb{R}^d))})}{\intr(\psi_{i,k})^2dv}<\infty,
+		\end{equation}
+		so $C_{i,k}^K(t)$ is uniformly bounded on $[0,T]$ when $K\to\infty$. Second, we will show $C_{i,k}^K(t)$ is H\"older continuous and its H\"older norm does not depend on $K$. 
+Choose $\psi=\psi_{i,k}$ in equation \eqref{eq:gg55}, we have
+		\begin{equation}
+			\begin{aligned}
+				\norm{\intr (\psi_{i,k})^2dv\frac{d}{dt}C^K_{i,k}(t)}&\leq \norm{\intr \inner{G_i(v,t)\nabla\rho^K_i(v,t)}{\nabla\psi_{i,k}(v)}dv}\\
+				&\quad+\norm{\intr \inner{\J_i(v,t)}{\nabla\rho^K_i(v,t)}\psi_{i,k}(v)dv}\\
+				&\quad +\norm{\intr \rho^K_i(v,t)\psi_{i,k}(v)dv}+\norm{\intr f_i(v,t)\psi_{i,k}(v)dv}\\
+				&\leq C(n_i,\norm{f}_{L^{\infty}(0,T;L^2(\mathbb{R}^d))},\norm{\rho}_{L^{\infty}(0,T;H^1(B_i))})\norm{\psi_{i,k}}_{H^1(B_i)},
+			\end{aligned}
+		\end{equation}
+		since $G_i\leq n_i+1$; thus
+		\begin{equation}
+			\norm{\frac{d}{dt}C^K_{i,k}(t)}\leq \frac{C(n_i,\norm{f}_{L^{\infty}(0,T;L^2(\mathbb{R}^d))},\norm{\rho}_{L^{\infty}(0,T;H^1(B_i))})\norm{\psi_{i,k}}_{H^1(B_i)}}{\norm{\psi_{i,k}}^2_{L^2(B_i)}},
+		\end{equation}
+		which is independent of $K$ but depends on $i$, hence $C^K_{i,k}(t)$ is uniformly Lipschitz on $[0,T]$ as $K\to\infty$. Thus, by the Arzel\`a-Ascoli theorem, $C^K_{i,k}(t)$ will uniformly converge to a Lipschitz continuous function, denote it as $C_{i,k}(t)$. We define
+		\begin{equation}
+			\rho_i(v,t):=\sum_{k=1}^\infty C_{i,k}(t)\psi_{i,k}(v),
+		\end{equation}
+		then for this limit $\rho_i(v,t)$, the estimates of \eqref{eq:g89}, \eqref{eq:g90} and \eqref{eq:gg106} also hold, since these estimates do not depend on $K$. 
+        
+        By Sobolev compact embedding theorem, we have $\rho_i^K(\cdot,t),\partial_t\rho_i^K(\cdot,t)$ converge to $\rho_i(\cdot,t),\partial_t\rho_i(\cdot,t)$ strongly in $\mathcal{C}^{m}(B_i), \forall m\geq 0$, respectively, and so by \eqref{eq:gg55},  we have
+				\begin{equation}\label{eq:t94}
+			\begin{aligned}
+				\intr \partial_t\rho_i(v,t) \psi(v,t)dv&=-\intr \inner{{G_i(v,t)}\nabla\rho_i(v,t))}{\nabla\psi(v,t)}dv\\
+				&\quad+\intr \inner{\J_i(v,t)}{\rho_i(v,t)}\psi(v,t)dv\\
+				&\quad +\intr\rho_i(v,t)\psi(v,t)dv+\intr f_i(v,t)\psi(v,t)dv,
+			\end{aligned}
+		\end{equation}
+		for any $\psi\in H^1(B_i)$, since $\operatorname{span}(H_{i,\infty})$ is dense in $H^1(B_i)$, so 
+		\begin{equation}\label{eq:g99}
+		\partial_t\rho_i(\cdot,t)=\div(G_i(\cdot,t)\nabla\rho_i(\cdot,t))+\inner{\J_i(\cdot,t)}{\nabla\rho_i(\cdot,t)}+\rho_i(\cdot,t)+f_i(\cdot,t),
+		\end{equation}
+		weakly.
+		
+		Since $\rho_i\in W^{1,\infty}(0,T;\mathcal{C}^{m}(B_i))$, then by \cite[Section 5.9, Theorem 2]{evans2022partial}, we have $\rho_i\in \mathcal{C}([0,T];\mathcal{C}^{m}(B_i))$ and 
+		\begin{equation}\label{eq:112}
+			\rho_i(v,s')=\rho_i(v,s)+\int_{s}^{s'}\partial_t\rho_i(v,t)dt,
+		\end{equation}
+		so $\rho_i(v,t)$ is continuous in $t$ and for $l\leq m$, we have
+		\begin{equation}
+			\rho_i^{(l)}(v,s')=\rho_i^{(l)}(v,s)+\int_s^{s'}\partial_t\rho_i^{(l)}(v,t)dt,
+		\end{equation}
+		so $\rho_i^{(l)}(v,t)$ is continuous in $t$, for $l\leq m$, thus by \eqref{eq:g99}, we have $\partial_t\rho_i(v,t)$ is H\"older-$\alpha$-continuous in $t$, since $\boldsymbol{J},G,f$ is locally H\"older-$\alpha$-continuous in time. Thus $\rho_i\in \mathcal{C}^{m,1+\alpha}(B_i\times [0,T])$, for any $m>0$, is a classical solution to 
+		\begin{equation}\label{eq:g102}
+			\begin{aligned}	&\partial_t\rho_i=\div(G_i\nabla\rho_i)+\inner{\J_i}{\nabla\rho_i}+\rho_i+f_i,\\
+				&\rho_i(v,0)=\varrho(v)(1-S(\norm{v}-n_i)).
+			\end{aligned}
+		\end{equation}
+	 Use integration by parts, we have
+	\begin{equation}\label{eq:g113}
+	\begin{aligned}
+		&\intt\intr\partial_t\psi(v,t)\rho_i(v,t)-\inner{G_i(v,t)\nabla\rho_i(v,t)}{\nabla\psi(v,t)}+\inner{\J_i(v,t)}{\nabla\rho_i(v,t)}\psi(v,t)dvdt\\
+		&\quad+\intt\intr\rho_i(v,t)\psi(v,t) dvdt\\
+		&\quad=\intr\psi(v,T)\rho_i(v,T)dv-\intr\psi(v,0)\varrho(v)(1-S(\norm{v}-n_i)) dv-\intt\intr f_i(v,t)\psi(v,t)dvdt,
+	\end{aligned}
+\end{equation}
+for any $\psi\in\mathcal{C}_c^{\infty}(B_i\times [0,T])$.
+		
+By taking $m$-th spatial derivative on both sides of \eqref{eq:g102}, we have
+\begin{equation}
+\begin{aligned}
+		\partial_t\rho_i^{(m)}&=\sum_{s=0}^mC(s,m)\div(G_i^{(s)}\nabla\rho_i^{(m-s)})+\sum_{s=0}^mC(s,m)\inner{\J_i^{(s)}}{\nabla\rho_i^{(m-s)}}+\rho_i^{(m)}+f_i^{(m)},
+\end{aligned}
+\end{equation}
+		thus for any compact region $Z\subset B_i$, we have
+		\begin{equation}\label{eq:g105}
+		\begin{aligned}
+				\int_{Z}\norm{\partial_t\rho_i^{(m)}}^2dv&\leq C(\norm{G}_{L^{\infty}(Z)},m)\Big(\norm{\rho_i}^2_{L^{\infty}(0,T;H^m(Z))}+\norm{f}_{L^{\infty}(0,T;H^m(Z))}^2\Big)\\
+			&\leq C(\norm{G}_{L^{\infty}(Z)},m)\Big(\norm{\rho_i}^2_{L^{\infty}(0,T;H^m(B_i))}+\norm{f}_{L^{\infty}(0,T;H^m(\mathbb{R}^d))}^2\Big)\\
+			&\leq C(\norm{G}_{L^{\infty}(0,T,L^{\infty}(Z))},m,d,T,\norm{f}_{L^{\infty}(0,T;H^m(\mathbb{R}^d))})<\infty,
+		\end{aligned}
+		\end{equation}
+		which does not depend on $i$. 
+
+% In the end, we will show $\intt\intr G\norm{\rho_i}^2dvdt <\infty.$ First by the theory of elliptic equation, see, for example, \cite[Theorem 3.54]{aubin2012nonlinear}, we have for any $v'\in\mathbb{R}^d$, that
+% \begin{equation}
+%     \int_{v'+[0,1]^d}\norm{\rho_i}^2dv\leq C\int_{v'+[0,1]^d}\norm{\Delta \rho_i}^2dv,
+% \end{equation}
+% here constant $C$ does not depend on $v'$. For large enough $R$, we can divide $\mathbb{R}^d\setminus [-R,R]^d$ into disjoint sets $\{v_i+[0,1]^d\}_{i=1}^\infty$, and on each $v_i+[0,1]^d$, use the above elliptic estimate 
+        
+\begin{remark}\label{rmk:g47}
+Finally, we want to remark that all the analysis in this section also hold for the following equation:
+\begin{equation}\label{eq:ggg106}
+\begin{aligned}
+&\partial_t\rho_i=\div(G_i\nabla\rho_i)-\div({\J_i}{\rho_i})+\rho_i+f_i,\\
+&\rho_i(v,0)=\varrho(v)(1-S(\norm{v}-n_i)),\forall v\in B_i,
+\end{aligned}
+\end{equation}
+since \eqref{eq:99} also hold for \eqref{eq:ggg106}, that is
+\begin{equation}
+\begin{aligned}
+	\frac{1}{2}\frac{d}{dt}\intr(\partial^m\rho)^2dv&=-\intr\inner{\nabla\rho^{(m)}}{\partial^m(G_i\nabla\rho)}dv\\
+&\quad+\intr\inner{\partial^m(\J_i\rho)}{\nabla\rho^{(m)}}dv\\
+&\quad+\intr(\rho^{(m)})^2dv\\
+&\quad+\intr f^{(m)}_i\rho^{(m)} dv\\
+&\leq -\intr G_i\norm{\nabla\rho^{(m)}}^2 dv\\
+&\quad-\intr\inner{\J_i}{\nabla\rho^{(m)}}\rho^{(m)}dv\\
+&\quad+\intr(\rho^{(m)})^2dv+\intr f_i^{(m)}\rho^{(m)} dv\\
+&\quad +C\norm{\intr\inner{\nabla\rho^{(m)}}{G_i^{(1)}\nabla\rho^{(m-1)}}dv}\\
+&\quad+C\sum_{s=2}^m\norm{\intr \inner{\nabla\rho^{(m)}}{G_i^{(s)}\nabla\rho^{(m-s)}}dv}\\
+&\quad +C\sum_{s=1}^m\norm{\intr\inner{\J_i^{(s)}}{\nabla\rho^{(m)}}\rho^{(m-s)}dv}\\
+\end{aligned}
+\end{equation}
+use integration by parts for the last term in the right hand side, we can further derive that
+\begin{equation}
+	\begin{aligned}
+			\frac{1}{2}\frac{d}{dt}\intr(\partial^m\rho)^2dv&\leq -\intr G_i\norm{\nabla\rho^{(m)}}^2 dv\\
+		&\quad-\intr\inner{\J_i}{\nabla\rho^{(m)}}\rho^{(m)}dv\\
+		&\quad+\intr(\rho^{(m)})^2dv+\intr f_i^{(m)}\rho^{(m)} dv\\
+		&\quad +C\norm{\intr\inner{\nabla\rho^{(m)}}{G_i^{(1)}\nabla\rho^{(m-1)}}dv}\\
+		&\quad+C\sum_{s=2}^m\norm{\intr \inner{\nabla\rho^{(m)}}{G_i^{(s)}\nabla\rho^{(m-s)}}dv}\\
+		&\quad +C\sum_{s=1}^m\norm{\intr\inner{\J_i^{(s)}}{\nabla\rho^{(m-s)}}\rho^{(m)}dv}\\
+		&\quad+C\sum_{s=1}^m\norm{\intr{\div(\J_i^{(s)})}{\rho^{(m-s)}}\rho^{(m)}dv},
+	\end{aligned}
+\end{equation}
+and the last term is less than $C\sum_{0\leq s\leq m}\intr (\rho^{(s)})^2dv+C\sum_{0\leq s\leq m}\intr G_i (\rho^{(s)})^2dv$, so \eqref{eq:g88} holds for this new equation and thus the esitmates \eqref{eq:g89} and \eqref{eq:g90}  also hold, for any $m\geq 0$. Similarly, the estimate for $\partial_t\rho^{(m)}$ and the rest derivation of this section also hold.
+\end{remark}
+		\subsubsection{Taking the limit and uniqueness of solution in $\Gamma'$}
+		All in all,  in the last section, we have proved $\rho_i\in W^{1,\infty}(0,T; H^m(Z))$ for any $m\geq 0$ and any compact domain $Z\subset\mathbb{R}^d$~(we need set $i$ large enough to let $B_i$ encompass $Z$), and its norm in $W^{1,\infty}(0,T; H^m(Z))$ does not depend on $i$, and thus by Sobolev embedding, we have $\rho_i\in \mathcal{C}^{m,1+\alpha}(Z\times [0,T])$ and its norm in $\mathcal{C}^{m,1+\alpha}(Z\times [0,T])$ is independent of $i$, and $\rho_i$ satisfies \eqref{eq:g102} for any $v\in Z$. So by letting $i\to\infty$, we can find a limit function $\rho\in \mathcal{C}^{m',1+\alpha'}(Z\times [0,T])$ for $m'<m,\alpha'<\alpha$, such that it satisfies 
+				\begin{equation}\label{eq:g106}
+			\begin{aligned}	&\partial_t\rho=\div(G\nabla\rho)+\inner{\J}{\nabla\rho}+\rho+f,\\
+				&\rho(v,0)=\varrho(v),
+			\end{aligned}
+		\end{equation}
+for any $v\in Z$, since $Z$ is any compact set in $\mathbb{R}^d$, so we have $\rho$ satisfies \eqref{eq:g106} on $\mathbb{R}^d$ and it is not hard to verify that $\rho\in L^{\infty}(0,T;H^m(\mathbb{R}^d))$ for any $m>0$,
+\begin{equation}
+\intt\int_{\mathbb{R}^d}G(v,t)\norm{\rho^{(m)}}^2dvdt<\infty,
+\end{equation}
+for any $m> 0$ and $\rho\in \mathcal{C}^{m,1+\alpha}(Z\times [0,T])$, for any $m\geq 0$.
+
+
+Then under Assumptions \ref{asp:g1} and \ref{asp:g2}, equation \eqref{eq:g1} has a unique solution in $\Gamma'$. The proof is simple: let $\rho_1,\rho_2\in \Gamma'$ be two solutions, then $\rho:=\rho_1-\rho_2\in\Gamma'$ is the solution of the following equation
+\begin{equation}
+    \begin{aligned}
+        &\partial_t\rho=\div\Big(G\nabla\rho\Big)+\inner{J}{\nabla\rho}+\rho,\\
+        &\rho(v,0)=0,\forall v\in \mathbb{R}^d.
+    \end{aligned}
+\end{equation}
+Then for any $t\in [0,T]$, we have
+\begin{equation}
+    \begin{aligned}
+        \frac{1}{2}\intd\rho^2(v,t)dv&=\int_0^t\intd \div\Big(G\nabla\rho\Big)\rho dvdr+\int_0^t\intd\inner{J}{\nabla\rho}\rho dvdr+\int_0^t\intd\rho^2dvdr\\
+        &=-\int_0^t\intd G\norm{\nabla\rho}^2dvdr+\int_0^t\intd\inner{J}{\nabla\rho}\rho dvdr+\int_0^t\intd\rho^2dvdr\\
+        &\leq -\int_0^t\intd G\norm{\nabla\rho}^2dvdr+\epsilon\int_0^t\intd\norm{J}^2\norm{\nabla\rho}^2dvdr+\frac{1}{\epsilon}\int_0^t\intd\rho^2 dvdr\\
+        &\quad+\int_0^t\intd\rho^2dvdr\\
+        &\leq -(1-C\epsilon)\int_0^t\intd G\norm{\nabla\rho}^2dvdr+(1+\frac{1}{\epsilon})\int_0^t\intd \rho^2dvdr,
+    \end{aligned}
+\end{equation}
+then by the G\"onwall lemma, we have $\rho=0$. In the above
+\begin{equation}
+    \int_0^t\intd \div\Big(G\nabla\rho\Big)\rho dvdr=-\int_0^t\intd G\norm{\nabla\rho}^2dvdr,
+\end{equation}
+is due to $\rho\in\Gamma'$, so we can always use compact supported function $\rho_c$ to approximate $\rho$ such that
+\begin{equation}
+    \begin{aligned}
+        &\int_0^t\intd \norm{\div\Big(G\nabla (\rho-\rho_c)\Big)}^2dvdr\to 0,\\
+        &\int_0^t\intd\norm{\rho-\rho_c}^2dvdr\to 0,\\
+        &\int_0^t\intd G\norm{\nabla(\rho-\rho_c)}^2dvdr\to 0,
+    \end{aligned}
+\end{equation}
+and for compact supported function $\rho_c$, we always have 
+\begin{equation}
+    \int_0^t\intd \div\Big(G\nabla\rho_c\Big)\rho_c dvdr=-\int_0^t\intd G\norm{\nabla\rho_c}^2dvdr.
+\end{equation}
+\begin{remark}\label{rmk:g95}
+By Remark \ref{rmk:g47}, the above results also hold to equation \eqref{eqg:2}.
+%     \begin{equation}\label{eq:g995}
+%     \begin{aligned}	&\partial_t\rho=\div(G\nabla\rho)-\div({\J}{\rho})+\rho+f,\\
+%         &\rho(v,0)=\varrho(v).
+%     \end{aligned}
+% \end{equation}
+\end{remark}
+
+\subsubsection{Improved estimates under stronger assumptions}
+In the previous sections, under Assumptions \ref{asp:g1} and \ref{asp:g2}, we showed equation \eqref{eq:g1}~(\eqref{eqg:2}) has a classical solution and satisfy $\intt\intd G\norm{\rho^{(m)}}^2dvdt<\infty,\forall m>0, \rho\in W^{1,\infty}(0,T;H^m(Z)),\forall m\geq 0, Z\subset\mathbb{R}^d\text{ compact supported}$. In this section, we will show this solution also satisfies $\rho\in W^{1,\infty}(0,T;H^m(\mathbb{R}^d)),\forall m\geq 0$ and $\intd G^2\norm{\rho^{(m)}}dv<\infty,\forall t\in [0,T], \intt\intd G^3\norm{\rho^{(m)}}^2dvdt<\infty,\forall m\geq 0$, however this result requires the following extra assumption.
+
+\begin{assumption}\label{asp:g3}
+   We assume on each torus $B_i$, there exists a smooth non-negative function $Q_i:B_i\to \mathbb{R}$, which does not depend on $t$, such that 
+   \begin{eqnarray}
+       &\norm{\nabla Q_i}\leq C(1+Q_i^{\frac{1}{2}}),\\
+        &C_1(1+G_i)\leq Q_i+1\leq C_2(1+G_i),\\
+        &\intd (1+G^2)\norm{f^{(m)}}^2dvdt\leq C<\infty,\quad \forall m\geq 0, t\in [0,T].
+   \end{eqnarray}
+\end{assumption}
+\begin{remark}\label{rmke:g211}
+    A sufficient condition for the above assumption to be satisfied is $f$ is a smooth compactly supported function on $\mathbb{R}^d\times (0,T)$, $\norm{\nabla G}\leq C\Big(1+G^{1/2}\Big)$ and $ G(v,t_2)+1\leq C(1+G(v,t_1))$ for any $v\in \mathbb{R}^d$ and any $t_1,t_2\in [0,T]$. Then fix any $t\in [0,T]$, we can choose $Q_i(\cdot):=G_i(\cdot,t)$, and it can be proved that this $Q_i$ satisfies the above assumption. The verification is based on the analysis in Section \ref{sec:aspaddr}, to avoid repetition, we have included it in Appendix \ref{apx:1}.
+\end{remark}
+
+
+
+
+Under Assupmtions \ref{asp:g1}, \ref{asp:g2} and \ref{asp:g3}, we have the following results: On $B_i$, we can choose the test function $\psi(v,t):=\partial^{m}\Big({\Q_i}^2\rho^{(m)}_i\Big)$, then we have
+	\begin{equation}
+		\begin{aligned}
+			\frac{1}{2}\frac{d}{dt}\intr {\Q_i}^2\norm{\rho_i^{(m)}}^2dv&=-\intr\inner{\partial^m(G_i\nabla\rho_i)}{\nabla(\Q_i^2\rho_i^{(m)})}dv\\
+			&\quad+\intr\partial^{m}\Big(\inner{\J_i}{\nabla\rho_i}\Big)\Q_i^2\rho_i^{(m)}dv\\
+			&\quad+\intr {\Q_i}^2\norm{\rho_i^{(m)}}^2dv\\
+            &\quad+\intr Q_i^2\partial^m f_i\rho_i^{(m)}dv,
+		\end{aligned}
+	\end{equation}
+	
+For the first term in the right hand side, we have
+\begin{equation}
+	\begin{aligned}
+	-\intr\inner{\partial^m(G_i\nabla\rho_i)}{\nabla(\Q_i^2\rho_i^{(m)})}dv&\leq -\intr G_i\Q_i^2\norm{\nabla\rho_i^{(m)}}^2dv\\
+	&\quad +C\sum_{s=1}^m\norm{\intr\inner{G_i^{(s)}\nabla\rho_i^{(m-s)}}{\Q_i^2\nabla\rho_i^{(m)}}dv}\\
+	&\quad +C\norm{\intr\inner{G_i\nabla\rho_i^{(m)}}{\Q_i\rho_i^{(m)}\nabla \Q_i}dv}\\
+	&\quad+C\sum_{s=1}^m\norm{\intr\inner{G_i^{(s)}\nabla\rho_i^{(m-s)}}{\Q_i\rho_i^{(m)}\nabla\Q_i}}\\
+	&=I+II+III+IV,
+	\end{aligned}
+\end{equation}	
+when $m=0$, $II=0,IV=0$;  when $m\geq 1$,  for $II$, use Assumption \ref{asp:g3} and Cauchy-Schwartz inequality, we have 
+	\begin{equation}
+		\begin{aligned}
+			II&\leq C\sum_{i=0}^{m-1}\intr (1+G_i)Q_i^2\norm{\nabla\rho_i^{(s)}}\norm{\nabla\rho_i^{(m)}}dv\\
+            &\leq\epsilon\intr G_i\Q_i^2\norm{\nabla\rho_i^{(m)}}^2dv+C(\epsilon)\sum_{s=0}^{m-1}\intr G_i\Q_i^2\norm{\nabla\rho_i^{(s)}}^2dv\\
+            &\quad+C\sum_{s=0}^{m-1}\intr Q_i^3\norm{\nabla \rho_i^{(s)}}^2dv+C\intr Q_i\norm{\nabla\rho^{(m)}}^2dv\\
+            &\leq \epsilon\intr G_i\Q_i^2\norm{\nabla\rho_i^{(m)}}^2dv+C(\epsilon)\sum_{s=0}^{m-1}\intr G_i\Q_i^2\norm{\nabla\rho_i^{(s)}}^2dv+C\sum_{s=0}^m\intr \norm{\nabla \rho_i^{(s)}}^2dv\\
+            &\quad+C\intr G_i\norm{\nabla\rho^{(m)}}^2dv,
+		\end{aligned}
+	\end{equation}
+    we used $Q_i^3\leq C(1+G_i)Q_i^2\leq CG_iQ_i^2+C$, since $CQ_i^2\leq CG_iQ_i^2+C$: if $G_i\geq 1$, we have $CQ_i^2\leq CG_iQ_i^2$, else $CQ_i^2\leq C(G_i+1)^2\leq C$; for $IV$,use Assumption \ref{asp:g3} and Cauchy-Schwartz inequality, we have
+	\begin{equation}
+		\begin{aligned}
+			IV&\leq C\sum_{s=0}^{m-1}\intr G_iQ_i(1+Q_i^{\frac{1}{2}})\norm{\nabla \rho_i^{(s)}}\norm{\rho_i^{(m)}}dv\\
+            &\leq C\sum_{s=0}^{m-1}\intr G_iQ_i^2\norm{\nabla\rho_i^{(s)}}^2dv+C\intr G_i\norm{\rho_i^{(m)}}^2dv \\
+            &\quad+C\sum_{s=0}^{m-1}\intr G_iQ_i^2\norm{\nabla\rho_i^{(s)}}^2dv+C\intr G_iQ_i\norm{\rho_i^{(m)}}^2dv\\
+            &\leq C\sum_{s=0}^{m-1}\intr G_iQ_i^2\norm{\nabla\rho_i^{(s)}}^2dv+C\intr Q_i^2\norm{\rho_i^{(m)}}^2dv+C\intr G_i\norm{\rho_i^{(m)}}^2dv+C\intr \norm{\rho_i^{(m)}}^2dv,
+		\end{aligned}
+	\end{equation}
+    since $G_iQ_i\leq C(1+Q_i)Q_i\leq CQ_i^2+CG_i+C$;
+	when $m\geq 0$, for $III$, we have
+	\begin{equation}
+		\begin{aligned}
+			III&\leq C\intr G_iQ_i(1+Q_i^{\frac{1}{2}})\norm{\nabla\rho_i^{(m)}}\norm{\rho_i^{(m)}}dv\\
+            &\leq \frac{1}{2}\epsilon\intr G_i\Q_i^2\norm{\nabla\rho_i^{(m)}}^2dv+C(\epsilon)\intr G_i\norm{\rho_i^{(m)}}^2dv\\
+            &\quad+\frac{1}{2}\epsilon\intr G_i\Q_i^2\norm{\nabla\rho_i^{(m)}}^2dv+C(\epsilon)\intr G_iQ_i\norm{\rho_i^{(m)}}^2dv \\
+            &\leq \epsilon\intr G_i\Q_i^2\norm{\nabla\rho_i^{(m)}}^2dv+C(\epsilon)\Big[\intr Q_i^2\norm{\rho_i^{(m)}}^2dv+\intr G_i\norm{\rho_i^{(m)}}^2dv+\intr \norm{\rho_i^{(m)}}^2dv\Big],
+		\end{aligned}
+	\end{equation}
+    again, we used $G_iQ_i\leq CQ_i^2+CG_i+C$; all in all, for the first term, when $m=0$, we have it less than
+	\begin{equation}
+		\begin{aligned}
+			-(1-\epsilon)\intr G_i\Q_i^2\norm{\nabla\rho_i}^2dv+C(\epsilon)\Big[\intr \Q_i^2(\rho_i)^2dv+\intr G_i(\rho_i)^2dv+\intr(\rho_i)^2dv\Big],
+		\end{aligned}
+	\end{equation}
+	when $m\geq 1$, we have it less than
+	\begin{equation}
+		\begin{aligned}
+			&-(1-2\epsilon)\intr G_i\Q_i^2\norm{\nabla\rho_i^{(m)}}^2dv\\
+			&+C(\epsilon)\Big[\sum_{s=0}^{m-1}\intr G_i\Q_i^2\norm{\nabla\rho_i^{(s)}}^2dv+\intr Q_i^2\norm{\rho_i^{(m)}}^2dv+\intr G_i\norm{\rho_i^{(m)}}^2dv+\intr \norm{\rho_i^{(m)}}^2dv\Big]\\
+            &+C\intr G_i\norm{\nabla\rho_i^{(m)}}^2dv+C\sum_{s=0}^m\intr\norm{\nabla\rho_i^{(s)}}^2dv.
+		\end{aligned}
+	\end{equation}
+	
+	
+	For the second term in the right hand side, similarly, when $m=0$,we have
+	\begin{equation}
+			\begin{aligned}
+				\intr\partial^{m}\Big(\inner{\J_i}{\nabla\rho_i}\Big)\Q_i^2\rho_i^{(m)}dv&\leq C\norm{\intr \inner{\J_i}{\nabla\rho_i}\Q_i^2\rho_idv}\\
+				&\leq \epsilon\intr G_i\Q_i^2\norm{\nabla\rho_i}^2dv+C(\epsilon)\intr \Q_i^2(\rho_i)^2dv
+			\end{aligned}
+	\end{equation}
+	when $m\geq 1$, use Assumption \ref{asp:g3} and Cauchy-Schwartz inequality, we have 
+	\begin{equation}
+		\begin{aligned}
+			&\intr\partial^{m}\Big(\inner{\J_i}{\nabla\rho_i}\Big)\Q_i^2\rho_i^{(m)}dv\\&\leq C\norm{\intr \inner{\J_i}{\nabla\rho_i^{(m)}}\Q_i^2\rho_i^{(m)}dv}\\
+			&\quad +C\sum_{s=1}^m\norm{\intr \inner{\J_i^{(s)}}{\nabla\rho_i^{(m-s)}}\Q_i^2\rho_i^{(m)}dv}\\
+			&\leq \epsilon\intr G_i\Q_i^2\norm{\nabla\rho_i^{(m)}}^2dv+C(\epsilon)\intr \Q_i^2(\rho_i^{(m)})^2dv\\
+			&\quad+C\Big[\sum_{s=0}^{m-1}\intr G_i\Q_i^2\norm{\nabla\rho_i^{(s)}}^2dv+\sum_{s=0}^{m-1}\intr Q_i^2\norm{\nabla\rho_i^{(s)}}^2dv+\intr \Q_i^2(\rho_i^{(m)})^2dv\Big].
+		\end{aligned}
+	\end{equation}
+    
+	For the last term in the right hand side, we have it less than
+    \begin{equation}
+       \begin{aligned}
+            \intr Q_i^2(\rho_i^{(m)})^2dv+\intr Q_i^2\norm{f_i^{(m)}}^2dv&\leq \intr Q_i^2(\rho_i^{(m)})^2dv+C\sum_{s=0}^m\intr Q_i^2\norm{f^{(s)}}^2dv\\
+            &\leq \intr Q_i^2(\rho_i^{(m)})^2dv+C\sum_{s=0}^m\intd(1+G^2)\norm{f^{(s)}}^2dv\\
+            &\leq \intr Q_i^2(\rho_i^{(m)})^2dv+C.
+       \end{aligned}
+    \end{equation}
+    
+	So, combine the above estimates, when $m=0$, we have
+	\begin{equation}
+		\begin{aligned}
+		    \frac{d}{dt}\intr \Q_i^2(\rho_i)^2dv&\leq -2(1-2\epsilon)\intr G_i\Q_i^2\norm{\nabla\rho_i}^2dv\\
+            &\quad+C(\epsilon)\Big[\intr \Q_i^2(\rho_i)^2dv+\intr G_i(\rho_i)^2dv+\intr(\rho_i)^2dv\Big]+C,
+		\end{aligned}
+	\end{equation}
+	by choosing $\epsilon$ small enough and using the Gr\"onwall lemma, we have
+\begin{eqnarray}
+	&	\intr \Q_i^2(\rho_i)^2\leq C<\infty,\\
+	&\intt\intr G_i\Q_i^2\norm{\nabla\rho_i}^2dvdt\leq C<\infty,
+\end{eqnarray}
+	and this $C$ does not depend on $i$; when $m\geq 1$, we have
+	\begin{equation}\label{eq:g117}
+		\begin{aligned}
+			&\sum_{s=m}\intr\Q_i^2(v)(\rho_i^{(s)}(v,t))^2dv-\sum_{s=m}\intr\Q_i^2(v)(\rho_i^{(s)}(v,0))^2dv\\
+            &\leq -2(1-3\epsilon)\sum_{s=m}\int_0^t\intr G_i(v,r)Q_i^2(v)\norm{\nabla\rho_i^{(s)}(v,r)}^2dvdr\\
+			&\quad+C(\epsilon)\sum_{s=m}\intr\Q_i^2(v)(\rho_i^{(s)}(v,r))^2dvdr+C_1(\epsilon,m-1),
+		\end{aligned}
+	\end{equation}
+    here $C_1(\epsilon,m-1)$ depends on $\epsilon$ and 
+    \begin{eqnarray*}
+        &\intr Q_i^2(\rho^{(s)}_i)^2dv,\\
+        &\intt\intr G_i\Q_i^2\norm{\nabla\rho^{(s)}_i}^2dvdt,\\
+        &\intr (\rho_i^{(s)})^2dv,\\
+        &\intt\intr G_i\norm{\nabla\rho^{(s)}_i}^2dvdt,\\
+        &\intd (1+G^2)(f^{(s)})^2dvdt,
+    \end{eqnarray*}
+    for any $0\leq s<m$, which are all bounded and independent of $i$,
+	so by induction, choose $\epsilon$ small enough and use the Gr\"onwall lemma, we have 
+	\begin{eqnarray}
+		&	\intr \Q_i^2(\rho^{(m)}_i)^2\leq C<\infty,\label{eq:g118}\\
+		&\intt\intr G_i\Q_i^2\norm{\nabla\rho^{(m)}_i}^2dvdt\leq C<\infty\label{eq:g119},
+	\end{eqnarray}
+	for any $m\geq 0$ and this $C$ does not depend on $i$.
+	
+	So on $B_i$, we have
+			\begin{equation}
+		\begin{aligned}
+			\intr(\partial_t\rho_i^{(m)})^2dv
+			&=\intr \partial^m\Big(\div(\J_i\rho_i)\Big)\partial_t\rho_i^{(m)} dv+\intr\Delta\partial^m(G_i\rho_i)\partial_t\rho^{(m)}dv\\
+			&\leq \epsilon\intr(\partial_t\rho_i^{(m)})^2dv+\frac{C}{\epsilon}\Big(\norm{\rho_i}^2_{L^{\infty}(0,T;H^{m+2}(B_i))}+\sum_{s\leq m+2}\intr\Q_i^2(\rho_i^{(s)})^2dv\Big),
+		\end{aligned}
+	\end{equation}
+	thus we have
+	\begin{equation}
+		\begin{aligned}
+			&\intr(\partial_t\partial^m\rho_i)^2dv\leq \frac{C}{\epsilon(1-\epsilon)}\Big(\norm{\rho_i}^2_{L^{\infty}(0,T;H^{m+2}(B_i))}+\sum_{s\leq m+2}\intr\Q_i^2(\rho_i^{(s)})^2dv\Big)\leq C<\infty,
+		\end{aligned}
+	\end{equation}
+	and this bound $C$ does not depend on $i$, let $i\to\infty$, we have the soution $\rho$ of the equation \eqref{eq:g1} is in $W^{1,\infty}(0,T;H^m(\mathbb{R}^d))$ for any $m\geq 0$ and function class $\Gamma$.
+    \begin{remark}\label{rmk:g2211}
+        For equation \eqref{eqg:2}, we should estimate the second term in the following way:
+        \begin{equation}
+            -\intr\partial^m\div(\J_i\rho_i)\rho^{(m)}dv=\underbrace{-\intr\partial^m\Big(\inner{\J_i}{\nabla\rho_i}\Big)\rho_i^{(m)}dv}_{A}+\underbrace{-\intr\partial^m\Big(\div(\J_i)\rho_i\Big)\rho_i^{(m)}dv}_{B},
+        \end{equation}
+        for term $A$, we have given the upper bound; for term $B$, we can upper bound it by
+        \begin{equation}
+            \begin{aligned}
+                B&\leq C\sum_{s=0}^m\norm{\intr \partial^{s}(\div(\J_i))\rho_i^{(m-s)}\rho_i^{(m)}dv}\\
+                &\leq C\sum_{s=0}^m\norm{\intr (1+G_i^{\frac{1}{2}})\rho_i^{(m-s)}\rho_i^{(m)}dv}\\
+                &\leq C\sum_{s=0}^m\Big[\intr\norm{\rho_i^{(s)}}^2dv+\intr (1+G_i)\norm{\rho_i^{(m)}}^2dv\Big]\\
+                &\leq C\sum_{s=0}^m\Big[\intr\norm{\rho_i^{(s)}}^2dv+\intr (1+Q_i)\norm{\rho_i^{(m)}}^2dv\Big]\\
+                &\leq C\sum_{s=0}^m\Big[\intr\norm{\rho_i^{(s)}}^2dv+\intr Q_i^2\norm{\rho_i^{(m)}}^2dv\Big]
+            \end{aligned}
+        \end{equation}
+        since $Q_i\leq 1/2(1+Q_i^2)$; so the upper bound of $B$ in the above can also be absorbed into the right hand side of \eqref{eq:g117}, thus we also have \eqref{eq:g118} and \eqref{eq:g119}, let $i\to\infty$, we have the solution of \eqref{eqg:2} in $\Gamma$.
+    \end{remark}
+
+Next, we show the uniqueness of weak solution under Assumptions \ref{asp:g1},\ref{asp:g2} and \ref{asp:g3}.
+
+
+% Next, we show the weak solution to \eqref{eq:g1} is unique and in class $\Gamma$.
+We denote $\tilde{\rho}$ be the classical solution in $\Gamma$, which is guaranteed by previous section, then by Lemma \ref{lm:27}, $\tilde{\rho}$ is also a weak solution. Let $\rho$ be any weak solution to equation \eqref{eq:g1}, we will show $\rho=\tilde{\rho}$ and thus we proved the statement.
+
+We assume $\psi$ be the solution of the following equation
+\begin{equation}\label{eq:gg119}
+    \begin{aligned}
+&\partial_t\psi(v,t)+\div(G(v,t)\nabla\psi(v,t))-\div({\J(v,t)}{\psi(v,t)})+\psi(v,t)=h(v,t)\\
+        &{\psi}(v,T)=0,
+    \end{aligned}
+\end{equation}
+	here $h(v,t):=\eta_{R,\delta}(g^{\epsilon})^{\epsilon}$,
+    $\eta_{R,\delta}(v,t):=\Big(1-S(\norm{v}-R)\Big)\cdot\chi_{[\delta,T-\delta]}^{\delta^2}(t), g(v,t):=\eta_{R,\delta}(v,t)\Big(\rho(v,t)-\tilde{\rho}(v,t)\Big)$ and $p^\eta(v,t):=(p*\varphi_\eta)(v,t)$, thus $h(v,t)$ has compact support on $\mathbb{R}^d\times (0,T)$.
+    
+    If we let $\tilde{\psi}(v,t):=\psi(v,T-t)$, then it can be directly verified that
+	$\tilde{\psi}$ satisfies the following equation
+		\begin{equation}
+		\begin{aligned}
+			&\partial_t{\tilde{\psi}}=\div\Big(\tilde{G}\nabla\tilde{\psi}\Big)-\div\Big(\tilde{\J}\tilde{\psi}\Big)+\tilde{\psi}+\tilde{h}\\
+			&\tilde{\psi}(v,0)=0,
+		\end{aligned}
+	\end{equation}
+	here $\tilde{\J}(v,t):=\J(v,T-t),\tilde{G}(v,t):=G(v,T-t),\tilde{h}(v,t):=-h(v,T-t)$, so by Remark \ref{rmk:g2211}, the above equation has a classical solution in $\Gamma$, and so \eqref{eq:gg119} has a classical solution $\psi\in\Gamma$. Since ${\psi}\in \Gamma$ and $\rho,\tilde{\rho}$ are both weak solutions, so we have
+	    \begin{equation}\label{eq:gg99}
+        \begin{aligned}
+            &\intt\intd\Big(\partial_t\psi(v,t)+\div(G(v,t)\nabla\psi(v,t))-\div({\J(v,t)}{\psi(v,t)})+\psi(v,t)\Big)\rho(v,t)dvdt\\
+            &=\intt\intd h(v,t)\rho(v,t)dvdt=-\intd\varrho(v)\psi(v,0)dv-\intt\intd f(v,t)\psi(v,t)dvdt.
+        \end{aligned}
+    \end{equation}
+	and
+		    \begin{equation}\label{eq:gg100}
+        \begin{aligned}
+            &\intt\intd\Big(\partial_t\psi(v,t)+\div(G(v,t)\nabla\psi(v,t))-\div({\J(v,t)}{\psi(v,t)})+\psi(v,t)\Big)\tilde{\rho}(v,t)dvdt\\
+            &=\intt\intd h(v,t)\tilde{\rho}(v,t)dvdt=-\intd\varrho(v)\psi(v,0)dv-\intt\intd f(v,t)\psi(v,t)dvdt.
+        \end{aligned}
+    \end{equation}
+Subtract \eqref{eq:gg99} from \eqref{eq:gg100}, we have
+	\begin{equation}
+		\intt\intd h(v,t)\Big(\rho(v,t)-\tilde{\rho}(v,t)\Big)dvdt=\intt\intd \Big(\Big(\eta_{R,\delta}(\rho-\tilde{\rho})\Big)^{\epsilon}\Big)^2dvdt=0,
+	\end{equation}
+	for any $R>0,\delta>0\text{ small, and }\epsilon\ll\delta$, so $\tilde{\rho}=\rho$.
+\begin{remark}\label{rmk:rmk220}
+The Galerkin approximation procedure described above also applies when the space $\mathbb{R}^d$ is substituted with a compact manifold $M$ {without boundary}. Therefore, the main theorem remains valid for equations \eqref{eq:g1} and \eqref{eqg:2} on smooth compact manifolds. In fact, when $M$ is a smooth compact manifold {without boundary}, we can simply set $B_i=M$ and utilize the first $K$ eigenfunctions of the Laplace-Beltrami operator on $M$ in place of $H_{i,K}$. Consequently, all the analyses from the previous sections continue to hold.
+\end{remark}
+
+
+
+
+\subsection{Applying the main theorem to CBO}\label{sec:cbo}
+Under assumptions that: The cost function $f: \mathbb{R}^d \rightarrow \mathbb{R}$ is bounded from below with $\underline{f}:=\inf f$. There exist constants $L_f,M,c_l$ and $c_u>0$ such that
+\begin{equation}\label{condition:f}
+    \begin{cases}|f(v)-f(u)| \leq L_f(\norm{v}+\norm{u})\norm{v-u} & \text { for all } v, u \in \mathbb{R}^d, \\ f(v)-\underline{f} \leq c_u\left(1+\norm{v}^2\right) & \text { for all } v\in \mathbb{R}^d ,\\
+f(v)-\underline{f}\geq c_l\norm{v}^2& \text { for all } \norm{v}\geq M, \end{cases}
+\end{equation}
+it is proved in \cite[Theorem 3.2]{carrillo2018analytical} that the CBO dynamics
+\begin{equation}\label{eq:gcbo}
+		\begin{aligned}
+			&\partial_t\rho=\div\Big((v-v_\alpha(\rho,t))\rho\Big)+\Delta\Big(\norm{v-v_\alpha(\rho,t)}^2\rho\Big)\\
+			&\rho(v,0)=\varrho(v),
+		\end{aligned}
+	\end{equation}
+    here $v_\alpha(\rho,t):=\intd ve^{-\alpha f(v)}d\rho(v,t)/\intd e^{-\alpha f(v)}d\rho(v,t)$,
+    has a solution in $\mathcal{C}(0,T,\mathcal{P}(\mathbb{R}^d))$~(check Remark \ref{rmke:2}), which is also a weak solution defined in this work by It\^o's lemma. We denote this solution as $\bar{\rho}$ and $v_\alpha(\bar{\rho},t)$ is $1/2$-H\"older continuous in time, see also \cite[Theorem 3.2]{carrillo2018analytical}.
+ Let $v_\alpha(t):=v_\alpha(\bar{\rho},t)$, then by Theorem \ref{thm:main}, the following equation:
+	\begin{equation}
+		\begin{aligned}
+			&\partial_t\rho=\div\Big((v-v_\alpha(t))\rho\Big)+\Delta\Big(\norm{v-v_\alpha(t)}^2\rho\Big)\\
+			&\quad=\div\Big(\norm{v-v_\alpha(t)}^2\nabla\rho\Big)+3\inner{v-v_\alpha(t)}{\nabla\rho}+3d\rho,\\
+			&\rho(v,0)=\varrho(v),
+		\end{aligned}
+	\end{equation}
+    where $G(v,t):=\norm{v-v_\alpha(t)}^2,\J(v,t):=v-v_\alpha(t),f(v,t)=0$ satisfies Assumptions \ref{asp:g1}, \ref{asp:g2} and \ref{asp:g3} by Remark \ref{rmke:g211}, has a unique weak solution $\rho$ and $\rho\in\Gamma$, thus $\bar{\rho}=\rho\in\Gamma$.
+
+    
+	
+	
+	% Let $\Q_i(v):=H_i(v)\left[\norm{v}^2(1-S_i(v))+R_i^2S_i(v)\right]$, then it is not hard to verify that $R_i^2\leq Cn_i$ and
+	% \begin{lemma}\label{lm:g213}
+ %    we have 
+	% 	\begin{eqnarray}
+	% 		&C_1(1+G_i)\leq \Q_i+1\leq C_2(1+G_i)\\
+	% 		&\norm{\nabla\Q_i}\leq C(1+\Q_i^{\frac{1}{2}}).
+	% 	\end{eqnarray}
+	% \end{lemma}
+	% \begin{proof}
+	% 	The first one is easy to verify. We only verifty the second one for $v\in B_{R_i}(0)\setminus B_{R_i-1}(0)$. First on $ B_{R_i}(0)\setminus B_{R_i-1}(0)$, we have $C_1n_i\leq\Q_i(v)\leq C_2n_i$ and 
+	% 	\begin{equation}
+	% 		\nabla Q_i=\nabla H_i(v)\left[\norm{v}^2(1-S_i(v))+R_i^2S_i(v)\right]+H_i(v)\left[v(1-S_i(v))+\Big(R_i^2-\norm{v}^2\Big)\nabla S_i(v)\right],
+	% 	\end{equation}
+	% 	use $\norm{\nabla H_i(v)}\leq C/n_i$ and $R_i^2-\norm{v}^2\leq CR_i$ for $v\in B_{R_i}(0)\setminus B_{R_i-1}(0)$, we can derive the lemma.
+	% \end{proof}
+	
+\subsubsection{Uniqueness of the CBO dynamics}
+	Now, we show the measure solution to the non-linear equation \eqref{eq:gcbo} is unique.
+\begin{definition}
+    We say $\rho$ is a measure solution to the CBO dynamics, if $\rho\in\mathcal{C}(0,T;\mathcal{P}(\mathbb{R}^d)),\forall T>0$ and for any $\psi(v,t)\in \mathcal{C}^{2,1}(\mathbb{R}^d\times[0,\infty))$ with $\norm{\nabla\psi},\norm{\partial_i\partial_j\psi}$ bounded, we have
+    \begin{equation}
+        \begin{aligned}
+            &\int_{0}^{s}\intd\Big(\partial_t\psi(v,t)+\Delta \psi(v,t)\norm{v-v_\alpha(\rho,t)}^2d\rho(v,t)-\inner{\nabla \psi(v,t)}{v-v_\alpha(\rho,t)}\Big)d\rho(v,t)dt\\
+            &=\intd\psi(v,s)d\rho(v,s)-\intd\psi(v,0)d\varrho(v),
+        \end{aligned}
+    \end{equation}
+    for any $s\in [0,\infty)$.
+\end{definition}
+\begin{remark}\label{rmke:2}
+    What we mean $\rho\in\mathcal{C}(0,T;\mathcal{P}(\mathbb{R}^d)),\forall T>0$ here:  for each $t\in [0,T]$, $\rho(\cdot,t)\in\mathcal{P}(\mathbb{R}^d)$, the space of probability measure, and $\intd f(v)d\rho(v,t)$ is continuous for any $f\in \mathcal{C}_b(\mathbb{R}^d)$, the space of bounded continuous function on $\mathbb{R}^d$.
+\end{remark}
+
+By Sobolev embedding, it is direct to derive that if $\psi\in\Gamma$, then $\psi$ satisfies the condition in the above definition, so if $\rho$ is a measure solution, it is also a weak solution.
+
+	Let $\rho$ be a measure solution and choose test function $e^{-\alpha f(v)}$ and $v_ie^{-\alpha f(v)},i=1,\ldots,d$ which are all bounded on $\mathbb{R}^d$, 
+ %    satisfy the condition in the definition of measure solution. For simplicity, we only focus on the test function $e^{-\alpha f(v)}$ , the other test functions $v_ie^{-\alpha f(v)},i=1,\ldots,d$ are similarly considered. We have
+	% \begin{equation}\label{eq:g125}
+	% 	\frac{d}{dt}\intd e^{-\alpha f(v)}d\rho(v,t)=\intd\Delta e^{-\alpha f(v)}\norm{v-v_\alpha(\rho,t)}^2d\rho(v,t)-\intd\inner{\nabla e^{-\alpha f(v)}}{v-v_\alpha(\rho,t)}d\rho(v,t),
+	% \end{equation}
+	% since for fixed $t$, $\Delta e^{-\alpha f(v)}\norm{v-v_\alpha(\rho,t)}^2$ and $\inner{\nabla e^{-\alpha f(v)}}{v-v_\alpha(\rho,t)}$ are in $L^\infty(\mathbb{R}^d)$, so we have the right hand side of \eqref{eq:g125} is bounded,
+    so $\intd e^{-\alpha f(v)}d\rho(v,t)$ and $\intd ve^{-\alpha f(v)}d\rho(v,t)$ are continuous on $[0,\infty)$, since $\rho\in\mathcal{C}(0,T;\mathcal{P}(\mathbb{R}^d)),\forall T>0$; combine this and the fact that for each $t\in [0,\infty)$, $v_\alpha(\rho,t)<\infty$, we have $v_{\alpha}(\rho,t):=\intd ve^{-\alpha f(v)}d\rho(v,t)/\intd e^{-\alpha f(v)}d\rho(v,t)$ is continuous on $[0,\infty)$. Thus by Theorem \ref{thm:main}, for this fixed $v_{\alpha}(\rho,t)$, the following equation 
+    \begin{equation}\label{eq:g127}
+		\begin{aligned}
+			&\partial_t\dot{\rho}=\Delta\Big(\norm{v-v_\alpha(\rho,t)}\dot{\rho}\Big)+\div\Big((v-v_\alpha(\rho,t))\dot{\rho}\Big),\\
+			&\dot{\rho}(v,0)=\varrho,
+		\end{aligned}
+	\end{equation}
+    has a unique weak solution, denote it as $\dot{\rho}$, and this solution is in $\Gamma$, since $\rho$ is a measure solution so it is also a weak solution and so $\rho=\dot{\rho}\in\Gamma$. Since the distribution of the process $V_t$ which satisfies the following linear SDE
+	\begin{equation}\label{eq:g126}
+		dV_t=-(V_t-v_{\alpha}(\rho,t))dt+\norm{V_t-v_\alpha(\rho,t)}dB_t,
+	\end{equation}
+    is also a measure solution~(by It\^o's lemma, thus a weak solution) of \eqref{eq:g127}, so $\rho$ is the distribution of the process $V_t$. So in summary, we have shown that any measure solution to the non-linear PDE \eqref{eq:gcbo} is in function class $\Gamma$ and is the distribution of the nonlinear SDE \begin{equation}
+		dV_t=-(V_t-v_{\alpha}(\rho,t))dt+\norm{V_t-v_\alpha(\rho,t)}dB_t,
+	\end{equation} with $\rho(\cdot,t)$ the distribution of $V_t$, and vice versa by \cite[Theorem 3.2]{carrillo2018analytical}. By \cite[Theorem 3.2]{carrillo2018analytical}, the nonlinear SDE has a unique strong solution, so the nonlinear PDE \eqref{eq:gcbo} also has a unique measure solution, and this measure solution is in $\Gamma$.
+
+
+\subsubsection{Positivity of CBO solutions}
+Since the measure solution of equation \eqref{eq:gcbo} is unique and in class $\Gamma$, in the next, for simplicity, we will write $v_\alpha(\rho,t)$ as $v_\alpha(t)$, thus equation \eqref{eq:gcbo} becomes
+\begin{equation}
+\partial_t\rho(v,t)=\div((v-v_{\alpha}(t))\rho(v,t))+\Delta(\norm{v-v_{\alpha}(t)}^2\rho(v,t)).
+\end{equation}
+Let $v=v+v_{\alpha}(t)$, then we have
+\begin{equation}\label{eq:665}
+\partial_t\rho(v+v_{\alpha}(t),t)=\div(v\rho(v+v_{\alpha}(t),t))+\Delta(\norm{v}^2\rho(v+v_{\alpha}(t),t)).
+\end{equation}
+Now, let $\tilde{\rho}(v,t):=\rho(v+v_{\alpha}(t),t)$, then
+\begin{equation}
+\begin{aligned}
+    \partial_t\tilde{\rho}(v,t)&=\frac{d}{dt}\rho(v+v_{\alpha}(t),t)\\
+    &=\partial_t\rho(v+v_{\alpha}(t),t)+\inner{\nabla\rho(v+v_{\alpha}(t),t)}{\frac{d}{dt}v_\alpha(t)}\\
+    &=\div(v\rho(v+v_{\alpha}(t),t))+\Delta(\norm{v}^2\rho(v+v_{\alpha}(t),t))\\
+    &\quad+\inner{\nabla\rho(v+v_{\alpha}(t),t)}{\frac{d}{dt}v_\alpha(t)}\\
+    &=\div(v\tilde{\rho}(v,t))+\Delta(\norm{v}^2\tilde{\rho}(v,t))+\inner{\nabla\tilde{\rho}(v,t)}{P(t)}\\
+    &=\norm{v}^2\Delta\tilde{\rho}(v,t)+\inner{5v+P(t)}{\nabla\tilde{\rho}(v,t)}+3d\tilde{\rho}(v,t)
+\end{aligned}
+\end{equation}
+here $P(t):=\frac{d}{dt}v_\alpha(t)$~(we can prove this is bounded by assuming the growth rate of $\nabla f,\Delta f$  at most polynomially, see Lemma \ref{lem:g211}). 
+
+Then on $B_R(0)\setminus B_{\epsilon}(0)\times [0,T]$ for any $0<\epsilon<R<\infty$, we have $\tilde{\rho}$ is the classical solution to 
+\begin{equation}
+\partial_t\tilde{\rho}(v,t)=\norm{v}^2\Delta\tilde{\rho}(v,t)+\inner{5v+P(t)}{\nabla\tilde{\rho}(v,t)}+3d\tilde{\rho}(v,t),
+\end{equation}
+and on $B_R(0)\setminus B_{\epsilon}(0)\times [0,T]$, the equation is uniform parabolic and then by the parabolic Harnack inequality~ see \cite[Section 7.1, Theorem 10]{evans2022partial}, we have
+\begin{equation}
+\sup_{B_R(0)\setminus B_{\epsilon}(0)} \tilde{\rho}(\cdot,t_1)\leq C\inf_{B_R(0)\setminus B_{\epsilon}(0)} \tilde{\rho}(\cdot,t_2),
+\end{equation}
+for any $0<t_1<t_2\leq T$. If $\rho(v,0)=\varrho$ is not identically $0$, then we can find some $v\in \mathbb{R}^d$, s.t. $\varrho(B_r(v))>0$ and then by \cite[Proposition 23]{B1-fornasier2021global}, we have $\rho(B_r(v),t_1)>0$ for any $t_1>0$ and thus we can find $R$ large enough and $\epsilon$ small enough, such that
+\begin{equation}
+\sup_{B_R(0)\setminus B_{\epsilon}(0)} \tilde{\rho}(\cdot,t_1)>0,
+\end{equation}
+and thus by the parabolic Harnack inequality, we have
+\begin{equation}
+\inf_{B_R(0)\setminus B_{\epsilon}(0)} \tilde{\rho}(\cdot,t_2)>0,
+\end{equation}
+for any $t_2>t_1>0$. Since $R,\epsilon,t_1,t_2$ are arbitrary, so we can conclude that $\rho(v,t)>0$ for any $v\not= v_\alpha(t)$, for any $t>0$.
+
+\begin{lemma}\label{lem:g211}
+Assume 
+\begin{equation}\label{condition:ff}
+    \begin{aligned}
+        &\norm{\Delta f}\leq C(1+\norm{v}^p),\\
+        &\norm{\nabla f}\leq C(1+\norm{v}^q),\text{ for some polynomial order of $p,q>0$},
+    \end{aligned}
+\end{equation}
+we will have $\norm{\frac{d}{dt}v_{\alpha}(t)}<C<\infty$.
+\end{lemma}
+
+\begin{proof}
+Use It\^o formula to function $e^{-\alpha f(v)},ve^{-\alpha f(v)}$, we have 
+\begin{equation}
+    \frac{d}{dt}\frac{\intd ve^{-\alpha f(v)}d\rho_t}{\intd e^{-\alpha f(v)}d\rho_t}=\frac{\frac{d}{dt}\intd ve^{-\alpha f(v)}d\rho_t}{\intd e^{-\alpha f(v)}d\rho_t}-v_{\alpha}(\rho_t)\frac{\frac{d}{dt}\intd e^{-\alpha f(v)}d\rho_t}{\intd e^{-\alpha f(v)}d\rho_t},
+\end{equation}
+we have
+\begin{equation}
+    \begin{aligned}
+        \frac{d}{dt}\intd ve^{-\alpha f(v)}d\rho_t&=-\intd \inner{\nabla(ve^{-\alpha f(v)})}{v-v_{\alpha}(\rho_t)}d\rho_t+\intd\Delta(ve^{-\alpha f(v)})\norm{v-v_{\alpha}(\rho_t)}^2d\rho_t\\
+        &=-\intd (v-v_{\alpha}(\rho_t))e^{-\alpha f(v)}d\rho_t+\alpha\intd\inner{\nabla f(v)}{v-v_{\alpha}(\rho_t)}ve^{-\alpha f(v)}d\rho_t\\
+        &\quad+\alpha^2\intd v\norm{v-v_{\alpha}(\rho_t)}^2\norm{\nabla f(v)}^2e^{-\alpha f(v)}d\rho_t\\
+        &\quad-\alpha\intd v\norm{v-v_{\alpha}(\rho_t)}^2\Delta f(v)e^{-\alpha f(v)}d\rho_t-2\alpha\intd \norm{v-v_{\alpha}(\rho_t)}^2\nabla f(v)e^{-\alpha f(v)}d\rho_t,
+    \end{aligned}
+\end{equation}
+and
+\begin{equation}
+    \begin{aligned}
+        \frac{d}{dt}\intd e^{-\alpha f(v)}d\rho_t&=-\intd \inner{\nabla(e^{-\alpha f(v)})}{v-v_{\alpha}(\rho_t)}d\rho_t+\intd\Delta(e^{-\alpha f(v)})\norm{v-v_{\alpha}(\rho_t)}^2d\rho_t\\
+        &=\alpha\intd\inner{\nabla f(v)}{v-v_{\alpha}(\rho_t)}e^{-\alpha f(v)}d\rho_t+\alpha^2\intd\norm{v-v_{\alpha}(\rho_t)}^2\norm{\nabla f(v)}^2e^{-\alpha f(v)}d\rho_t\\
+        &\quad -\alpha\intd\norm{v-v_{\alpha}(\rho_t)}^2\Delta f(v)e^{-\alpha f(v)}d\rho_t,
+    \end{aligned}
+\end{equation}
+thus by a direct generalization of \cite[Lemma 3.3]{carrillo2018analytical}, see \cite[Theorem 2.3, Proposition A.3]{gerber2023propagation}, and the assumption on $\nabla f,\Delta f$, we have $\norm{\partial_tv_{\alpha}(t)}<C<\infty$.
+\end{proof}
+\subsubsection{Conclusion}
+In summary, in Section \ref{sec:cbo}, we proved the following theorem.
+\begin{theorem}\label{thm:positivity}
+    Let the objective $f$ satisfies condition \eqref{condition:f}, then the non-linear PDE \eqref{eq:gcbo} has a unique measure solution $\rho$, and this solution is in class $\Gamma$. If we further assume condition \eqref{condition:ff}, then $\rho(v,t)>0$, for any $t>0,v\in\mathbb{R}^d\setminus \{v_\alpha(\rho,t)\}$.
+\end{theorem}
+
+\begin{remark}
+% When $M$ is a connected smooth compact hypersurface embedded in $\mathbb{R}^d$ defined by 
+% \begin{equation}
+%     M=\{v\in\mathbb{R}^d: \operatorname{dist}(v,M)=0\},
+% \end{equation}
+% here the signed distance function is defined by $\operatorname{dist}(v,M):=\inf_{u\in M}\norm{v-u}$ if $v$ is on the exterior of $M$, else $\operatorname{dist}(v,M):=-\inf_{u\in M}\norm{v-u}$. \cite{fornasier2020consensus_hypersurface_wellposedness} generalized the CBO equation on $\mathbb{R}^d$ to $M$ and studied the following nonlinear CBO equation on $M$:
+% \begin{equation}\label{eq:cbom}
+% \partial_t \rho_t=\lambda \div_{M}\Big(P(v)\left(v-v_{\alpha}\left(\rho_t\right)\right) \rho_t\Big)+\frac{\sigma^2}{2} \Delta_{M}\left(\|v-v_{\alpha}\left(\rho_t\right)\|^2 \rho_t\right), \quad t>0, v \in M,
+% \end{equation}
+% here $\lambda,\sigma$ are constants and $P(v):=\mathrm{I}_d-(\nabla \operatorname{dist}(v,M))(\nabla \operatorname{dist}(v,M))^\top$. It can be verified that all the assumptions are satisfied and thus by Remark \ref{rmk:rmk220}, Theorem \ref{thm:positivity} also holds to the CBO equation on $M$ \eqref{eq:cbom}.
+{For a connected smooth compact manifold $M$ without boundary and embedded in $\mathbb R^d$, we can consider the following CBO equation
+\begin{equation}\label{eq:cbom}
+ \partial_t \rho_t=\lambda \div_{M}\Big(P(v)\left(v-v_{\alpha}\left(\rho_t\right)\right) \rho_t\Big)+\frac{\sigma^2}{2} \Delta_{M}\left(\|v-v_{\alpha}\left(\rho_t\right)\|^2 \rho_t\right), \quad t>0, v \in M,
+ \end{equation}
+ where $\lambda,\sigma>0$ are constants and $P(v)$ is the orthogonal projection onto the tangent space at $v \in M$. The model \eqref{eq:cbom} was introduced, for instance, in \cite{fornasier2020consensus_hypersurface_wellposedness} for the case of smooth hypersurfaces (e.g., torus and hypersphere) described by
+ \begin{equation}
+     M=\{v\in\mathbb{R}^d: \operatorname{dist}(v,M)=0\},
+ \end{equation}
+ here the signed distance function is defined by $\operatorname{dist}(v,M):=\inf_{u\in M}\norm{v-u}$ if $v$ is on the exterior of $M$, else $\operatorname{dist}(v,M):=-\inf_{u\in M}\norm{v-u}$.
+In this case of $M$ being an hypersurface, we have  
+ $P(v)=\mathrm{I}_d-(\nabla \operatorname{dist}(v,M))(\nabla \operatorname{dist}(v,M))^\top$, and it can be verified that all the assumptions are satisfied. Thus, by Remark \ref{rmk:rmk220}, Theorem \ref{thm:positivity} also holds to the CBO equation \eqref{eq:cbom} on $M$.
+}
+\end{remark}
+
+
+\bibliography{lukang.bib}
+\bibliographystyle{abbrv}
+
+
+\section{Appendix}\label{apx:1}
+The proof directly follow the proofs of Lemma \ref{lem:g1}, \ref{lem:g25} and \ref{lem:g4}. Let us fix any $t\in [0,T]$, and for simplicity, we denote $G(\cdot):=G(\cdot,t)$. Then we first have 
+\begin{equation}
+\begin{aligned}
+    \norm{\frac{\partial}{\partial v_j}G(\frac{R_i v}{\norm{v}})}&=\sum_{k=1}^d\norm{\frac{\partial}{\partial v'_k}G(v')\mid_{v'=\frac{R_iv}{\norm{v}}}}\norm{\frac{\partial}{\partial v_j}\frac{R_iv_k}{\norm{v}}}\\
+    &\leq C\Big(1+G^{\frac{1}{2}}(\frac{R_iv}{\norm{v}})\Big),
+\end{aligned}
+\end{equation}
+by the condition in Remark \ref{rmke:g211}. 
+
+Secondly, let $G_i':=1+G(\frac{R_iv}{\norm{v}})$, then on $B_{R_i}(0)\setminus B_{R_i-1}(0)$~(the other cases are direct by the condition in Remark \ref{rmke:g211}), we have
+\begin{equation}
+\begin{aligned}
+    \norm{\overline{G}_i^{(1)}}&=\norm{G^{(1)}(1-S_i)-GS_i^{(1)}+G_i'^{(1)}S_i+G_i'S_i^{(1)}}\\
+    &\leq C\Big[\norm{G^{(1)}}(1-S_i)+\norm{G_i'^{(1)}}S_i\Big]+C\norm{G-G_i'}\\
+    &\leq C\Big[\Big(1+G^{\frac{1}{2}}\Big)(1-S_i)+\Big(1+G^{\frac{1}{2}}(\frac{R_iv}{\norm{v}})\Big)S_i\Big]\\
+    &\quad+C\Big(1+\norm{\nabla G(v')}\norm{v-\frac{R_iv}{\norm{v}}}\Big),
+\end{aligned}
+\end{equation}
+for some $v'$ between $v$ and $\frac{R_iv}{\norm{v}}$ by the mean value theorem; further, use $\norm{v-\frac{R_iv}{\norm{v}}}\leq 1$ for any $v\in B_{R_i}(0)\setminus B_{R_i-1}(0)$, we have
+\begin{equation}
+    \norm{\overline{G}_i^{(1)}}\leq C\Big[\Big(1+G^{\frac{1}{2}}\Big)(1-S_i)+\Big(1+G^{\frac{1}{2}}(\frac{R_iv}{\norm{v}})\Big)S_i\Big]+C\Big(1+G^{\frac{1}{2}}(v')\Big),
+\end{equation}
+use Assumption \ref{asp:g2}, we have for any $v\in B_{R_i}(0)\setminus B_{R_i-1}(0)$ that
+\begin{eqnarray}
+    &1+G\leq C\Big(1+G(\frac{R_iv}{\norm{v}})\Big),\\
+    &1+G(\frac{R_iv}{\norm{v}})\leq C\Big(1+G\Big),
+\end{eqnarray}
+then 
+\begin{eqnarray}
+    &1+G\leq C\Big(1+\overline{G}_i\Big),\\
+    &1+G(\frac{R_iv}{\norm{v}})\leq C\Big(1+\overline{G}_i\Big),\\
+    &1+G(v')\leq C\Big(1+\overline{G}_i\Big),
+\end{eqnarray}
+thus
+\begin{equation}
+   \begin{aligned}
+        &C\Big[\Big(1+G^{\frac{1}{2}}\Big)(1-S_i)+\Big(1+G^{\frac{1}{2}}(\frac{R_iv}{\norm{v}})\Big)S_i\Big]+C\Big(1+G^{\frac{1}{2}}(v')\Big)\\
+        &\leq C\Big[\Big(1+(1+G)^{\frac{1}{2}}\Big)(1-S_i)+\Big(1+\Big(1+G(\frac{R_iv}{\norm{v}})\Big)^{\frac{1}{2}}\Big)S_i\Big]+C\Big(1+\Big(1+G(v')\Big)^{\frac{1}{2}}\Big)\\
+        &\leq C\Big(1+\Big(1+\overline{G}_i\Big)^{\frac{1}{2}}\Big)\\
+        &\leq C\Big(1+\overline{G}_i^{\frac{1}{2}}\Big),
+   \end{aligned}
+\end{equation}
+by simple inequality $(1+x)^{1/2}\leq 1+x^{1/2},x\geq 0$, thus we proved $\norm{\overline{G}_i^{(1)}}\leq C\Big(1+\overline{G}_i^{{1}/{2}}\Big)$.
+
+Thirdly, we have
+\begin{equation}
+\begin{aligned}
+    \norm{G_i^{(1)}}&\leq H_i\overline{G}_i \norm{H_i^{(1)}}+H_i^2\norm{\overline{G}^{(1)}_i}\\
+    &\leq H_i\overline{G}_i^{\frac{1}{2}} \frac{\overline{G}_i^{\frac{1}{2}}}{n_i}+CH_i^2\Big(1+\overline{G}^{\frac{1}{2}}_i\Big)\\
+    &\leq C\Big(1+G_i^{\frac{1}{2}}\Big),
+\end{aligned}
+\end{equation}
+since $\overline{G_i}^{1/2}/n_i\leq C$.
+
+Finally, use the condition in Remark \ref{rmke:g211}, we have 
+\begin{equation}
+    \begin{aligned}
+        1+\overline{G}_i(v,t_1)&:=\Big(1+G(v,t_1)\Big)(1-S_i)+\Big(2+G(\frac{R_iv}{\norm{v}},t_1)\Big)S_i\\
+        &\leq C\Big[\Big(1+G(v,t_2)\Big)(1-S_i)+\Big(2+G(\frac{R_iv}{\norm{v}},t_2)\Big)S_i\Big]\\
+        &=C\Big[1++G(v,t_2)(1-S_i)+\Big(1+G(\frac{R_iv}{\norm{v}},t_2)\Big)S_i\Big]\\
+        &=:C\Big[1+\overline{G}_i(v,t_2)\Big],
+    \end{aligned}
+\end{equation}
+for any $t_1,t_2\in [0,T]$, thus 
+\begin{equation}
+    G_i(v,t_1)\leq C\Big[H_i^2+H_i^2\overline{G}_i(v,t_2)\Big]\leq C\Big[1+G_i(v,t_2)\Big]
+\end{equation}
+and 
+\begin{equation}
+    1+G_i(v,t_1)\leq C\Big[H_i^2+H_i^2\overline{G}_i(v,t_2)\Big]\leq C\Big[1+G_i(v,t_2)\Big],
+\end{equation}
+for any $t_1,t_2\in [0,T]$.
+\end{document}

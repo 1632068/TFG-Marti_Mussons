@@ -1,0 +1,433 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsfonts}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{paralist}
+\usepackage{url}
+\usepackage{dsfont}
+%\usepackage{natbib}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{pgfgantt}
+\usepackage{pdflscape}
+
+
+\setlength{\voffset}{-1,54cm}
+\setlength{\topmargin}{1cm}
+\setlength{\headheight}{0cm}
+\setlength{\headsep}{0cm}
+\setlength{\marginparwidth}{0cm}
+\setlength{\evensidemargin}{1,5cm}
+\setlength{\oddsidemargin}{1,5cm}
+\setlength{\hoffset}{-1,54cm}
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{25cm}
+\setlength{\footskip}{20pt}
+
+
+\usepackage{graphicx}
+\usepackage[mathcal]{euscript}
+\usepackage{float}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,intersections}
+
+\restylefloat{figure}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{noname}[theorem]{}
+\newtheorem{sublemma}{}[theorem]
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{property}[theorem]{Property}
+\newtheorem{consequence}[theorem]{Consequence}
+
+\DeclareMathOperator{\pg}{PG}
+\DeclareMathOperator{\one}{\mathbf{j}}
+\DeclareMathOperator{\srg}{srg}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\q}{Q}
+\DeclareMathOperator{\h}{H}
+\DeclareMathOperator{\w}{W}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\cF}{\mathcal{F}}
+\DeclareMathOperator{\cC}{\mathcal{C}}
+\DeclareMathOperator{\cL}{\mathcal{L}}
+\DeclareMathOperator{\cA}{\mathcal{A}}
+\DeclareMathOperator{\cE}{\mathcal{E}}
+\DeclareMathOperator{\cS}{\mathcal{S}}
+\DeclareMathOperator{\cP}{\mathcal{P}}
+\DeclareMathOperator{\cU}{\mathcal{U}}
+\DeclareMathOperator{\cJ}{\mathcal{J}}
+\DeclareMathOperator{\I}{\mathrel{I}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\No}{\mathbb{N}\setminus \{0\}}
+\DeclareMathOperator{\f}{\mathbb{F}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\def\IS{(\cP,\cL,\I)}
+\def\pgammal{\mathrm{P}\Gamma{}\mathrm{L}}
+
+ 
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+ 
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\usepackage{abstract}
+ 
+\title{On properties of eigenvalue regions for monotone stochastic matrices}
+
+\date{}
+
+\author{Brando Vagenende$^{1,2}$, Brecht Verbeken$^{1}$, Marie-Anne Guerry$^{1}$  \\  
+        \small $^{1}$Department Business Technology and Operations, Data Analytics Laboratory, Vrije \\
+        \small Universiteit Brussel (VUB), Pleinlaan 2, Brussels, 1050, Belgium \\
+        \small $^{2}$ Corresponding author: email address: brando.vagenende@vub.be
+}
+
+\newlength{\bibitemsep}\setlength{\bibitemsep}{.2\baselineskip plus .05\baselineskip minus .05\baselineskip}
+\newlength{\bibparskip}\setlength{\bibparskip}{0pt}
+\let\oldthebibliography\thebibliography
+\renewcommand\thebibliography[1]{%
+  \oldthebibliography{#1}%
+  \setlength{\parskip}{\bibitemsep}%
+  \setlength{\itemsep}{\bibparskip}%
+}
+\setlength{\bibitemsep}{0ex}
+
+%\setlength\bibitemsep{0em}
+\bibliographystyle{plain}
+
+% Keywords command
+\providecommand{\keywords}[1]
+{
+  \small	
+  \textbf{\textit{Keywords---}} #1
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Monotone stochastic matrices are stochastic matrices in which each row stochastically dominates the previous one. While the eigenvalue regions for stochastic matrices have been fully described by F.I. Karpelevich in 1951, this study focuses on the analysis of monotone matrices. This paper examines their spectral properties and establishes a reduction theorem stating that, for \(n \geq 3\), the eigenvalue region for the \(n \times n\) monotone matrices is included in those for the \((n-1)\times(n-1)\) stochastic matrices. Moreover, the eigenvalue region, along with the corresponding realising matrices, is determined for monotone matrices up till order \(3\).
+\end{abstract}
+
+\keywords{non-negative matrices, stochastic matrices, monotone matrices, eigenvalues, eigenvalue regions, Markov chain theory}
+
+\section{Introduction}
+ Eigenvalues are useful to understand various matrix properties, among others of the determinant, which is the product of the eigenvalues, and of the trace, which is the sum of the eigenvalues. Matrix and eigenvalue analysis can be approached in two distinct ways. The first way involves an analysis of a given matrix to explore its spectral properties comprehensively. The complementary way investigates whether a specific set of numbers is the spectrum of a matrix that satisfies certain conditions. This complementary perspective, known as the inverse eigenvalue problem, has become an active area of research in recent years. Further details can be found in \cite{chu1998inverse, paparella2019realizing}.
+
+This paper is interested in a specific kind of matrices, namely the stochastic matrices. A stochastic matrix is considered here as a non-negative matrix with each row sum equal to one. These matrices find their way into numerous applications in different domains, most famously in Markov chain theory \cite{Bartholomew}. In this field, stochastic matrices describe the transition probabilities of a given process over time. Furthermore, the spectrum of a stochastic matrix provides insights for the aforementioned Markov chains, among others the steady-state behaviour, the long-term behaviour and the convergence 
+properties \cite{pillai2005perron, delbianco2023markov, racoceanu1995new, meyer2000applied}.
+
+
+The characterisation of the eigenvalue regions for stochastic matrices is often considered to be a difficult problem and therefore has a very long research history. It was as early as 1938 that Kolmogorov first came up with this problem. Specifically, he examined the set $\mathcal{S}_n$ of $n \times n$ stochastic matrices and asked whether an exact description could be found of the region consisting of all eigenvalues of the matrices of $\mathcal{S}_n$, where $n$ is a fixed natural number. It was only in 1946 that Dmitriev and Dynkin \cite{Dynkin} could give part of the solution to this problem, namely a complete description of this eigenvalue region for $\mathcal{S}_n$ up to $n=5$. In 1951, Karpelevich \cite{Karpelevich} was finally able, by generalizing some ideas of Dmitriev and Dynkin, to give a complete description of the region consisting of all eigenvalues for $\mathcal{S}_n$ for any $n$.
+
+The general description of Karpelevich is accompanied by an extensive and somewhat opaque proof. The finally obtained theorem is also very long and the description of the boundaries of the eigenvalue region is not straightforward to implement. The complexity of this theorem and its proof is evident from papers such as \cite{ito1997new, djokovic1990cyclic, munger2024demystifying}, which develop a more practical version of the theorem through extensive reasoning. The ongoing challenges and gaps in understanding are further demonstrated by the publication of several recent papers on the subject, among others on alternative characterisations of the eigenvalue regions \cite{kirkland2020karpelevivc}, properties of the boundary curves of the eigenvalue regions \cite{kim2020proofs, joshi2024powers} and realising matrices \cite{kirkland2022stochastic, johnson2017matricial}, i.e. matrices with an eigenvalue located on the boundary of the eigenvalue region.
+
+Within this framework, doubly stochastic matrices, a subclass of stochastic matrices with both row and column sums equal to one, are also a common topic of discussion. Research into the eigenvalue regions of these matrices continues, though no complete descriptions of these regions or their boundaries exist for matrices of any order. Conjectures and partial proofs appear in several publications \cite{mashreghi2007conjecture, harlev2022doubly, kim2022conjectures, fiedler1972bounds, hwang2004inverse, marcus1962some, mourad2012spectral, rehman2020spectral, mandal2019eigenvalue}. Besides (doubly) stochastic matrices, the eigenvalue regions of other matrix types, such as Metzler matrices \cite{domka2022spectrum} and Leslie matrices \cite{kirkland1992eigenvalue}, are also studied.
+
+This research focuses specifically on investigating another type of matrices, namely the set $\mathcal{M}_n$ of $n \times n$ monotone matrices. Different definitions of a monotone matrix are available, but this paper follows the definition provided by Daley \cite{daley1968stochastically}, which says that monotone matrices are stochastic matrices in which each row is stochastically dominated by the next row. Consequently, any mention of a monotone matrix in this paper adheres to that interpretation. Monotone matrices appear in various contexts, such as intergenerational occupational mobility \cite{conlisk1990monotone}, equal-input modeling \cite{baake2022equal} and credit ratings based 
+systems \cite{jarrow1997markov}. While some research has been conducted on these matrices and their eigenvalues, such as in \cite{guerry2022monotone}, the scope remains relatively narrow. This paper contributes fresh insights into the eigenvalue regions of monotone matrices.
+
+This paper provides, in Section \ref{Non-negative and stochastic matrices}, an overview of relevant theorems in non-negative matrix theory and of the results of stochastic matrices and their eigenvalues, from the theory developed by Dmitriev, Dynkin and Karpelevich. Then, in Section \ref{Monotone matrices}, the set $\mathcal{M}_n$ and some of its already known interesting properties are discussed. In Section \ref{Reduction theorem}, a reduction theorem is proven which will provide insight into the eigenvalue region for $\mathcal{M}_n$ (for any $n$). After which, in Section \ref{Complete description}, the eigenvalue region for $\mathcal{M}_3$ is fully determined accompanied by realising matrices. Finally, in Section \ref{Conclusions and further research}, conclusions and further research avenues are presented.
+
+\section{Non-negative and stochastic matrices}\label{Non-negative and stochastic matrices}
+
+Monotone matrices are above all also non-negative matrices, a theory which is already richly developed. Below, we list the main concepts and results related to this paper.
+
+\begin{definition}[\cite{seneta1973non}]
+    An \(n \times n\) matrix \(A=(a_{ij})\) is called non-negative if all matrix elements are non-negative, i.e. \(a_{ij} \geqslant 0 \) for all \(1 \leqslant i \leqslant n\) and \(1 \leqslant j \leqslant n\). In this case we write \(A \geqslant 0 \).
+\end{definition}
+
+Furthermore, non-negative matrices can be divided into an interesting partition, namely the reducible and irreducible matrices.
+
+\begin{definition}[\cite{minc1988nonnegative}]
+    An \(n \times n\) non-negative matrix \(A\), \( n \geqslant 2 \), is called reducible if there exists a permutation matrix \(P\) such that
+    \[P^{T}AP = \begin{pmatrix}
+        B & C \\
+        O & D
+    \end{pmatrix}, \]
+    where \(B\) and \(D\) are square submatrices, and the notation \(P^{T}\) refers to the transpose of \(P\). Otherwise \(A\) is called irreducible. A \(1 \times 1\) matrix is irreducible by definition.
+\end{definition}
+
+The Perron-Frobenius theorem is surely one of the most important results in non-negative matrix theory and the corresponding spectral theory. Below we present the findings restricted to the irreducible matrices that are relevant for this research.
+
+\begin{theorem}[\cite{seneta1973non}, The Perron-Frobenius Theorem for irreducible matrices.] \label{PerronFrobenius} Suppose \(A\) is an \(n \times n\) non-negative irreducible matrix. Then there exists an eigenvalue \(r\) such that:
+\begin{enumerate}
+    \item \(r\) is real and \(r>0\);
+    \item with \(r\) there can be associated strictly positive left and right eigenvectors;
+    \item \(r \geqslant |\lambda| \) for any eigenvalue \(\lambda\) of \(A\).
+    
+\end{enumerate}
+\end{theorem}
+
+A special type of non-negative matrices that are important in the context of this research are the stochastic matrices.
+
+\begin{definition}
+    A non-negative \(n \times n\) matrix \(S\) is stochastic if the sum of all matrix elements in each row is equal to \(1\). So a stochastic matrix \(S = (s_{ij}) \) satisfies the following conditions:
+    \begin{enumerate}
+        \item \(s_{ij} \geqslant 0, \forall i,j \in \{1, \ldots , n \}  \);
+        \item \(\sum_{j=1}^{n} s_{ij} = 1, \forall i \in \{ 1, \ldots , n\}.\)
+    \end{enumerate}
+\end{definition}
+
+From the point of view of stochastic matrices, we are interested to what extent we can transform a non-negative matrix into a stochastic matrix. This is clarified in the subsequent theorem.
+
+\begin{theorem}[\cite{minc1988nonnegative}]\label{Minc}
+    If \(A\) is an \( n \times n\) non-negative matrix with positive maximal eigenvalue \(r\) and a corresponding positive eigenvector \(x = (x_1, x_2, \ldots, x_n)\), then \( (1/r) \cdot D^{-1}AD \) is a stochastic matrix, with the diagonal matrix \(D = \text{diag}(x_1, x_2, \ldots , x_n)\).
+\end{theorem}
+
+If \( \sigma(A) = \{\lambda_1, \ldots, \lambda_{n} \}\) and  \( \sigma((1/r) \cdot D^{-1}AD) = \{\mu_1, \ldots, \mu_{n} \}\) are the spectra of respectively \(A\) and \((1/r) \cdot D^{-1}AD\), then there is the following link:
+        \[\mu_i = \lambda_i/r \text{ for } i \in \{1, \ldots, n\}.\]
+
+Kolmogorov came up with the problem of determining the eigenvalue regions for the \(n \times n\) stochastic matrices in 1938.
+
+\begin{definition} For each \(n\), the eigenvalue regions (also known as the Karpelevich regions) are defined as follows:
+    \[ \Theta_n = \{ \lambda \in \mathds{C} : \lambda \text{ is an eigenvalue of an \(n \times n\) \hfill \\ stochastic  matrix}  \}.\]
+\end{definition}
+
+In 1946, Dmitriev and Dynkin \cite{Dynkin} were able to provide a description for \(n\) up to \(5\). They succeeded in this by making a geometric argument and expressing what it means that \(\lambda\) is an element of the region \(\Theta_n \):
+
+\[ \begin{split}
+    \lambda \in \Theta_n &\Longleftrightarrow \text{ There exists an \(n \times n\) stochastic matrix } S \text{ and} \text{ an eigenvector } \\ & \hspace{11mm} x  \text{ such that } \lambda x = S x.\\
+    &\Longleftrightarrow \text{ For every } i \text{ holds }\lambda x_i = \sum_{j=1}^{n} s_{ij}x_j \text{, with all \(s_{ij} \geqslant 0 \), \( \sum_{j=1}^{n}s_{ij} = 1\)} \\ & \hspace{10mm} \text{ and complex numbers \(x_i\) which are not all zero.}
+    \end{split}
+\]
+
+When the complex numbers \(x_1, \ldots , x_n\) are drawn and connected in the complex plane, then a polygon is obtained and the following property was proven above.
+
+\begin{property}[\cite{Dynkin}]
+    \(\lambda\) belongs to \(\Theta_n\) if and only if there exists a convex \(k\)-gon \(Q\) \((k \leqslant n)\), consisting of more than one point, which is mapped into itself through multiplication by \(\lambda\), i.e. \( \lambda \in \Theta_n \Longleftrightarrow \lambda Q \subset Q .\)
+\end{property}
+
+Some simple observations and implications of this property, written in \cite{Dynkin}, are that \(1 \in \Theta_n\), \(\Theta_n\) is symmetric w.r.t. the \(x\)-axis,  \(\Theta_n \subset \{z : |z| \leqslant 1\}\) and \(\Theta_n \subset \Theta_{n+1}\). Another important property in the context of this research is that the \(\Theta_n\)'s are star-convex. One can see this in the following way. Suppose we have \(\lambda Q \subset Q\) and \(0 < \alpha < 1 \), then it easily follows that \( \alpha \lambda Q \subset \lambda Q \subset Q \). So, if \(\Theta_n\) contains \(\lambda\), then it contains \(\alpha \lambda\) as well, which proves that \(\Theta_n\) is star-convex.
+
+It was in 1951 that Karpelevich \cite{Karpelevich} succeeded in generalizing the extended theory of Dmitriev and Dynkin and in this way in describing the eigenvalue regions completely. In a long and complex proof he managed to formulate explicit equations of the boundary of each region. Since the regions are star-convex, it is sufficient to know the boundary, because from that the whole region follows immediately.
+
+\section{Monotone matrices}\label{Monotone matrices}
+This paper will focus on the study of monotone matrices and their spectral properties. Therefore, we will present below an exposition of the existing theory on this subject.
+Monotone matrices are stochastic matrices in which each row stochastically dominates the previous row.
+
+\begin{definition}[\cite{daley1968stochastically}]\label{MonotoneMatrix}
+    A monotone matrix \(M =(m_{ij})\) is a stochastic matrix satisfying the following conditions:
+    \[\sum_{j=r}^n m_{lj} \geqslant \sum_{j=r}^n m_{kj} \hspace{4mm} \forall l > k, \hspace{2mm} \forall r \in \{1, \ldots, n \} .\]
+\end{definition}
+
+For every monotone matrix \(M\), its corresponding dominance matrix \(D(M)\) can be calculated.
+
+\begin{definition}[\cite{conlisk1990monotone}]
+For an \(n \times n\) monotone matrix \(M\) the \((n-1) \times (n-1)\) \text{dominance matrix \(D(M)\)} is given by:
+        \[(D(M))_{kl} = \sum_{j=1}^l m_{kj} - \sum_{j=1}^l m_{k+1,j} \hspace{4mm} \forall k,l \in \{1, \ldots, n-1 \} . \]
+\end{definition}
+
+Note that when we require \(D(M) \geq 0\), the matrix elements of \(D(M)\) correspond exactly to the conditions from Definition \ref{MonotoneMatrix} of a monotone matrix. In this way, one can easily see the important property below.
+
+\begin{property}[\cite{conlisk1990monotone}]
+     \(M\) is monotone \(\Longleftrightarrow\)  \(D(M) \geqslant 0 \).
+\end{property}
+
+In view of the study of the eigenvalues of monotone matrices, the following property is of great importance. This reduces the investigation of the eigenvalues of a \(n \times n\) monotone matrix \(M\) to the eigenvalues of a smaller \((n-1) \times (n-1)\) non-negative dominance matrix \(D(M)\).
+
+\begin{property}[\cite{conlisk1990monotone}]\label{spectrumreduction}
+Let \(M\) be an \( n \times n \) monotone matrix with spectrum \(\sigma(M) = \{\lambda_1 = 1, \lambda_2, \ldots , \lambda_n \}\), then \(\sigma(D(M)) = \{\lambda_2, \lambda_3, \ldots , \lambda_n \}\).
+\end{property}
+
+For a monotone matrix \(M\) the dominance matrix \(D(M)\) is non-negative. Denoting the spectrum \(\sigma(M) = \{\lambda_1 = 1, \lambda_2, \ldots , \lambda_n \}\), where \(|\lambda_1| \geqslant |\lambda_2| \geqslant \ldots \geqslant |\lambda_n| \), it follows by Theorem \ref{PerronFrobenius} that \(\lambda_2 \geqslant 0\). Thus, every monotone matrix has \(\lambda_1=1\) as an eigenvalue (as every stochastic matrix) and a largest (by modulus) non-negative eigenvalue \(\lambda_2\).
+
+Analogously to the Karpelevich regions, we now define the eigenvalue regions for monotone matrices.
+
+\begin{definition} For each \(n\), the monotone eigenvalue regions are defined as follows:
+    \[ \Xi_n = \{ \lambda \in \mathds{C} : \lambda \text{ is an eigenvalue of an \(n \times n\) \hfill \\ monotone  matrix}  \}.\]
+\end{definition}
+
+Since monotone matrices are a subclass of the stochastic matrices, they immediately inherit some properties of this parent group. Hence, we know immediately for the monotone eigenvalue regions that \(1 \in \Xi_n\), \(\Xi_n\) is symmetric w.r.t. the \(x\)-axis and \(\Xi_n \subset \{z : |z| \leqslant 1\}\). Furthermore, the following property also holds.
+
+\begin{property}
+    For every \(n \geq 1\) holds \(\Xi_n \subset \Xi_{n+1}\).
+\end{property}
+\begin{proof}
+    Let \(\lambda \in \Xi_n\) and let \(M\) be an \(n \times n\) monotone matrix of which \(\lambda\) is an eigenvalue. Then, one can easily verify that \(\lambda\) is an eigenvalue of the matrix
+    \(M' = \begin{pmatrix}
+        M & 0 \\
+        0^{T} & 1
+    \end{pmatrix}\)
+    as well, where \(0\) is a \( n \times 1\) vector filled with all zeros. The matrix \(M'\) is a \((n+1) \times (n+1) \) monotone matrix. So it immediately follows that \(\lambda \in \Xi_{n+1} \).
+\end{proof}
+
+We will discuss the monotone eigenvalue regions further in the next section.
+\section{Reduction theorem}\label{Reduction theorem}
+
+Before presenting the main result in this section, we give a description of the monotone eigenvalue regions for \(\mathcal{M}_1\) and \(\mathcal{M}_2\).
+
+\begin{theorem}
+    \( \Xi_1 = \{ 1 \} \).
+\end{theorem}
+\begin{proof}
+    This statement is trivial since a \(1 \times 1\) monotone matrix can only be the matrix \((1)\).
+\end{proof}
+
+\begin{theorem}
+    \( \Xi_2 = [0,1] \).
+\end{theorem}
+\begin{proof}
+    Let \(M\) be a \(2 \times 2\) monotone matrix with \(\sigma(M)= \{\lambda_1 = 1, \lambda_2 \}\), then \(\lambda_2 \geqslant 0\) (because of Theorem \ref{PerronFrobenius}). Hence, \(\Xi_2 \subseteq [0,1]\). Furthermore, for \(\lambda_2 \in [0,1] \) the monotone matrix \(\begin{pmatrix}
+                \lambda_2 & 1 - \lambda_2 \\
+                0 & 1 
+            \end{pmatrix}\), has \(\lambda_2\) as eigenvalue. This concludes the proof.
+\end{proof}
+
+For monotone eigenvalue regions with \(n \geqslant 3\), we prove the Reduction Theorem \ref{ReductionTheorem}. According to this theorem, we can reduce the monotone eigenvalue region for \(\mathcal{M}_n\) to a subset of the eigenvalue region for \(\mathcal{S}_{n-1}\). The proof of this theorem is based on the following observations.
+
+Let \(M\) be an \(n \times n\) monotone matrix, with \(n \geqslant 3 \), and \(D(M)\) its \((n-1) \times (n-1)\) dominance matrix. Suppose \(\sigma(M) = \{1, \lambda_2, \ldots, \lambda_{n} \}\) is the spectrum of \(M\). It is clear that \(1 \in \Theta_{n-1}\) because \(1\) is an eigenvalue of every \((n-1) \times (n-1) \) stochastic matrix. Our aim in the Reduction Theorem \ref{ReductionTheorem} is to prove that \(\sigma(M) = \{1, \lambda_2, \ldots, \lambda_{n}\} \subseteq \Theta_{n-1}\), so it suffices to proof that \(\{\lambda_2, \ldots, \lambda_{n} \} \subseteq \Theta_{n-1} \). In order to do so, we use the dominance matrix \(D(M)\) with \(\sigma(D(M)) = \{\lambda_2, \ldots, \lambda_{n} \}\), according to Property \ref{spectrumreduction}. It is important to note that we may restrict ourselves to the case where \(D(M)\) is irreducible, as Lemma \ref{ReducibeleGeval} shows.
+
+\begin{lemma}\label{ReducibeleGeval}
+    If \(A\) is an \(n \times n\) non-negative reducible matrix, then \(\sigma(A) = \sigma (A_1) \cup \sigma (A_2) \cup \cdots \cup \sigma (A_l)\), with \(l \in \mathbb{N}\) and \(A_1, A_2, \ldots, A_l\) non-negative irreducible matrices of order at most \(n-1\).
+\end{lemma}
+\begin{proof}        
+The reducible matrix \(A\) can be transformed, using a certain permutation matrix \(P\), into the following form:
+\[ P^T \cdot A \cdot P = \begin{pmatrix}
+            A_1 & * & * & \cdots & * \\
+            0 & A_2 & * & \cdots & * \\
+            0 & 0 & A_3 & \cdots & * \\
+            \vdots & \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & 0 & \cdots & A_l 
+\end{pmatrix}, \]
+where all \(A_i\)'s are irreducible square matrices. It can easily be seen that \(A\) and \(P^T \cdot A \cdot P\) have the same eigenvalues, so we can focus ourselves to the new obtained blockmatrix above. Since
+\[\det (A - \lambda I) = \det (A_1 - \lambda I) \cdot \ldots \cdot \det (A_l - \lambda I),\]
+we can rewrite the spectrum of \(A\) as
+\[ \sigma(A) = \sigma (A_1) \cup \cdots \cup \sigma (A_l).\]
+In this way the eigenvalues of \(A\) can be determined as the eigenvalues of the smaller irreducible matrices \(A_1, \ldots , A_l\). Because the matrix \(A\) is non-negative, it follows that \(A_1, \ldots , A_l\) have the same property, which concludes the proof. 
+\end{proof}
+
+With the above observations in mind, we can prove the Reduction Theorem \ref{ReductionTheorem}.
+
+\begin{theorem}[Reduction Theorem] \label{ReductionTheorem}
+    For every \(n \geqslant 3\): \(\Xi_{n} \subseteq \Theta_{n-1} \). 
+\end{theorem}
+\begin{proof}
+By Lemma \ref{ReducibeleGeval}, it suffices to prove this theorem in case where the dominance matrix \(D(M)\) is a non-negative irreducible matrix. It follows from Theorem \ref{PerronFrobenius} that \(D(M)\) has a strictly positive maximal eigenvalue \(r\) and a strictly positive maximal eigenvector.  It follows from Theorem \ref{Minc} that \(S = (1/r) \cdot D^{-1} \cdot D(M) \cdot D \) is an \((n-1) \times (n-1)\) stochastic matrix. If \( \sigma(S) = \{\mu_1, \ldots, \mu_{n-1} \}\), then we have the following link between the eigenvalues of \(S\) en \(D(M)\):
+        \[\mu_i = \lambda_{i+1}/r \text{ for } i \in \{1, \ldots, n-1\}.\]
+
+Since \(r\) is a eigenvalue of the stochastic matrix \(M\), necessarily holds \(r \leq 1\).
+
+Hence, \(|\mu_i| = |\lambda_{i+1}|/r \geqslant |\lambda_{i+1}| \). Because each \(\mu_i\) lies in the region \(\Theta_{n-1}\) and, moreover, this region is star-convex, it follows that also \(\lambda_{i+1}\) lies in \(\Theta_{n-1}\). Thus \( \sigma(D(M)) = \{\lambda_2, \ldots, \lambda_{n} \} \subseteq \Theta_{n-1} \), which completes the proof.
+\end{proof}
+
+\section{Monotone eigenvalue region \(\Xi_3\)}\label{Complete description}
+
+In Theorem \ref{ReductionTheorem} a delimitation of the monotone eigenvalue regions for \(\mathcal{M}_n\), with \(n \geq 3 \), was proved. In the current section, we fully determine the eigenvalue region for the case \(n = 3\). In order to do so, we first improve the trivial inclusion \(\Xi_3 \subseteq [-1, 1]\).
+
+\begin{lemma}\label{lemmainclusie}
+    \(\Xi_3 \subseteq [-1/2, 1]\).
+\end{lemma}
+\begin{proof}
+    Let \(M\) be the following \(3 \times 3\) monotone matrix:
+    \[M = \begin{pmatrix}
+        m_{11} & m_{12} & m_{13} \\
+        m_{21} & m_{22} & m_{23} \\
+        m_{31} & m_{32} & m_{33}
+    \end{pmatrix} .\]
+   Then we have the following dominance matrix:
+\[
+D(M) = \begin{pmatrix}
+    a & b \\
+    c & d
+\end{pmatrix},
+\]
+with 
+\begin{align}
+    a &= m_{11} - m_{21}; \nonumber \\
+    b &= (m_{11} + m_{12}) - (m_{21} + m_{22}); \\
+    c &= m_{21} - m_{31}; \\
+    d &= (m_{21} + m_{22}) - (m_{31} + m_{32}). \nonumber
+\end{align}
+Since \(D(M)\) is a non-negative matrix, it follows that \(a, b, c, d \geq 0\).
+
+    The eigenvalues of \(D(M)\) are:
+    \[ \lambda_2 = \frac{a + d + \sqrt{(a-d)^2 + 4bc}}{2} \text{ and } \lambda_3 = \frac{a + d - \sqrt{(a-d)^2 + 4bc}}{2} .\]
+    In order to prove the intended inclusion, we want to know how small an eigenvalue can be. Therefore, we are going to minimize the smallest eigenvalue:
+    \begin{align}
+        \lambda_3 &= \frac{a + d - \sqrt{(a-d)^2 + 4bc}}{2} \nonumber \\
+         &\geqslant \frac{a + d - \sqrt{(a+d)^2 + 4bc}}{2} \\
+         &\geqslant \frac{a + d - \sqrt{(a+d)^2 + 2(a+d)2\sqrt{bc} + (2\sqrt{bc})^2}}{2} \\
+         &= \frac{a + d - \sqrt{(a+d + 2 \sqrt{bc})^2}}{2} \nonumber \\
+         &= \frac{a + d - (a+d + 2 \sqrt{bc})}{2} \nonumber\\
+         &= - \sqrt{bc}
+    \end{align}
+    Above, inequalities (3) and (4) follow from the fact that \(a\) and \(d\) are positive.
+
+    It follows from equation (5) that, in order to investigate a lower bound for the eigenvalues, we need to maximize the expression \(b \cdot c\).
+    
+    According to (1) an upper bound for \(b\) can be obtained by choosing \(m_{22} = 0\) en \(m_{11} + m_{12} = 1\). In turn, according to (2), \(c\) can be bounded upwards by setting \(m_{31} = 0\). In this way, we get \( b \cdot c \leq (1-m_{21}) \cdot m_{21}.\)
+
+    One can easily check that the maximum of this last expression is reached for \(m_{21}=1/2\) and is equal to \(1/4\). So we obtain that \( \lambda_3 \geqslant - 1/2 \), and as we know that an eigenvalue of a stochastic matrix is at most 1, this concludes the proof.
+\end{proof}
+
+So we already know that the target region \(\Xi_3\) is located in the interval \([-1/2, 1]\). However, the last interval turns out to be exactly the monotone eigenvalue region \(\Xi_3 \). This can be seen by the following 2 constructions of the realising matrices.
+
+\begin{lemma}[Realising matrices type 1]\label{lemmaconstructie1}
+    Each \(\lambda \in [0,1]\) is an eigenvalue of a \(3 \times 3\) monotone matrix.
+\end{lemma}
+\begin{proof}
+    For each \( x \in [0,1]\), we construct the following monotone matrix
+
+\[\begin{pmatrix}
+    0 & 1-x & x \\
+    0 & 1-x & x \\
+    0 & 0 & 1
+\end{pmatrix} .\]
+
+Via a simple calculation, we obtain the following characteristic equation
+
+\[(\lambda - 1)(-\lambda^2 - \lambda x + \lambda) = 0,\]
+from which the eigenvalues below follow:
+\[ \lambda_1 = 1, \lambda_2 = 1-x \text{ and } \lambda_3 = 0  .\]
+
+For \( x \in [0,1] \), the eigenvalue \( \lambda_2 = 1 - x \) traverses the line segment \([0,1]\).
+\end{proof}
+
+\begin{lemma}[Realising matrices type 2]\label{lemmaconstructie2}
+    Each \(\lambda \in [-1/2,1/2]\) is an eigenvalue of a \(3 \times 3\) monotone matrix.
+\end{lemma}
+\begin{proof}
+    For each \( x \in [0, 1/2]\), we construct the following monotone matrix
+
+\[ \begin{pmatrix}
+    1/2 - x & 1/2 + x & 0 \\
+    1/2 - x & 0 & 1/2 + x \\
+    0 & 1/2 - x & 1/2 +x
+\end{pmatrix}\]
+
+with characteristic equation
+
+\[-\lambda^3 + \lambda^2 + (1/4 - x^2) \lambda + (x^2 - 1/4) = 0,\]
+
+from which the eigenvalues below follow:
+
+\[ \lambda_1 = 1,  \lambda_2 = \sqrt{1/4 - x^2} \text{ and } \lambda_3 = - \sqrt{1/4 - x^2}  .\]
+
+For \( x \in [0,\frac{1}{2}] \), the eigenvalues \(\lambda_2 = \sqrt{1/4 - x^2}\) and \(\lambda_3 = - \sqrt{1/4 - x^2} \) traverse respectively line segments \([-1/2,0]\) and \([0, 1/2]\).
+\end{proof}
+
+Lemma \ref{lemmainclusie} combined with the realising matrices described in Lemma \ref{lemmaconstructie1} and Lemma \ref{lemmaconstructie2}, fully solves the case \(n=3\).
+
+\begin{theorem}[Complete description of \(\Xi_3\)]
+    \(\Xi_3 = [-1/2, 1]\).
+\end{theorem}
+
+
+\section{Conclusions and further research}\label{Conclusions and further research}
+
+A new contribution is made to the spectral analysis of monotone matrices, a theory that has been rather limited so far. This paper gives a first delineation of the monotone eigenvalue regions for \(\mathcal{M}_n\), with \(n \geq 3\), through Reduction Theorem \ref{ReductionTheorem} that says \(\Xi_{n} \subseteq \Theta_{n-1} \). Furthermore, a precise description is given for the case n = 3, namely \( \Xi_3 = [-1/2, 1]\), with corresponding realising matrices.
+
+The monotone eigenvalue regions for \(\mathcal{M}_n\) are completely determined for \(1 \leq n \leq 3\). However, for \(n \geq 4\), the problem remains unsolved. Although this paper introduces the Reduction Theorem \ref{ReductionTheorem} to provide additional boundaries, a comprehensive examination is necessary to establish an exact characterization.
+
+Knowledge about the monotone eigenvalue regions holds potential applications in Markov theory. Consequently, future research should focus on linking the spectral properties of monotone matrices to their corresponding Markov chains, as eigenvalues offer critical insights into both the long-term behavior and the rate of convergence.
+
+\bibliography{bibl}
+
+\end{document} 
+ 

@@ -1,0 +1,2723 @@
+\documentclass[11pt]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{tikz}
+% \usepackage{amscd}    simple commutative diagrams
+% \usepackage[all]{xy}    complex commutative diagrams
+\usepackage{tikz-cd}    % commutative diagrams with tikz
+\usepackage{rotating}
+\usepackage{commath}    % formatting formulas
+\usepackage{mathtools}    % formatting formulas
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{enumitem}
+\usepackage{comment}
+\usepackage{stmaryrd}
+\usepackage{hyperref}
+\usepackage{mathrsfs}
+
+\usepackage[
+backend=biber,
+style=alphabetic,
+maxalphanames=10,
+maxbibnames=10,
+sorting=anyt,
+]{biblatex}
+
+%\usepackage{refcheck}
+
+\addbibresource{refs.bib}
+
+\linespread{1.15}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[subsection]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem*{Thm}{Theorem}
+\newtheorem*{Lem}{Lemma}
+\newtheorem*{Prop}{Proposition}
+\newtheorem*{Cor}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{ex}[thm]{Exercise}
+\newtheorem*{Defn}{Definition}
+\newtheorem*{Ex}{Exercise}
+\newtheorem*{Axm}{Axiom}
+\newtheorem*{Con}{Conjecture}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem*{Rem}{Remark}
+
+\numberwithin{equation}{section}
+
+%%%%%   bold face symbols   %%%%%
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\GG}{\mathbb{G}}
+
+%%%%%  frak  %%%%%
+
+\newcommand{\afk}{\mathfrak{a}}
+\newcommand{\bfk}{\mathfrak{b}}
+\newcommand{\cfk}{\mathfrak{c}}
+\newcommand{\dfk}{\mathfrak{d}}
+\newcommand{\mfk}{\mathfrak{m}}
+\newcommand{\nfk}{\mathfrak{n}}
+\newcommand{\pfk}{\mathfrak{p}}
+\newcommand{\qfk}{\mathfrak{q}}
+
+\newcommand{\Lfk}{\mathfrak{L}}
+\newcommand{\Pfk}{\mathfrak{P}}
+
+%%%%%  cal  %%%%%
+
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Bcal}{\mathcal{B}}
+\newcommand{\Ccal}{\mathcal{C}}
+\newcommand{\Dcal}{\mathcal{D}}
+\newcommand{\Ecal}{\mathcal{E}}
+\newcommand{\Fcal}{\mathcal{F}}
+\newcommand{\Gcal}{\mathcal{G}}
+\newcommand{\Hcal}{\mathcal{H}}
+\newcommand{\Ical}{\mathcal{I}}
+\newcommand{\Jcal}{\mathcal{J}}
+\newcommand{\Kcal}{\mathcal{K}}
+\newcommand{\Lcal}{\mathcal{L}}
+\newcommand{\Mcal}{\mathcal{M}}
+\newcommand{\Ncal}{\mathcal{N}}
+\newcommand{\Ocal}{\mathcal{O}}
+\newcommand{\Pcal}{\mathcal{P}}
+\newcommand{\Qcal}{\mathcal{Q}}
+\newcommand{\Rcal}{\mathcal{R}}
+\newcommand{\Scal}{\mathcal{S}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Ucal}{\mathcal{U}}
+\newcommand{\Vcal}{\mathcal{V}}
+\newcommand{\Wcal}{\mathcal{W}}
+\newcommand{\Xcal}{\mathcal{X}}
+\newcommand{\Ycal}{\mathcal{Y}}
+\newcommand{\Zcal}{\mathcal{Z}}
+
+%%%%%  log like operators  %%%%%
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Iso}{\operatorname{Iso}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\im}{\operatorname{im}}
+
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\Perm}{\operatorname{Perm}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\Frac}{\operatorname{Frac}}
+
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\rk}{\operatorname{rank}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\nr}{\operatorname{nr}}
+\newcommand{\Nr}{\operatorname{Nr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\disc}{\operatorname{disc}}
+\newcommand{\Irr}{\operatorname{Irr}}
+\newcommand{\trdeg}{\operatorname{trdeg}}
+\newcommand{\Frob}{\operatorname{Frob}}
+
+\newcommand{\df}{\operatorname{def}}
+\newcommand{\re}{\operatorname{Re}}
+\newcommand{\lhs}{\operatorname{LHS}}
+\newcommand{\rhs}{\operatorname{RHS}}
+\newcommand{\jk}{\operatorname{junk}}
+\newcommand{\ovl}{\overline}
+\newcommand{\udl}{\underline}
+\newcommand{\td}{\tilde}
+\newcommand{\isoto}{\xrightarrow{\sim}}
+\newcommand{\nor}{|\phantom{x}|}
+\newcommand{\co}{\mathsf{c}}
+\newcommand{\sbe}{\subseteq}
+\newcommand{\spe}{\supseteq}
+\newcommand{\nsbe}{\nsubseteq}
+\newcommand{\nspe}{\nsupseteq}
+\newcommand{\sbne}{\varsubsetneq}
+\newcommand{\spne}{\varsupsetneq}
+\newcommand{\inj}{\hookrightarrow}
+\newcommand{\sur}{\twoheadrightarrow}
+
+\let\oldforall\forall
+\renewcommand{\forall}{\oldforall \: }
+\let\oldexist\exists
+\renewcommand{\exists}{\oldexist \: }
+\newcommand\exu{\oldexist \: ! \: }
+
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\ang}[1]{\langle #1 \rangle}
+\newcommand{\anginf}[1]{\langle #1 \rangle_\infty}
+
+\newcommand{\lrfloor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\lrceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\lrang}[1]{\left\langle #1 \right\rangle}
+\newcommand{\lranginf}[1]{\left\langle #1 \right\rangle_\infty}
+
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+%%%%%  commutative diagram  %%%%%
+
+\newcommand*{\hisoarrow}[1]{\arrow[#1,"\rotatebox{360}{\(\sim\)}"]}
+\newcommand*{\visoarrow}[1]{\arrow[#1,"\rotatebox{90}{\(\backsim\)}"]}
+\newcommand{\lra}{\longrightarrow}
+
+%%%%%  this project only  %%%%%
+
+\newcommand{\Fq}{\FF_q}
+\newcommand{\Fqst}{\FF_q^\times}
+\newcommand{\Fqd}{\FF_{q^d}}
+\newcommand{\Fqdf}{\FF_{q^{df}}}
+\newcommand{\Fqdl}{\FF_{q^{d\l}}}
+\newcommand{\T}{\theta}
+\newcommand{\Ami}{A_{+,i}}
+
+\newcommand{\iaf}{\Pi_\infty^{\textnormal{ari}}}
+\newcommand{\iag}{\Gamma_\infty^{\textnormal{ari}}}
+\newcommand{\iafb}{\ovl{\Pi}_\infty^{\textnormal{ari}}}
+\newcommand{\iagb}{\ovl{\Gamma}_\infty^{\textnormal{ari}}}
+\newcommand{\iafG}{\Pi_{\infty,G}^{\textnormal{ari}}}
+\newcommand{\iagG}{\Gamma_{\infty,G}^{\textnormal{ari}}}
+
+\newcommand{\vaftd}{\td{\Pi}_v^{\textnormal{ari}}}
+\newcommand{\vagtd}{\td{\Gamma}_v^{\textnormal{ari}}}
+\newcommand{\vaf}{\Pi_v^{\textnormal{ari}}}
+\newcommand{\vag}{\Gamma_v^{\textnormal{ari}}}
+
+\newcommand{\igf}{\Pi_\infty^{\textnormal{geo}}}
+\newcommand{\igg}{\Gamma_\infty^{\textnormal{geo}}}
+
+\newcommand{\vgf}{\Pi_v^{\textnormal{geo}}}
+\newcommand{\vgg}{\Gamma_v^{\textnormal{geo}}}
+
+\newcommand{\itf}{\Pi_\infty}
+\newcommand{\itg}{\Gamma_\infty}
+
+\newcommand{\vtf}{\Pi_v}
+\newcommand{\vtg}{\Gamma_v}
+
+\newcommand{\bggs}{\Gcal^{\textnormal{geo}}}
+\newcommand{\bags}{\Gcal^{\textnormal{ari}}}
+\newcommand{\ggs}{G_\l^{\textnormal{geo}}}
+\newcommand{\ggsf}{G_f^{\textnormal{geo}}}
+\newcommand{\ags}{G_\l^{\textnormal{ari}}}
+
+\let\oldl\l
+\let\l\ell
+
+\DeclarePairedDelimiter{\angres}{\langle}{\rangle_{\textnormal{Res}}}
+\DeclarePairedDelimiter{\angtr}{\langle}{\rangle_\textnormal{Tr}}
+
+%%%%%  this project only  %%%%%
+
+\makeatletter
+
+\newcommand{\myToC}{{
+		\renewcommand{\contentsname}{Contents}
+		\@starttoc{toc}{\contentsname}
+}}
+
+\patchcmd{\@tocline}
+{\hfil}
+{\leaders\hbox{\,.\,}\hfil}
+
+\makeatother
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	citecolor=red,
+	%anchorcolor=black,
+	%filecolor=cyan,
+	%urlcolor=red,
+	%menucolor=blue,
+	linktoc=page,
+	linkbordercolor=blue,
+	citebordercolor=red,
+}
+
+%%%%%  content start here  %%%%%
+
+\title[Geometric Gauss Sums and Gross-Koblitz Formulas over Function Fields]{Geometric Gauss Sums and Gross-Koblitz Formulas \\ over Function Fields}
+\author{Ting-Wei Chang}
+\date{\today}
+
+\subjclass[2020]{Primary 11R58, 11L05; Secondary 11R60}
+\keywords{Function field, Gamma value, Gauss sum, Gross-Koblitz formula, Hasse-Davenport relation, Stickelberger's theorem}
+\thanks{This work is supported by the National Science and Technology Council grant no. 109-2115-M-007-017-MY5 and 113-2628-M-007-003.}
+
+\begin{document}
+	
+	\begin{abstract}
+		In this paper, we prove the Gross-Koblitz-Thakur formulas relating special $v$-adic gamma values to the newly introduced geometric Gauss sums in the function field setting.
+		These are analogous to those for the $p$-adic gamma function in the classical setting due to Gross-Koblitz and the $v$-adic arithmetic gamma function over function fields due to Thakur.
+		For these new Gauss sums, we establish their key arithmetic properties, including the uniformity of absolute values and prime factorizations.
+		We also determine their signs at infinite places, and derive two analogs of the Hasse-Davenport relations.
+	\end{abstract}
+	
+	\maketitle
+	
+	\setcounter{tocdepth}{2}
+	\myToC
+	
+	\section{Introduction}
+	
+	\subsection{Motivation}
+	
+	This study is motivated by the Gross-Koblitz formula for the $p$-adic gamma function and Thakur's analog for the $v$-adic arithmetic gamma function in positive characteristic.
+	Classically, there is Euler's gamma function which interpolates the factorials.
+	Over time, a number of connections were discovered between special gamma values $\Gamma(z)$ $(z \in \QQ \setminus \ZZ)$ and “periods”.
+	For example, by the Chowla-Selberg formula \cite{sc1967epstein} one explicitly expresses the periods of CM elliptic curves in terms of products of special $\Gamma$-values (up to algebraic multiples).
+	It is also conjectured that all such values are transcendental over $\QQ$.
+	To date, this has only been confirmed when the denominator of $z \in \QQ \setminus \ZZ$ is either $2,4$, or $6$.
+	The first case is by the well-known identity $\Gamma(1/2) = \sqrt{\pi}$, while the latter two are consequences of Chudnovsky's result \cite{chudnovsky1984contributions} on the algebraic independence of a non-zero period and the associated quasi-period of a CM elliptic curve over $\ovl{\QQ}$.
+	
+	On the other hand, Morita \cite{morita1975padic} interpolated factorials in the $p$-adic setting for each prime number $p$, and introduced a $p$-adic analog of gamma function $\Gamma_p$ on $\ZZ_p$.
+	The values $\Gamma_p(z)$ for $z \in (\QQ \cap \ZZ_p) \setminus \ZZ$ are called special $p$-adic gamma values.
+	One striking difference between Morita's and Euler's gamma functions lies in the algebraicity of $\Gamma_p(a/b)$ for $p>2$ and $b \mid p-1$.
+	This follows from the result of Gross and Koblitz in \cite{gk1979gauss}, now called \textit{Gross-Koblitz formula}, expressing products of specific $\Gamma_p$-values in terms of the well-known \textit{Gauss sums}.
+	While the algebraicity of special $p$-adic gamma values has been established for cases mentioned above, it remains unknown whether all the other special values are transcendental over $\QQ$.
+	
+	Now, we turn to the function field setting, where there are three analogs of gamma functions over a one-variable rational function field $k$ with finite constant field.
+	In the $\infty$-adic case, the algebraic relations among special gamma values have been fully determined in works such as \cite{thakur1991gamma}, \cite{thakur1996transcendence}, \cite{allouche1996transcendence}, \cite{cpty2010algebraic}, \cite{sinha1997periods}, \cite{bp2002linear}, \cite{abp2004determination}, \cite{wei2022algebraic}, among others.
+	A crucial step involves interpreting these values in terms of periods of CM $t$-motives (in the sense of Anderson \cite{anderson1986tmotives}).
+	In this paper, we focus on the $v$-adic counterparts of these gamma functions, where $v$ is a monic irreducible polynomial in $k$.
+	Specifically, we study the $v$-adic two-variable gamma function, originally defined by Goss at the very end of \cite[Subsection 9.9]{goss1996basic}.
+	It can be viewed as a generalization of the other two gammas, the arithmetic one introduced by Goss \cite[Appendix]{goss1980modular} and the geometric one introduced by Thakur \cite[Section 5]{thakur1991gamma}.
+	
+	Several results are known regarding the algebraicity of their special values.
+	For both $v$-adic arithmetic and geometric gamma functions, the Gross-Koblitz-type theorems were proved by Thakur in \cite{thakur1988gauss} and \cite[Section 8.6]{thakur2004function}, respectively.
+	As in the classical situation, these yield a number of algebraic special $v$-adic gamma values for both cases.
+	For the arithmetic case, a precise formula was given in terms of the “arithmetic” Gauss sums in positive characteristic also introduced by Thakur.
+	We recall his result in \ref{section-gkt-formulas-for-v-adic-gamma-functions}.
+	Furthermore, two research teams Chang-Wei-Yu \cite{cwy2024vadic} and Adam \cite{adam2023transcendance} have independently shown, using different methods, that besides the cases covered by Thakur's formula, all the other special $v$-adic arithmetic gamma values are transcendental over $k$.
+	Thus, the analogous conjecture for this particular case has been proved.
+	
+	In this paper, we introduce new “geometric” Gauss sums over function fields, and complete Thakur’s result in the geometric case by exploring the Gross-Koblitz phenomena for both $v$-adic geometric and two-variable gamma functions.
+	This constitutes the main result of this paper.
+	As applications, we also establish several arithmetic properties of our geometric Gauss sums.
+	
+	\subsection{\texorpdfstring{$v$}{v}-adic gamma functions over rational function fields}
+	
+	Let $p$ be any prime number and $q$ be a power of $p$.
+	Let $A:=\Fq[\T]$ be the polynomial ring in the variable $\T$ over a finite field $\Fq$ and $k\Fq(\T)$ be its field of fractions.
+	Let $A_+$ be the set of all monic polynomials in $A$ and $\Ami$ be its subset consisting of monic polynomials of degree $i \geq 0$.
+	Fix a prime $v\in A_{+,d}$.
+	We let $k_v$ be the completion of $k$ at $v$ and $A_v$ be its ring of integers.
+	Let $\CC_v$ be the completion of a fixed algebraic closure of $k_v$ and $\ovl{k}$ be the algebraic closure of $k$ inside $\CC_v$. 
+	For an element $x\in A_v$, we set
+	$$
+	x^\flat := 
+	\begin{cases}
+		x, & \text{if } x \in A_v^\times, \\
+		1, & \text{if } x\in v A_v.
+	\end{cases}
+	$$
+	
+	There are three analogs of $v$-adic gamma functions in the function field setting.
+	
+	\begin{itemize}
+		\item \textit{$v$-adic arithmetic gamma function} (\cite[Appendix]{goss1980modular}): For $y = \sum_{i=0}^{\infty} y_iq^i \in \ZZ_p$ with $0\leq y_i < q$ for all $i$, define $\vag: \ZZ_p \to A_v$ by
+		$$
+		\vag (y+1) := \prod_{i=0}^{\infty} \left( -\prod_{a\in \Ami} a^\flat \right)^{y_i}.
+		$$
+		
+		\item \textit{$v$-adic geometric gamma function} (\cite[Section 5]{thakur1991gamma}): Define $\vgg: A_v \to A_v$ by
+		$$
+		\vgg(x) := \frac{1}{x^\flat} \prod_{i=0}^{\infty} \left( \prod_{a\in \Ami} \frac{a^\flat}{(x+a)^\flat} \right).
+		$$
+		
+		\item \textit{$v$-adic two-variable gamma function} (\cite[Subsection 9.9]{goss1996basic}): For $(x,y) \in A_v \times \ZZ_p$ with $y$ as in the arithmetic case, define $\vtg: A_v \times \ZZ_p \to A_v$ by
+		$$
+		\vtg(x,y) := \frac{\vgg(x,y)}{\vag(y)}
+		$$
+		where
+		$$
+		\vgg(x,y+1) := \frac{1}{x^\flat} \prod_{i=0}^\infty \left( \prod_{a\in\Ami} \frac{a^\flat}{(x+a)^\flat} \right)^{y_i}.
+		$$
+	\end{itemize}
+	Actually, Goss' definition in the two-variable case is the $\vgg(x,y)$ above, which generalizes the geometric case as one has
+	$$
+	\vgg\left(x , 1-\frac{1}{q-1}\right)
+	= \vgg(x).
+	$$
+	Inspired by Thakur's modification of its $\infty$-adic counterpart \cite[Section 8]{thakur1991gamma}, we define the $v$-adic two-variable gamma function with the arithmetic one involved.
+	In particular, we have
+	$$
+	\vtg\left(x , 1-\frac{1}{q-1}\right) 
+	= \epsilon \vgg(x),
+	\quad
+	\text{where}
+	\quad
+	\epsilon = \vag\left(1-\frac{1}{q-1}\right)^{-1}
+	$$
+	is a root of unity by \cite[Theorem 4.4]{thakur1991gamma}.
+	Thus, our $v$-adic two-variable gamma function generalizes both the arithmetic and geometric cases.
+	
+	Natural functional equations of the first two gammas, such as their respective reflection and multiplication formulas, were well established by Thakur in \cite{thakur1991gamma}.
+	The corresponding results for the two-variable case are established in \ref{section-functional-equations}.
+	Building on these formulas, we obtain several monomial relations among special gamma values at $x\in (k \cap A_v) \setminus A$ and $y\in (\QQ \cap \ZZ_p) \setminus \ZZ$, up to algebraic multiples (Corollary \ref{monomial-relation}).
+	
+	\subsection{Geometric Gauss sums}
+	
+	Fix $\nfk \in A_+$ which is relatively prime to $v$, and let $K_\nfk$ be the $\nfk$-th cyclotomic function field with ring of integers $\Ocal_{\nfk}$.
+	We let $\Pfk$ be the prime in $K_\nfk$ lying over $v$ of residue degree $\l$ corresponding to the inclusions $K_\nfk \sbe \ovl{k} \sbe \CC_v$, and let $\FF_\Pfk := \Ocal_{\nfk}/\Pfk$ be its residue field.
+	With the $A$-module structure $C(\FF_{\Pfk})$ on $\FF_{\Pfk}$ via the Carlitz $A$-module $C$, we let $\omega$ be the $A$-module isomorphism from the $\nfk$-torsions of $C(\FF_{\Pfk})$ to the Carlitz $\nfk$-torsions in $K_\nfk$ which is the inverse of reduction map, called the “geometric” Teichmüller character.
+	And let $\psi : \FF_\Pfk \to \Fqdl \sbe \ovl{k}$ be the usual Teichmüller embedding, called the “arithmetic” Teichmüller homomorphism.
+	Then for any $x \in \nfk^{-1}A$, we define a \textit{geometric Gauss sum} to be
+	$$
+	\bggs_x
+	:= 1 + \sum_{z \in \FF_\Pfk^\times} \omega\left(C_{x(v^\l-1)} (z^{-1})\right)\psi(z) \in K_\nfk\Fqdl.
+	$$
+	
+	To see the analogy between geometric and classical Gauss sums, note that $\omega$ in the geometric case plays the role of “multiplicative character” (although it is in fact additive) preserving the $A$-module structures between the residue field and the torsion points of Carlitz module $C(\ovl{k})$.
+	This corresponds to the classical case (see \cite[(1.2)]{gk1979gauss}), where the multiplicative characters preserve the $\ZZ$-module structures between the multiplicative group of the residue field and roots of unity in $\ovl{\QQ}^\times$ (i.e., the torsion points of $\ovl{\QQ}^\times$ as a $\ZZ$-module).
+	From this point of view, we shall regard $\psi$ as an “additive character”.
+	Thus, the inclusion of “plus $1$” in the above definition arises from the natural analogy between addition and multiplication.
+	Note that the usual trace map in the additive character $\psi$ is intentionally excluded, as such definitions arise as special cases of the above ones with $\l=1$ (Remark \ref{ggs-with-trace}(1)).
+	
+	Another similarity lies in Fourier analysis, where the geometric Gauss sums are expressed as Fourier coefficients of “geometric characters” (Remark \ref{fourier-coefficients}).
+	Subsequently in \ref{the-section-arithmetic-properties-of-geometric-gauss-sums}, we will see many other arithmetic properties of these Gauss sums, including the uniformity of absolute values, their signs at infinite places, the multiplicative relations (analogs of Hasse-Davenport relations), and the prime factorization property (analog of Stickelberger's theorem).
+	Most of the proofs rely on the main result of this paper, the Gross-Koblitz-Thakur formulas for geometric Gauss sums and $v$-adic gamma functions, which we present in the following section.
+	We note that this suggests a deviated approach from both the classical and the arithmetic cases, where the corresponding formulas were originally proved based on the arithmetic properties of Gauss sums, such as their respective prime factorizations.
+	
+	\subsection{The Gross-Koblitz-type formulas}
+	
+	For a rational number $y \in \QQ$, we define its fractional part $\ang{y}$ as the unique number in $\QQ$ such that $0 \leq |\ang{y}| <1$ and $y \equiv \ang{y} \pmod{\ZZ}$.
+	On the other hand, recall that the $\infty$-adic absolute value on $k$ is given by $|0|_\infty := 0$ and $|f/g|_\infty := q^{\deg f - \deg g}$ for $f,g \in A \setminus\{0\}$.
+	Then for each $x \in k$, we define its “$A$-fractional part” $\anginf{x}$ as the unique element in $k$ such that $0 \leq |\anginf{x}|_\infty < 1$ and $x \equiv \anginf{x} \pmod{A}$.
+	
+	Let $\tau_q \in \Gal(k\Fqdl/k) \simeq \Gal(\Fqdl/\Fq)$ be the $q$-th power Frobenius map on the constant field, and extend it canonically to $\Gal(K_\nfk\Fqdl/k)$.
+	For any $y \in (q^{d\l}-1)^{-1} \ZZ$, we write
+	$$
+	\ang{y} = \sum_{s=0}^{d\l-1} \frac{y_s q^s}{q^{d\l}-1}
+	\quad
+	(0 \leq y_s < q \text{ for all } s).
+	$$
+	We consider the integral group ring element $\sum_{s=0}^{d\l-1} y_s \tau_q^s \in \ZZ[\Gal(K_\nfk\Fqdl/k)]$ acting on the geometric Gauss sum $\bggs_x$, and define
+	$$
+	\ggs(x,y)
+	:= (\bggs_x)^{\sum_{s=0}^{d\l-1} y_s \tau_q^s}
+	= \prod_{s=0}^{d\l-1} (\bggs_x)^{y_s \tau_q^s} \in K_\nfk\Fqdl.
+	$$
+	In particular, put
+	$$
+	\ggs(x)
+	:= \ggs \left(x , \frac{1}{q-1} \right)
+	= \prod_{s=0}^{d\l-1} (\bggs_x)^{\tau_q^s} \in K_\nfk.
+	$$
+	Then the special $v$-adic gamma monomials can be recognized as these special monomials of geometric Gauss sums as follows.
+	
+	\begin{thm}[Analogs of Gross-Koblitz formula, Theorems \ref{gkt-formula-for-geometric-gamma-function} and \ref{gkt-formula-for-geo-two}]
+		For any $x \in \nfk^{-1}A$ and $y \in (q^{d\l}-1)^{-1} \ZZ$, we have
+		$$
+		\ggs(x)
+		= \kappa_1 \cdot
+		\prod_{i=0}^{\l-1} \vgg \left( \anginf{v^ix} \right)^{-1}
+		$$
+		and
+		$$
+		\ggs (x,y)
+		= \kappa_2 \cdot
+		\prod_{i=0}^{\l-1} \vgg \left( \anginf{v^ix}, \ang{|v^i|_\infty y} \right)
+		$$
+		where $\kappa_1$ and $\kappa_2$ are explicitly given algebraic numbers over $k$.
+		In particular, $\vgg(a/(v-1))$ and $\vgg(a/(v-1),r/(q^d-1))$ are algebraic over $k$ for all $a \in A$ and $r \in \ZZ$.
+	\end{thm}
+	
+	In particular, this implies that the product of $v$-adic gamma values along the $\Frob_v$-orbits is algebraic, which coincides with Thakur's theorem for the geometric case \cite[Corollary 8.6.2]{thakur2004function}.
+	By combining the second equality with Thakur's analog of the Gross-Koblitz formula for the arithmetic case (stated in \eqref{gkt-formula-for-ari}), we also obtain the corresponding formula and algebraicity for the two-variable case (Theorem \ref{gkt-formula-for-two-variable-gamma-function}).
+	
+	To prove this theorem, one key step involves interpreting the geometric Gauss sums as the “reduction of the twisted Coleman functions” evaluated at a particular point (see \ref{section-a-scalar-product-expression-of-geometric-gauss-sums}).
+	These functions were first introduced by Anderson in \cite{anderson1992twodimensional} from a geometric perspective and later reconstructed by Anderson-Brownawell-Papanikolas in \cite[\nopp 6.3.5]{abp2004determination} using a more arithmetic approach.
+	They also play a pivotal role in the period interpretations of $\infty$-adic gamma values, as demonstrated in \cite{sinha1997periods}, \cite{abp2004determination}, and \cite{wei2022algebraic}.
+	We also make use of the algebraic equations in \cite[Theorem 5.4.4]{abp2004determination} (see Theorem \ref{restatement-of-abp-5.4.4} also), leading to a comparison between three different pairings: residue pairing, Poonen pairing, and trace pairing (see \ref{section-residue-pairing-and-trace-pairing} and \ref{section-residue-pairing-and-poonen-pairing}).
+	
+	\subsection{The arithmetic properties of geometric Gauss sums}     \label{the-section-arithmetic-properties-of-geometric-gauss-sums}
+	
+	As mentioned earlier, our result on the Gross-Koblitz formulas leads to a further investigation of geometric Gauss sums.
+	For the first application, we prove that the valuation (normalized so that the valuation of $\T$ is $-1$) of the geometric Gauss sums $\bggs_x$ at any infinite place of $K_{\nfk}\Fqdl$ is $-1/(q-1)$ for all $x \in \nfk^{-1}A \setminus A$ (Proposition \ref{absolute-values}).
+	This is parallel to the classical situation.
+	Note also that it coincides with the valuation of Thakur's arithmetic Gauss sums \cite[Theorem IV]{thakur1988gauss}.
+	Moreover, using our results on pairing comparisons, we are also able to determine their signs at infinite places (Proposition \ref{sign}).
+	
+	For the second application, we establish the following multiplication formula, which is an analog of the Hasse-Davenport product relation \cite{hd1935dienullstellen}.
+	
+	\begin{thm}[Analog of Hasse-Davenport product relation, Theorem \ref{HD-product}]
+		Suppose $x \in \nfk^{-1}A$ with $|x|_\infty < 1$.
+		For any $g \in A_{+,h}$ with $(g,v) = 1$, we let $f$ be the order of $v$ modulo $g\nfk$.
+		Then for any $y \in (q^{df}-1)^{-1}\ZZ$, we have
+		$$
+		\prod_{\alpha} \ggsf\left( \frac{x+\alpha}{g},y \right) \bigg/ \ggsf\left( \frac{\alpha}{g},y \right) = \ggsf(x,q^hy)
+		$$
+		where $\alpha$ runs through a complete residue system modulo $g$.
+		In particular, we have
+		$$
+		\prod_{\alpha} \ggsf\left( \frac{x+\alpha}{g} \right) \bigg/ \ggsf\left( \frac{\alpha}{g} \right) = \ggsf(x).
+		$$
+	\end{thm}
+	
+	For our last application, we derive the prime factorizations of geometric Gauss sums, which are analogs of the classical Stickelberger's theorem.
+	Let $K_{\nfk,d\l} := K_\nfk\Fqdl$ with ring of integers $\Ocal_{\nfk,d\l}$.
+	The Galois group $\Gal(K_{\nfk,d\l}/k)$ is canonically isomorphic to $\Gal(K_\nfk/k) \times \Gal(k\Fqdl/k)$.
+	We denote $\sigma_{a,s}$ the element in $\Gal(K_{\nfk,d\l}/k)$ extending $\rho_a \in \Gal(K_\nfk/k)$ and $\tau_q^s \in \Gal(k\Fqdl/k)$, where $\rho_a$ corresponds to $a \in (A/\nfk)^\times$ via the Artin symbol and $\tau_q$ is the $q$-th power Frobenius on the constant field as before.
+	Let $\Pfk_{\nfk}$ ($=\Pfk$ before) and $\Pfk_{\nfk,d\l}$ be respectively the primes in $K_\nfk$ and $K_{\nfk,d\l}$ above $v$ corresponding to the inclusions $K_\nfk \sbe K_{\nfk,d\l} \sbe \ovl{k} \sbe \CC_v$.
+	
+	\begin{thm}[Analog of Stickelberger's theorem, Theorem \ref{analog-of-stickelbergers-theorem}]
+		Given $x \in k$ with $0 < |x|_\infty < 1$, write $x = a_0/\nfk$ where $\deg a_0 < \deg \nfk$ and $(a_0,\nfk)=1$.
+		Define
+		$$
+		\eta_{x,\nfk,d\l} := \sigma_{a_0,\deg \nfk - d\l} \cdot \eta_{\nfk,d\l}
+		\quad
+		\text{where}
+		\quad
+		\eta_{\nfk,d\l} := \sum_{\substack{a\in A_+ \\ \deg a < \deg \nfk \\ (a,\nfk)=1}}  \sigma_{a,\deg a}^{-1} \in \ZZ[\Gal(K_{\nfk,d\l}/k)].
+		$$
+		Then $\bggs_x$ has prime factorization
+		$$
+		\bggs_x \cdot \Ocal_{\nfk,d\l}
+		= \Pfk_{\nfk,d\l}^{\eta_{x,\nfk,d\l}}.
+		$$
+		Consequently, let
+		$$
+		\eta_{x,\nfk} := \rho_{a_0} \cdot \eta_{\nfk}
+		\quad
+		\text{where}
+		\quad
+		\eta_{\nfk} := \sum_{\substack{a\in A_+ \\ \deg a < \deg \nfk \\ (a,\nfk)=1}}  \rho_a^{-1} \in \ZZ[\Gal(K_\nfk/k)].
+		$$
+		Then $\ggs(x)$ has prime factorization
+		$$
+		\ggs(x) \cdot \Ocal_{\nfk}
+		= \Pfk_{\nfk}^{\eta_{x,\nfk}}.
+		$$
+	\end{thm}
+	
+	A geometric construction for the second case has already been given by Anderson in the aforementioned paper \cite{anderson1992twodimensional}.
+	There, the “Jacobi sums” $\ggs(x)$ were interpreted as “algebraic Hecke characters”, which parallel the classical situation by the work of Weil \cite{weil1952jacobi}.
+	On the other hand, the integral group ring elements $\eta_{\nfk}$ and $\eta_{\nfk,d\l}$ are analogs of the classical Stickelberger element corresponding to the cyclotomic function field $K_{\nfk}$ and the composite field $K_{\nfk,d\l}$, respectively.
+	It can also be shown that these two elements appear as special values of the “$L$-function evaluators” with respect to their corresponding fields (see \cite[Chapter 15]{rosen2002number} for the former).
+	Hence, our geometric Gauss sums provide an explicit construction of the “Brumer-Stark units” for these two abelian extensions over $k$.
+	(See Gross' theorem \cite{gross1980annihilation} and the Brumer-Stark conjecture for function fields \cite[Chapter V]{tate1984lesconjectures} and \cite{hayes1985stickelberger}.)
+	
+	\subsection*{Acknowledgments}
+	
+	This paper is part of the author's PhD thesis at National Tsing Hua University, Taiwan.
+	He would like to express sincere gratitude to Fu-Tsun Wei for his exceptional mentorship, insightful discussions, and constant support throughout the development of this work.
+	Appreciation is also extended to Jing Yu for providing valuable comments and feedback.
+	Special thanks to the National Science and Technology Council for its financial support over the past few years, and to the National Center for Theoretical Sciences for organizing workshops and conferences that have enriched his understanding of mathematics and contributed to his academic growth.
+	
+	\section{Preliminaries}
+	
+	\subsection{Carlitz modules}    \label{section-carlitz-module}
+	
+	Let $A := \Fq[\T]$ be the polynomial ring in the variable $\T$ over a finite field $\Fq$ of $q$ elements, where $q$ is a power of a prime number $p$.
+	In this section, we recall the notion of Carlitz module over an arbitrary $A$-field (see \cite[Chapter 3]{goss1996basic}).
+	An $A$-field is, by definition, a field $L$ together with an $\Fq$-algebra homomorphism $\iota: A \to L$.
+	Let $\tau$ be the $q$-th power Frobenius element in the $\Fq$-linear endomorphism ring $\End_{\Fq}(\GG_a)$ of the additive group $\GG_a$ of $L$.
+	This ring is isomorphic to the twisted polynomial ring $L\{\tau\}$ with the usual addition rule and the multiplication given by $\tau \alpha = \alpha^q \tau$ for all $\alpha \in L$.
+	It is also isomorphic to the ring of $\Fq$-linear polynomials with the usual addition rule and the multiplication given by composition.
+	Under this identification, each element $\alpha\tau^n \in L\{\tau\}$ corresponds to the $\Fq$-linear polynomial $\alpha z^{q^n}$ for all $\alpha\in L$.
+	
+	The \textit{Carlitz module over $L$} is the $\Fq$-algebra homomorphism $C: A \to L\{\tau\}$ given by $C_\T := \iota(\T) + \tau$. 
+	Since $A$ is generated freely by $\T$ over $\Fq$, the Carlitz module is determined completely by $C_\T$.
+	In the language of $\Fq$-linear polynomials, we have $C_\T(z) = \iota(\T)z + z^q$, called a \textit{Carlitz polynomial}.
+	More generally, for each $a \in A$, a straightforward calculation shows that the Carlitz polynomial $C_a(z)$ is
+	\begin{equation}    \label{carlitz-polynomial}
+		C_a(z) = \sum_{i=0}^{\deg a} c_{a,i} z^{q^i} \in \iota(A)[z] \sbe L[z]
+	\end{equation}
+	where $c_{a,0} = \iota(a)$ and $c_{a,\deg a}$ is the leading coefficient of $a$.
+	
+	Via the structure map $\iota$, there is a natural $A$-module action on $L$ given by the usual multiplication in $L$.
+	Now via $C$, we obtain a new $A$-module structure on $L$ given by $a \cdot \alpha := C_a(\alpha)$ for all $a\in A$ and $\alpha \in L$.
+	The latter structure will be denoted as $C(L)$ to distinguish the usual $A$-module structure on $L$.
+	Very often, we identify the Carlitz module over $L$ with $C(L)$.
+	
+	\subsection{Cyclotomic function fields}   \label{section-cyclotomic-function-fields}
+	
+	In this section, we review some fundamental properties of cyclotomic function fields (see \cite{hayes1974explicit}, \cite[Chapter 12]{rosen2002number}, or \cite[Section 7.1]{papikian2023drinfeld}).
+	Let $k := \Fq(\T)$ be the field of fractions of $A$ and $\ovl{k}$ be a fixed algebraic closure of $k$.
+	Consider the Carlitz module $C(\ovl{k})$ with the natural structure map $\iota: A \inj k \inj \ovl{k}$.
+	We fix a (monic) polynomial $\nfk \in A$, and	let $\Lambda_\nfk$ be the $\nfk$-torsion points of $C(\ovl{k})$.
+	In other words, $\Lambda_\nfk$ consists of roots of the Carlitz polynomial $C_\nfk(z)$ in $\ovl{k}$.
+	We let $K_\nfk := k(\Lambda_\nfk)$, called the \textit{$\nfk$-th cyclotomic function field}, and $\Ocal_\nfk$ be the integral closure of $A$ in $K_\nfk$.
+	Then the following properties are known.
+	
+	\begin{itemize}
+		\item There is an $A$-module isomorphism $\Lambda_{\nfk} \simeq A/\nfk$.
+		In particular, $\Lambda_{\nfk}$ has a generator $\lambda_\nfk \in \Lambda_\nfk$, called a primitive $\nfk$-th root of $C$.
+		For $a\in A$, $C_a(\lambda_\nfk)$ is primitive if and only if $(a,\nfk) = 1$.
+		
+		\item The $\nfk$-th cyclotomic polynomial $C_\nfk^\star (z) := \prod (z-\lambda)$, where $\lambda$ runs through all primitive $\nfk$-th roots of $C$, has coefficients in $A$.
+		
+		\item $K_\nfk/k$ is Galois and $\Gal(K_\nfk/k) \simeq (A/\nfk A)^\times$ where each $a \in (A/\nfk A)^\times$ corresponds to the automorphism $\rho_a \in \Gal(K_\nfk/k)$ such that $\rho_a(\lambda_\nfk) = C_a(\lambda_\nfk)$ (the Artin map).
+		
+		\item The ring $\Ocal_\nfk = A[\lambda_\nfk]$.
+		
+		\item For any monic prime $v \in A$, the polynomial $C_v(z)/z$ is Eisenstein at $v$.
+		Moreover, $v$ is ramified in $K_\nfk$ if and only if $v \mid \nfk$.
+		
+		\item If $v \nmid \nfk$, let $\l$ be the order of $v$ in $(A/\nfk A)^\times$.
+		Then $v$ splits into $[K_\nfk : k]/\l$ primes in $K_\nfk$, each with residue degree $\l$.
+		
+		\item The infinite prime $\infty$ in $k$ splits into $[K_\nfk : k]/(q-1)$ primes in $K_\nfk$ with the decomposition group $\{\rho_\epsilon \mid \epsilon \in \Fqst\} \sbe \Gal(K_\nfk/k)$ which is isomorphic to $\Fqst$.
+	\end{itemize}
+	
+	We also have the following proposition.
+	
+	\begin{prop}     \label{reduction-of-lambda}
+		Let $\nfk \in A$ be a monic polynomial and $v \in A$ be a monic irreducible polynomial not dividing $\nfk$.
+		Let $\Pfk$ be a prime in $K_\nfk$ above $v$ of degree $\l$ with residue field $\FF_{\Pfk} := \Ocal_\nfk/\Pfk$.
+		Then we have the $A$-module isomorphisms $A/(v^\l-1) \simeq \Lambda_{v^\l-1} \simeq C(\FF_{\Pfk})$, where the second map is given by reduction modulo $\Pfk$.
+		In particular, we have the isomorphism $\Lambda_{\nfk} \simeq C(\FF_{\Pfk})[\nfk]$.
+	\end{prop}
+	
+	\begin{proof}
+		The first isomorphism is a general fact mentioned earlier.
+		For the second, from
+		$$
+		C_\nfk(z) = z\prod_{0\neq \lambda \in \Lambda_\nfk} (z - \lambda),
+		$$
+		we take derivative and substitute $z=0$, which results in
+		$$
+		\nfk = \prod_{0\neq \lambda \in \Lambda_\nfk} (-\lambda).
+		$$
+		Since the reduction of $\nfk$ is non-zero in $\FF_{\Pfk}$, we obtain an injection $\Lambda_{\nfk} \to C(\FF_{\Pfk})[\nfk] \sbe C(\FF_\Pfk)$.
+		In particular, we have $\Lambda_{v^\l-1} \simeq C(\FF_{\Pfk})$ by counting cardinality.
+		(Here, we identify the residue field of $v$ in $K_{v^\l-1}$ with $\FF_{\Pfk}$.)
+	\end{proof}
+	
+	\subsection{Adjoint Carlitz modules}
+	
+	There is also the notion of adjoint Carlitz module (see \cite[Section 3.7]{goss1996basic}).
+	Suppose that the $A$-field $L$ in \ref{section-carlitz-module} is a perfect field, so that $\tau$ induces an automorphism of $L$.
+	We let $L\{\tau^{-1}\}$ be the twisted polynomial ring in $\tau^{-1}$ over $L$ with the usual addition rule and the multiplication given by $\tau^{-1} \alpha = \alpha^{1/q} \tau^{-1}$ for all $\alpha \in L$.
+	The \textit{adjoint Carlitz module over $L$} is defined by the $\Fq$-algebra homomorphism $C^*: A \to L\{\tau^{-1}\}$ where $C^*_\T := \iota(\T) + \tau^{-1}$.
+	Similar to the Carlitz module, the adjoint Carlitz module is determined completely by $C^*_\T$.
+	For each $a\in A$, the adjoint of the Carlitz polynomial \eqref{carlitz-polynomial} is
+	$$
+	C^*_a(z) := \sum_{i=0}^{\deg a} c_{a,i}^{q^{-i}} z^{q^{-i}}.
+	$$
+	Via $C^*$, we obtain a new $A$-module structure $C^*(L)$ on $L$, which will also be identified with the adjoint Carlitz module over $L$.
+	
+	Now, consider the adjoint Carlitz module $C^*(\ovl{k})$.
+	For a monic polynomial $\nfk \in A$, we let $\Lambda_\nfk^*$ be the $\nfk$-torsion points of $C^*(\ovl{k})$.
+	In other words, $\Lambda_\nfk^*$ consists of roots of $C_\nfk^*(z)$ in $\ovl{k}$
+	(or more precisely, roots of the polynomial $C_\nfk^*(z)^{q^{\deg \nfk}} \in A[z]$).
+	Then we have the following theorem.
+	
+	\begin{thm}      \label{goss-1.7.11}
+		The roots of $C_\nfk(z)$ and $C_\nfk^*(z)$ generate the same field extension over $k$. In other words, $K_\nfk = k(\Lambda_\nfk) = k(\Lambda_\nfk^*)$.
+	\end{thm}
+	
+	\begin{proof}
+		See \cite[Theorem 1.7.11]{goss1996basic}.
+	\end{proof}
+	
+	Note that the leading coefficient of the polynomial $C_\nfk^*(z)^{q^{\deg\nfk}} \in A[z]$ is $\nfk^{q^{\deg \nfk}}$.
+	So every $\lambda^* \in \Lambda_\nfk^* \sbe K_\nfk$ is integral at $v$ for each monic irreducible $v \in A$ not dividing $\nfk$.
+	Hence, we may consider a statement similar to Proposition \ref{reduction-of-lambda}.
+	
+	\begin{prop}     \label{reduction-of-lambda*}
+		Let $\nfk \in A$ be a monic polynomial and $v \in A$ be a monic irreducible polynomial not dividing $\nfk$.
+		Let $\Pfk$ be a prime in $K_\nfk$ above $v$ of degree $\l$ with residue field $\FF_{\Pfk} := \Ocal_\nfk/\Pfk$ (which is perfect).
+		Then we have the $A$-module isomorphisms $A/(v^\l-1) \simeq \Lambda^*_{v^\l-1} \simeq C^*(\FF_{\Pfk})$.
+	\end{prop}
+	
+	\begin{proof}
+		A similar argument to that of Proposition \ref{reduction-of-lambda} applies in the adjoint setting.
+		The first isomorphism is also a general property.
+		For the second, one considers
+		$$
+		(C_\nfk^*(z) / \nfk)^{q^{\deg\nfk}}
+		= z\prod_{0 \neq \lambda^* \in \Lambda_\nfk^*} (z - \lambda^*).
+		$$
+		We omit the details.
+	\end{proof}
+	
+	\subsection{Dual families}       \label{section-dual-families}
+	
+	In this section, we introduce an important result in \cite{abp2004determination}.
+	Let $\Res: k \to \Fq$ be the usual residue map for parameter $\T$.
+	For a monic polynomial $\nfk \in A$, we define the residue pairing $\angres{\cdot,\cdot}: A/\nfk \times A/\nfk \to \Fq$ by $\angres{a,b} := \Res(ab/\nfk)$.
+	Since with respect to the ordered bases $\{1,\T,\ldots,\T^{\deg\nfk-1}\}$ and $\{\T^{\deg\nfk-1},\T^{\deg\nfk-2},\ldots,1\}$, the matrix representation of $\angres{\cdot,\cdot}$ is lower triangular with $1$'s along the diagonal, the residue pairing is perfect.
+	We call dual bases $\{a_i\}_{i=1}^{\deg\nfk}, \{b_j\}_{j=1}^{\deg\nfk}$ ($a_i,b_j\in A$) of this pairing \textit{$\nfk$-dual families}.
+	
+	Fix any $\nfk$-dual families $\{a_i\}_{i=1}^{\deg\nfk}, \{b_j\}_{j=1}^{\deg\nfk}$.
+	We choose an $A$-module isomorphism from $A/\nfk$ to $\Lambda_\nfk$, and suppose the element $1\in A/\nfk$ is mapped to $\lambda \in \Lambda_\nfk$.
+	Let $\lambda_j := C_{b_j}(\lambda)$ be the corresponding image of $b_j$.
+	Since the given $A$-module isomorphism is $\Fq$-linear, $\{\lambda_j\}_{j=1}^{\deg\nfk}$ becomes an $\Fq$-basis of $\Lambda_\nfk$.
+	An explicit formula given by Ore then says that one may express an $\Fq$-basis of $\Lambda_\nfk^*$ in terms of $\{\lambda_j\}_{j=1}^{\deg\nfk}$ and the Moore determinant.
+	(Recall that for $x_1,\ldots,x_n \in \ovl{k}$, the Moore determinant is defined as $\Delta(x_1,\ldots,x_n) := \det_{1 \leq i,j \leq n} x_j^{q^{i-1}}$.)
+	
+	\begin{thm}[Ore]
+		For each $1\leq i \leq \deg\nfk$, set $\Delta_i := \Delta(\lambda_1,\ldots,\lambda_{i-1},\lambda_{i+1},\ldots,\lambda_{\deg\nfk})$ and $\Delta := \Delta(\lambda_1,\ldots,\lambda_{\deg\nfk}) \neq 0$. Let
+		$$
+		\lambda_i^* := (-1)^{\deg\nfk+i} \left(\frac{\Delta_i}{\Delta}\right)^q.
+		$$
+		Then $\{\lambda_i^*\}_{i=1}^{\deg\nfk}$ forms an $\Fq$-basis of $\Lambda_\nfk^*$.
+	\end{thm}
+	
+	\begin{proof}
+		See \cite[\nopp 8]{ore1933special} or \cite[Theorem 1.7.13]{goss1996basic}.
+	\end{proof}
+	
+	\begin{rem}
+		In fact, these $\lambda_i^*$ are the dual bases of $\lambda_j$ with respect to the “Poonen pairing” (with a minus sign modification).
+		We will justify this claim in Proposition \ref{lambdai*-and-poonen-pairing}.
+	\end{rem}
+	
+	For each integer $N\geq 0$, we define $\Psi_N(z)$ so that
+	\begin{equation}      \label{Psi}
+		1 + \Psi_N(z)
+		= \prod_{a\in A_{+,N}} \left(1+\frac{z}{a}\right),
+	\end{equation}
+	where the product runs through all monic polynomials of degree $N$ in $A$.
+	Then we have the following identities between $\{\lambda_i^*\}_{i=1}^{\deg\nfk}$ and $\{\lambda_j\}_{j=1}^{\deg\nfk}$.
+	We mention that these are in fact “algebraic” reformulations of \cite[Theorem 5.4.4]{abp2004determination}.
+	See Section \ref{section-pairing-comparisons-and-geometric-gauss-sums-at-infinity} (in particular, \eqref{the-equation-of-the-main-goal}) for the comparison with the original statement.
+	
+	\begin{thm}  \label{restatement-of-abp-5.4.4}
+		Fix a monic $\nfk \in A$ of positive degree and $\nfk$-dual families 
+		$$
+		\{a_i\}_{i=1}^{\deg\nfk},
+		\quad
+		\{b_j\}_{j=1}^{\deg\nfk}.
+		$$
+		Then for $a_0 \in A$ with $\deg a_0 < \deg \nfk$, we have  \\
+		(1)
+		$$
+		\sum_{i=1}^{\deg \nfk} (\lambda_i^*)^{q^N} C_{a_0}(\lambda_i) = -\Psi_N(a_0/\nfk)
+		$$
+		for all integers $N\geq 0$.   \\
+		(2) Moreover, if $a_0 \in A$ is monic, we have
+		$$
+		\sum_{i=1}^{\deg \nfk} \lambda_i^* C_{a_0}(\lambda_i)^{q^{\deg \nfk - \deg a_0}} = 1.
+		$$
+	\end{thm}
+	
+	\section{Geometric Gauss sums}     \label{section-geometric-gauss-sums}
+	
+	\subsection{Definition and some basic properties}     \label{section-definition-and-some-basic-properties}
+	
+	Let $\nfk \in A$ be monic and $v \in A$ be monic irreducible of degree $d$ which is relatively prime to $\nfk$.
+	Let $\Lambda_\nfk$ be the $\nfk$-torsion points of the Carlitz module $C(\ovl{k})$, $K_\nfk := k(\Lambda_\nfk)$ be the $\nfk$-th cyclotomic function field and $\Ocal_\nfk$ be the integral closure of $A$ in $K_\nfk$.
+	Fix a prime $\Pfk$ in $\Ocal_\nfk$ with residue degree $\l$ over $v$, and put $\FF_\Pfk := \Ocal_\nfk/\Pfk$.
+	We let $\omega: C(\FF_{\Pfk})[\nfk] \to \Lambda_\nfk$ be the $A$-module isomorphism from the $\nfk$-torsions of $C(\FF_{\Pfk})$ to the Carlitz $\nfk$-torsions in $K_\nfk$ which is the inverse of reduction map (Proposition \ref{reduction-of-lambda}).
+	We regard $\omega$ as the “geometric” Teichmüller character (see \eqref{geo-teichmüller}).
+	Fix an $\Fq$-algebra isomorphism $\psi: \FF_\Pfk \to \Fqdl$.
+	
+	\begin{defn}    \label{ggs-definition}
+		For any $x \in \nfk^{-1}A$, we define a \textit{geometric Gauss sum} to be
+		$$
+		\bggs_x
+		:= \bggs_x (\Pfk,\psi)
+		:= 1 + \sum_{z \in \FF_\Pfk^\times} \omega\left(C_{x(v^\l-1)}(z^{-1})\right)\psi(z) \in K_\nfk\Fqdl.
+		$$
+		(Note that $\bggs_{x} = \bggs_{x+a}$ for all $a \in A$.)
+	\end{defn}
+	
+	The geometric Gauss sums satisfy a compatibility condition.
+	Suppose we view $x \in \nfk^{-1}A$ as an element in $(\nfk')^{-1}A$, where $\nfk'$ is a multiple of $\nfk$ which is also relatively prime to $v$, then the corresponding geometric Gauss sums remain the same.
+	To justify this claim, we use the following identity.
+	
+	\begin{lem}    \label{descending-ggs}
+		Let $r$ be a prime power and $n\in\NN$.
+		Suppose $h$ is a function on $\FF_{r^n}$ with values in a ring containing $\FF_{r^n}$ and satisfies $h(0) = 0$, then
+		$$
+		\sum_{z \in \FF_{r^n}^\times} h\left( \Tr_{\FF_{r^n}/\FF_r} (z^{-1}) \right) z^{r^j}
+		=  \sum_{z \in \FF_r^\times} h(z^{-1}) z^{r^j}
+		$$
+		for all $j \geq 0$.
+	\end{lem}
+	
+	\begin{proof}
+		This is equivalent to \cite[Lemma I]{thakur1988gauss}.
+	\end{proof}
+	
+	Now, let $\l'$ be the order of $v$ modulo $\nfk'$.
+	Then necessarily we have $\l$ divides $\l'$.
+	Assume $\l' = m\l$ for some natural number $m$.
+	We write $\Pfk$ (resp. $\Pfk'$) as the chosen prime in $K_{\nfk}$ (resp. $K_{\nfk'}$) above $v$ with residue field $\FF_{\Pfk}$ (resp. $\FF_{\Pfk'}$).
+	Note that $m$ is the residue degree of $\Pfk'$ over $\Pfk$.
+	
+	\begin{prop}    \label{compatibility-of-ggs}
+		Setting as above, and consider $\omega$ and $\psi$ as functions defined on $C(\FF_{\Pfk'})$ and $\FF_{\Pfk'}$, respectively.
+		Then we have
+		$$
+		\sum_{z \in \FF_{\Pfk}^\times} \omega\left(C_{x(v^\l-1)}(z^{-1})\right)\psi(z)
+		= \sum_{z \in \FF_{\Pfk'}^\times} \omega\left(C_{x(v^{\l'}-1)}(z^{-1})\right)\psi(z).
+		$$
+	\end{prop}
+	
+	\begin{proof}
+		We begin with the right-hand side of the proposition.
+		For each $z \in \FF_{\Pfk'}^\times$, we have
+		\begin{align*}
+			\omega\left(C_{x(v^{\l'}-1)}(z^{-1})\right)
+			&= \omega\left(C_{x(v^\l-1) \sum_{i=0}^{m-1} v^{i\l}}(z^{-1})\right)
+			= \sum_{i=0}^{m-1} \omega\left(C_{x(v^\l-1)v^{i\l}}(z^{-1})\right)
+			\\
+			&= \sum_{i=0}^{m-1} \omega\left(C_{x(v^\l-1)}(z^{-q^{d\l i}})\right)
+			= \omega\left(C_{x(v^\l-1)} (\Tr_{\FF_{\Pfk'}/\FF_{\Pfk}}(z^{-1}))\right)
+		\end{align*}
+		where the third equality is because $C_v \equiv \tau^d \pmod{v}$ sends $z$ to $z^{q^d}$ (recall \ref{section-cyclotomic-function-fields}).
+		So by Lemma \ref{descending-ggs}, we have
+		\begin{align*}
+			\sum_{z \in \FF_{\Pfk'}^\times} \omega\left(C_{x(v^{\l'}-1)}(z^{-1})\right)\psi(z)
+			&= \sum_{z \in \FF_{\Pfk'}^\times} \omega\left(C_{x(v^\l-1)}(\Tr_{\FF_{\Pfk'}/\FF_{\Pfk}}(z^{-1}))\right)\psi(z)        \\
+			&= \sum_{z \in \FF_{\Pfk}^\times} \omega\left(C_{x(v^\l-1)}(z^{-1})\right)\psi(z).
+		\end{align*}
+	\end{proof} 
+	
+	\begin{rem}     \label{fourier-coefficients}
+		The geometric Gauss sums can also be interpreted as the Fourier coefficients of “geometric characters” on $\FF_{\Pfk}^\times$.
+		Let $f(z) := \omega(C_{x(v^\l-1)}(z))$ and $\tau_q$ be the $q$-th power Frobenius map on the constant field.
+		Then by the $\Fq$-linearity of $f$ and Fourier inversion formula, one sees that
+		$$
+		f(z) = \sum_{i=0}^{d\l-1} \left( (1 - \bggs_x) \psi(z) \right)^{\tau_q^i}.
+		$$
+		Hence, we have
+		$$
+		\Tr_{\FF_\Pfk/\Fq}(z) - f(z)
+		= \sum_{i=0}^{d\l-1} \left( \bggs_x \psi(z) \right)^{\tau_q^i}.
+		$$
+	\end{rem}
+	
+	\begin{rem}    \label{ggs-with-trace}
+		(1) In Definition \ref{ggs-definition}, we can alternatively adopt the definition by including the usual trace map in the additive character $\psi$ and omitting the “plus $1$”.
+		That is, define
+		$$
+		\widetilde{\Gcal}_{x,\l}^{\textnormal{geo}}
+		:= -\sum_{z \in \FF_{\Pfk}^\times} \omega\left(C_{x(v^\l-1)}(z^{-1})\right)\psi \left( \Tr_{\FF_{\Pfk}/\FF_v} (z) \right).
+		$$
+		Then one may express
+		\begin{equation}    \label{gg-tilde-and-gg}
+			\widetilde{\Gcal}_{x,\l}^{\textnormal{geo}}
+			= \sum_{i=0}^{\l-1} (1-\bggs_x)^{\tau_q^{di}}.
+		\end{equation}
+		Hence, the geometric Gauss sums $\bggs_x$ are viewed as refinements of $\widetilde{\Gcal}_{x,\l}^{\textnormal{geo}}$.
+		Also, one sees similarly by change of variables and Lemma \ref{descending-ggs} that
+		$$
+		\widetilde{\Gcal}_{x,\l}^{\textnormal{geo}}
+		= -\sum_{z \in \FF_{\Pfk}^\times} \omega\left(C_{x(v^\l-1)} (\Tr_{\FF_{\Pfk}/\FF_v}(z^{-1}))\right) \psi(z)
+		= -\sum_{z \in \FF_v^\times} \omega\left(C_{x(v^\l-1)}(z^{-1})\right) \psi(z)
+		= \widetilde{\Gcal}_{x',1}^{\textnormal{geo}}
+		$$
+		where $x' \in (v-1)^{-1}A$ satisfying $x(v^\l-1) \equiv x'(v-1) \pmod{v-1}$.
+		So including the trace map will always reduce the definition to the $\l=1$ case.
+		
+		(2) It also follows from Lemma \ref{descending-ggs} that the following “additive” analog of Hasse-Davenport lifting relation holds.
+		(Alternatively, use \eqref{gg-tilde-and-gg} and note that $\bggs_x$ is fixed by $\tau_q^{d\l}$.
+		Compare it with Proposition \ref{compatibility-of-ggs} also.)
+		$$
+		m \cdot \widetilde{\Gcal}_{x,\l}^{\textnormal{geo}}
+		= \widetilde{\Gcal}_{x,m\l}^{\textnormal{geo}}
+		\quad
+		\text{for all}
+		\quad
+		m \in \NN.
+		$$
+		This deviation from the classical Gauss sums \cite{hd1935dienullstellen}, where $m$ appears in the exponent, is also a natural phenomenon of the addition/multiplication comparison.
+		As we will see in \ref{section-more-on-geometric-gauss-sums}, the original geometric Gauss sums (i.e., including the “plus $1$”) turn out to satisfy the “desired” multiplicative relations.
+	\end{rem}
+	
+	We now consider how geometric Gauss sums react under the action of Galois elements.
+	Let $K := K_\nfk\Fqdl$ so that $\bggs_x \in K$.
+	The Galois group $\Gal(K/k)$ is canonically isomorphic to $\Gal(K_\nfk/k) \times \Gal(k\Fqdl/k)$, which is further isomorphic to $(A/\nfk)^\times \times \ZZ/d\l\ZZ$ (the first component is by Artin symbol).
+	We let $\rho_a \in \Gal(K_\nfk/k)$ be the element corresponding to $a \in (A/\nfk)^\times$ and $\tau_q \in \Gal(k\Fqdl/k)$ be the $q$-th power Frobenius on the constant field as before.
+	Finally, we let $\sigma_{a,s}$ be the element in $\Gal(K/k)$ corresponding to $(\rho_a,\tau_q^s)$ in $\Gal(K_\nfk/k) \times \Gal(k\Fqdl/k)$.
+	
+	\begin{prop}       \label{galois-action}
+		(1) $(\bggs_x)^{\sigma_{a,0}}
+		= \bggs_{ax}$ for all $a \in (A/\nfk)^\times$.      \\
+		(2) $(\bggs_x)^{\sigma_{1,-d}} = \bggs_{vx}$.
+	\end{prop}
+	
+	\begin{proof}
+		(1) follows from the commutativity of $A$-actions $\rho_a \circ \omega = \omega \circ C_a$.
+		For (2), by change of variables and using the fact that $C_v \equiv \tau^d \pmod{v}$, we have
+		$$
+		(\bggs_x)^{\sigma_{1,-d}}
+		= 1 + \sum_{z \in \FF_\Pfk^\times} \omega\left(C_{x(v^\l-1)} (z^{-q^d})\right) \psi(y)
+		= 1 + \sum_{z \in \FF_\Pfk^\times} \omega\left(C_{vx(v^\l-1)} (z^{-1})\right) \psi(y)
+		= \bggs_{vx}.
+		$$
+	\end{proof}
+	
+	\begin{rem}   \label{fixed-field}
+		Note that $v$ splits into $[K_\nfk:k]/\l \cdot d\l = [K_\nfk:k]d$ primes in $K$.
+		So the decomposition group $D$ of $v$ in $K$ (note $K/k$ is abelian) contains $\l$ elements and is generated by the Artin automorphism $\sigma_{v,d} \in D$.
+		Thus, by Proposition \ref{galois-action}(2), we see that $\bggs_x$ lies in the fixed field $K^D$ of $D$.
+		Moreover, the proposition also implies
+		$$
+		\left(\prod_{i=0}^{\l-1} \bggs_{v^ix} \right)^{\sigma_{1,d}} = \prod_{i=0}^{\l-1} \bggs_{v^ix}
+		\quad
+		\text{and}
+		\quad
+		\prod_{s=0}^{d-1} \prod_{i=0}^{\l-1} (\bggs_x)^{\sigma_{v^i,s}}
+		= \prod_{s=0}^{d\l-1} (\bggs_x)^{\sigma_{1,s}}.
+		$$
+	\end{rem}
+	
+	\subsection{A scalar product expression of geometric Gauss sums}     \label{section-a-scalar-product-expression-of-geometric-gauss-sums}
+	
+	Put $\mfk := v^\l-1$ and let $\Pfk_\mfk$ be a prime in $K_\mfk$ above $\Pfk_\nfk = \Pfk$ fixed in \ref{section-definition-and-some-basic-properties} with residue field $\FF_{\Pfk_\mfk}$.
+	Since $\FF_{\Pfk_\nfk}$ and $\FF_{\Pfk_\mfk}$ are isomorphic, we may identify
+	$$
+	\bggs_x
+	= 1 + \sum_{z \in \FF_{\Pfk_\nfk}^\times} \omega\left(C_{x(v^\l-1)}(z^{-1})\right)\psi(z)   \\
+	= 1 + \sum_{z \in \FF_{\Pfk_\mfk}^\times} \omega\left(C_{\mfk x} (z^{-1})\right)\psi(z).
+	$$
+	The following theorem serves as a key ingredient for our main result.
+	
+	\begin{thm}   \label{coleman-function-and-gauss-sum}
+		Fix $\mfk$-dual families $\{a_i\}_{i=1}^{d\l}, \{b_j\}_{j=1}^{d\l}$ and let $\{\lambda_i^*\}_{i=1}^{d\l}, \{\lambda_j\}_{j=1}^{d\l}$ be defined accordingly as in \ref{section-dual-families}.
+		Then we have
+		$$
+		\bggs_x
+		= 1 - \sum_{i=1}^{d\l} C_{\mfk x}(\lambda_i) \psi(\ovl{\lambda}{}^*_i)
+		$$
+		where we take the reduction of $\lambda_i^*$ modulo $\Pfk_\mfk$.
+		(Recall the paragraph before Proposition \ref{reduction-of-lambda*}, which says that each $\lambda_i^*$ is integral at $v$.)
+	\end{thm}
+	
+	\begin{proof}
+		From Theorem \ref{restatement-of-abp-5.4.4}(2), we have
+		$$
+		\sum_{i=1}^{d\l} \lambda_i^* \cdot \lambda_i^{q^{d\l}} = 1.
+		$$
+		Taking reduction modulo $\Pfk_\mfk$ and applying $\psi$ on both sides yield
+		$$
+		\sum_{i=1}^{d\l} \psi(\ovl{\lambda}{}^*_i) \psi(\ovl{\lambda}_i) = 1.
+		$$
+		Now, using the observation right before the theorem, we have
+		\begin{align*}
+			\bggs_x
+			&= 1 + \sum_{z \in \FF_{\Pfk_\mfk}^\times} \omega\left(C_{\mfk x} (z^{-1})\right)\psi(z) \sum_{i=1}^{d\l} \psi(\ovl{\lambda}{}^*_i) \psi(\ovl{\lambda}_i)    \\
+			&= 1 + \sum_{i=1}^{d\l} \sum_{z \in \FF_{\Pfk_\mfk}^\times} \omega\left(C_{\mfk x} (z^{-1})\right) \psi(z \ovl{\lambda}_i) \psi(\ovl{\lambda}{}^*_i)  \\
+			&= 1 + \sum_{z \in \FF_{\Pfk_\mfk}^\times} \sum_{i=1}^{d\l} \omega\left(C_{\mfk x} (z^{-1}\ovl{\lambda}_i)\right) \psi(z\ovl{\lambda}{}^*_i).
+		\end{align*}
+		The last equality is by the change of variables $z \ovl{\lambda}_i \mapsto z$.
+		We will claim that for each $z \in \FF_{\Pfk_\mfk}^\times$,
+		\begin{equation}      \label{claim-in-coleman-function-and-gauss-sum}
+			\sum_{i=1}^{d\l} \omega\left(C_{\mfk x} (z^{-1}\ovl{\lambda}_i)\right) \psi(z \ovl{\lambda}{}^*_i)
+			=  \sum_{i=1}^{d\l} \omega\left(C_{\mfk x} (\ovl{\lambda}_i)\right) \psi(\ovl{\lambda}{}^*_i).
+		\end{equation}
+		Assuming this for a moment, then the above becomes
+		$$
+		\bggs_x
+		= 1 + \sum_{z \in \FF_{\Pfk_\mfk}^\times} \sum_{i=1}^{d\l} \omega\left(C_{\mfk x} (\ovl{\lambda}_i)\right) \psi(\ovl{\lambda}{}^*_i)
+		= 1 - \sum_{i=1}^{d\l} C_{\mfk x}(\lambda_i) \psi(\ovl{\lambda}{}^*_i),
+		$$
+		where the last equality is because
+		$$
+		\omega\left(C_{\mfk x} (\ovl{\lambda}_i)\right)
+		= C_{\mfk x}\left(\omega(\ovl{\lambda}_i)\right)
+		= C_{\mfk x}(\lambda_i).
+		$$
+		And this is exactly what we want.
+		
+		It remains to prove the claim.
+		Let $X := (\ovl{\lambda}_1, \ldots, \ovl{\lambda}_{d\l})$ and $Y := (\ovl{\lambda}{}^*_1, \ldots, \ovl{\lambda}{}^*_{d\l})$ be as row vectors. 
+		From Propositions \ref{reduction-of-lambda} and \ref{reduction-of-lambda*}, we know the entries of $X$ and $Y$ are both $\Fq$-bases of the finite field $\FF_{\Pfk_\mfk}$. 
+		For each $z \in \FF_{\Pfk_\mfk}^\times$, we let $z$ act on the vectors $X$ and $Y$ componentwise by the usual multiplication, and write
+		$$
+		z^{-1}X = X\Mcal^{-1}
+		\quad
+		\text{and}
+		\quad 
+		z Y = Y\Ncal
+		$$
+		for some $\Mcal,\Ncal \in \GL_{d\l}(\Fq)$.
+		We next apply $\omega \circ C_{\mfk x}$ to the first equation componentwise and $\psi$ to the second.
+		Since they are $\Fq$-linear, we obtain
+		\begin{equation}    \label{MNcal-omega-psi}
+			\omega\left(C_{\mfk x} (z^{-1}X)\right)
+			= \omega\left(C_{\mfk x} (X)\right)  \Mcal^{-1}
+			\quad
+			\text{and}
+			\quad 
+			\psi(zY) = \psi(Y) \Ncal.
+		\end{equation}
+		In Section \ref{section-pairing-comparisons-and-geometric-gauss-sums-at-infinity} (Theorem \ref{pairing-summary} to be exact), we will show that in fact, $X$ and $Y$ are dual bases with respect to the trace pairing $\angtr{\cdot,\cdot}: \FF_{\Pfk_\mfk} \times \FF_{\Pfk_\mfk} \to \Fq$ defined by $\angtr{a,b} := \Tr_{\FF_{\Pfk}/\Fq}(ab)$.
+		Then since $\angtr{za,b} = \angtr{a,zb}$, it follows that $\Mcal = \Ncal^t$.
+		Thus, \eqref{claim-in-coleman-function-and-gauss-sum} becomes
+		\begin{align*}
+			&\sum_{i=1}^{d\l} \omega\left(C_{\mfk x} (z^{-1}\ovl{\lambda}_i)\right) \psi(z \ovl{\lambda}{}^*_i)
+			= \omega\left(C_{\mfk x} (z^{-1}X)\right) \cdot \psi(zY)^t   \\
+			\overset{\eqref{MNcal-omega-psi}}{=}{} &\omega\left(C_{\mfk x} (X)\right)  \Mcal^{-1}
+			\cdot \Ncal^t \psi(Y)^t
+			= \omega\left(C_{\mfk x} (X)\right) \cdot \psi(Y)^t
+			= \sum_{i=1}^{d\l} \omega\left(C_{\mfk x} (\ovl{\lambda}_i)\right) \psi(\ovl{\lambda}{}^*_i).
+		\end{align*}
+		This completes the claim, and hence the proof.
+	\end{proof}
+	
+	\begin{rem}   \label{ggs-and-coleman-remark}
+		Let $t,z$ be two independent variables.
+		For each $a \in A$, we let
+		$$
+		C_a(t,z) := C_a(z)|_{\T = t} \in \Fq[t,z]
+		\quad
+		\text{and}
+		\quad
+		C_a^\star (t,z) := C_a^\star(z)|_{\T = t} \in \Fq[t,z],
+		$$
+		where $C_a(z)$ is the Carlitz polynomial and $C_a^\star (z)$ is the $a$-th cyclotomic polynomial.
+		Let $O_a := \Fq[t,z]/(C_a^\star (t,z))$.
+		Then with notations as in Theorem \ref{coleman-function-and-gauss-sum}, for each $x \in \mfk^{-1}A$, the \textit{Coleman function} is defined by (see \cite[\nopp 6.3.5]{abp2004determination})
+		$$
+		g_x(t,z) := 1 - \sum_{i=1}^{d\l} C_{\mfk xb_i}(t,z) (\lambda_i^*)^{1/q}
+		\in \ovl{k} \otimes_{\Fq} O_\mfk.
+		$$
+		Note we have $g_x = g_{x+a}$ for all $a \in A$.
+		Moreover, one sees by definition that $C_{\mfk xb_i}(\T,\lambda) = C_{\mfk xb_i}(\lambda) = C_{\mfk x}(C_{b_i}(\lambda))
+		= C_{\mfk x}(\lambda_i)$.
+		Hence, by Theorem \ref{coleman-function-and-gauss-sum}, we may regard the geometric Gauss sums as the “reduction at $v$” of the twisted Coleman functions specialized at $(\T,\lambda)$.
+	\end{rem}
+	
+	Other fundamental properties of geometric Gauss sums, including their absolute values, multiplicative relations, and prime factorizations will be established in \ref{section-more-on-geometric-gauss-sums}.
+	We will also determine their signs at infinite places in \ref{section-behavior-of-geometric-gauss-sums-at-infinity}.
+	
+	\section{\texorpdfstring{$v$}{v}-adic two-variable gamma function}     \label{section-v-adic-two-variable-gamma-function}
+	
+	In this section, we recall three $v$-adic gamma functions over $k$, and derive the standard functional equations for the two-variable case.
+	
+	\subsection{Definition}
+	
+	Fix a monic irreducible $v\in A$ of degree $d$.
+	We let $k_v$ be the completion of $k$ at $v$ with ring of integers $A_v$, and $\CC_v$ be the completion of a fixed algebraic closure of $k_v$.
+	Let $\ovl{k}$ be the algebraic closure of $k$ in $\CC_v$.
+	For an element $x\in A_v$, we set
+	$$
+	x^\flat := 
+	\begin{cases}
+		x, & \text{if } x \in A_v^\times, \\
+		1, & \text{if } x\in v A_v.
+	\end{cases}
+	$$
+	We define the sign function $\sgn$ on $A$ which sends a non-zero polynomial to its leading coefficient, and put $\sgn(0) := 0$.
+	
+	Let $A_+$ be the set of all monic polynomials in $A$ and $\Ami$ be its subset consisting of monic polynomials of degree $i\geq 0$.
+	A $p$-adic number $y \in \ZZ_p$, when written as $y = \sum y_i q^i$, is always assumed that $0\leq y_i < q$.
+	Recall the following three analogs of $v$-adic gamma and factorial functions.
+	
+	\begin{defn}    \label{v-adic-gamma-definition}
+		(1) \textit{$v$-adic arithmetic gamma function} (\cite[Appendix]{goss1980modular}): Define $\vag: \ZZ_p \to A_v$ by
+		$$
+		\vag (y) := \vaf(y-1)
+		\quad
+		\text{where}
+		\quad
+		\vaf(y) := \prod_{i=0}^{\infty} \left( -\prod_{a\in \Ami} a^\flat \right)^{y_i}.
+		$$
+		(2) \textit{$v$-adic geometric gamma function} (\cite[Section 5]{thakur1991gamma}): Define $\vgg: A_v \to A_v$ by
+		$$
+		\vgg(x) := \frac{1}{x^\flat} \vgf(x)
+		\quad
+		\text{where}
+		\quad
+		\vgf(x) := \prod_{i=0}^{\infty} \left( \prod_{a\in \Ami} \frac{a^\flat}{(x+a)^\flat} \right).
+		$$
+		(3) \textit{$v$-adic two-variable gamma function} (\cite[Subsection 9.9]{goss1996basic}): Define $\vtg: A_v \times \ZZ_p \to A_v$ by
+		$$
+		\vtg(x,y)
+		:= \frac{\vgg(x,y)}{\vag(y)}
+		= \frac{1}{x^\flat} \vtf(x,y-1)
+		\quad
+		\text{and}
+		\quad
+		\vtf(x,y)
+		:= \frac{\vgf(x,y)}{\vaf(y)}
+		$$
+		where
+		$$
+		\vgg(x,y) := \frac{1}{x^\flat} \vgf(x,y-1)
+		\quad
+		\text{and}
+		\quad
+		\vgf(x,y) := \prod_{i=0}^\infty \left( \prod_{a\in\Ami} \frac{a^\flat}{(x+a)^\flat} \right)^{y_i}.
+		$$
+	\end{defn}
+	Note that in particular,
+	$$
+	\vtg\left(x , 1-\frac{1}{q-1}\right) 
+	= \epsilon \vgg(x),
+	\quad
+	\text{where}
+	\quad
+	\epsilon = \vag\left(1-\frac{1}{q-1}\right)^{-1}
+	$$
+	is a root of unity by \cite[Theorem 4.4]{thakur1991gamma}.
+	So the $v$-adic two-variable gamma function is regarded as a generalization of the arithmetic and geometric ones.
+	
+	The convergence of the two-variable case is justified by the following lemma.
+	
+	\begin{lem}
+		Let $x,y\in A$ and $n,m\in\NN$ with $x\equiv y \pmod{v^r}$ and $n\equiv m\pmod{q^s}$ for large $r,s \in \NN$.
+		Then we have
+		$$
+		\vgf(x,n) \equiv \vgf(x,m) \pmod{v^{\floor{s/d}}}
+		\quad
+		\text{and}
+		\quad
+		\vgf(x,m) \equiv \vgf(y,m) \pmod{v^r}.
+		$$
+	\end{lem}
+	
+	\begin{proof}
+		The second congruence equation follows from the observation that for each $a\in\Ami$, $(x+a)^\flat$ and $(y+a)^\flat$ are either simultaneously $1$ or $x+a$ and $y+a$.
+		For the first one, we write $n=\sum n_iq^i$ and $m=\sum m_iq^i$ in $q$-adic expansions.
+		By assumption we have $n_i = m_i$ for $i < s$.
+		So it's sufficient to show that
+		$$
+		\prod_{a\in\Ami} \frac{a^\flat}{(x+a)^\flat} \equiv 1 \pmod{v^{\floor{s/d}}}
+		$$
+		for all $i\geq s$.
+		For the numerator, write $i=ed+j$ where $0\leq j < d$.
+		And for each $a\in\Ami$, write $a=f\cdot v^e+g$ where $\deg f=j$ and $\deg g<ed$.
+		Note that $v\nmid a$ if and only if $v\nmid g$, and as $a$ runs through $\Ami$, we get $q^i/q^{ed} = q^j$ copies of complete residue system modulo $v^e$.
+		Hence, we see by Wilson's theorem that
+		$$
+		\prod_{a\in\Ami} a^\flat
+		= \prod_{\substack{a\in\Ami \\ v\nmid a}} a
+		\equiv \left(\prod_{g \in (A/v^eA)^\times} g \right)^{q^j} 
+		\equiv -1 \pmod{v^e = v^{\floor{i/d}}}.
+		$$
+		This shows that the numerator is congruent to $-1$ modulo $v^{\floor{s/d}}$.
+		A similar argument shows that this is also true for the denominator.
+		Writing $x+a = f\cdot v^e+g$, we observe that there are $q^j$ possibilities of $f$, each corresponding to a complete residue system modulo $v^e$.
+		Hence, the result follows.
+	\end{proof}
+	
+	\subsection{Functional equations}    \label{section-functional-equations}
+	
+	In this section, we establish the standard functional equations of the $v$-adic two-variable gamma function.
+	Some of them can be easily deduced from definitions and the corresponding results for the arithmetic and geometric cases due to Thakur \cite{thakur1991gamma}, we thus omit their proofs.
+	(We note that both $\vaf(\cdot)$ and $\vgf(x,\cdot)$ fit into the framework of \cite[Section 2]{thakur1991gamma}.)
+	
+	\begin{prop}
+		Let $y,y' \in \ZZ_p$ with $y = \sum y_iq^i$ and $y' = \sum y_i'q^i$ in $q$-adic expansions.
+		If $y_i+y_i' < q$ for all $i$ (i.e., $y+y'$ has no carry over base $q$), we have
+		$$
+		\frac{\vtg(x,1+y+y')}{\vtg(x,1+y)\vtg(x,1+y')}
+		= x^\flat.
+		$$
+	\end{prop}
+	
+	\begin{thm}[Reflection formula]
+		For $(x,y) \in A_v \times \ZZ_p$, we have  \\
+		(1)
+		$$
+		\vtg(x,y) \vtg(x,1-y)
+		= (-1)^{d-1} (x^{\flat})^{q-3} \vgg(x)^{q-1}.
+		$$
+		(2)
+		$$
+		\prod_{\epsilon\in \Fqst}
+		\vtg(\epsilon x,y) \vtg(\epsilon x,1-y)
+		= \left( \frac{1}{x^{\flat}} \right)^{q-1}.
+		$$
+	\end{thm}
+	
+	\begin{thm}[Multiplication formula]
+		For $(x,y) \in A_v \times \ZZ_p$ and $n\in\NN$ with $(n,q)=1$, we have
+		$$
+		\prod_{i=0}^{n-1} \vtg\left(x,\frac{y+i}{n}\right)
+		= \left(\frac{1}{x^\flat}\right)^{n-1}
+		\left( \frac{\vgf(x,-1)}{\vaf(-1)} \right)^{(n-1)/2}
+		\vtg(x,y)
+		$$
+		where the square root is taken to be $\vgf(x,-1/2)/\vaf(-1/2)$ when $n$ is even.
+	\end{thm}
+	
+	\begin{thm}[Multiplication formula]   \label{multiplication-formula}
+		Let $x_0 \in A$ be the unique element such that $x_0 \equiv x \pmod{v}$ and $\deg x_0 < d$.
+		Then for any $g\in A_{+,h}$ with $(g,v) = 1$, we have
+		$$
+		\prod_{\alpha} \vtf\left(\frac{x+\alpha}{g},y\right) = \vtf(x,q^h y) g^{-\delta_x y_{i'-h} + m} u_g(y),
+		$$
+		or equivalently,
+		$$
+		\prod_{\alpha} \vgf\left(\frac{x+\alpha}{g},y\right)
+		= \vgf(x,q^h y) \frac{1}{\vaf(q^hy)} \vaf(y)^{q^h}
+		g^{-\delta_x y_{i'-h} + m} u_g(y),
+		$$
+		where $\alpha$ runs through a complete residue system modulo $g$, $i':=\deg x_0$, $\delta_x = 1$ if $h \leq i' <d$ and $\sgn(x_0) = -1$, and $\delta_x = 0$ otherwise, $m:=\sum_{i=h}^{d-1} y_{i-h}q^i$ is a non-negative integer, and $u_g(y)\in A_v$ is a one-unit.
+		(As always, we write $y = \sum y_i q^i$ in $q$-adic expansion.
+		Set $y_i := 0$ if $i<0$.)
+	\end{thm}
+	
+	\begin{proof}
+		Starting with $\vgf(\cdot,\cdot)$ (Definition \ref{v-adic-gamma-definition}(3)), we have
+		\begin{multline}   \label{multiplication-formula-eq-1}
+			\prod_\alpha \vgf\left(\frac{x+\alpha}{g},y\right)
+			= \lim_{N\to\infty}
+			\left( \prod_{i=0}^N \left( \prod_{a\in\Ami} \prod_{\alpha} \frac{1}{(ga+\alpha+x)^\flat} \right)^{y_i} \right)   \\
+			\left( \prod_{i=0}^N \prod_{a\in\Ami} \prod_\alpha (a^\flat)^{y_i} \right)
+			\left( \prod_{i=0}^N \left( \prod_{a\in\Ami} \prod_{\substack{\alpha \\ v\nmid ga+\alpha+x}} g \right)^{y_i} \right). 
+		\end{multline}
+		In the first term, we see from the division algorithm that for each such $a$ and $\alpha$, $ga+\alpha$ corresponds to a unique $b \in A_+$ with $h \leq \deg b\leq N+h$, and vice versa.
+		So by change of variables, the first two terms of \eqref{multiplication-formula-eq-1} are
+		\begin{align*}
+			&\left( \prod_{i=0}^N \left( \prod_{a\in\Ami} \prod_{\alpha} \frac{1}{(ga+\alpha+x)^\flat} \right)^{y_i} \right) 
+			\left( \prod_{i=0}^N \prod_{a\in\Ami} \prod_\alpha (a^\flat)^{y_i} \right)    \\
+			={} &\left( \prod_{i=h}^{N+h} \left( \prod_{b\in\Ami} \frac{b^\flat}{(b+x)^\flat} \right)^{y_{i-h}} \right)
+			\left( \prod_{i=h}^{N+h} \left( \prod_{b\in\Ami} \frac{1}{b^\flat} \right)^{y_{i-h}} \right)
+			\left( \prod_{i=0}^N \prod_{a\in\Ami} (a^\flat)^{y_i} \right)^{q^h}
+		\end{align*}
+		Note that the first term converges to $\vgf(x,q^h y)$.
+		And for the latter two, by multiplying $-1$ to each of their terms, they converge to $1/\vaf(q^h y)$ and $\vaf(y)^{q^h}$, respectively.
+		Recall by Definition \ref{v-adic-gamma-definition}(3), $\vtf(x,y) = \vgf(x,y)/\vaf(y)$.
+		Thus, \eqref{multiplication-formula-eq-1} becomes
+		$$
+		\prod_{\alpha} \vtf\left(\frac{x+\alpha}{g},y\right) = \vtf(x,q^h y)  \lim_{N\to\infty} \prod_{i=0}^N \left( \prod_{a\in\Ami} \prod_{\substack{\alpha \\ v\nmid ga+\alpha+x}} g \right)^{y_i}.
+		$$
+		
+		It remains to show that the limit converges to a power of $g$ times a one-unit.
+		By using the same change of variables again, we see that
+		$$
+		\lim_{N\to\infty} \prod_{i=0}^N \left( \prod_{a\in\Ami} \prod_{\substack{\alpha \\ v\nmid ga+\alpha+x}} g \right)^{y_i}
+		= \lim_{N\to\infty} \prod_{i=h}^{N+h} \left( \prod_{b\in\Ami} \prod_{ v \nmid b+x} g \right)^{y_{i-h}}
+		= \lim_{N\to\infty} g^{\sum_{i=h}^{N+h} k_iy_{i-h}}
+		$$
+		where
+		$$
+		k_i =
+		\begin{cases}
+			(q^d-1)q^{i-d}, & \text{if } i \geq d,  \\
+			q^i-1, & \text{if } h \leq i = i' < d  \text{ and } \sgn(x_0)=-1, \\
+			q^i, & \text{otherwise},
+		\end{cases}
+		$$
+		which counts the cardinality of the set $\{b \in\Ami \mid v \nmid b+x\}$.
+		Thus, by the definitions of $\delta_x,i'$ and $m$, we have
+		$$
+		\sum_{i=h}^{N+h} k_iy_{i-h}
+		= -\delta_x y_{i'-h} + m + (q^d-1)\sum_{i=d}^{N+h} y_{i-h} q^{i-d}.
+		$$
+		So the power of $g$ is established.
+		On the other hand, note that $g_N := g^{(q^d-1)\sum_{i=d}^{N+h} y_{i-h} q^{i-d}}$ satisfies
+		$$
+		g_N \equiv 1 \pmod{v}
+		\quad
+		\text{and}
+		\quad
+		\frac{g_{N+1}}{g_N} = g^{(q^d-1)y_{N+1}q^{N+1+h-d}} \equiv 1 \pmod{v^{q^{N+1+h-d}}}.
+		$$ 
+		So by the non-Archimedean property, the limit converges to a one-unit $u_g(y)$.
+		This completes the proof.
+	\end{proof}
+	
+	For $\kappa_1,\kappa_2 \in \CC_v^\times$, we write $\kappa_1 \sim \kappa_2$ if $\kappa_1/\kappa_2 \in \ovl{k}^\times$.
+	
+	\begin{prop}
+		The one-unit part $u_g(y)$ in Theorem \ref{multiplication-formula} is algebraic over $k$ for all $y \in (\QQ \cap \ZZ_p) \setminus \ZZ$.
+	\end{prop}
+	
+	\begin{proof}
+		Assume $y \in (q^t-1)^{-1}\ZZ$.
+		During the proof of Theorem \ref{multiplication-formula}, we saw that
+		$$
+		u_g(y)
+		= \lim_{N\to\infty} g^{ (q^d-1)\sum_{i=d}^{N+h} y_{i-h} q^{i-d} }
+		= \lim_{N\to\infty} g^{ (q^d-1)q^{h-d} \sum_{i=d-h}^{N} y_i q^i }.
+		$$
+		Let $n \in \NN$ be large enough so that we have $y_{nt+i} = y_{nt+j}$ if and only if $i \equiv j \pmod{t}$.
+		Put $m := \sum_{i=nt}^{nt+t-1} y_iq^i$.
+		Then the $(q^t-1)$-st power of $u_g(y)$ is seen to be
+		$$
+		u_g(y)^{q^t-1}
+		\sim \lim_{N\to\infty} g^{ (q^d-1) (q^t-1) \sum_{i=nt}^{(n+N)t-1} y_i q^i }
+		= \lim_{N\to\infty} g^{ (q^d-1)(q^{Nt}-1)m}
+		\sim \lim_{N\to\infty} g^{ (q^d-1)q^{Nt}}
+		= 1
+		$$
+		as $g^{q^d-1} \equiv 1 \pmod{v}$.
+		Hence, $u_g(y)$ is algebraic.
+	\end{proof}
+	
+	We conclude this section by presenting monomial relations among special $v$-adic gamma values.
+	They are all immediate consequences of the functional equations of $\vtg(\cdot,\cdot)$ we have seen in this section.
+	
+	\begin{cor}    \label{monomial-relation}
+		Let $x\in (k \cap A_v) \setminus A$ and $y\in (\QQ \cap \ZZ_p) \setminus \ZZ$.  \\
+		(1) For any $a\in A$ and $n \in \ZZ$,
+		$$
+		\vtg(x+a,y+n)
+		\sim
+		\vtg(x,y).
+		$$
+		(2)
+		$$
+		\vtg(x,y) \vtg(x,1-y)
+		\sim \vgg(x)^{q-1}
+		\quad
+		\text{and}
+		\quad
+		\prod_{\epsilon\in \Fqst}
+		\vtg(\epsilon x,y) \vtg(\epsilon x,1-y)
+		\sim 1.
+		$$
+		(3) Suppose $y \in (q^t-1)^{-1}\ZZ$.
+		Write the fractional part of $-y$ as $\sum_{s=0}^{t-1} r_sq^s/(q^t -1)$ where $0 \leq r_s < q$ for all $s$.
+		Then
+		$$
+		\vtg(x,y)
+		\sim
+		\prod_{s=0}^{t-1} \vtg \left(x , 1-\frac{q^s}{q^t-1}\right)^{r_s}.
+		$$
+		(4) For any $n \in \NN$ with $(n,q) = 1$,
+		$$
+		\prod_{i=0}^{n-1} \vtg\left( x,\frac{y+i}{n} \right)
+		\sim
+		\vtg(x,y)\vgg(x)^{(n-1)(q-1)/2}.
+		$$
+		(5) For any $g \in A_{+,h}$ with $(g,v) = 1$,
+		$$
+		\prod_{\substack{\alpha \in A \\ \deg \alpha < \deg g}} \vtg \left(\frac{x+\alpha}{g},y\right)
+		\sim
+		\vtg(x,q^h y). 
+		$$
+	\end{cor}
+	
+	\section{Gross-Koblitz-Thakur formulas and their applications}
+	
+	In this section, we prove the main result of this paper, the Gross-Koblitz-Thakur formulas for $v$-adic geometric and two-variable gamma functions.
+	We will also use it to establish further properties of geometric Gauss sums, including their absolute values, analogs of Hasse-Davenport relations, and an analog of Stickelberger's theorem on prime factorizations.
+	
+	As in Section \ref{section-geometric-gauss-sums}, we let $\nfk \in A_+$ which is relatively prime to $v$ and $\mfk := v^\l-1$ where $\l$ is the order of $v$ modulo $\nfk$.
+	Recall that we assumed $\Pfk$ is any prime in $K_\nfk$ above $v$, and $\psi: \FF_\Pfk \to \Fqdl$ is any $\Fq$-algebra isomorphism.
+	Now, we choose $\Pfk$ so that the completion of $K_\nfk$ at $\Pfk$ is contained in $\CC_v$, as fixed in Section \ref{section-v-adic-two-variable-gamma-function} (with ring of integers $\Ocal_{\nfk,\Pfk}$), and $\psi$ as the usual Teichmüller embedding from $\FF_\Pfk = \Ocal_\nfk/\Pfk$ into $\Fqdl \sbe \Ocal_{\nfk,\Pfk}$.
+	We mention that any other such $\Fq$-algebra isomorphisms are some $q$ powers of the Teichmüller embedding.
+	
+	We can regard $\psi: \FF_{\Pfk} \to \Fqdl$ as the “arithmetic” Teichmüller character, which satisfies
+	\begin{equation}   \label{ari-teichmüller}
+		\psi(\ovl{\alpha}) = \lim_{N \to \infty} \alpha^{q^{Nd\l}}
+		\quad
+		\text{for all}
+		\quad
+		\alpha \in \Ocal_{\nfk,\Pfk}.
+	\end{equation}
+	Correspondingly, for the “geometric” Teichmüller character $\omega: C(\FF_{\Pfk}) \to \Lambda_{\mfk}$ defined in \ref{section-definition-and-some-basic-properties}, we have
+	\begin{equation}    \label{geo-teichmüller}
+		\omega(\ovl{\alpha}) = \lim_{N \to \infty} C_{v^{N\l}} (\alpha)
+		\quad
+		\text{for all}
+		\quad
+		\alpha \in \Ocal_{\nfk,\Pfk}.
+	\end{equation}
+	
+	\subsection{Gross-Koblitz-Thakur formulas for \texorpdfstring{$v$}{v}-adic gamma functions}     \label{section-gkt-formulas-for-v-adic-gamma-functions}
+	
+	For each $y \in \QQ$, we define its fractional part $\ang{y}$ as the unique number such that $0 \leq |\ang{y}| <1$ and $y \equiv \ang{y} \pmod{\ZZ}$.
+	Similarly, for each $x \in k$, we define its $A$-fractional part $\anginf{x}$ as the unique element in $k$ such that $0 \leq |\anginf{x}|_\infty < 1$ and $x \equiv \anginf{x} \pmod{A}$.
+	(Here, $|\cdot|_\infty$ is the usual $\infty$-adic absolute value on $k$.)
+	
+	For any $x \in \nfk^{-1} A$ and $y \in (q^{d\l}-1)^{-1} \ZZ$, we write
+	$$
+	\ang{y} = \sum_{s=0}^{d\l-1} \frac{y_s q^s}{q^{d\l}-1}
+	\quad
+	(0 \leq y_s < q \text{ for all } s),
+	$$
+	and define the special monomials of geometric Gauss sums by the action of the group ring element $\sum_{s=0}^{d\l-1} y_s \tau_q^s$ on $\bggs_x$ (recall $\tau_q$ denotes the canonical extension of the $q$-th power Frobenius on the constant field).
+	That is, define
+	\begin{equation}    \label{product-of-ggs}
+		\ggs(x,y) := \prod_{s=0}^{d\l-1} (\bggs_x)^{y_s \tau_q^s}
+		\quad
+		\text{and}
+		\quad
+		\ggs(x)
+		:= \ggs \left(x , \frac{1}{q-1} \right)
+		:= \prod_{s=0}^{d\l-1} (\bggs_x)^{\tau_q^s}.
+	\end{equation}
+	
+	\begin{thm}[Analog of Gross-Koblitz-Thakur formula]      \label{first-gkt-formula}
+		Suppose $x \in \nfk^{-1} A$ and $y \in (q^{d\l}-1)^{-1} \ZZ$ are given by
+		$$
+		\anginf{x} = \sum_{i=0}^{\l-1} \frac{x_i v^i}{v^\l-1}
+		\quad
+		(\deg x_i < d \text{ for all } i),
+		\quad
+		\ang{y} = \frac{q^s}{q^{d\l}-1}
+		\quad
+		(0 \leq s < d\l).
+		$$
+		Then we have
+		$$
+		\ggs(x,y)
+		= \delta_x^{(s)} \cdot
+		\prod_{i=0}^{\l-1} \vgf \left( \anginf{v^ix}, -\ang{|v^i|_\infty y} \right)^{-1}
+		$$
+		where $\delta_x^{(s)}$ is defined as follows:
+		Let $0 \leq e \leq \l-1$ be the unique integer such that $ed \leq s < (e+1)d$ and $s' := s - ed$ be the unique integer such that $s' \equiv s \pmod{d}$ and $0 \leq s' < d$.
+		Then $\delta_x^{(s)} := v \anginf{v^{\l-e-1}x}$ if $x_e \in A_{+,s'}$ and $1$ otherwise.
+	\end{thm}
+	
+	\begin{proof}
+		Since all the quantities are unchanged when replacing $(x,y)$ by $(\anginf{x},\ang{y})$, we may assume $\anginf{x} = x$ and $\ang{y} = y$.
+		For each $0 \leq i \leq \l-1$, set
+		$$
+		\ang{|v^i|_\infty y}
+		= \ang{q^{di}y}
+		= \ang{\frac{q^{s+di}}{q^{d\l}-1}}
+		=: \frac{q^{s_i}}{q^{d\l}-1}
+		$$
+		where $s_i \equiv s+di \pmod{d\l}$ with $0 \leq s_i < d\l$ (the index is considered modulo $\l$).
+		Then by the definition of $\vgf(\cdot,\cdot)$ (Definition \ref{v-adic-gamma-definition}(3)), we have
+		\begin{equation}   \label{gkt-eq1}
+			\prod_{i=0}^{\l-1} \vgf \left( \anginf{v^ix}, -\ang{|v^i|_\infty y} \right)
+			= \lim_{N\to\infty}  \prod_{i=0}^{\l-1} \prod_{j=0}^N  \prod_{a \in A_{+,s_i+jd\l}} \frac{a^\flat}{\left(\anginf{v^ix}+a\right)^\flat}.       
+		\end{equation}
+		Put $x_\l := x_0$ and note that $\anginf{v^ix} \equiv -x_{\l-i} \pmod{v}$ in $A_v$ for all $0\leq i \leq \l-1$.
+		So
+		$$
+		v \mid \anginf{v^ix} + a
+		\iff a \equiv x_{\l-i} \pmod{v}.
+		$$
+		We now split the right-hand side of \eqref{gkt-eq1} into two cases according to the value of $s_i$:
+		\begin{itemize}
+			\item Case 1:
+			$s_i = s'$ (which means $i \equiv \l-e \pmod{\l}$ as $s_i \equiv s+d(\l-e) \equiv s' \pmod{d\l}$).
+			Then \eqref{gkt-eq1} corresponds to
+			\begin{align}
+				&\prod_{j=0}^N  \prod_{a \in A_{+,s'+jd\l}} \frac{a^\flat}{\left(\anginf{v^{\l-e} x}+a \right)^\flat}     \nonumber     \\
+				={} &\left( \prod_{a \in A_{+,s'}} \frac{a^\flat}{\left(\anginf{v^{\l-e} x}+a\right)^\flat} \right)
+				\left( \prod_{j=1}^N  \prod_{a \in A_{+,s'+jd\l}} \frac{a^\flat}{\left(\anginf{v^{\l-e} x}+a\right)^\flat} \right).     \label{gkt-case1}
+			\end{align}
+			The reason of singling out $j=0$ term is because $0 \leq s' <d$, making the situation slightly different.
+			For the first term, the numerator $a$ is never divisible by $v$ as $0 \leq \deg a = s' < d$.
+			And the denominator $\anginf{v^{\l-e} x}+a$ is divisible by $v$ if and only if $a = x_e \in A_{+,s'}$, in which case $\anginf{v^{\l-e} x} + a = v\anginf{v^{\l-e-1}x}$.
+			So this term is (recall \eqref{Psi} the definition of $\Psi$)
+			\begin{align*}
+				\prod_{a \in A_{+,s'}} \frac{a^\flat}{\left(\anginf{v^{\l-e} x}+a\right)^\flat}
+				&= \delta_x^{(s)}
+				\prod_{a \in A_{+,s'}} 	\frac{a}{\anginf{v^{\l-e} x}+a}   \\
+				&= \delta_x^{(s)} \left(1+ \Psi_{s'}\left(\anginf{v^{\l-e} x}\right)\right)^{-1}.
+			\end{align*}
+			For the second term, note that when $a \in A_{+,s'+jd\l}$, we have $v \mid \anginf{v^{\l-e} x} + a$ if and only if $a \equiv x_e \pmod{v}$.
+			And in this case, $a = x_e + va'$ for some $a' \in A_{+,s'+jd\l-d}$ and $\anginf{v^{\l-e}x} + a = v(\anginf{v^{\l-e-1}x} + a')$.
+			So this term is
+			\begin{align*}
+				&\prod_{j=1}^N \prod_{a \in A_{+,s'+jd\l}} \frac{a^\flat}{\left(\anginf{v^{\l-e}x}+a\right)^\flat}   \\
+				={} &\prod_{j=1}^N \frac{ \prod_{a\in A_{+,s'+jd\l}} a \Big/ \prod_{a\in A_{+,s'+jd\l-d}} va }{ \prod_{a\in A_{+,s'+jd\l}} \left(\anginf{v^{\l-e}x}+a\right) \Big/ \prod_{a\in A_{+,s'+jd\l-d}} v\left(\anginf{v^{\l-e-1}x} + a\right) }      \\
+				={} &\prod_{j=1}^N \frac{1+\Psi_{s'+jd\l-d} \left(\anginf{v^{\l-e-1}x}\right)}{1+\Psi_{s'+jd\l} \left(\anginf{v^{\l-e}x}\right)}.
+			\end{align*}
+			Hence, \eqref{gkt-case1} becomes
+			$$
+			\delta_x^{(s)} \left(1+ \Psi_{s'}\left(\anginf{v^{\l-e}x}\right)\right)^{-1}
+			\prod_{j=1}^N \frac{1+\Psi_{s'+jd\l-d} \left(\anginf{v^{\l-e-1}x}\right)}{1+\Psi_{s'+jd\l} \left(\anginf{v^{\l-e}x}\right)}.
+			$$
+			
+			\item Case 2:
+			$s_i \neq s'$ (which means $i \not\equiv \l-e \pmod{\l}$).
+			Note that in this case, $d\leq s_i < d\l$.
+			So similar to the second term in the previous case, when $a \in A_{+,s_i+jd\l}$, we have $v \mid \anginf{v^ix} + a$ if and only if $a \equiv x_{\l-i} \pmod{v}$.
+			And in this case, $a = x_{\l-i} + va'$ for some $a' \in A_{+,s_i+jd\l-d}$ and $\anginf{v^ix} + a = v(\anginf{v^{\l+i-1}x} + a')$.
+			So \eqref{gkt-eq1} corresponds to
+			\begin{align*}
+				&\prod_{j=0}^N \prod_{a \in A_{+,s_i+jd\l}} \frac{a^\flat}{\left(\anginf{v^ix}+a\right)^\flat}   \\
+				={} &\prod_{j=0}^N \frac{ \prod_{a\in A_{+,s_i+jd\l}} a \Big/ \prod_{a\in A_{+,s_i+jd\l-d}} va }{ \prod_{a\in A_{+,s_i+jd\l}} \left(\anginf{v^ix}+a\right) \Big/ \prod_{a\in A_{+,s_i+jd\l-d}} v \left(\anginf{v^{\l+i-1}x} + a\right) }      \\
+				={} &\prod_{j=0}^N \frac{1+\Psi_{s_i+jd\l-d} \left(\anginf{v^{\l+i-1}x}\right)}{1+\Psi_{s_i+jd\l} \left(\anginf{v^ix}\right)}.   
+			\end{align*}
+		\end{itemize}
+		
+		Combining the results of these two cases, the right-hand side of \eqref{gkt-eq1} is seen to be
+		\begin{multline*}
+			\delta_x^{(s)}
+			\lim_{N\to\infty} \left( \frac{1}{1+ \Psi_{s'} \left(\anginf{v^{\l-e}x}\right)} \prod_{j=1}^N \frac{1+\Psi_{s'+jd\l-d} \left(\anginf{v^{\l-e-1}x}\right)}{1+\Psi_{s'+jd\l} \left(\anginf{v^{\l-e}x}\right)} \right)
+			\\
+			\left( \prod_{\substack{i=0 \\ i \not\equiv \l-e \bmod \l}}^{\l-1} \prod_{j=0}^N \frac{1+\Psi_{s_i+jd\l-d} \left(\anginf{v^{\l+i-1}x}\right)}{1+\Psi_{s_i+jd\l} \left(\anginf{v^ix}\right)} \right).
+		\end{multline*}
+		A careful inspection shows that except for the term
+		$$
+		\left(1+\Psi_{s_{\l-e-1}+Nd\l} \left(\anginf{v^{\l-e-1}x}\right) \right)^{-1}
+		= \left(1+\Psi_{s+d(\l-e-1)+Nd\l} \left(\anginf{v^{\l-e-1}x}\right) \right)^{-1},
+		$$
+		the denominator of the former product will cancel out the numerator of the latter one.
+		And it converges to
+		\begin{align*}
+			&\lim_{N \to \infty} \left(1+\Psi_{s+d(\l-e-1)+Nd\l} \left(\anginf{v^{\l-e-1}x}\right) \right)^{-1}   \\
+			={} &\lim_{N \to \infty} \left( 1 - \sum_{i=1}^{d\l} (\lambda_i^*)^{q^{s+d(\l-e-1)+Nd\l}} C_{\mfk\anginf{v^{\l-e-1}x}}(\lambda_i) \right)^{-1}    \\
+			={} &\left( 1 - \sum_{i=1}^{d\l} \psi(\ovl{\lambda}{}^*_i)^{q^{s+d(\l-e-1)}} C_{\mfk\anginf{v^{\l-e-1}x}}(\lambda_i) \right)^{-1}   \\
+			={} &\left(\bggs_{v^{\l-e-1}x}\right)^{-\sigma_{1,s+d(\l-e-1)}}
+			= (\bggs_x)^{-\sigma_{1,s}}
+			= \ggs (x,y)^{-1}
+		\end{align*}
+		by applying Theorem \ref{restatement-of-abp-5.4.4}(1), \eqref{ari-teichmüller}, Theorem \ref{coleman-function-and-gauss-sum}, Proposition \ref{galois-action}(2), and \eqref{product-of-ggs} sequentially.
+		This completes the proof.
+	\end{proof}
+	
+	\begin{rem}
+		In the above proof, the telescoping product of the special $v$-adic gamma values and the algebraicity of the $v$-adic limit were first demonstrated by Thakur in the geometric case \cite[Section 8.6]{thakur2004function}.
+		In there, the limit was interpreted as the Coleman functions evaluated at particular point.
+		Our Theorem \ref{first-gkt-formula} generalizes his result to the two-variable case and explains the limit in terms of geometric Gauss sums (recall Remark \ref{ggs-and-coleman-remark}).
+	\end{rem}
+	
+	Note that the formula in Theorem \ref{first-gkt-formula} involves not a product but a single geometric Gauss sum.
+	Hence, we may use it to obtain analogous formulas for the geometric and two-variable gamma functions.
+	
+	\begin{thm}[Gross-Koblitz-Thakur formula for geometric gamma function]      \label{gkt-formula-for-geometric-gamma-function}
+		For any $x \in \nfk^{-1}A$, write
+		$$
+		\anginf{x} = \sum_{i=0}^{\l-1} \frac{x_i v^i}{v^\l-1}
+		\quad
+		(\deg x_i < d \text{ for all } i).
+		$$
+		Then we have
+		$$
+		\ggs (x)
+		= \prod_{i=0}^{\l-1} \frac{\delta_{x,i}}{\anginf{v^ix}^\flat}
+		\cdot
+		\prod_{i=0}^{\l-1} \vgg \left( \anginf{v^ix} \right)^{-1}
+		$$
+		where $\delta_{x,i} := v\anginf{v^{\l-i-1}x}$ if $x_i \in A_+$ and $1$ otherwise.
+	\end{thm}
+	
+	\begin{proof}
+		Note we may once again assume $\anginf{x} = x$.
+		For each $0 \leq s <d$, by Definition \ref{v-adic-gamma-definition}(3) and Theorem \ref{first-gkt-formula}, one has
+		\begin{align*}
+			\prod_{i=0}^{\l-1} \vgf \left( \anginf{v^ix}, \frac{q^s}{1-q^d} \right)
+			&= \prod_{i=0}^{\l-1} \prod_{j=0}^{\l-1} \vgf \left( \anginf{v^ix}, -\ang{\frac{q^{s+dj+di}}{q^{d\l}-1}} \right)   \\
+			&= \prod_{j=0}^{\l-1} \delta_x^{(s,j)} \ggs \left(x, \frac{q^{s+dj}}{q^{d\l}-1}\right)^{-1} 
+		\end{align*}
+		where $\delta_x^{(s,j)} = v\anginf{v^{\l-j-1}x}$ if $x_j \in A_{+,s}$ and $1$ otherwise.
+		Now, we may reproduce the geometric gamma function in terms of the above equation.
+		More precisely, one has
+		\begin{align}    \label{reflection-for-vgf}
+			&\prod_{i=0}^{\l-1} \vgf(\anginf{v^ix})
+			= \prod_{i=0}^{\l-1} \prod_{s=0}^{d-1} \vgf \left( \anginf{v^ix}, \frac{q^s}{1-q^d} \right)    \\
+			={} &\prod_{s=0}^{d-1}  \prod_{j=0}^{\l-1} \delta_x^{(s,j)} \ggs \left(x, \frac{q^{s+dj}}{q^{d\l}-1}\right)^{-1}
+			= \left( \prod_{i=0}^{\l-1} \delta_{x,i} \right) \ggs (x)^{-1}.  \nonumber
+		\end{align}
+	\end{proof}
+	
+	Next, we consider the two-variable case.
+	
+	\begin{thm}   \label{gkt-formula-for-geo-two}
+		For any $x \in \nfk^{-1} A$ and $y \in (q^{d\l}-1)^{-1} \ZZ$, write
+		$$
+		\anginf{x} = \sum_{i=0}^{\l-1} \frac{x_i v^i}{v^\l-1}
+		\quad
+		(\deg x_i < d \text{ for all } i),
+		\quad
+		\ang{y} = \sum_{s=0}^{d\l-1} \frac{y_s q^s}{q^{d\l}-1}
+		\quad
+		(0 \leq y_s < q \text{ for all } s).
+		$$
+		Then we have
+		$$
+		\ggs (x,y)
+		= \left( \prod_{i=0}^{\l-1}
+		\frac{\anginf{v^ix}^\flat}{\delta_{x,i}^{q-1-y_{di+\deg x_i}}} \right)
+		\ggs(x)^{q-1}
+		\prod_{i=0}^{\l-1} \vgg \left( \anginf{v^ix}, \ang{|v^i|_\infty y} \right)
+		$$
+		where $\delta_{x,i} := v\anginf{v^{\l-i-1}x}$ if $x_i \in A_+$ and $1$ otherwise.
+	\end{thm}
+	
+	\begin{proof}
+		We assume $\anginf{x} = x$ and $\ang{y} = y$.
+		By Definition \ref{v-adic-gamma-definition}(3) and Theorem \ref{first-gkt-formula}, one sees that
+		\begin{align*}
+			&\prod_{i=0}^{\l-1} \vgf \left( \anginf{v^ix}, -\ang{|v^i|_\infty y} \right)
+			= \prod_{s=0}^{d\l-1} \prod_{i=0}^{\l-1} \vgf \left( \anginf{v^ix}, -\ang{\frac{q^{s+di}}{q^{d\l}-1}} \right)^{y_s}      \\
+			={} &\prod_{s=0}^{d\l-1} \left( \delta_x^{(s)} \ggs\left(x,\frac{q^s}{q^{d\l}-1}\right)^{-1} \right)^{y_s}
+			= \left( \prod_{s=0}^{d\l-1} \left( \delta_x^{(s)} \right)^{y_s} \right) \ggs (x,y)^{-1}
+		\end{align*}
+		where $\delta_x^{(s)}$ is defined as in Theorem \ref{first-gkt-formula}:
+		Let $0 \leq e \leq \l-1$ be the unique integer such that $ed \leq s < (e+1)d$ and $s' := s - ed$.
+		Then $\delta_x^{(s)} := v \anginf{v^{\l-e-1}x}$ if $x_e \in A_{+,s'}$ and $1$ otherwise.
+		
+		For each $s$, we write $s = ed + r$ for some unique $0 \leq r \leq d-1$.
+		Then $\delta_x^{(s)} = v \anginf{v^{\l-e-1}x}$ if $x_e \in A_{+,r}$ (in which case, $s = ed + \deg x_e$) and $1$ otherwise.
+		Therefore, the delta part is seen to be
+		$$
+		\prod_{s=0}^{d\l-1} \left( \delta_x^{(s)} \right)^{y_s}
+		= \prod_{i=0}^{\l-1} \delta_{x,i}^{y_{di+\deg x_i}}.
+		$$
+		So we get
+		\begin{align*}
+			\prod_{i=0}^{\l-1} \vgf \left( \anginf{v^ix}, -\ang{|v^i|_\infty y} \right)
+			&= \left( \prod_{i=0}^{\l-1} \delta_{x,i}^{y_{di+\deg x_i}} \right)
+			\cdot
+			\ggs (x,y)^{-1}.
+		\end{align*}
+		
+		Using this, the reflection formula of $\vgf(\cdot,\cdot)$ \cite[Lemma 2.3]{thakur1991gamma}, and Gross-Koblitz-Thakur formula for the geometric case (Theorem \ref{gkt-formula-for-geometric-gamma-function}, but see \eqref{reflection-for-vgf}), we have
+		\begin{align*}
+			&\prod_{i=0}^{\l-1} \vgg \left( \anginf{v^ix}, \ang{|v^i|_\infty y} \right)   \\
+			={} &\prod_{i=0}^{\l-1} \frac{1}{\anginf{v^ix}^\flat} \vgf\left(\anginf{v^ix}\right)^{q-1}
+			\vgf \left( \anginf{v^ix}, -\ang{|v^i|_\infty y} \right)^{-1}       \\
+			={} &\left( \prod_{i=0}^{\l-1} \frac{\delta_{x,i}^{q-1-y_{di+\deg x_i}}}{\anginf{v^ix}^\flat} \right)
+			\ggs (x)^{-(q-1)} \ggs(x,y).
+		\end{align*}
+	\end{proof}
+	
+	We now recall Thakur's analog of Gross-Koblitz formula for the $v$-adic arithmetic gamma function \cite{thakur1988gauss}.
+	Let $\chi: A/v \to \Fqd \sbe \ovl{k}$ be the usual Teichmüller character, and choose an $A$-module isomorphism $\psi :A/v \to \Lambda_v$.
+	Then we define the \textit{arithmetic Gauss sum} to be
+	$$
+	\bags
+	:= -\sum_{z\in (A/v)^\times} \chi(z^{-1}) \psi(z).
+	$$
+	(The same element is denoted as $g_0$ in the original paper.)
+	Furthermore, for $y \in (q^{d\l}-1)^{-1} \ZZ$, we write
+	$$
+	\ang{y} = \sum_{s=0}^{d\l-1} \frac{y_s q^s}{q^{d\l}-1}
+	\quad
+	(0 \leq y_s < q \text{ for all } s),
+	$$
+	and define the special monomial of arithmetic Gauss sums as
+	$$
+	\ags(y) := \prod_{s=0}^{d\l-1} (\bags)^{y_s \tau_q^s}.
+	$$
+	
+	Let $\varpi_v \in k_v(\psi(1))$ be the unique $(q^d-1)$-st roots of $-v$ such that $\varpi_v \equiv -\psi(1) \pmod{\psi(1)^2}$.
+	Then under this setting, Thakur proved the following Gross-Koblitz formula for the $v$-adic arithmetic gamma function (\cite[Theorem VI]{thakur1988gauss} and \cite[Theorem 4.8]{thakur1991gamma}).
+	\begin{equation}    \label{gkt-formula-for-ari}
+		\ags(y) = (-1)^{\l(d-1)} \varpi_v^{(q^d-1) \sum_{i=0}^{\l-1} \ang{|v^i|_\infty y}} \prod_{i=0}^{\l-1} \vag\left(\ang{|v^i|_\infty y}\right).
+	\end{equation}
+	In particular, this implies that $\vag(r/(q^d-1))$ is algebraic for all $r \in \ZZ$.
+	
+	Now, combining Theorem \ref{gkt-formula-for-geo-two} with \eqref{gkt-formula-for-ari}, we obtain immediately an analogous formula for the two-variable case.
+	Put
+	$$
+	G_\l (x,y) := \frac{\ggs(x,y)}{\ags(y)}.
+	$$
+	
+	\begin{thm}[Gross-Koblitz-Thakur formula for two-variable gamma function]     \label{gkt-formula-for-two-variable-gamma-function}
+		For any $x \in \nfk^{-1} A$ and $y \in (q^{d\l}-1)^{-1} \ZZ$, write
+		$$
+		\anginf{x} = \sum_{i=0}^{\l-1} \frac{x_i v^i}{v^\l-1}
+		\quad
+		(\deg x_i < d \text{ for all } i),
+		\quad
+		\ang{y} = \sum_{s=0}^{d\l-1} \frac{y_s q^s}{q^{d\l}-1}
+		\quad
+		(0 \leq y_s < q \text{ for all } s).
+		$$
+		Then we have
+		\begin{multline*}
+			G_{\l} (x,y)
+			= \left( \prod_{i=0}^{\l-1}
+			\frac{\anginf{v^ix}^\flat}{\delta_{x,i}^{q-1-y_{di+\deg x_i}}} \right)
+			\ggs (x)^{q-1} 
+			\\
+			\left( (-1)^{\l(d-1)} \varpi_v^{-(q^d-1) \sum_{i=0}^{\l-1} \ang{|v^i|_\infty y}} \right)
+			\prod_{i=0}^{\l-1} \vtg\left( \anginf{v^ix}, \ang{|v^i|_\infty y} \right)
+		\end{multline*}
+		where $\delta_{x,i} := v\anginf{v^{\l-i-1}x}$ if $x_i \in A_+$ and $1$ otherwise.
+	\end{thm}
+	
+	As in the classical and arithmetic cases, Theorems \ref{gkt-formula-for-geometric-gamma-function}, \ref{gkt-formula-for-geo-two}, and \ref{gkt-formula-for-two-variable-gamma-function} yield a class of algebraic special $v$-adic gamma values.
+	
+	\begin{cor}
+		For any $a \in A$ and $r \in \ZZ$, $\vgg(a/(v-1))$, $\vgg(a/(v-1),r/(q^d-1))$ and $\vtg(a/(v-1),r/(q^d-1))$ are algebraic over $k$.
+	\end{cor}
+	
+	\subsection{More on geometric Gauss sums}    \label{section-more-on-geometric-gauss-sums}
+	
+	Now, we use our results in the previous section to establish further arithmetic properties of geometric Gauss sums.
+	We keep the same notations as in the paragraph before Proposition \ref{galois-action}.
+	First, we have the following “reflection formula” for geometric Gauss sums.
+	(Compare this with the analogous result of the arithmetic case \cite[Section 2]{thakur1993behaviour}.
+	See Anderson's paper \cite[\nopp 3.4]{anderson1992twodimensional} also.)
+	
+	\begin{thm}    \label{gauss-sum-lies-above-v}
+		For any $x \in \nfk^{-1}A \setminus A$, we have
+		$$
+		\prod_{\epsilon \in \Fqst} \prod_{s=0}^{d\l-1} (\bggs_x)^{\sigma_{\epsilon,s}}
+		=\prod_{\epsilon \in \Fqst} \ggs(\epsilon x)
+		= v^\l.
+		$$
+		In particular, the prime factorization of $\bggs_x$ only involves primes above $v$.
+	\end{thm}
+	
+	\begin{proof}
+		The first assertion follows from Proposition \ref{galois-action}(1) and \eqref{product-of-ggs}.
+		For the second, we may assume $\anginf{x} = x$ and write
+		$$
+		x = \sum_{i=0}^{\l-1} \frac{x_i v^i}{v^\l-1}
+		\quad
+		(\deg x_i < d \text{ for all } i).
+		$$
+		By Theorem \ref{gkt-formula-for-geometric-gamma-function} (but see \eqref{reflection-for-vgf}), we have
+		\begin{equation}     \label{gauss-sum-above-v-eq1}
+			\prod_{\epsilon \in \Fqst} \ggs (\epsilon x)
+			= \prod_{\epsilon \in \Fqst} \left( \prod_{i=0}^{\l-1} \delta_{\epsilon x,i} \cdot  \prod_{i=0}^{\l-1} \vgf(\anginf{v^i \epsilon x})^{-1} \right)
+		\end{equation}
+		where $\delta_{\epsilon x,i} := v\anginf{v^{\l-i-1} \epsilon x}$ if $\epsilon x_i \in A_+$ and $1$ otherwise.
+		Note the former case happens if and only if $x_i \neq 0$ and $\epsilon = \sgn( x_i)^{-1}$.
+		So the delta part is
+		$$
+		\prod_{\epsilon \in \Fqst} \prod_{i=0}^{\l-1} \delta_{\epsilon x,i}
+		= \prod_{\substack{i=0 \\ x_i \neq 0}}^{\l-1} v \cdot \sgn(x_i)^{-1} \cdot \anginf{v^{\l-i-1}x}.
+		$$
+		For the gamma (factorial) part, we apply the reflection formula of $\vgf(\cdot)$ \cite[Theorem 4.10.5]{thakur2004function} and see that
+		$$
+		\prod_{\epsilon \in \Fqst} \prod_{i=0}^{\l-1} \vgf(\anginf{v^i \epsilon x})
+		= \prod_{\substack{i=0 \\ x_i \neq 0}}^{\l-1} \sgn(x_i)^{-1} \cdot \anginf{v^{\l-i}x}.
+		$$
+		Combining these two with \eqref{gauss-sum-above-v-eq1}, we have
+		\begin{equation}   \label{gauss-sum-above-v-eq2}
+			\prod_{\epsilon \in \Fqst} \ggs(\epsilon x)
+			= \prod_{\substack{i=0 \\ x_i \neq 0}}^{\l-1} v \cdot \frac{\anginf{v^{\l-i-1}x}}{\anginf{v^{\l-i}x}}.
+		\end{equation}
+		
+		Now, we rewrite $x$ as
+		$$
+		x = \frac{x_{i_1}v^{i_1} + \cdots + x_{i_n}v^{i_n}}{v^\l-1}
+		$$
+		so that $x_{i_1},\ldots,x_{i_n}$ are all non-zero digits in the $v$-adic expansion of the numerator of $x$.
+		Then \eqref{gauss-sum-above-v-eq2} becomes
+		\begin{equation}       \label{gauss-sum-above-v-eq3}
+			\prod_{\epsilon \in \Fqst} \ggs(\epsilon x)
+			= v^n \prod_{j=1}^n \frac{\anginf{v^{\l-i_j-1}x}}{\anginf{v^{\l-i_j}x}}.
+		\end{equation}
+		In the last product, one sees that for $1\leq j \leq n-1$, the numerator of the $j$-th term cancels out the denominator of the $(j+1)$-st term, leaving $v^{i_{j+1}-i_j-1}$ in the numerator.
+		And similarly, the numerator of the last term cancels out the denominator of the first term, leaving $v^{\l+i_1-i_n-1}$ also in the numerator.
+		So \eqref{gauss-sum-above-v-eq3} becomes
+		$$
+		\prod_{\epsilon \in \Fqst} \ggs(\epsilon x)
+		= v^n \cdot v^{i_2-i_1-1} \cdot v^{i_3-i_2-1} \cdots v^{\l + i_1 - i_n - 1}
+		= v^\l.
+		$$
+		This completes the proof.
+	\end{proof}
+	
+	\begin{cor}
+		(1) For any $x \in \nfk^{-1}A$ and $y \in (q^{d\l}-1)^{-1}\ZZ$, we have
+		$$
+		\ggs(x,y) \ggs(x,1-y) = \ggs(x)^{q-1}.
+		$$
+		(2) Moreover, if $x \in \nfk^{-1}A \setminus A$, we have
+		$$
+		\prod_{\epsilon \in \Fqst}
+		\ggs(\epsilon x,y) \ggs(\epsilon x,1-y) = v^{\l(q-1)}.
+		$$
+	\end{cor}
+	
+	\begin{proof}
+		Write $\ang{y} = \sum_{s=0}^{d\l-1} y_sq^s/(q^{d\l}-1)$ where $0\leq y_s < q$ for all $s$.
+		Then the first assertion follows from \eqref{product-of-ggs} and the observation that $\ang{1-y} = \sum_{s=0}^{d\l-1} (q-1-y_s)q^s/(q^{d\l}-1)$.
+		And the second follows from (1) and Theorem \ref{gauss-sum-lies-above-v}.
+	\end{proof}
+	
+	Theorem \ref{gauss-sum-lies-above-v} has another immediate consequence concerning the absolute values of geometric Gauss sums.
+	Note that it is analogous to the classical situation, and coincides with Thakur's result of the arithmetic case \cite[Theorem IV]{thakur1988gauss}.
+	
+	\begin{prop}    \label{absolute-values}
+		The valuation (normalized so that the valuation of $\T$ is $-1$) of $\bggs_x$ at any infinite place of $K := K_{\nfk}\Fqdl$ is $-1/(q-1)$ for all $x \in \nfk^{-1}A \setminus A$.
+	\end{prop}
+	
+	\begin{proof}
+		Choose any infinite place $\td{\infty}$ of $K$ above $\infty$.
+		Let $K_{\td{\infty}}$ (resp. $k_\infty$) be the completion of $K$ at $\td{\infty}$ (resp. $k$ at $\infty$) with normalized valuation $\ord_{\td{\infty}} (\T) = -1$.
+		The Galois group $\Gal(K_{\td{\infty}}/k_\infty)$ is isomorphic to $\Fqst \times \ZZ/d\l \ZZ$ (recall \ref{section-cyclotomic-function-fields}).
+		So by Theorem \ref{gauss-sum-lies-above-v}, we have
+		$$
+		\ord_{\td{\infty}} (\bggs_x)
+		= \frac{1}{[K_{\td{\infty}} : k_\infty]} \ord_{\infty} \left( \Nr_{K_{\td{\infty}}/k_\infty} (\bggs_x) \right)
+		=  \frac{1}{(q-1)d\l} \ord_{\infty}(v^\l)
+		= -\frac{1}{q-1}.
+		$$
+	\end{proof}
+	
+	\begin{rem}   \label{remark-of-absolute-values}
+		Using the same argument, one sees that the same conclusion holds for $(\bggs_x)^{\tau_q^s}$ for all $0 \leq s \leq d\l-1$.
+	\end{rem}
+	
+	For another property of geometric Gauss sums at infinity, we will determine their signs in \ref{section-behavior-of-geometric-gauss-sums-at-infinity}.
+	Below, we establish their “multiplication formula”, which is an analog of Hasse-Davenport product relation \cite{hd1935dienullstellen}.
+	
+	\begin{thm}[Analog of Hasse-Davenport product relation]     \label{HD-product}
+		Suppose $x \in \nfk^{-1}A$ with $|x|_\infty < 1$.
+		For any $g \in A_{+,h}$ with $(g,v) = 1$, we let $f$ be the order of $v$ modulo $g\nfk$.
+		Then for any $y \in (q^{df}-1)^{-1}\ZZ$, we have
+		$$
+		\prod_{\alpha} \ggsf\left( \frac{x+\alpha}{g},y \right) \bigg/ \ggsf\left( \frac{\alpha}{g},y \right) = \ggsf(x,q^hy)
+		$$
+		where $\alpha$ runs through a complete residue system modulo $g$.
+		In particular, we have
+		$$
+		\prod_{\alpha} \ggsf\left( \frac{x+\alpha}{g} \right) \bigg/ \ggsf\left( \frac{\alpha}{g} \right) = \ggsf(x).
+		$$
+	\end{thm}
+	
+	\begin{proof}
+		It suffices to show the case $y = 1/(q^{df}-1)$.
+		The general situation will follow by applying the group ring element $\sum_{s=0}^{df-1} y_s\tau_q^s$ to both sides (we put $y = \sum_{s=0}^{df-1} y_sq^s/(q^{df}-1)$ as always).
+		Note we may also assume $x \in \nfk^{-1}A \setminus A$ because otherwise the result is trivial.
+		Observe that for each $0 \leq i \leq \l-1$, we have
+		$$
+		\left\{ \lranginf{v^i\left(\frac{x+\alpha}{g}\right)} \Biggm| \deg \alpha < \deg g \right\}
+		= \left\{ \frac{\anginf{v^ix}+\alpha}{g} \Biggm| \deg \alpha < \deg g \right\}
+		$$
+		and
+		$$
+		\left\{ \lranginf{v^i \frac{\alpha}{g}} \biggm| \deg \alpha < \deg g \right\}
+		= \left\{ \frac{\alpha}{g} \biggm| \deg \alpha < \deg g \right\}.
+		$$
+		Using these, Theorems \ref{first-gkt-formula}, \ref{multiplication-formula}, and the translation formula of $\vgf(x,\cdot)$ (see the proof of \cite[Lemma 4.6.2]{thakur2004function}), we have up to explicit rational multiples (for $\kappa_1,\kappa_2 \in \CC_v$, we write $\kappa_1 \sim_k \kappa_2$ if $\kappa_1/\kappa_2 \in k^\times$),
+		\begin{alignat*}{2}
+			& &&\prod_{\alpha} \ggsf\left( \frac{x+\alpha}{g},y \right) \bigg/ \ggsf\left( \frac{\alpha}{g},y \right)
+			\sim_k \prod_{\alpha} \prod_{i=0}^{f-1} \frac{\vgf\left(\anginf{v^i \alpha/g},-|v^i|_\infty y\right)}{\vgf\left(\anginf{v^i(x+\alpha)/g},-|v^i|_\infty y\right)}    \\
+			&= &&\prod_{i=0}^{f-1} \prod_{\alpha} \frac{\vgf\left(\alpha/g,-|v^i|_\infty y\right)}{\vgf\left((\anginf{v^ix}+\alpha)/g,-|v^i|_\infty y\right)}
+			\sim_k \prod_{i=0}^{f-1} \vgf\left(\anginf{v^ix},-|v^i|_\infty q^hy\right)^{-1}   \\
+			&\sim_k &&\prod_{i=0}^{f-1} \vgf\left(\anginf{v^ix}, -\ang{|v^i|_\infty q^hy}\right)^{-1}
+			\sim_k \ggsf(x,q^hy).
+		\end{alignat*}
+		Thus, the result is proved up to some $\kappa \in k^\times$.
+		
+		Since the geometric Gauss sums lie above $v$ by Theorem \ref{gauss-sum-lies-above-v}, we see that $\kappa$ is up to an $\Fqst$-multiple, an integral power of $v$.
+		Furthermore, note that $(x+\alpha)/g \notin A$ for all $\alpha$ and $\alpha/g \in A$ if and only if $\alpha=0$.
+		Since $x \notin A$, by Proposition \ref{absolute-values} and Remark \ref{remark-of-absolute-values}, we see that the $\infty$-adic valuation of $\kappa$ is $0$.
+		This shows that $\kappa \in \Fqst$ is a constant.
+		Finally, from the explicit expression of $\kappa$, one sees that both of its denominator and numerator are monic polynomials.
+		(Note that all the deltas coming from Theorem \ref{first-gkt-formula} have this property by the definition.)
+		Hence, we conclude that $\kappa = 1$.
+	\end{proof}
+	
+	We also have the following multiplicative relation with respect to $y$.
+	
+	\begin{thm}
+		Suppose $y \in N^{-1}\ZZ$ for some $N \in \NN$ with $(N,q) = 1$ and $0 \leq y < 1$.
+		For any $n\in\NN$ with $(n,q) = 1$, we let $f$ be the order of $q^d$ modulo $Nn$.
+		Then for any $x \in (v^f-1)^{-1}A$, we have
+		$$
+		\prod_{i=0}^{n-1} \ggsf\left(x,\frac{y+i}{n}\right)
+		= \ggsf(x)^{(n-1)(q-1)/2} \ggsf(x,y).
+		$$
+	\end{thm}
+	
+	\begin{proof}
+		We define a function $g$ on $\ZZ_p$ by
+		$$
+		g\left(1 + \sum_{i=0}^\infty y_iq^i\right) := \prod_{i=0}^{df-1} \left( (\bggs_x)^{\tau_q^i} \right)^{y_i}
+		\text{ where }
+		0 \leq y_i < q
+		\text{ for all }
+		i.
+		$$
+		Then $g$ fits into the framework of \cite[Section 2]{thakur1991gamma}, and we have for all $y \in (q^{df}-1)^{-1}\ZZ$,
+		$$
+		\ggsf(x,y) = g(1 - \ang{y}).
+		$$
+		Now, observe that
+		$$
+		\left\{ 1 - \frac{y+i}{n} \biggm| 0\leq i \leq n-1 \right\}
+		= \left\{ \frac{(1-y)+i}{n} \biggm| 0\leq i \leq n-1 \right\}.
+		$$
+		So by \cite[Lemma 2.4]{thakur1991gamma},
+		\begin{align*}
+			\prod_{i=0}^{n-1} \ggsf\left(x,\frac{y+i}{n}\right)
+			&= \prod_{i=0}^{n-1} g\left(1-\frac{y+i}{n}\right)
+			= \prod_{i=0}^{n-1} g\left(\frac{(1-y)+i}{n}\right)   \\
+			&= g(0)^{(n-1)/2} g(1-y)
+			= \ggsf(x)^{(n-1)(q-1)/2} \ggsf(x,y).
+		\end{align*}
+	\end{proof}
+	
+	For the completeness, we also consider an analog of Hasse-Davenport lifting relation \cite{hd1935dienullstellen}.
+	(Compare it with Proposition \ref{compatibility-of-ggs}.
+	See the corresponding result of the arithmetic case \cite[Theorem VIII]{thakur1988gauss} also.)
+	
+	\begin{thm}[Analog of Hasse-Davenport lifting relation]
+		Suppose $x \in \nfk^{-1}A \sbe (\nfk')^{-1}A$ where $\nfk \mid \nfk'$ with $(\nfk',v) = 1$.
+		Let $\l'$ be the order of $v$ modulo $\nfk'$ and put $m := \l' / \l \in \NN$.
+		Then for any $y \in (q^{d\l}-1)^{-1}\ZZ$, we have
+		$$
+		G_{\l'}^{\textnormal{geo}}(x,y) = \ggs(x,y)^m.
+		$$
+	\end{thm}
+	
+	\begin{proof}
+		This follows immediately from \eqref{product-of-ggs} because $\bggs_x$ is fixed by $\tau_q^{d\l}$ and
+		$$
+		\sum_{s=0}^{d\l-1} \frac{y_sq^s}{q^{d\l}-1}
+		= \sum_{j=0}^{m-1} q^{jd\l} \cdot \frac{y_0 + y_1 q+ \cdots + y_{d\l-1} q^{d\l-1}}{q^{d\l'}-1}.
+		$$
+	\end{proof}
+	
+	For the last property in this section, we consider the prime factorizations of geometric Gauss sums, which is an analog of the classical Stickelberger's theorem.
+	Set $K_{\nfk,d\l} := K_{\nfk}\Fqdl$ with ring of integers $\Ocal_{\nfk,d\l}$ and let $\Pfk_{\nfk,d\l}$ be the prime in $K_{\nfk,d\l}$ above $v$ corresponding to the inclusions $K_{\nfk,d\l} \sbe \ovl{k} \sbe \CC_v$.
+	We also let $\Pfk_\nfk$ be the prime in $K_\nfk$ below $\Pfk_{\nfk,d\l}$.
+	
+	\begin{thm}[Analog of Stickelberger's theorem]     \label{analog-of-stickelbergers-theorem}
+		Given $x \in k$ with $0 < |x|_\infty < 1$, write $x = a_0/\nfk$ where $\deg a_0 < \deg \nfk$ and $(a_0,\nfk)=1$.
+		Define
+		$$
+		\eta_{x,\nfk,d\l} := \sigma_{a_0,\deg \nfk - d\l} \cdot \eta_{\nfk,d\l}
+		\quad
+		\text{where}
+		\quad
+		\eta_{\nfk,d\l} := \sum_{\substack{a\in A_+ \\ \deg a < \deg \nfk \\ (a,\nfk)=1}}  \sigma_{a,\deg a}^{-1} \in \ZZ[\Gal(K_{\nfk,d\l}/k)].
+		$$
+		Then $\bggs_x$ has prime factorization
+		$$
+		\bggs_x \cdot \Ocal_{\nfk,d\l}
+		= \Pfk_{\nfk,d\l}^{\eta_{x,\nfk,d\l}}.
+		$$
+		Consequently, let
+		$$
+		\eta_{x,\nfk} := \rho_{a_0} \cdot \eta_{\nfk}
+		\quad
+		\text{where}
+		\quad
+		\eta_{\nfk} := \sum_{\substack{a\in A_+ \\ \deg a < \deg \nfk \\ (a,\nfk)=1}}  \rho_a^{-1} \in \ZZ[\Gal(K_{\nfk}/k)].
+		$$
+		Then $\ggs(x)$ has prime factorization
+		$$
+		\ggs(x) \cdot \Ocal_{\nfk}
+		= \Pfk_{\nfk}^{\eta_{x,\nfk}}.
+		$$
+	\end{thm}
+	
+	\begin{proof}
+		It suffices to show the case $a_0 = 1$.
+		Put $\mfk := v^\l-1$ and write
+		$$
+		\frac{1}{\nfk} = \frac{b_0}{\mfk}.
+		$$
+		Fix any $a \in A_+$, $\deg a< \deg \nfk$ with $(a,\nfk) = 1$.
+		From Theorem \ref{first-gkt-formula}, we take
+		$$
+		x
+		= \frac{a}{\nfk}
+		= \frac{ab_0}{\mfk}
+		:= \sum_{i=0}^{e} \frac{x_i v^i}{v^\l-1}
+		\quad
+		\text{and}
+		\quad
+		y = \frac{q^{\deg ab_0}}{q^{d\l}-1}
+		$$
+		where $0 \leq e \leq \l-1$, $x_e \in A_+$, and $\deg x_i < d$ for all $i$.
+		Then we have
+		\begin{equation}    \label{stickelberger-apply-gkt-formula}
+			\ggs (x,y)
+			= \left(\bggs_{ab_0/\mfk}\right)^{\sigma_{1,\deg ab_0}}
+			= v\anginf{v^{\l-e-1}x} \cdot
+			\prod_{i=0}^{\l-1} \vgf \left( \anginf{v^ix}, -\ang{|v^i|_\infty y} \right)^{-1}.
+		\end{equation}
+		By Proposition \ref{galois-action}(1),
+		$$
+		\left(\bggs_{ab_0/\mfk}\right)^{\sigma_{1,\deg ab_0}}
+		= \left(\bggs_{1/\nfk}\right)^{\sigma_{a,\deg ab_0}}.
+		$$
+		On the other hand, one sees that
+		$$
+		v\anginf{v^{\l-e-1}x}
+		= v \cdot v^{\l-e-1} x
+		= v^{\l-e} \frac{ab_0}{\mfk}.
+		$$
+		So \eqref{stickelberger-apply-gkt-formula} becomes
+		$$
+		\left(\bggs_{1/\nfk}\right)^{\sigma_{a,\deg ab_0}}
+		= v^{\l-e} \frac{ab_0}{\mfk} \cdot \prod_{i=0}^{\l-1} \vgf \left( \anginf{v^ix}, -\ang{|v^i|_\infty y} \right)^{-1}.
+		$$
+		From here we take the $\Pfk_{\nfk,d\l}$-adic valuations to both sides, using the fact that $\vgf(\cdot , \cdot)$ is a unit in $A_v$, we get
+		$$
+		\ord_{\Pfk_{\nfk,d\l}} \left( \left(\bggs_{1/\nfk}\right)^{\sigma_{a,\deg ab_0}} \right)
+		= \ord_{\Pfk_{\nfk,d\l}} \left( v^{\l-e} \frac{ab_0}{\mfk} \right)
+		= \l - e + \ord_v(ab_0).
+		$$
+		
+		We will claim that this quantity is exactly the number of elements of the form $\sigma_{b,\deg b}$ in the coset $\sigma_{a,\deg a}D$ (the decomposition group of $v$ in $K_{\nfk,d\l}$) of $\Gal(K_{\nfk,d\l}/k)$, where $b \in A_+$, $\deg b< \deg \nfk$ and $(b,\nfk) = 1$.
+		Assuming this for a moment, then since every such $\sigma_{b,\deg b}$ results in the same prime as $\sigma_{a,\deg a}$ does after applying to $\Pfk_{\nfk,d\l}$, and since this holds for each $a \in A_+$, $\deg a< \deg \nfk$ with $(a,\nfk) = 1$, we obtain
+		\begin{equation}      \label{divisors-of-geometric-gauss-sum}
+			\Pfk_{\nfk,d\l}^{\sigma_{1,\deg b_0}^{-1} \eta_{\nfk,d\l}}
+			\Bigm| 
+			\bggs_{1/\nfk} \cdot\Ocal_{\nfk,d\l}.
+		\end{equation}
+		Now, applying both sides by $\sum_{\epsilon \in\Fqst} \sum_{s=0}^{d\l-1} \sigma_{\epsilon,s}$ and using Theorem \ref{gauss-sum-lies-above-v}, we have
+		$$
+		\left( \Pfk_{\nfk,d\l}^{\sigma_{1,\deg b_0}^{-1} \eta_{\nfk,d\l}} \right)^{\sum_{\epsilon \in\Fqst} \sum_{s=0}^{d\l-1} \sigma_{\epsilon,s}} 
+		\Biggm|
+		\left(\bggs_{1/\nfk}\right)^{\sum_{\epsilon \in\Fqst} \sum_{s=0}^{d\l-1} \sigma_{\epsilon,s}} \cdot\Ocal_{\nfk,d\l}
+		= v^\l \cdot\Ocal_{\nfk,d\l}.
+		$$
+		Since both sides consist of the same amount of primes (counting multiplicity) in $K_{\nfk,d\l}$ (recall Remark \ref{fixed-field} that $v$ splits into $[K_{\nfk}:k]d$ primes in $K_{\nfk,d\l}$), we see in fact they are identical.
+		This means \eqref{divisors-of-geometric-gauss-sum} actually gives the equality
+		$$
+		\bggs_{1/\nfk} \cdot\Ocal_{\nfk,d\l}
+		= \Pfk_{\nfk,d\l}^{\sigma_{1,\deg b_0}^{-1} \eta_{\nfk,d\l}},
+		$$
+		as any other prime divisors will violate the factorization of $v^\l$.
+		And this is what we want.
+		(Note $\deg b_0 = \deg \mfk - \deg \nfk = d\l - \deg\nfk$.)
+		
+		It remains to prove the claim.
+		In fact, we prove a stronger result that for any $a \in A_+$ with $\deg a < \deg \mfk$, if
+		$$
+		a = a_rv^r + \cdots + a_ev^e
+		\quad
+		(0 \leq r \leq e \leq \l-1),
+		$$
+		with $r = \ord_v(a)$, $\deg a_i < d$ for all $i$, $a_e \in A_+$, then the number of $b \in A_+$, $\deg b< \deg \mfk$ satisfying
+		\begin{equation}     \label{condition-on-b}
+			b \equiv av^i \Mod{\mfk}
+			\text{ and }
+			\deg b \equiv \deg a + di \Mod{d\l}
+			\text{ for some }
+			0 \leq i \leq \l-1
+		\end{equation}
+		is precisely $\l - e + r$.
+		We split $i$ into three cases:
+		\begin{itemize}
+			\item Case 1: $0 \leq i \leq \l-e-1$.
+			Then automatically $b := av^i$ satisfies \eqref{condition-on-b}.
+			
+			\item Case 2: $\l-e \leq i \leq \l-r-1$.
+			Say $i = \l-e+j$ for some $j = 0,\ldots,e-r-1$.
+			Note
+			$$
+			av^i = a_rv^{r+i} + \cdots + a_ev^{e+i}
+			\equiv \cdots + a_rv^{r+i} + \cdots + a_{\l-1-i}v^{\l-1} 
+			=: b \pmod{\mfk}.
+			$$
+			And $\deg a + di \equiv \deg a_e + dj \pmod{d\l}$.
+			As $a_r \neq 0$, we have
+			$$
+			d\l
+			>
+			\deg b 
+			\geq \deg a_r + d(r + i)
+			\geq \deg a_r + d(1 + j)
+			> \deg a_e + dj.
+			$$
+			So \eqref{condition-on-b} must not hold.
+			
+			\item Case 3: $\l-r \leq i \leq \l-1$.
+			Note
+			$$
+			av^i = a_rv^{r+i} + \cdots + a_ev^{e+i}
+			\equiv a_rv^{r+i-\l} + \cdots + a_ev^{e+i-\l} 
+			=: b \pmod{\mfk},
+			$$
+			which can be seen to satisfy \eqref{condition-on-b}.
+		\end{itemize}
+		In conclusion, those $b$ satisfying \eqref{condition-on-b} are precisely in Cases 1 and 3, giving $\l-e+r$ elements in total.
+		This completes the claim.
+		
+		Finally, to apply the claim to our situation, observe that there is a bijection from
+		$$
+		\{b \mid b\in A_+, \deg b < \deg \nfk, b \equiv av^i \Mod{\nfk}, \deg b \equiv \deg a + di \Mod{d\l}\}
+		$$
+		to
+		$$
+		\{b \mid b\in A_+, \deg b < \deg \mfk, b \equiv ab_0v^i \Mod{\mfk}, \deg b \equiv \deg ab_0 + di \Mod{d\l}\}
+		$$
+		sending $b$ to $bb_0$.
+	\end{proof}
+	
+	\begin{rem}
+		The connection between special $v$-adic gamma values and the Stickelberger elements in Theorem \ref{analog-of-stickelbergers-theorem} has already been pointed out by Thakur in his Gross-Koblitz theorem for the geometric case \cite[Section 8.6]{thakur2004function}.
+		Our Theorem \ref{analog-of-stickelbergers-theorem} provides a more explicit description in terms of geometric Gauss sums and generalizes it to the two-variable case.
+	\end{rem}
+	
+	\section{Pairing comparisons and geometric Gauss sums at infinity}   \label{section-pairing-comparisons-and-geometric-gauss-sums-at-infinity}
+	
+	\subsection{The functions \texorpdfstring{$e$}{e} and \texorpdfstring{$e^*$}{e*}}
+	
+	Recall that in \ref{section-dual-families}, we gave an algebraic reformulation of \cite[Theorem 5.4.4]{abp2004determination} as Theorem \ref{restatement-of-abp-5.4.4}.
+	The original statement, along with its proof, made use of two special analytic functions $e$ and $e^*$, whose definitions and properties are reviewed below.
+	We let $k_\infty := \Fq(\!(1/\T)\!)$ be the completion of $k$ at the infinite place and $\CC_\infty$ be the completion of a fixed algebraic closure $\ovl{k}_\infty$ of $k_\infty$.
+	We choose an identification from $\ovl{k}$ (fixed in Section \ref{section-v-adic-two-variable-gamma-function}) into $\ovl{k}_\infty$.
+	
+	Recall that the Carlitz module over $\ovl{k}$ is the $\Fq$-algebra homomorphism $C: A \to \ovl{k}\{\tau\}$ given by $C_\T := \T + \tau$.
+	The associated power series $\exp_C(z) \in \CC_\infty[\![z]\!]$, called the \textit{Carlitz exponential function}, is $\Fq$-linear and entire on $\CC_\infty$.
+	Its kernel is a free rank-one $A$-module generated by an element $\td{\pi} \in\CC_\infty$, called the \textit{Carlitz period}, which is unique up to $\Fqst$-multiples.
+	We fix one such period and put $e(z) := \exp_C(\td{\pi}z)$.
+	Then we have the functional equation
+	\begin{equation}    \label{functional-equation-of-e}
+		C_a(e(z)) = e(az)
+		\quad
+		\text{for all}
+		\quad
+		a \in A.
+	\end{equation}
+	For any $\nfk \in A_+$, from \eqref{functional-equation-of-e} and the fact that $\ker e= A$, we see that the collection
+	$$
+	\Lambda_\nfk = \{ e(a/\nfk) \mid a \in A, \deg a < \deg \nfk \}
+	$$
+	is the $\nfk$-torsion points of the Carlitz module $C(\ovl{k})$, which is isomorphic to $A/\nfk$. 
+	Thus, the element $e(a/\nfk)$ is an $A$-generator of $\Lambda_{\nfk}$ if and only if $(a,\nfk)=1$.
+	
+	Next, recall that the adjoint Carlitz module over $\ovl{k}$ is the $\Fq$-algebra homomorphism $C^*: A \to \ovl{k}\{\tau^{-1}\}$ given by $C^*_\T := \T + \tau^{-1}$.
+	There is an analog of the exponential function for $C^*$ with properties parallel to $e(z)$.
+	Let $\Res: k_\infty \to \Fq$ be the usual residue map for parameter $\T$. In other words, it is the unique $\Fq$-linear functional with kernel $\Fq[\T] + (1/\T^2)\Fq[\![1/\T]\!]$ and $\Res(1/\T) = 1$.
+	Let $t$ be an independent variable and $\td{\T} := e(1/\T)$ be a fixed $(q-1)$-st root of $-\T$.
+	Set
+	$$
+	\Omega(t) := \td{\T}^{-q} \prod_{i=1}^\infty \left( 1-\frac{t}{\T^{q^i}} \right)
+	\in k_\infty(\td{\T}) [\![t]\!]
+	$$
+	and
+	$$
+	\Omega^{(-1)}(t) := \td{\T}^{-1} \prod_{i=0}^\infty \left( 1-\frac{t}{\T^{q^i}} \right) =: \sum_{i=0}^\infty c_it^i
+	\in k_\infty(\td{\T}) [\![t]\!].
+	$$
+	One checks that $\Omega$ satisfies the functional equation $\Omega^{(-1)} = (t-\T) \Omega$.
+	
+	For $z \in k_\infty$, we set
+	$$
+	e^*(z) := \sum_{i=0}^\infty \Res(\T^iz)c_i.
+	$$
+	Then it is a fact that $e^*$ is $\Fq$-linear with $\ker e^* = A$.
+	Moreover, we have the following functional equation (compare this with \eqref{functional-equation-of-e}).
+	
+	\begin{prop}
+		For any $a \in A$, one has
+		$$
+		C_a^*(e^*(z)^q) = e^*(az)^q.
+		$$
+		In particular, for any $\nfk \in A_+$, $e^*(a/\nfk)$ are $q$-th roots of the $\nfk$-torsion points of the adjoint Carlitz module $C^*(\ovl{k})$ for all $a \in A$. In other words,
+		$$
+		\Lambda_\nfk^* = \{ e^*(a/\nfk)^q \mid a \in A, \deg a < \deg \nfk \} \sbe K_\nfk.
+		$$
+	\end{prop}
+	
+	\begin{proof}
+		The second assertion follows from the functional equation and the fact that $\ker e^* = A$. 
+		And the containment is due to Theorem \ref{goss-1.7.11}. 
+		So we turn to verify the functional equation. 
+		As $C^*$ is an $\Fq$-algebra homomorphism on $A$, it's sufficient to check for the case $\nfk = \T$.
+		From $\Omega^{(-1)}(t) = \sum c_it^i$ and the functional equation $(t-\T)\Omega = \Omega^{(-1)}$, we have
+		$$
+		(t-\T) \sum c_i^q t^i = \sum c_i t^i.
+		$$
+		By comparing the coefficients of $t^i$, it follows that
+		$$
+		\T c_i^q + c_i = 
+		\begin{cases}
+			c_{i-1}^q, & \text{if } i>0, \\
+			0, & \text{if } i=0.
+		\end{cases}
+		$$
+		Thus,
+		$$
+		C_\T^*(e^*(z)^q)
+		= \T e^*(z)^q +  e^*(z)
+		= \sum_{i=0}^\infty \Res(\T^iz)^q (\T c_i^q+c_i)
+		= \sum_{i=1}^\infty \Res(\T^iz)^q c_{i-1}^q
+		=  e^*(\T z)^q.
+		$$
+	\end{proof}
+	
+	For each integer $N\geq 0$, recall \eqref{Psi} that $\Psi_N(z)$ is defined as
+	$$
+	1 + \Psi_N(z)
+	= \prod_{a\in A_{+,N}} \left(1+\frac{z}{a}\right).
+	$$
+	We can now state \cite[Theorem 5.4.4]{abp2004determination}.
+	
+	\begin{thm}    \label{original-abp-5.4.4}
+		Fix $\nfk \in A_+$ of positive degree and $\nfk$-dual families 
+		$$
+		\{a_i\}_{i=1}^{\deg\nfk},
+		\quad
+		\{b_j\}_{j=1}^{\deg\nfk}.
+		$$
+		Then for $a_0 \in A$ with $\deg a_0 < \deg \nfk$, we have    \\
+		(1)
+		$$
+		\sum_{i=1}^{\deg \nfk} e^*(a_i/\nfk)^{q^{N+1}} e(b_ia_0/\nfk) = -\Psi_N(a_0/\nfk)
+		$$
+		for all integers $N\geq 0$.    \\
+		(2) Moreover, if $a_0 \in A_+$, we have
+		$$
+		\sum_{i=1}^{\deg \nfk} e^*(a_i/\nfk) e(b_ia_0/\nfk)^{q^{\deg \nfk - \deg a_0 -1}} = 1.
+		$$
+	\end{thm}
+	
+	Let us now briefly recall the terminologies in \ref{section-dual-families} using the notions of this section.
+	For any $\nfk \in A_+$, define the residue pairing with respect to $\nfk$ (which is perfect) as
+	$$
+	\angres{\cdot,\cdot}: A/\nfk \times A/\nfk \to \Fq,
+	\quad
+	\angres{a,b} := \Res(ab/\nfk).
+	$$
+	Let $\{a_i\}_{i=1}^{\deg\nfk}, \{b_j\}_{j=1}^{\deg\nfk}$ be any fixed $\nfk$-dual families so that we have $\Res(a_ib_j/\nfk) = \delta_{ij}$.
+	Using the analytic function $e(z)$, we choose an $A$-module isomorphism from $A/\nfk$ to $\Lambda_\nfk$, which sends $1 \in A/\nfk$ to $\lambda = e(\alpha/\nfk) \in \Lambda_\nfk \sbe \ovl{k}_\infty$ for some $\alpha\in A$ with $(\alpha,\nfk)=1$.
+	By \eqref{functional-equation-of-e}, we put
+	\begin{equation}    \label{lambda-j}
+		\lambda_j := C_{b_j}(\lambda) = e(\alpha b_j/\nfk).
+	\end{equation}
+	Note that $\{\lambda_j\}_{j=1}^{\deg\nfk}$ forms an $\Fq$-basis of $\Lambda_\nfk$.
+	So by Ore's formula, we obtain an $\Fq$-basis $\{\lambda^*_i\}_{i=1}^{\deg\nfk}$ of $\Lambda_\nfk^*$ given by
+	$$
+	\lambda_i^* = (-1)^{\deg\nfk+i} \left(\frac{\Delta_i}{\Delta}\right)^q,
+	$$
+	where (recall $\Delta(x_1,\ldots,x_n) := \det_{1 \leq i,j \leq n} x_j^{q^{i-1}}$ is the Moore determinant)
+	$$
+	\Delta_i := \Delta(\lambda_1,\ldots,\lambda_{i-1},\lambda_{i+1},\ldots,\lambda_{\deg\nfk})
+	\quad
+	\text{and}
+	\quad
+	\Delta := \Delta(\lambda_1,\ldots,\lambda_{\deg\nfk}) \neq 0.
+	$$
+	Then under this setting, we have the following restatement of Theorem \ref{original-abp-5.4.4}.
+	
+	\begin{thm}      \label{restatement-of-abp-5.4.4-last-section}
+		Fix $\nfk \in A_+$ of positive degree and $\nfk$-dual families 
+		$$
+		\{a_i\}_{i=1}^{\deg\nfk},
+		\quad
+		\{b_j\}_{j=1}^{\deg\nfk}.
+		$$
+		Then for $a_0 \in A$ with $\deg a_0 < \deg \nfk$, we have   \\
+		(1)
+		$$
+		\sum_{i=1}^{\deg \nfk} (\lambda_i^*)^{q^N} C_{a_0}(\lambda_i) = -\Psi_N(a_0/\nfk)
+		$$
+		for all integers $N\geq 0$.   \\
+		(2) Moreover, if $a_0 \in A_+$, we have
+		$$
+		\sum_{i=1}^{\deg \nfk} \lambda_i^* C_{a_0}(\lambda_i)^{q^{\deg \nfk - \deg a_0}} = 1.
+		$$
+	\end{thm}
+	
+	Note that by \eqref{lambda-j} and \eqref{functional-equation-of-e}, we have
+	$$
+	C_{a_0}(\lambda_j)
+	= C_{a_0}(e(\alpha b_j/\nfk))
+	= e(a_0 \alpha b_j/\nfk).
+	$$
+	On the other hand, note that if
+	$$
+	\{a_i\}_{i=1}^{\deg\nfk},
+	\quad
+	\{b_j\}_{j=1}^{\deg\nfk}
+	$$
+	is a pair of $\nfk$-dual families, then so is the pair
+	$$
+	\{\alpha' a_i\}_{i=1}^{\deg\nfk},
+	\quad
+	\{\alpha b_j\}_{j=1}^{\deg\nfk}
+	$$
+	where $\alpha' \in A$ with $\alpha\alpha' \equiv 1 \pmod{\nfk}$.
+	Thus, to justify the equivalence between Theorems \ref{original-abp-5.4.4} and \ref{restatement-of-abp-5.4.4-last-section}, we need to show that
+	\begin{equation}      \label{the-equation-of-the-main-goal}
+		\lambda_i^*
+		= (-1)^{\deg\nfk+i} \left(\frac{\Delta_i}{\Delta}\right)^q
+		= e^*(\alpha' a_i/\nfk)^q.
+	\end{equation}
+	This will be done in the following two sections by investigating the compatibility of three different pairings: residue pairing, Poonen pairing, and trace pairing.
+	
+	\subsection{Residue pairing and trace pairing}  \label{section-residue-pairing-and-trace-pairing}
+	
+	In this section, we consider the special case $\nfk = v - 1$ where $v \in A_{+,d}$ is irreducible.
+	Recall that by Proposition \ref{reduction-of-lambda}, every element in $\FF_\Pfk \simeq \Fqd$ is represented by a unique $\lambda \in \Lambda_\nfk$, and also by a unique $\lambda^* \in \Lambda_\nfk^*$ by Proposition \ref{reduction-of-lambda*}.
+	We consider the trace pairing
+	$$
+	\angtr{\cdot,\cdot}: \FF_\Pfk \times \FF_\Pfk \to \Fq,
+	\quad
+	\angtr{a,b} := \Tr_{\FF_\Pfk/\Fq}(ab),
+	$$
+	where we lift the image uniquely to the constant field $\Fq$.
+	
+	\begin{prop}      \label{lambdai*-and-trace-pairing}
+		Suppose $\nfk = v - 1 \in A_{+,d}$.
+		Let $\{\lambda_j\}_{j=1}^{d}$ be any $\Fq$-basis of $\Lambda_\nfk$, and set
+		$$
+		\lambda_i^* 
+		:= (-1)^{d+i} \left(\frac{\Delta_i}{\Delta}\right)^q.
+		$$
+		Then one has
+		$$
+		\angtr{\ovl{\lambda}{}^*_i , \ovl{\lambda}_j} = \delta_{ij}.
+		$$
+		In other words, after reduction the $\lambda_i^*$ given by Ore's formula are the dual bases of $\lambda_j$ with respect to trace pairing.
+	\end{prop}
+	
+	\begin{proof}
+		We start with noticing that
+		$$
+		\Delta^q 
+		= \left(\det_{1 \leq i,j \leq d} \lambda_j^{q^{i-1}}\right)^q
+		= \det_{1 \leq i,j \leq d} \lambda_j^{q^i}
+		\equiv (-1)^{d-1} \Delta \pmod{\Pfk}
+		$$
+		where the power of $-1$ comes from moving the last row to the first.
+		On the one hand, this implies (note $\Delta \not\equiv 0 \pmod{\Pfk}$ as $\{\ovl{\lambda}_1,\ldots,\ovl{\lambda}_d\}$ is still an $\Fq$-basis of $\FF_{\Pfk}$)
+		$$
+		\lambda_i^* 
+		= (-1)^{d+i} \left(\frac{\Delta_i}{\Delta}\right)^q
+		\equiv (-1)^{i-1} \frac{\Delta_i^q}{\Delta}   \pmod{\Pfk},
+		$$
+		and on the other, we have by induction that for any $k\in\NN$,
+		$$
+		\Delta^{q^k} \equiv (-1)^{k(d-1)} \Delta \pmod{\Pfk}.
+		$$
+		These two imply
+		\begin{equation}       \label{trace-of-lambda*-and-lambda}
+			\sum_{k=0}^{d-1} (\lambda_i^* \lambda_j)^{q^k}
+			\equiv \sum_{k=0}^{d-1} \left( (-1)^{i-1} \frac{\Delta_i^q}{\Delta} \lambda_j \right)^{q^k}
+			\equiv \frac{1}{\Delta} \sum_{k=0}^{d-1} (-1)^{(i-1)+k(d-1)} (\Delta_i^q \lambda_j)^{q^k}
+			\pmod{\Pfk}.
+		\end{equation}
+		
+		Consider the matrices
+		$$
+		\Mcal \equiv \left( \lambda_j^{q^{i-1}}  \right),
+		\quad  
+		\Zcal \equiv (z_{ij})
+		\pmod{\Pfk}
+		$$
+		and the system of linear equations
+		\begin{equation}    \label{linear-equations-MZ-I}
+			\Mcal \cdot \Zcal \equiv I_d   \pmod{\Pfk}.
+		\end{equation}
+		Let $\{e_1,\ldots,e_d\}$ be the standard ordered basis of $\FF_\Pfk$ over $\Fq$. Then by Cramer's rule, we have
+		$$
+		z_{ij} \equiv \frac{\det \Mcal_i'}{\Delta}  \pmod{\Pfk}
+		$$
+		where $\Mcal_i'$ is obtained by replacing the $i$-th column of $\Mcal$ with $e_j$. And by applying the cofactor expansion to $\Mcal_i'$ along the $i$-th column and exchanging rows, one sees that
+		\begin{equation}      \label{zij}
+			z_{ij} 
+			\equiv \frac{\det \Mcal_i'}{\Delta}  
+			\equiv (-1)^{(i+j)+(j-1)(d-j)} \frac{\Delta_i^{q^j}}{\Delta}
+			\pmod{\Pfk}.
+		\end{equation}
+		Now, by exchanging the product of matrices
+		$$
+		\Zcal \cdot \Mcal \equiv I_d  \pmod{\Pfk},
+		$$
+		we have
+		\begin{align*}
+			\delta_{ij} 
+			&\equiv \sum_{k=1}^d z_{ik} \lambda_j^{q^{k-1}}
+			\overset{\eqref{zij}}{\equiv} \sum_{k=1}^d (-1)^{(i+k)+(k-1)(d-k)} \frac{\Delta_i^{q^k}}{\Delta} \lambda_j^{q^{k-1}}    \\
+			&= \frac{1}{\Delta} \sum_{k=0}^{d-1} (-1)^{(i-1)+k(d-1)} (\Delta_i^q \lambda_j)^{q^k}
+			\overset{\eqref{trace-of-lambda*-and-lambda}}{\equiv} \sum_{k=0}^{d-1} (\lambda_i^* \lambda_j)^{q^k}  \pmod{\Pfk}.
+		\end{align*}
+		And this is what we want.
+	\end{proof}
+	
+	The relation between $\nfk$-dual families $\{a_i\}_{i=1}^{d}, \{b_j\}_{j=1}^{d}$ and the elements
+	$$
+	\{\ovl{e^*(\alpha' a_i/\nfk)^q}\}_{i=1}^{d}, 
+	\quad
+	\{\ovl{e(\alpha b_j/\nfk)}\}_{j=1}^{d}
+	$$
+	in the finite field $\FF_\Pfk$ is also explained by the trace pairing.
+	Precisely, we have
+	
+	\begin{prop}    \label{residue-and-trace}
+		Suppose $\nfk = v - 1 \in A_{+,d}$.
+		Let $\{a_i\}_{i=1}^{d}, \{b_j\}_{j=1}^{d}$ be $\nfk$-dual families.
+		Take $\alpha \in A$ prime to $\nfk$ and let $\alpha' \in A$ be such that $\alpha\alpha' \equiv 1 \pmod{\nfk}$.
+		Then one has
+		$$
+		\angtr{ \ovl{e^*(\alpha' a_i/\nfk)^q}, \ovl{e(\alpha b_j/\nfk)} }= \delta_{ij}.
+		$$
+		In other words, the analytic functions $e^*$ and $e$ together with the reduction modulo $\Pfk$ map dual bases of the residue pairing to dual bases of the trace pairing.
+	\end{prop}
+	
+	Note that Propositions \ref{lambdai*-and-trace-pairing} and \ref{residue-and-trace} imply the main goal \eqref{the-equation-of-the-main-goal} for the special case $\nfk = v-1$.
+	
+	\begin{proof}
+		As $\{\alpha' a_i\}_{i=1}^d, \{\alpha b_j\}_{j=1}^d$ is also a pair of $\nfk$-dual families, we may assume without loss of generality that $\alpha = 1$.
+		Let $\lambda_i^* := e^*(a_i/\nfk)^q$ and $\lambda_j := e(b_j/\nfk)$. We will show that
+		\begin{equation}    \label{claim-in-residue-and-trace}
+			\left( \lambda_j^{q^{i-1}} \right)
+			\left( (\lambda_i^*)^{q^{j-1}} \right)
+			\equiv I_d  \pmod{\Pfk}.
+		\end{equation}
+		Assuming this for a moment, then we have
+		$$
+		\left( (\lambda_i^*)^{q^{j-1}} \right)
+		\left( \lambda_j^{q^{i-1}} \right)
+		\equiv I_d  \pmod{\Pfk}.
+		$$
+		So the $(i,j)$-entry is
+		$$
+		\delta_{ij}
+		\equiv \sum_{k=1}^d (\lambda_i^*)^{q^{k-1}} \lambda_j^{q^{k-1}}
+		= \left( \sum_{k=1}^d \lambda_i^* \lambda_j \right)^{q^{k-1}}
+		\pmod{\Pfk}.
+		$$
+		And this is what we want.
+		(Note that \eqref{claim-in-residue-and-trace} is exactly the system of linear equations \eqref{linear-equations-MZ-I} considered in the proof of Proposition \ref{lambdai*-and-trace-pairing}.
+		This already suggests that $e^*(a_i/\nfk)^q$ can be obtained from Ore's formula.
+		Note that the trick of exchanging the product of two matrices was also used during that proof.)
+		
+		It remains to prove the claim.
+		Note that the $(i,j)$-entry in the product of \eqref{claim-in-residue-and-trace} is
+		\begin{equation}    \label{ij-entry}
+			\sum_{k=1}^d \lambda_k^{q^{i-1}} (\lambda_k^*)^{q^{j-1}}  \pmod{\Pfk}.
+		\end{equation}
+		And we have by Theorem \ref{original-abp-5.4.4}(1),
+		\begin{equation}     \label{note-lambda-and-lambda*}
+			\sum_{k=1}^d (\lambda_k^*)^{q^N} \lambda_k
+			= -\Psi_N(1/\nfk)
+			= 1 - \prod_{a\in A_{+,N}} \left(1+\frac{1}{\nfk a}\right)
+			= 1 - \prod_{a\in A_{+,N}} \frac{\nfk a+1}{\nfk a}.
+		\end{equation}
+		for all integers $N \geq 0$.
+		We split $i$ and $j$ into three cases:
+		
+		\begin{itemize}
+			\item Case 1: $i=j$.
+			Then
+			$$
+			\eqref{ij-entry}
+			= \left( \sum_{k=1}^d \lambda_k \cdot 	\lambda_k^* \right)^{q^{i-1}}       
+			\overset{\eqref{note-lambda-and-lambda*}}{=} \left( -\frac{1}{v-1} \right)^{q^{i-1}}    
+			\equiv 1 \pmod{\Pfk}.
+			$$
+			
+			\item Case 2: $i<j$.
+			We see that
+			$$
+			\eqref{ij-entry}
+			= \left( \sum_{k=1}^d \lambda_k (\lambda_k^*)^{q^{j-i}} \right)^{q^{i-1}}      
+			\overset{\eqref{note-lambda-and-lambda*}}{=} \left( 1 - \prod_{a\in A_{+,j-i}} \frac{\nfk a+1}{\nfk a} \right)^{q^{i-1}}.
+			$$
+			We check that the product is congruent to $1$ modulo $\Pfk$.
+			For the numerator, note that $\nfk a+1 = v a-a+1$.
+			So $v \mid \nfk a+1$ if and only if $v \mid -a+1$, which is impossible as $1 \leq \deg(-a+1) = j-i \leq d-1$.
+			Similar for the denominator, note that $\nfk a = v a-a$.
+			So $v \mid \nfk a$ if and only if $v \mid -a$, which is also impossible for the same reason.
+			These two imply that
+			$$
+			\prod_{a\in A_{+,j-i}} \frac{\nfk a+1}{\nfk a}
+			\equiv \prod_{a\in A_{+,j-i}} \frac{-a+1}{-a} = 1 \pmod{\Pfk}.
+			$$
+			
+			\item Case 3: $i>j$.
+			We see that
+			$$
+			\eqref{ij-entry}
+			= \left( \sum_{k=1}^d \lambda_k
+			(\lambda_k^*)^{q^{d+j-i}} \right)^{q^{i-1}}
+			\overset{\eqref{note-lambda-and-lambda*}}{=} \left( 1 - \prod_{a\in A_{+,d+j-i}} \frac{\nfk a+1}{\nfk a} \right)^{q^{i-1}}
+			\equiv 0 \pmod{\Pfk}
+			$$
+			by a similar argument as in Case 2.
+			We omit the details.
+		\end{itemize}
+	\end{proof}
+	
+	\subsection{Residue pairing and Poonen pairing}    \label{section-residue-pairing-and-poonen-pairing}
+	
+	In this section, we consider arbitrary $\nfk \in A_+$.
+	This will be done with the help of \textit{Poonen pairing} for which we shall introduce now.
+	To ease the exposition and focus on our main goal, we restrict ourselves to one particular example, the Carlitz module, and refer to \cite{poonen1996fractional} or \cite[Subsection 4.14]{goss1996basic} for those interested readers.
+	We will also omit the justifications of all basic properties we mention for the same reason.
+	
+	\begin{defn}   \label{definition-of-poonen-pairing}
+		For $a\in \Lambda_\nfk^*$ and $b\in \Lambda_\nfk$, write
+		$$
+		a\tau^0 C_\nfk(\tau) = (\tau^0 - \tau)h_a(\tau).
+		$$
+		Then the \textit{Poonen pairing with respect to $\nfk$} is defined as
+		$$
+		\ang{\cdot,\cdot}_{\textnormal{Poon}(\nfk)}: \Lambda_\nfk^* \times \Lambda_\nfk \to \Fq, \quad \ang{a,b}_{\textnormal{Poon}(\nfk)} := h_a(b).
+		$$
+	\end{defn}
+	
+	This is a non-degenerate, bilinear, and Galois-equivariant pairing on the torsion points of the Carlitz and adjoint Carlitz modules.
+	Moreover, it is also compatible with the $A$-module structures in the sense that the equation
+	$$
+	\ang{C_f^*(a),b}_{\textnormal{Poon}(\nfk)} = \ang{a,C_f(b)}_{\textnormal{Poon}(\nfk)}
+	$$
+	holds for all $f\in A$.
+	Hence, it is viewed as an analog of Weil pairing on elliptic curves.
+	(This will not be needed in the sequel but is meant to be pointed out to illustrate its analogy with the classical situation.)
+	
+	Another compatibility of the Poonen pairings with respect to different $\nfk$ will also be useful for us.
+	
+	\begin{prop}    \label{compatibility-of-poonen-pairing-with-respect-to-different-nfk}
+		Let $\nfk,\mfk \in A_+$ be given.
+		Suppose $a\in \Lambda_{\nfk}^* \sbe \Lambda_{\nfk\mfk}^*$ and $b \in \Lambda_{\nfk\mfk}$. Then the equation
+		$$
+		\ang{a,b}_{\textnormal{Poon}(\nfk\mfk)} = \ang{a,C_\mfk(b)}_{\textnormal{Poon}(\nfk)}
+		$$
+		is true.
+	\end{prop}
+	
+	There is an analogous result to Proposition \ref{lambdai*-and-trace-pairing} for the Poonen pairing.
+	
+	\begin{prop}     \label{lambdai*-and-poonen-pairing}
+		For $\nfk \in A_+$, let $\{\lambda_j\}_{j=1}^{\deg\nfk}$ be any $\Fq$-basis of $\Lambda_\nfk$.
+		Take $\{\lambda_i^*\}_{i=1}^{\deg\nfk} \sbe \Lambda_\nfk^*$ so that $\ang{\lambda_i^*, \lambda_j}_{\textnormal{Poon}(\nfk)} = - \delta_{ij}$.
+		Then one has
+		$$
+		\lambda_i^* = (-1)^{\deg\nfk+i} \left(\frac{\Delta_i}{\Delta}\right)^q.
+		$$
+		In other words, the $\lambda_i^*$ given by Ore's formula are the dual bases of $\lambda_j$ with respect to Poonen pairing (with a minus sign modification).
+	\end{prop}
+	
+	\begin{proof}
+		Fix $1\leq i \leq \deg\nfk$. As $a_i := \lambda_i^*$ satisfies $C_\nfk^*(z)$, we have $a_i^{(1-q)/q} \tau^0 - \tau$ left divides $C_\nfk(z)$ (see \cite[Corollary 1.7.7]{goss1996basic}).
+		So we may write
+		$$
+		C_\nfk(\tau) = \left(a_i^{(1-q)/q} \tau^0 - \tau\right) Q_i(\tau)
+		$$
+		for some $Q_i(\tau) \in \ovl{k}\{\tau\}$.
+		Note that
+		\begin{equation}   \label{apply-poonen-pairing}
+			a_i\tau^0 C_\nfk(\tau)
+			= a_i\tau^0 \left(a_i^{(1-q)/q} \tau^0 - \tau\right) Q_i(\tau)
+			= (\tau^0-\tau) a_i^{1/q} Q_i(\tau).
+		\end{equation}
+		So by Definition \ref{definition-of-poonen-pairing}, we have
+		$$
+		-\delta_{ij}
+		= \ang{a_i, \lambda_j}_{\textnormal{Poon}(\nfk)}
+		= a_i^{1/q} Q_i(\lambda_j)
+		\quad
+		\text{for all}
+		\quad
+		1 \leq j \leq \deg\nfk.
+		$$
+		In particular, $Q_i(\lambda_j) = 0$ for all $j\neq i$.
+		So the subspace $W_i \sbe \Lambda_\nfk$ of roots of $Q_i(z) = 0$ is spanned by $\{\lambda_1,\ldots,\lambda_{i-1},\lambda_{i+1},\ldots,\lambda_{\deg\nfk}\}$.
+		The leading coefficient of $Q_i(z)$ is seen to be $-1$ from \eqref{apply-poonen-pairing}. 
+		Thus, we may write
+		$$
+		Q_i(z) = - \prod_{\lambda \in W_i} (z - \lambda) =: -P_i(z).
+		$$
+		Also, note that
+		$$
+		-1 
+		= \ang{a_i, \lambda_i}_{\textnormal{Poon}(\nfk)}
+		= a_i^{1/q} Q_i(\lambda_i)
+		= -a_i^{1/q} P_i(\lambda_i)
+		\implies
+		a_i = P_i(\lambda_i)^{-q}.
+		$$
+		A property of the Moore determinant (see \cite[Theorem 1.3.5.2]{goss1996basic}) now implies that
+		$$
+		\lambda_i^* 
+		= a_i
+		= P_i(\lambda_i)^{-q}
+		= \left(\frac{\Delta(\lambda_1,\ldots,\lambda_{i-1},\lambda_{i+1},\ldots,\lambda_{\deg\nfk})}{\Delta(\lambda_1,\ldots,\lambda_{i-1},\lambda_{i+1},\ldots,\lambda_{\deg\nfk},\lambda_i)}\right)^q
+		= (-1)^{\deg\nfk+i} \left(\frac{\Delta_i}{\Delta}\right)^q.
+		$$
+		This completes the proof.
+	\end{proof}
+	
+	The relation between $\nfk$-dual families $\{a_i\}_{i=1}^{\deg\nfk}, \{b_j\}_{j=1}^{\deg\nfk}$ and the torsion points
+	$$
+	\{e^*(\alpha' a_i/\nfk)^q\}_{i=1}^{\deg\nfk},
+	\quad
+	\{e(\alpha b_j/\nfk)\}_{j=1}^{\deg\nfk}
+	$$
+	is also explained by the Poonen pairing. Precisely, we have
+	
+	\begin{prop}    \label{residue-and-poonen}
+		Let $\nfk \in A_+$ and $\{a_i\}_{i=1}^{\deg\nfk}, \{b_j\}_{j=1}^{\deg\nfk}$ be $\nfk$-dual families.
+		Take $\alpha \in A$ prime to $\nfk$ and let $\alpha' \in A$ be such that $\alpha\alpha' \equiv 1 \pmod{\nfk}$.
+		Then one has
+		$$
+		\ang{e^*(\alpha' a_i/\nfk)^q, e(\alpha b_j/\nfk)}_{\textnormal{Poon}(\nfk)} = - \delta_{ij}.
+		$$
+		In other words, the analytic functions $e^*$ and $e$ map dual bases of the residue pairing to dual bases of the Poonen pairing (again, with a minus sign modification).
+	\end{prop}
+	
+	Note that Propositions \ref{lambdai*-and-poonen-pairing} and \ref{residue-and-poonen} imply the main goal \eqref{the-equation-of-the-main-goal} for the general case.
+	
+	\begin{proof}
+		As $\{\alpha' a_i\}_{i=1}^{\deg\nfk}, \{\alpha b_j\}_{j=1}^{\deg\nfk}$ is also a pair of $\nfk$-dual families, we may assume without loss of generality that $\alpha = 1$.
+		First, we consider the special case $\nfk = v - 1$ where $v \in A_{+,d}$ is irreducible.
+		Let $\Pfk$ be a prime in $K_\nfk$ above $v$.
+		In the definition of Poonen pairing, one considers everything modulo $\Pfk$ in the residue field $\FF_\Pfk$ and defines the “reduction” of Poonen pairing.
+		More precisely, put (recall Propositions \ref{reduction-of-lambda} and \ref{reduction-of-lambda*})
+		$$
+		\ovl{\Lambda}_\nfk := \{ \ovl{\lambda} \mid \lambda \in \Lambda_\nfk \}
+		\quad
+		\text{and}
+		\quad
+		\ovl{\Lambda}{}^*_\nfk := \{ \ovl{\lambda}{}^* \mid \lambda^* \in \Lambda_\nfk^* \}.
+		$$
+		For $\ovl{a} \in \ovl{\Lambda}{}^*_\nfk$ and $\ovl{b} \in \ovl{\Lambda}_\nfk$, write
+		$$
+		\ovl{a} \tau^0 \ovl{C}_\nfk(\tau) = (\tau^0 - \tau) \ovl{h}_{\ovl{a}}(\tau)
+		$$
+		where $\ovl{C}_\nfk(\tau)$ is the twisted polynomial obtained from reducing the coefficients of $C_\nfk(\tau)$ modulo $v$.
+		Then the reduced Poonen pairing (with respect to $\nfk = v-1$) is defined as
+		$$
+		\ang{\cdot,\cdot}_{\ovl{\textnormal{Poon}}(\nfk)}: \ovl{\Lambda}{}^*_\nfk \times \ovl{\Lambda}_\nfk \to \Fq,
+		\quad 
+		\ang{\ovl{a},\ovl{b}}_{\ovl{\textnormal{Poon}}(\nfk)}
+		:= \text{the unique lift of }
+		\ovl{h}_{\ovl{a}} (\ovl{b}) \sbe \FF_{\Pfk}
+		\text{ to }
+		\Fq.
+		$$
+		
+		Note that
+		$$
+		\ovl{h}_{\ovl{a}} (\ovl{b})
+		= \ovl{h_a(b)}
+		= \ovl{\ang{a,b}_{\textnormal{Poon}(\nfk)}}.
+		$$
+		So in fact,
+		\begin{equation}    \label{reduced-poonen-and-poonen}
+			\ang{\ovl{a},\ovl{b}}_{\ovl{\textnormal{Poon}}(\nfk)}
+			= \ang{a,b}_{\textnormal{Poon}(\nfk)}.
+		\end{equation}
+		On the other hand, as $\nfk = v-1$, we know $\ovl{C}_\nfk (\tau) = \tau^d - \tau^0$.
+		This implies that
+		$$
+		\ovl{h}_{\ovl{a}} (\tau) = -(\tau^0 + \tau^1 + \cdots + \tau^{d-1}) \ovl{a}\tau^0
+		\implies
+		\ovl{h}_{\ovl{a}} (\ovl{b})
+		= -\sum_{k=0}^{d-1} (\ovl{ab})^{q^k}.
+		$$
+		Thus, using the trace pairing considered in \ref{section-residue-pairing-and-trace-pairing}, we have
+		\begin{equation}       \label{reduced-poonen-and-trace}
+			\ang{\ovl{a},\ovl{b}}_{\ovl{\textnormal{Poon}}(\nfk)}
+			= -\angtr{\ovl{a},\ovl{b}}.
+		\end{equation}
+		Hence, by Proposition \ref{residue-and-trace}, \eqref{reduced-poonen-and-trace}, and \eqref{reduced-poonen-and-poonen}, we have
+		$$
+		\delta_{ij}
+		= \angtr{\ovl{e^*(a_i/\nfk)^q},\ovl{e(b_j/\nfk)}}
+		= -\ang{e^*(a_i/\nfk)^q,e(b_j/\nfk)}_{\textnormal{Poon}(\nfk)}.
+		$$
+		This completes the case where $\nfk = v-1$.
+		
+		For general $\nfk$, we apply the Dirichlet density theorem (see \cite[Chapter 4]{rosen2002number}) to take an irreducible $v \in A_+$ such that $v \equiv 1 \pmod{\nfk}$.
+		Write $\nfk\mfk = v - 1 =: \nfk'$ for some $\mfk \in A_+$.
+		Note that for the pair $\{a_i\mfk\}_{i=1}^{\deg\nfk}, \{b_j\}_{j=1}^{\deg\nfk}$, we have
+		$$
+		\Res(a_i\mfk \cdot b_j / \nfk') = \Res(a_ib_j/\nfk) = \delta_{ij}.
+		$$
+		So we may extend it to a pair of $\nfk'$-dual families $\{a_i'\}_{i=1}^{\deg\nfk'}, \{b_j'\}_{j=1}^{\deg\nfk'}$ so that
+		$$
+		a_i' = a_i\mfk
+		\quad
+		\text{and}
+		\quad
+		b_j' = b_j
+		\quad
+		\text{for all}
+		\quad
+		1\leq i,j \leq \deg\nfk.
+		$$
+		Then for any such $i,j$, we have by the previous case and Proposition \ref{compatibility-of-poonen-pairing-with-respect-to-different-nfk} that
+		\begin{align*}
+			-\delta_{ij}
+			&= \ang{e^*(a_i'/\nfk')^q,e(b_j'/\nfk')}_{\textnormal{Poon}(\nfk')}
+			= \ang{e^*(a_i/\nfk)^q,e(b_j'/\nfk')}_{\textnormal{Poon}(\nfk\mfk)}    \\
+			&= \ang{e^*(a_i/\nfk)^q,C_\mfk(e(b_j'/\nfk'))}_{\textnormal{Poon}(\nfk)}
+			= \ang{e^*(a_i/\nfk)^q, e(b_j/\nfk)}_{\textnormal{Poon}(\nfk)}.
+		\end{align*}
+		This proves the general case.
+	\end{proof}
+	
+	In the first half of the proof, we may consider $\mfk = v^\l - 1$ for any $\l \in \NN$ and still obtain the identities \eqref{reduced-poonen-and-poonen} and \eqref{reduced-poonen-and-trace}, where the trace is taken from $\FF_{\Pfk} \simeq \Fqdl$ to $\Fq$.
+	Hence, to summarize, we have proved the following theorem.
+	
+	\begin{thm}    \label{pairing-summary}
+		Let $\mfk := v^\l-1$ and $\{a_i\}_{i=1}^{d\l}, \{b_j\}_{j=1}^{d\l}$ be any $\mfk$-dual families.
+		Let $\lambda_i^* := e^*(\alpha' a_i/\mfk)^q$ and $\lambda_j := e(\alpha b_j/\mfk)$ where $\alpha'\alpha \equiv 1 \pmod{\mfk}$.
+		Then we have
+		$$
+		\angres{a_i,b_j}
+		= - \ang{\lambda_i^*,\lambda_j}_{\textnormal{Poon}(\mfk)}
+		= \angtr{\ovl{\lambda}{}^*_i,\ovl{\lambda}_j}
+		= \delta_{ij}
+		$$
+		(these three pairings correspond respectively to the isomorphisms in Propositions \ref{reduction-of-lambda} and \ref{reduction-of-lambda*})
+		and
+		$$
+		\lambda_i^* = (-1)^{\deg\nfk+i} \left(\frac{\Delta_i}{\Delta}\right)^q
+		$$
+		where $\Delta_i := \Delta(\lambda_1,\ldots,\lambda_{i-1},\lambda_{i+1},\ldots,\lambda_{d\l})$ and $\Delta := \Delta(\lambda_1,\ldots,\lambda_{d\l})$ are the Moore determinants.
+	\end{thm}
+	
+	\subsection{The behavior of geometric Gauss sums at infinity}    \label{section-behavior-of-geometric-gauss-sums-at-infinity}
+	
+	We now resume the study of geometric Gauss sums at infinity.
+	Recall in Proposition \ref{absolute-values}, we proved that their (normalized) valuations at any infinite place of $K_\nfk\Fqdl$ is $-1/(q-1)$.
+	By our identification from $\ovl{k}$ into $\ovl{k}_\infty$, we may regard $\bggs_x$ as elements in $k_\infty(\td{\T})\Fqdl \sbe \ovl{k}_\infty$ and consider their signs at infinity (with respect to the uniformizer $\td{\T}$).
+	By choosing a suitable embedding, we assume without loss of generality that $\lambda = e(1/\nfk)$.
+	Set $\mfk := v^\l-1$ as in \ref{section-a-scalar-product-expression-of-geometric-gauss-sums}.
+	
+	\begin{prop}   \label{sign}
+		For $x \in \nfk^{-1}A$ with $0 < |x|_\infty < 1$, we have
+		$$
+		\sgn(\bggs_x) = -\sgn(\td{\pi}) \psi\left( \ovl{e^*(x)^q} \right).
+		$$
+	\end{prop}
+	
+	\begin{proof}
+		Let $\Sigma$ be the summation in Definition \ref{ggs-definition}, so that $\bggs_x = 1 + \Sigma$.
+		Note by Proposition \ref{absolute-values} and the non-Archimedean property, we have $\ord_{\td{\infty}}(\bggs_x) = \ord_{\td{\infty}} (\Sigma) = -1/(q-1)$.
+		Thus, it's sufficient to determine the sign of $\Sigma$.
+		
+		Write $x = a_0/\mfk$ with $\deg a_0 < d\l$.
+		Since every element in $\FF_{\Pfk}^\times$ is represented by $e(a/\mfk) \in \Lambda_{\mfk}$ for some unique $0 \neq a \in A/\mfk$, we have
+		$$
+		\Sigma
+		= \sum_{z \in \FF_{\Pfk}^\times} \omega\left(C_{\mfk x} (z^{-1})\right)\psi(z)
+		= \sum_{0 \neq a \in A/\mfk} e(a_0a/\mfk) \psi\left( \ovl{e(a/\mfk)}^{-1} \right).
+		$$
+		For each such $a$, we let $a'$ be the unique element in $A$ such that $a' \equiv a_0a \pmod{\mfk}$ and $\deg a' < d\l$.
+		Then from the infinite product expression
+		$$
+		e(z) = \td{\pi}z \prod_{0 \neq a \in A} \left( 1+\frac{z}{a} \right),
+		$$
+		we see that
+		\begin{align*}
+			&e(a_0a/\mfk) = e(a'/\mfk) \text{ has minimal valuation}   \\
+			\iff{} &\ord_{\infty}(a'/\mfk) = d\l - \deg a' \text{ is minimal}   \\
+			\iff{} &\deg a' = d\l-1     \\
+			\iff{} &\Res(a'/\mfk) = \Res(a_0a/\mfk)\neq 0.
+		\end{align*}
+		And in this case, $\sgn(e(a_0a/\mfk)) = \epsilon \Res(a_0a/\mfk)$ where $\epsilon := \sgn(\td{\pi})$.
+		Thus, we have
+		$$
+		\sgn(\Sigma)
+		= \epsilon \sum_{0 \neq a \in A/\mfk} \Res(a_0a/\mfk) \psi\left( \ovl{e(a/\mfk)}^{-1} \right).
+		$$
+		Put $\lambda_a := e(a/\mfk)$ and $\lambda_{a_0}^* := e^*(a_0/\mfk)^q$.
+		Then by the compatibility of the residue pairing and the trace pairing (Theorem \ref{pairing-summary}), this implies that
+		\begin{align*}
+			\sgn(\Sigma)
+			&= \epsilon \sum_{0 \neq a \in A/\mfk} \Tr_{\FF_\Pfk/\Fq} (\ovl{\lambda}{}^*_{a_0} \ovl{\lambda}_a) \psi \left( \ovl{\lambda}_a^{-1} \right)   \\
+			&= \epsilon \sum_{0 \neq b \in A/\mfk} \Tr_{\FF_\Pfk/\Fq}(\ovl{\lambda}_b) \psi\left( \ovl{\lambda}{}^*_{a_0} \ovl{\lambda}_b^{-1} \right)
+			= \epsilon \psi\left( \ovl{\lambda}{}^*_{a_0} \right) \sum_{z \in \FF_{\Pfk}^\times} \Tr_{\FF_\Pfk/\Fq}(z) \psi(z^{-1}).
+		\end{align*}
+		By Lemma \ref{descending-ggs}, the last sum is seen to be $-1$.
+		This completes the proof.
+	\end{proof}
+	
+	\printbibliography
+	
+\end{document}

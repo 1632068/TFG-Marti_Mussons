@@ -1,0 +1,708 @@
+\documentclass[11pt]{article}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+
+%\usepackage{showkeys}
+\usepackage{amsfonts,amssymb,amsmath,amsthm, graphics, setspace}
+\usepackage{bbm}
+\usepackage{xcolor}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{hyperref} 
+\usepackage{soul}
+
+
+
+
+\setlength{\textwidth}{15cm} \setlength{\textheight}{22cm}
+\setlength{\oddsidemargin}{.5cm}\setlength{\evensidemargin}{-.5cm}
+\setlength{\topmargin}{-.5cm} \setlength{\abovedisplayskip}{3mm}
+\setlength{\belowdisplayskip}{3mm}
+\setlength{\abovedisplayshortskip}{3mm}
+\setlength{\belowdisplayshortskip}{3mm}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemme}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{property}[theorem]{Property}
+\newtheorem*{theoremnonum}{Theorem}
+\newtheorem*{cornonum}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+
+\parindent=0pt
+
+
+
+\def\theequation {\arabic{section}.\arabic{equation}}
+\numberwithin{equation}{section}
+
+\title{Genetic contribution of advantaged ancestors in the biparental Moran model - finite selection}
+\author{Camille Coron, Yves Le Jan}
+\date{}
+
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+
+\begin{document}
+\maketitle
+
+ 
+\begin{abstract}
+We study a population of $N$ individuals evolving according to a biparental Moran model with two types, one being advantaged compared to the other. The advantage is conferred by a Mendelian mutation, that reduces the death probability of individuals carrying it. We assume that a proportion $a$ of individuals initially carry this mutation, which therefore eventually gets fixed with high probability. After a long time, we sample a gene uniformly from the population, at a new locus, independent of the locus under selection, and calculate the probability that this gene originated from one of the initially advantaged individuals, when population size is large. Our theorem provides quantitative insights, such as the observation that under strong selection, if only $1\%$ of the individuals are initially advantaged, approximately $19\%$ of the population's genome will originate from them after a long time.
+\end{abstract}
+
+\textbf{Keywords:} Biparental Moran model with selection ; dynamical system approximation ; Ancestor's genetic contribution.
+
+
+\section{Motivation and model}
+
+\subsection{Motivation}
+
+This article investigates the long-term impact of a genetic mutation that confers an advantage to individuals, on their contribution to the genome of a sexually reproducing population. Building on previous works (\cite{geneal} and \cite{CoronLeJan22}), we consider a population, represented by a Moran biparental model, of haploid individuals whose genome is a random and balanced mixture of their two parents' genomes. Initially, a proportion $a$ of individuals carry a mutation that increases their life expectancy and thus their genetic contribution to the population. Our goal is to quantify the effect of selection strength on the genetic composition of the population in the limit of large population size and more specifically to determine the impact of the advantage conferred by the mutation on the genetic contribution of ancestors.
+
+
+Biparental genealogies have received some interest, notably in \cite{Chang1999,Derrida2000,GravelSteel2015}, in which time to more recent common ancestors and ancestors' weights are investigated for the Wright-Fisher biparental model. In \cite{geneal}, we studied the asymptotic law of the  contribution of an ancestor, to the genome of the present time population. The articles \cite{MatsenEvans2008} and \cite{BartonEtheridge2011} study the link between pedigree, individual reproductive success and genetic contribution. The monoparental Moran model with selection at birth has received some interest, notably in \cite{EtheridgeGriffiths} that studies its dual coalescent and \cite{KluthBaake} that notably studies alleles fixation probabilities and ancestral lines. Finally, the limiting case where the strength of selection is infinite was studied in \cite{CoronLeJan22}.
+
+
+\subsection{Model}\label{sec:model}
+
+Following the framework of previous papers (\cite{geneal} and \cite{CoronLeJan22}), we model the dynamics of a population of $N$ haploid individuals using a Moran biparental model with selection. 
+
+Specifically, we consider a population of fixed size 
+$N$ in which a mutation at a given locus confers an advantage to individuals carrying it. We assume that selection affects only the death rate of individuals : advantaged individuals have a death weight of $1$, while non-advantaged individuals have a death weight of $1+s$, with $s>0$. At each discrete time step, two individuals are chosen uniformly at random to be parents and produce one offspring, which replaces a third individual chosen with probability proportional to its death weight. This results in a death probability at each time step that is $1+s$ times higher for non-advantaged individuals than for advantaged individuals, leading to an increased life expectancy and mean offspring number for the latter.
+
+Genetic transmission follows Mendelian rules, in the sense that at a given locus of the genome, each individual inherits an allele, chosen uniformly at random among the two alleles of its parents. In particular, the transmission of advantage to offspring is characterized by Mendelian transmission at one locus. We refer to the parent that transmits a copy of its gene at the locus under mutation as the "mother" and the other parent as the "father". An individual is therefore advantaged if and only if its mother is advantaged. The limiting case where $s$ is infinite (i.e., only non-advantaged individuals can die) has been studied in a previous paper (\cite{CoronLeJan22}), and comparisons to this work will be provided later on. As in the two previous works \cite{geneal} and \cite{CoronLeJan22}, recombination is not considered. We indeed focus on the probability for a gene sampled at present time, to originate from a given ancestor, which can be seen as the proportion of genome transmitted by this ancestor, if the genome is seen as a set of infinitely many independent loci. 
+
+Let us denote by $I=\{1,2,...,N\}$ the sites in which individuals live (which is simply a way to number individuals at each time step), and denote by $(\mu_n,\pi_n,\kappa_n)\in I^3$ the respective positions of the mother, father, and offspring at time step $n$. As in \cite{geneal}, this reproduction dynamics defines an oriented random graph on $I\times\mathbb{Z}_+$ (as represented in Figure \ref{FigPedigree}), denoted $G$, representing the pedigree of the population, such that between time $n$ and time $n+1$, two arrows are drawn from $(\kappa_n,n+1)$ to $(\pi_n,n)$ and $(\mu_n,n)$ respectively and $N-1$ arrows are drawn from $(i,n+1)$ to $(i,n)$ for each $i\in I\setminus\{\kappa_n\}$. Note that individuals are now also characterized by their advantage : advantaged individuals are represented in red in Figure \ref{FigPedigree}. We denote by $\mathcal{Y}_n\subset \{1,...,N\}$ the set of advantaged individuals at time $n$ and denote by $\{\mathcal{F}_n,n\in\mathbb{Z}_+\}$ the natural filtration associated to the stochastic process $(\mu_n,\pi_n,\kappa_n)_{n\in\mathbb{Z}_+}$, that characterizes the population dynamics and in particular includes the filtration associated to $(\mathcal{Y}_n)_{n\in\mathbb{Z}_+}$, $\mathcal{Y}_0$ being fixed. Note that the pedigree itself is characterized only by the sequence $((\{\mu_n,\pi_n\},\kappa_n))_{n\in\mathbb{Z}_+}$ which is not a Markov chain, due to selection. We denote by $\{\mathcal{G}_n,n\in\mathbb{Z}_+\}$ its associated filtration.
+
+\begin{figure}[ht]
+\begin{center}\includegraphics[scale=0.5]{Pedigree}
+\end{center} 
+\caption{This figure represents simultaneously the pedigree $G$ and the set of advantaged individuals, at $10$ time steps, in a population with $5$ individuals. The time orientation is from past to future and arrows materialize gene flow between individuals, represented backwards in time here. Advantaged individuals are represented in red. Numbers at the bottom gives the probability that a gene sampled in each of the individuals come from the initially advantaged individual. In this example the genetic weight of the initially advantaged individual (i.e. the probability  given the pedigree that a gene sampled uniformly at time $n=9$ comes from this individual at time $n=0$) is equal to $21/40=1/5(1+1/2+1/2+1/4+3/8).$\label{FigPedigree}}
+\end{figure}
+
+
+\subsection{Ancestors genetic weights}
+
+To investigate the impact of selection on the genetic composition of the population, we consider a second locus that is far enough from the locus under mutation so that the genome is assumed to be transmitted independently at these two loci. We then sample an individual in the population at time $n$ and consider the genealogy of its gene at this second locus, i.e. the sequence of ancestral individuals through which this gene was transmitted, at all times $n-k\leq n$. This genealogy, denoted by $(X^{(n)}_k, n-k)_{0\leq k\leq n}$, is a random walk on the pedigree $G$. A particularly interesting element is the number $X_n{(n)}$ that gives the position of the initial ancestor of the sampled gene.
+
+The key object in this model, as introduced in \cite{geneal} is therefore the sequence of random variables $((W_n(i,j))_{1\leq i,j\leq N})_{n\geq 0}$ defined by
+
+\begin{equation} \label{eq:defA} W_n(i,j)=\mathbb{P}(X^{(n)}_n=j|X^{(n)}_0=i,\mathcal{G}_n).\end{equation}
+
+In words, the quantity $W_n(i,j)$ is the probability, given the pedigree before time $n$, $\mathcal{G}_n$, that any gene of individual $i$ living at time $n$ comes from the ancestor $j$, living at time $0$. It is a deterministic function of the random graph $G$ between time $0$ and time $n$ and does not depend on the advantage status of individuals in the pedigree (although the pedigree itself depends on this status). In mathematical words,
+$$W_n(i,j)=\mathbb{P}(X^{(n)}_n=j|X^{(n)}_0=i,\mathcal{G}_n)=\mathbb{P}(X^{(n)}_n=j|X^{(n)}_0=i,\mathcal{F}_n).$$
+
+If genome size is very large and the evolution of distant genes are sufficiently decorrelated, we can expect this quantity to be close to the proportion of genes of individual $i$ that come from individual $j$. For this reason we refer to this quantity as the genetic weight of ancestor $j$ in the genome of individual $i$ (see Figure \ref{FigPedigree} for an illustration).
+
+\subsection{Main result}\label{sec:IntroResult}
+
+Recall that $\mathcal{Y}_n\subset I$ denotes the set of advantaged individuals at time $n$, and let $Y_n$ be its cardinal, i.e. the number of advantaged individuals at time $n$. Our goal is to investigate the impact of selection on the weight of ancestors, and notably to study the probability that a gene sampled in the population at present time originated from an advantaged individual. 
+
+To this aim we introduce the two following quantities : 
+\begin{align*}
+U_n&=\sum_{l\in\mathcal{Y}_n}\sum_{l'\in\mathcal{Y}_0} W_n(l,l'), \quad\text{and}\quad
+V_n=\sum_{l\notin\mathcal{Y}_n}\sum_{l'\in\mathcal{Y}_0} W_n(l,l').
+\end{align*}
+
+The quantity $U_n\in[0,N]$ (resp. $V_n\in[0,N]$) is equal to $Y_n$ (resp. $N-Y_n$) times the probability, knowing the pedigree, that a gene sampled uniformly among advantaged (resp. non-advantaged) individuals at time $n$ originates from an initially advantaged individual. In mathematical words, as long as $Y_n\notin\{0,N\}$, if we denote by $\mathcal{U}(A)$ the uniform law on a discrete set $A$,
+
+$$\frac{U_n}{Y_n}=\mathbb{P}(X_n^{(n)}\in \mathcal{Y}_0| X^{(n)}_0\sim\mathcal{U}(\mathcal{Y}_n),\mathcal{G}_n),$$ and $$\frac{V_n}{N-Y_n}=\mathbb{P}(X_n^{(n)}\in\mathcal{Y}_0| X^{(n)}_0\sim\mathcal{U}(I\setminus\mathcal{Y}_n),\mathcal{G}_n).$$
+%Setting $$\Xi^U_n=\frac{U_n}{Y_n}\qquad \text{for any $n<T_0$, and} \qquad \Xi^V_n=\frac{V_n}{N-Y_n}\qquad \text{for any $n<T_N$}, $$ one can have a good quantification of the impact of selection on genetic weight by studying the two quantities
+%$$\Xi^U_{T_N}\mathbf{1}_{T_N<\infty}\quad\text{and}\quad\Xi^V_{T_0}\mathbf{1}_{T_0<\infty}.$$
+
+We denote by $T_k$ the hitting time of any integer $k$ lying between $0$ and $N$, by the Markov chain $(Y_n)_{n\in\mathbb{N}}$. Then the two quantities $$\frac{U_{T_N}}{N}\mathbf{1}_{T_N<\infty}=\frac{U_{T_N}}{Y_{T_N}}\mathbf{1}_{T_N<\infty}\quad\text{and}\quad\frac{V_{T_0}}{N}\mathbf{1}_{T_0<\infty}=\frac{V_{T_0}}{N-Y_{T_0}}\mathbf{1}_{T_0<\infty}$$
+ can be interpreted as the genetic weight of advantaged individuals in the population once the mutation is fixed or has disappeared, respectively. They indeed give the probability that a gene sampled uniformly from the population, once the latter has become monomorphic, originates from an advantaged individual (see Figure \ref{FigPedigree} for an example starting with one advantaged individual, and fixation of this type). 
+ 
+After the time $\inf(T_0,T_N)$, the population continues to evolve, according to the neutral model studied in \cite{geneal}. Note finally that although $W_n$ is a deterministic function of the pedigree before time $n$, $\mathcal{G}_n$, the genetic weights $U_n$ and $V_n$ are not, since the pedigree alone does not give the advantage status of individuals. The precise dynamics of all these stochastic processes will be given in the next section, but introducing them is sufficient to state our main result :
+
+
+\begin{theoremnonum}[Theorem \ref{thmCvceDeterministe}] Let $Z_n=\left(\frac{Y_n}{N},\frac{U_n}{N},\frac{V_n}{N}\right)_{n\in\mathbb{N}}$. Let $a\in(0,1)$. If $Y_0=\lfloor aN\rfloor$, then for any $c\in\mathbb{R}_+$,
+\begin{align}\sup_{0\leq t\leq c}\|Z_{\lfloor Nt\rfloor}-z_t\|\underset{N\rightarrow\infty}{\longrightarrow}0\end{align} 
+in probability, where $(z_t)_{t\geq0}=(y_t,u_t,v_t)_{t\geq0}$ satisfies
+$$\left\{\begin{aligned}
+      y_t&= F^{-1}\left(\frac{a^{1+s}}{1-a}\exp(st)\right) \qquad\text{where  $F:x\rightarrow\frac{x^{1+s}}{1-x}$ maps $[0,1)$ onto $[0,\infty)$}.
+      \\
+      u_t&= y_t\frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}\left[\frac{(1-y_t)^{\frac{1}{2s}}}{y_t^{\frac{1+s}{2s}}}+\int_a^{y_t}\frac{(1-x)^{\frac{1}{2s}}}{x^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-x}\right]dx\right] \\
+      v_t&= (1-y_t)\frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}\int_a^{y_t}\frac{(1-x)^{\frac{1}{2s}}}{x^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-x}\right]dx. \\
+    \end{aligned}\right.$$
+\end{theoremnonum}
+This theorem gives the limiting dynamics of the respective weights of advantaged and disadvantaged individuals in the population, through time. Note that if the initial proportion of advantaged individuals $\frac{Y_0}{N}$ converges to $a$ in probability when $N$ goes to infinity, then $\mathbb{P}(T_N<T_0)\rightarrow 1$ (Proposition \ref{prop:Avantages}).
+The following corollary, gives, under a large population approximation, the genetic weight of advantaged ancestors, assumed to be in proportion $a$, once the proportion of advantaged individuals reaches any level $b>a$. 
+\begin{cornonum}[Corollary \ref{cor_main}] Let $a<b\in(0,1)$. If $Y_0=\lfloor aN\rfloor$ then 
+\begin{align*}\frac{U_{T_{\lfloor bN\rfloor}}}{N}\mathbf{1}_{T_{\lfloor bN\rfloor}<\infty}\underset{N\rightarrow\infty}{\longrightarrow} b\frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}&\left[\frac{(1-b)^{\frac{1}{2s}}}{b^{\frac{1+s}{2s}}}+\int_a^{b}\frac{(1-x)^{\frac{1}{2s}}}{x^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-x}\right]dx\right] \end{align*} in probability.
+\end{cornonum}
+
+By construction, this limiting genetic weight is non-decreasing with $s$, and one can see that it converges to $2\sqrt{a}-a$ as $s\uparrow \infty$ and $b$ converges to $1$. This result can also be retrieved from \cite{CoronLeJan22}, in which we focused on the case where $s=\infty$. Corollary \ref{cor_main} states, as an example, that for large selection strength $s$ and large population size, if only $1\%$ of the individuals are initially advantaged, they will on average end to be responsible for approximately $19\%$ of the population's genome. Theorem \ref{thmCvceDeterministe} and Corollary \ref{cor_main} are illustrated in Figure \ref{fig:simulations}.
+
+\begin{figure}
+\centering
+\begin{minipage}{0.6\textwidth}
+    \includegraphics[height=5cm]{Dynamics_N1000_y100_s10.png}
+\end{minipage}\quad
+\begin{minipage}{0.35\textwidth}
+    \includegraphics[height=5cm]{Asymptotics.png}
+\end{minipage}
+ \caption{Left : For $N=1000$, $s=10$ (very strong selection), and $a=20\%$, $30$ realizations of the dynamics of the proportion of advantaged individuals (in red) and the genetic weight of initially advantaged individuals (in blue). Right : For different values of initial proportion of advantaged individuals, $30$ simulation results for the weight at time $n=8000$ of initially advantaged individuals (in blue), their mean (in yellow), the theoretical prediction (in blue), as well as the theoretical predictions for $s=0$ (in purple) and for infinite $s$ (in red), once the population has become monomorphic.}    \label{fig:simulations}
+\end{figure}
+
+\section{Results and proofs}
+\subsection{A few Markovian properties}
+
+We begin by presenting a series of results that shed light on various aspects of the dynamics of the process under consideration, and notably the interplay between the set and number of advantaged individuals, the pedigree, and the genetic weights of ancestors. 
+
+\paragraph*{Number and set of advantaged individuals } We first focus on the set and number of advantaged individuals, whose dynamics happen to be particularly simple. Recall that $\mu_n\in I$ is the site of the mother (parent that transmits advantage) at time step $n$, while $\kappa_n\in I$ is the site of the individual that dies at time step $n$. These notations combined to the modeling framework described in Section \ref{sec:model}
+immediately give the following
+\begin{proposition} \label{prop:Avantages}
+The stochastic process $(\mathcal{Y}_n)_{n\in\mathbb{Z}_+}$ is a Markov chain, such that $$\mathcal{Y}_{n+1}=\begin{cases}
+  \mathcal{Y}_n\cup\{\kappa_n\} \qquad \text{ if $\mu_n\in\mathcal{Y}_n$} \\
+  \mathcal{Y}_n\setminus\{\kappa_n\}\qquad \text{if $\mu_n\notin\mathcal{Y}_n$ and $\kappa_n\in\mathcal{Y}_n$}\\
+  \mathcal{Y}_n \qquad \text{if $\mu_n,\kappa_n\notin\mathcal{Y}_n$.}
+\end{cases}$$
+\end{proposition}
+
+\begin{proof}
+If the mother is chosen among advantaged individuals then by the definition of the model described in Section \ref{sec:model}, the site $\kappa_n$ is added to (or remains in) the set of advantaged individuals. If the mother is chosen among non advantaged individuals then the site $\kappa_n$ is removed from the set of advantaged individuals, if it was present in this set.
+\end{proof}
+
+As a consequence,
+
+\begin{proposition}\label{prop:Y}
+The stochastic process  $(Y_n)_{n\in\mathbb{Z}_+}$ is a Markov chain such that if $Y_n=k\in \{0,1,...,N\}$ then $Y_{n+1}\in\{k-1,k,k+1\}$, and \begin{align*}\mathbb{P}(Y_{n+1}=k-1|Y_n=k)&=p_k\times\frac{1}{2+s},\\\mathbb{P}(Y_{n+1}=k+1|Y_n=k)&=p_k\times\frac{1+s}{2+s},\quad\text{and}\\\mathbb{P}(Y_{n+1}=k|Y_n=k)&=1-p_k,\end{align*} where $p_k=\frac{k(N-k)}{N\left(\frac{1}{2+s}k+\frac{1+s}{2+s}(N-k)\right)}=\frac{1}{\left(\frac{1}{2+s}\frac{N}{N-k}+\frac{1+s}{2+s}\frac{N}{k}\right)}.$ This Markov chain is absorbed in $0$ and in $N$.
+\end{proposition}
+
+
+\begin{proof} As summarized in Proposition \ref{prop:Avantages}, the number of advantaged individuals is increased by $1$ if the mother is advantaged while the dying individual is disadvantaged, which gives that $\mathbb{P}(Y_{n+1}=k+1|Y_n=k)=k/N\times\frac{(1+s)(N-k)}{k+(1+s)(N-k)}=\frac{1+s}{2+s}\times \frac{k(N-k)}{N(\frac{1}{2+s}k+\frac{1+s}{2+s}(N-k))}$. Similarly, the number of advantaged individuals is decreased by $1$ if the mother is disadvantaged while the dying individual is advantaged, which gives that $\mathbb{P}(Y_{n+1}=k-1|Y_n=k)=(N-k)/N\times\frac{k}{k+(1+s)(N-k)}=\frac{1}{2+s}\times \frac{k(N-k)}{N(\frac{1}{2+s}k+\frac{1+s}{2+s}(N-k))}$. Finally, the number of advantaged individuals remains the same if the mother and replaced individual have the same advantage status, which gives that $\mathbb{P}(Y_{n+1}=k|Y_n=k)=\frac{k}{N}\frac{k}{k+(1+s)(N-k)}+\frac{N-k}{N}\frac{(1+s)(N-k)}{k+(1+s)(N-k)}=\frac{k^2+(1+s)(N-k)^2}{N(k+(1+s)(N-k))}=1-\frac{(2+s)k(N-k)}{N(k+(1+s)(N-k))}=1-p_k$. As $p_0=p_N=0$, this gives that the states $0$ and $N$ are absorbing.
+\end{proof}
+
+The previous result implies that the skeleton of the Markov chain $(Y_n)_{n\in\mathbb{Z}_+}$ has a particularly simple dynamics. More precisely, let $\tau_0=0$, and $H_0=Y_0=Y_{\tau_0}$. Now for any $l\in\mathbb{Z}_+^*$, if $Y_{\tau_l}\notin\{0,N\}$ let $\tau_{l+1}=\inf\{n>\tau_l|Y_n\neq Y_{\tau_l}\}$ and $H_{l+1}=Y_{\tau_{l+1}}$. If $Y_{\tau_l}\in\{0,N\}$ let $H_{l+1}=H_l$. Then from Proposition \ref{prop:Y}, 
+\begin{proposition}\label{prop-biasedRW}
+The stochastic process $(H_l)_{l\in\mathbb{Z}_+}$ is a simple random walk absorbed in $\{0,N\}$ : For any $l\in\mathbb{Z}_+$ such that $H_l\notin\{0,N\}$,
+\begin{align}\mathbb{P}(H_{l+1}&=H_{l}+1)=\frac{1+s}{2+s}\\\mathbb{P}(H_{l+1}&=H_{l}-1)=\frac{1}{2+s},\end{align} and if $H_l\in\{0,N\}$, $H_{l+1}=H_l$. We denote by $S_k$ the hitting time of $k\in\{0,1,...,N\}$ by the random walk $H$.
+\end{proposition}
+
+
+
+This result allows to prove very simply the first item of the following proposition:
+\begin{proposition}\label{prop-Y-TN} Let $a\in(0,1)$. If $Y_0=\lfloor aN\rfloor$, then 
+\begin{description}
+\item[$(i)$] The fixation probability of advantaged individuals satisfies \begin{align*}\mathbb{P}(T_N<T_0)\underset{N\rightarrow\infty}{\longrightarrow} 1. \end{align*} 
+\item[$(ii)$] Let $b\in [a,1)$. There exists $C>0$ (depending on $b$) such that $\mathbb{P}(T_{\lfloor bN\rfloor}> N C)\rightarrow 0$ when $N$ goes to infinity. \\
+%\item[$(iii)$] For any $b\in[a,1)$, let $T_{bN}=\inf\{n:Y_n\geq bN\}$. 
+%\textcolor{red}{Contrôle sur $\mathbb{E}(T_N-T_{bN})$ quand $b$ tend vers $1$ et $N$ tend vers l'infini ? Voir tome 1 de Feller}
+%\item[$(iv)$] \textcolor{red}{Introduire la marche changee de temps pour avoir une information sur le temps qu'il faut pour aller de $\alpha N$ a $\beta N$}
+\end{description}
+\end{proposition}
+\begin{proof} Result $(i)$ falls from Proposition \ref{prop-biasedRW} and from a classical result on "gambler's ruin"  (see for example 3.9 (6) p. 74 in \cite{GrimmettStirzaker}). Note that $T_N<T_0$  iff $T_N<\infty$, iff $T_0=\infty$. We recall that $S_k$ is the hitting time of $k\in\{0,1,...,N\}$ by the random walk $H$. Remark that $T_{\lfloor bN\rfloor}<T_0$ iff $S_{\lfloor bN\rfloor}<S_0$, iff $S_{\lfloor bN\rfloor}<\infty$. 
+\\
+Now, let us turn our attention to (ii).  For any $\epsilon<a$ and any $K>\frac{2+s}{s}$, $\mathbb P(S_{\lfloor bN\rfloor}<S_{\lfloor \epsilon N\rfloor})=\frac{(1+s)^{\lfloor aN\rfloor-\lfloor \epsilon N\rfloor}-1}{(1+s)^{\lfloor bN\rfloor-\lfloor \epsilon N\rfloor}-1}\rightarrow 0$ as $N\uparrow\infty$ and for any $K>\frac{2+s}{s}$ (which is the inverse of the drift of the random walk $H$), \begin{align*}\mathbb P(S_{\lfloor bN\rfloor}>KbN)&<\mathbb P(H_{\lfloor KbN\rfloor}<\lfloor bN\rfloor)\\&<\mathbb{P}\Big(H_{\lfloor KbN\rfloor}-(\lfloor aN\rfloor+\frac{s}{2+s}\lfloor KbN\rfloor)<\lfloor bN\rfloor-(\lfloor aN\rfloor+\frac{s}{2+s}\lfloor KbN\rfloor)\Big)\\&<\mathbb{P}\Big(H_{\lfloor KbN\rfloor}-(\lfloor aN\rfloor+\frac{s}{2+s}\lfloor KbN\rfloor)<\lfloor bN\rfloor-(\frac{s}{2+s}\lfloor KbN\rfloor)\Big)\\&<\mathbb{P}\Big(\big|H_{KbN}-(\lfloor aN\rfloor+\frac{s}{2+s}\lfloor KbN\rfloor)\big|<\frac{s}{2+s}\lfloor KbN\rfloor-\lfloor bN\rfloor\Big)\end{align*} since $K>\frac{2+s}{s}$. Therefore $\mathbb P(S_{\lfloor bN\rfloor}>KbN)\rightarrow 0$ as $N\rightarrow\infty$ from Cebishev inequality. On $T_k<\infty$, $T_k=\sum_0^{S_k-1}L_i $, with the $L_i$'s being, conditionally to $H$, independent geometric random variables with parameter $p_{H_i}$. From the expression of $p_k=\frac{1}{\left(\frac{1}{2+s}\frac{N}{N-k}+\frac{1+s}{2+s}\frac{N}{k}\right)}$, we check that by taking $\epsilon$ small enough we can assume that $p_{\lfloor \epsilon N\rfloor}\leq p_k$ for all $\lfloor \epsilon N\rfloor\leq k\leq \lfloor  bN\rfloor$. Note that $\epsilon$ depends on $b$ since $p_{\lfloor \epsilon N\rfloor}$ must be smaller that $p_{\lfloor bN\rfloor}$.
+On $\{S_{\lfloor bN\rfloor}<S_{\lfloor \epsilon N\rfloor}\}$, using that the infimum of two independent geometric random variables is geometric, we can  define pairs of new  independent random variables $(D_i, E_i)$ such that $L_i=\min(E_i,D_i)$, the $D_i$'s are independent geometric random variables with parameter $p_{\lfloor \epsilon N\rfloor}$, and conditionally to $H$, the $E_i$'s are also independent geometric random variables with parameter $1-\frac{1-p_{H_i}}{1-p_{\lfloor \epsilon N\rfloor}}\in[0,1]$.
+Hence, on $\{S_{\lfloor bN\rfloor}<KN\}\cap\{S_{\lfloor bN\rfloor}<S_{\lfloor \epsilon N\rfloor} \}$, 
+$T_{\lfloor bN\rfloor}=\sum_{i=0}^{S_k-1}L_i\leq\sum_{i=0}^{S_k-1}D_i$. Now $p_{\lfloor \epsilon N\rfloor}<\frac{1}{\left(\frac{1}{2+s}\frac{1}{1-\epsilon+\frac{1}{N}}+\frac{1+s}{2+s}\frac{1}{\epsilon}\right)}=\epsilon\frac{(2+s)(1-\epsilon+1/N)}{(1+s)(1-\epsilon+1/N)+\epsilon}<2\epsilon$ if $N$ is large enough. Therefore, the expectation and the variance of $T_{\lfloor bN\rfloor}$ are respectively smaller than $\frac{KN}{2\epsilon}$ and $\frac{KN}{4\epsilon^2}$ which allows to conclude immediately by Cebishev inequality if we take $C$ larger than $\frac{K}{2\epsilon}$.\\
+
+%%Hence, on $S_{\lfloor bN\rfloor<\infty}$, \begin{equation}\label{eq-exp-Tk}\mathbb E(T_{\lfloor bN\rfloor}|H)=\sum_{i=0}^{S_{\lfloor bN\rfloor}-1}\frac{1}{p_{H_i}}\quad\text{ and }\quad Var(T_{\lfloor bN\rfloor}|H)=\sum_{i=0}^{S_{\lfloor bN\rfloor}-1}\frac{1-p_{H_i}}{p_{H_i}}\leq \sum_{i=0}^{S_{\lfloor bN\rfloor}-1} \frac{1}{p_{H_i}}. \end{equation} Moreover, \begin{equation}\label{eq-control-1/p}\sum_{i=0}^{S_{\lfloor bN\rfloor}-1}\frac{1}{p_{H_i}}\leq\frac{S_{\lfloor bN\rfloor}}{p_{\min_b H}}\end{equation} with $\min_b H=\min_{0\leq i <S_{\lfloor bN\rfloor} }(H_i)$. \\
+%%To prove $(ii)$, by Cebishev inequality, it is enough to show that for some positive $C$ (whose value is allowed to change at each step in what follows), $\mathbb E(T_{\lfloor bN\rfloor}|S_{\lfloor bN\rfloor}<\infty)<CN$ and $Var(T_{\lfloor bN\rfloor}| S_{\lfloor bN\rfloor}<\infty)<CN$.  We will now prove \\1.  $\mathbb E(S_{\lfloor bN\rfloor}|S_{\lfloor bN\rfloor}<\infty)<CN$ and $Var(S_{\lfloor bN\rfloor}| S_{\lfloor bN\rfloor}<\infty)<CN$, \\
+%%2. $\mathbb E(\frac{S_{\lfloor bN\rfloor}}{p_{\min H_b}}|S_{\lfloor bN\rfloor}<\infty)<CN$.\\
+%%Indeed from Equations \eqref{eq-exp-Tk} and \eqref{eq-control-1/p}, 2. will imply that $\mathbb E(T_{\lfloor bN\rfloor}|S_{\lfloor bN\rfloor}<\infty)<CN$ and that $\mathbb{E}(Var(T_{\lfloor bN\rfloor}|H))<CN$, and \textcolor{red}{1. will imply that $Var(\mathbb{E}(T_{\lfloor bN\rfloor}|H))<CN$ ?}
+%%
+%\textcolor{green}{
+%1. results from (i) and from the fact that on $\{S_{\lfloor bN\rfloor}<\infty\}$, $S_{\lfloor bN\rfloor}$ can be bounded by the hitting time of the non absorbed random walk which is the sum of  $\lfloor bN\rfloor-\lfloor aN\rfloor$ i.i.d. random times with moments of all orders.\\
+%As for any $1\leq k\leq \lfloor bN\rfloor$, $p_k<\frac{CN}{k}$, by Cauchy Schwartz inequality, 2. results from 1. and from the bounds: $\mathbb E(\frac{1}{\min H_b^2}1_{S_{\lfloor bN\rfloor}<\infty} )
+% <C\sum_{k=1}^{\lfloor aN\rfloor}(\frac{N^2}{k^2}-\frac{N^2}{(k+1)^2})\mathbb P(\min H_b\leq k, S_{\lfloor bN\rfloor}<\infty)$\\
+%$ <C\sum_{k=1}^{\lfloor aN\rfloor} \frac{N^2}{k^3}\mathbb P(S_k<S_{\lfloor bN\rfloor}<\infty)$ which stays bounded as $N\uparrow \infty$ since for any $x\leq a$, $\mathbb P(S_{\lfloor xN\rfloor}<S_{\lfloor bN\rfloor})$ is equivalent to $(1+s)^{(x-b)N}$.
+% }
+\end{proof}
+Note that the previous result can be extended to the case where $Y_0/N$ converges in probability to $a\in(0,1)$.
+
+\bigskip
+\paragraph*{Ancestors genetic weights} Let us now focus on ancestors weights. Due to selection, the sequence of ancestors weights $((W_n(i,j)_{1\leq i,j\leq N})_{n\in\mathbb{Z}_+}$ is not a Markov chain. However, the couple $((W_n(i,j)_{1\leq i,j\leq N},\mathcal{Y}_n)_{n\in\mathbb{Z}_+}$ is, and follows the
+
+
+\begin{lemma}\label{prop-WY}
+The sequence $(W_n,\mathcal{Y}_n)_{n\in\mathbb{Z}_+}$ is a Markov chain, with transition \begin{align}\mathcal{Y}_{n+1}&=\begin{cases}
+  \mathcal{Y}_n\cup\{\kappa_n\} \qquad \text{ if $\mu_n\in\mathcal{Y}_n$ and  $\kappa_n\notin\mathcal{Y}_n$ } \\
+  \mathcal{Y}_n\setminus\{\kappa_n\}\qquad \text{if $\mu_n\notin\mathcal{Y}_n$ and $\kappa_n\in\mathcal{Y}_n$}\\
+  \mathcal{Y}_n \qquad \text{if $\mu_n,\kappa_n\notin\mathcal{Y}_n$ or $\mu_n,\kappa_n\in\mathcal{Y}_n$, \quad and}
+\end{cases}\label{eq-Y}\\
+W_{n+1}(i,j)&=\begin{cases}W_n(i,j) \quad\text{if $i\neq \kappa_n$}\\
+    \frac{W_n(\mu_n,j)+W_n(\pi_n,j)}{2} \quad\text{if $i=\kappa_n$,}\end{cases}\label{eq-W}\end{align} where $\mu_n$ and $\pi_n$ are drawn uniformly in $1,...,N$, and $\kappa_n$ is such that $\mathbb{P}(\kappa_n=i)=\frac{1+s\mathbf{1}_{i\notin\mathcal{Y}_n}}{Y_n+(1+s)(N-Y_n)}$ for all $i\in\{1,..,N\}$.
+\end{lemma}
+
+\begin{proof} Equation \eqref{eq-Y} is equivalent to the result stated in Proposition \ref{prop:Y} and Equation \eqref{eq-W} is a consequence of the model presented in Section \ref{sec:model} and the definition \eqref{eq:defA}.
+\end{proof}
+
+Now recall the definition of the two key quantities 
+\begin{align*}
+U_n&=\sum_{l\in\mathcal{Y}_n}\sum_{l'\in\mathcal{Y}_0} W_n(l,l'), \quad\text{and}\quad
+V_n=\sum_{l\notin\mathcal{Y}_n}\sum_{l'\in\mathcal{Y}_0} W_n(l,l')
+\end{align*} and note that $U_0=Y_0$ and $V_0=0$. From now on we consider the sequence of the rescaled triplets :
+$$Z_n=\left(\frac{Y_n}{N},\frac{U_n}{N},\frac{V_n}{N}\right)\in[0,1]^3$$ and denote by $(\mathcal{F}^Z_n,n\geq0)$ its natural filtration. The set $[0,1]^3$ is endowed with the Euclidean norm. We also denote by $\mathcal{C}^2([0,1]^3)$ the set of real-valued twice continuously differentiable functions on $[0,1]^3$. Our first aim in this section is to present the dynamics of this stochastic process and to prove that when the population size goes to infinity, if the initial proportion of advantaged individuals converges to some value $a\in]0,1[$, then this stochastic process converges to the solution of a dynamical system which can be explicitly solved.
+
+\medskip
+First, the following proposition follows from Proposition \ref{prop-WY} : 
+
+\begin{proposition}\label{prop-Z} The sequence $(Z_n)_{n\in\mathbb{Z}_+}=\left(\frac{Y_n}{N},\frac{U_n}{N},\frac{V_n}{N}\right)_{n\in\mathbb{Z}_+}$ (which is not Markovian) is such that
+\begin{equation}\label{eq-dynamiqueZ}\begin{aligned}
+Z_{n+1}=Z_n+\frac{1}{N}&\left[\left(1,\sum_{l'\in\mathcal{Y}_0}\frac{W_n(\mu_n,l')+W_n(\pi_n,l')}{2},\sum_{l'\in\mathcal{Y}_0}-W_n(\kappa_n,l')\right)\mathbf{1}_{\mu_n\in\mathcal{Y}_n,\kappa_n\notin\mathcal{Y}_n}\right.\\&+\left(-1,-\sum_{l'\in\mathcal{Y}_0}W_n(\kappa_n,l'),\sum_{l'\in\mathcal{Y}_0}\frac{W_n(\mu_n,l')+W_n(\pi_n,l')}{2}\right)\mathbf{1}_{\mu_n\notin\mathcal{Y}_n,\kappa_n\in\mathcal{Y}_n}\\&+\left(0,\sum_{l'\in\mathcal{Y}_0}\frac{W_n(\mu_n,l')+W_n(\pi_n,l')}{2}-\sum_{l'\in\mathcal{Y}_0}W_n(\kappa_n,l'),0\right)\mathbf{1}_{\mu_n\in\mathcal{Y}_n,\kappa_n\in\mathcal{Y}_n}\\&+\left.\left(0,0,\sum_{l'\in\mathcal{Y}_0}\frac{W_n(\mu_n,l')+W_n(\pi_n,l')}{2}-\sum_{l'\in\mathcal{Y}_0}W_n(\kappa_n,l')\right)\mathbf{1}_{\mu_n\notin\mathcal{Y}_n,\kappa_n\notin\mathcal{Y}_n}\right].\end{aligned}
+\end{equation}
+In particular $\|Z_{n+1}-Z_n\|\leq \sqrt{3}/N$ for all $n\geq0$, and 
+\begin{equation}\label{eq-ExpDZ}\begin{aligned}\mathbb{E}\left(Z_{n+1}-Z_n|\mathcal{F}^Z_n\right)=\frac{1}{N}\Big(&\frac{sY_n/N(1-Y_n/N)}{Y_n/N+(1+s)(1-Y_n/N)},\\&\frac{U_n}{2N}+\frac{U_n+V_n}{2N}\frac{Y_n}{N}-\frac{U_n/N}{Y_n/N+(1+s)(1-Y_n/N)},\\&\frac{V_n}{2N}+\frac{U_n+V_n}{2N}\left(1-\frac{Y_n}{N}\right)-\frac{(1+s)V_n/N}{Y_n/N+(1+s)(1-Y_n/N)}\Big).\end{aligned}\end{equation}
+\end{proposition}
+
+\begin{proof} 
+Equation \eqref{eq-dynamiqueZ} follows from the model described in Section \ref{sec:model} (i.e. from Lemma \ref{prop-WY}), and Equation \eqref{eq-ExpDZ} follows from the fact that $\mu_n$ and $\pi_n$ are uniformly chosen in $\{1,...,N\}$ and $\kappa_n\in\mathcal{Y}_n$ with probability $\frac{Y_n}{Y_n+(1+s)(N-Y_n)}$.
+\end{proof}
+
+%the following proposition follows.
+
+%\begin{proposition} Let $f\in\mathcal{C}^2_b([0,1]^3)$.
+%\begin{align*}f(Z_{n+1})=f(Z_n)&+\frac{1}{N}\frac{\partial f}{\partial U}(Z_n)\left[\sum_{l'\in\mathcal{Y}_0}\frac{W_n(\mu_n,l')+W_n(\pi_n,l')}{2}\mathbf{1}_{\mu_n\in\mathcal{Y}_n}-W_n(\kappa_n,l')\mathbf{1}_{\kappa_n\in\mathcal{Y}_n}\right]\\&
+%+\frac{1}{N}\frac{\partial f}{\partial V}(Z_n)\left[\sum_{l'\in\mathcal{Y}_0}\frac{W_n(\mu_n,l')+W_n(\pi_n,l')}{2}\mathbf{1}_{\mu_n\notin\mathcal{Y}_n}-W_n(\kappa_n,l')\mathbf{1}_{\kappa_n\notin\mathcal{Y}_n}\right]\\&
+%+\frac{1}{N}\frac{\partial f}{\partial Y}(Z_n)\left[\mathbf{1}_{\mu_n\in\mathcal{Y}_n,\kappa_n\notin\mathcal{Y}_n}-\mathbf{1}_{\mu_n\notin\mathcal{Y}_n,\kappa_n\in\mathcal{Y}_n}\right]\\&
+%+\frac{1}{N^2}R^f,\end{align*} where $R^f=3\sup_z\|Hess(f)(z)\|$.
+%\end{proposition}
+
+%\begin{proof}
+   
+%\end{proof}
+
+This previous proposition is a first step to prove the convergence, as the population size $N$ goes to infinity, of the stochastic sequence $(Z_{\lfloor Nt\rfloor})_{0\leq t\leq c}$ towards the solution of a deterministic dynamical system which is the object of the next subsection. 
+
+
+\subsection{Dynamical system}
+
+\begin{proposition} \label{prop-z} The differential equation 
+\begin{equation}\label{eq:dyn-system}\begin{cases}y'=\frac{sy(1-y)}{y+(1+s)(1-y)}\\u'=\left[\frac{u}{2}+\frac{u+v}{2}y-\frac{u}{y+(1+s)(1-y)}\right]\\
+v'=\left[\frac{v}{2}+\frac{u+v}{2}(1-y)-\frac{(1+s)v}{y+(1+s)(1-y)}\right]\end{cases}\end{equation} admits a unique solution $z_t:=(y_t,u_t,v_t)_{t\geq0}$ starting from $(a,a,0)$ with $a\in(0,1)$. This solution satisfies :
+\begin{equation}\label{eq-sol-syst}\left\{\begin{aligned}
+      y_t&= F^{-1}\left(\frac{a^{1+s}}{1-a}\exp(st)\right) \qquad\text{where $F:x\rightarrow\frac{x^{1+s}}{1-x}$ maps $[0,1)$ onto $[0,\infty)$}\\
+      u_t&= y_t\frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}\left[\frac{(1-y_t)^{\frac{1}{2s}}}{y_t^{\frac{1+s}{2s}}}+\int_a^{y_t}\frac{(1-x)^{\frac{1}{2s}}}{x^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-x}\right]dx\right] \\
+      v_t&= (1-y_t)\frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}\int_a^{y_t}\frac{(1-x)^{\frac{1}{2s}}}{x^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-x}\right]dx. \\
+    \end{aligned}\right.\end{equation}
+\end{proposition}
+
+
+\begin{proof} Let us first focus on the first differential equation of \eqref{eq:dyn-system} which happens to be closed : \begin{equation}\label{eq-dydt}\frac{dy_t}{dt}=\frac{sy_t(1-y_t)}{y_t+(1+s)(1-y_t)}=\frac{sy_t(1-y_t)}{1+s(1-y_t)}=:m(y_t),\end{equation} with $y_0=a$. Since the function $m$ is Lipschitz continuous on $[0,1]$, from Cauchy-Lipschitz theorem, this ordinary differental equation admits a unique solution starting at $a\in[0,1]$. Since $m(0)=m(1)=0$, this solution is simply constant if $a\in\{0,1\}$, and if $a\in(0,1)$, then this solution is such that $y_t\in(0,1)$ for all $t$, and the differential equation \eqref{eq-dydt} can then also be written as:
+$$\frac{dy_t}{dt}\left[\frac{1+s}{y_t}+\frac{1}{1-y_t}\right]=s.$$ Noting that $\frac{1+s}{y}$ and $\frac{1}{1-y}$ are respectively the derivative of $y\rightarrow(1+s)\ln(y)$ and $y\rightarrow-\ln(1-y)$ gives that the solution to this equation starting from $a$ satisfies 
+\begin{equation}\label{eq-y^1+s}\frac{y_t^{1+s}}{1-y_t}=\frac{a^{1+s}}{1-a}\exp(st)\in[0,\infty) \quad\text{for all $t\geq0$}.\end{equation} Let $F$ be the function such that $F(x)=\frac{x^{1+s}}{1-x}$ for all $x\in[0,1)$. The function $F$ is strictly increasing on $[0,1)$ and sends $[0,1)$ onto $[0,+\infty)$. Therefore, since $a\in[0,1)$, Equation \eqref{eq-y^1+s} gives that
+$y_t= F^{-1}\left(\frac{a^{1+s}}{1-a}\exp(st)\right)$ for all $t\geq0$, which is the first equation of \eqref{eq-sol-syst}. 
+
+\medskip
+Note that it gives in particular that 
+\begin{align}\label{eq-yt}
+\exp(t/2)=\exp(st)^{\frac{1}{2s}}=\left(F(y_t)\frac{1-a}{a^{1+s}}\right)^{\frac{1}{2s}}=\frac{y_t^{\frac{1+s}{2s}}}{(1-y_t)^{\frac{1}{2s}}}\frac{(1-a)^{\frac{1}{2s}}}{a^{\frac{1+s}{2s}}}.
+\end{align}
+
+Let us now come back to the whole differential equation \eqref{eq:dyn-system}. The existence and uniqueness of the solution starting from the initial condition $(a,a,0)$ falls from Cauchy-Lipschitz theorem again. This solution $(z_t)_{t\geq0}$ belongs to $[0,1]^3$.
+
+Now considering the quantity $D_t=\frac{u_te^{t/2}}{y_t}-\frac{v_te^{t/2}}{1-y_t}$, one finds out (see below) that \begin{equation}\label{EquationD}\frac{dD_t}{dt}=0 \qquad \text{therefore}\qquad D_t=D_0=1 \qquad\text{for all $t\geq0$.}\end{equation} Note that this property is a fundamental characteristic of our model. An analogous version of it was given in \cite{CoronLeJan22} (Equation (1.7)) in a discrete setting and for infinite selection, which was extended for the finite selection case in \cite{coronLeJan2024}, Proposition 2.6. Equation \eqref{EquationD} is proved as follows : 
+
+\begin{align*}
+    \left(\frac{u}{y}\right)'&=\frac{u'}{y}-u\frac{y'}{y^2}=\frac{u}{2y}+\frac{u+v}{2}-\frac{u}{y[y+(1+s)(1-y)]}-\frac{usy(1-y)}{y^2[y+(1+s)(1-y)]}\\&=\frac{u+v}{2}-\frac{u}{2y},
+\end{align*}
+
+therefore \begin{align*}
+    \left(\frac{ue^{t/2}}{y}\right)'&=\frac{u+v}{2}e^{t/2},
+\end{align*}
+
+and similarly
+\begin{align*}
+    \left(\frac{v}{1-y}\right)'&=\frac{v'}{1-y}+v\frac{y'}{(1-y)^2}\\&=\frac{v}{2(1-y)}+\frac{u+v}{2}-\frac{(1+s) v}{(1-y)[y+(1+s)(1-y)]}+\frac{vsy(1-y)}{(1-y)^2[y+(1+s)(1-y)]}\\&=\frac{u+v}{2}-\frac{v}{2(1-y)}.
+\end{align*}
+therefore 
+\begin{align}\label{eq-deriv-v}
+    \left(\frac{ve^{t/2}}{1-y}\right)'&=\frac{u+v}{2}e^{t/2}.
+\end{align}
+
+In particular Equation \eqref{EquationD} gives that $u_te^{t/2}=y_t\left(1+\frac{v_t}{1-y_t}e^{t/2}\right)$ for all $t\geq0$. Finally, let us set $\beta_t=\frac{v_t}{1-y_t}e^{t/2}$. Then
+
+\begin{align*}\frac{d\beta_t}{dy_t}&=\frac{\frac{d\beta_t}{dt}}{\frac{dy_t}{dt}}=\frac{\frac{u_t+v_t}{2}e^{t/2}}{\frac{sy_t(1-y_t)}{y_t+(1+s)(1-y_t)}} \qquad\text{from Equation \eqref{eq-deriv-v}}\\&=\frac{y_t\left[1+\frac{v_t}{1-y_t}e^{t/2}\right]+v_te^{t/2}}{\frac{2sy_t(1-y_t)}{y_t+(1+s)(1-y_t)}}\\&=\frac{y_t+\beta_t}{\frac{2sy_t(1-y_t)}{y_t+(1+s)(1-y_t)}}.\end{align*}
+Therefore \begin{equation}\label{eq-diff-beta}\frac{d\beta_t}{dy_t}=\frac{\beta_t}{\frac{2sy_t(1-y_t)}{y_t+(1+s)(1-y_t)}}+\frac{y_t+(1+s)(1-y_t)}{2s(1-y_t)}\end{equation} 
+and this differential equation can be solved using the variation of constant method. Let us to that purpose introduce a function $C$ defined on $(0,1)$ such that
+
+\begin{align*}\beta_t=C(y_t)\frac{y_t^{\frac{1+s}{2s}}}{(1-y_t)^{\frac{1}{2s}}}\quad\text{for all $t\geq0$}.\end{align*}
+Then from Equations \eqref{eq-diff-beta} and \eqref{eq-dydt}
+\begin{align*}\frac{dC}{dy}\frac{y^{\frac{1+s}{2s}}}{(1-y)^{\frac{1}{2s}}}=\frac{y+(1+s)(1-y)}{2s(1-y)}=\frac{y}{2s(1-y)}+\frac{1+s}{2s},\end{align*} therefore
+\begin{align*}\frac{dC}{dy}=\frac{(1-y)^{\frac{1}{2s}-1}}{2sy^{\frac{1+s}{2s}-1}}+\frac{1+s}{2s}\frac{(1-y)^{\frac{1}{2s}}}{y^{\frac{1+s}{2s}}},\end{align*}
+
+which gives that since $\beta_0=0$ and $y_0=a$, 
+\begin{align*}C(y)&=\frac{1}{2s}\int_a^{y}\frac{(1-x)^{\frac{1}{2s}}}{x^{\frac{1+s}{2s}}}\left[\frac{x}{1-x}+1+s\right]dx\\&=\frac{1}{2s}\int_a^{y}\frac{(1-x)^{\frac{1}{2s}}}{x^{\frac{1+s}{2s}}}\left[\frac{1}{1-x}+s\right]dx\\&=\int_a^{y}\frac{(1-x)^{\frac{1}{2s}}}{x^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-x}\right]dx,\end{align*}
+
+Therefore from Equation \eqref{eq-yt}, \begin{align*}\frac{v_t}{1-y_t}&=e^{-\frac{t}{2}}\beta_t=\frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}\int_a^{y_t}\frac{(1-x)^{\frac{1}{2s}}}{x^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-x}\right]dx\end{align*} which gives the second equation of \eqref{eq-sol-syst}.
+
+Finally from Equation \eqref{EquationD}, 
+\begin{align*}\frac{u_t}{y_t}&=e^{-\frac{t}{2}}(1+\beta_t)=\frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}\left[\frac{(1-y_t)^{\frac{1}{2s}}}{y_t^{\frac{1+s}{2s}}}+\int_a^{y_t}\frac{(1-x)^{\frac{1}{2s}}}{x^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-x}\right]dx\right]\end{align*} which gives the third equation of \eqref{eq-sol-syst}.
+\end{proof}
+
+Recall that the limiting solution $(z_t)_{t\geq0}=(y_t,u_t,v_t)_{t\geq0}$ satisfies that $y_t$ is strictly increasing, from $y_0$ to $1$ (the function $y$ was used as a time change in the previous proof). For any $b\in[a,1)$, let us denote by $r_b$ the hitting time of $b$ by $(y_t)_{t\geq0}$. The limiting dynamical system $(z_t)_{t\geq0}$ satisfies the following :
+\begin{corollary} \label{cor-zb}
+\begin{description}
+\item[(i)] For any $b\in[y_0,1]$, \begin{align*}z_{r_b}=\Big(b,b\frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}&\left[\frac{(1-b)^{\frac{1}{2s}}}{b^{\frac{1+s}{2s}}}+\int_a^{b}\frac{(1-x)^{\frac{1}{2s}}}{x^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-x}\right]dx\right],\\&(1-b)\frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}\int_a^{b}\frac{(1-x)^{\frac{1}{2s}}}{x^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-x}\right]dx\Big).\end{align*}
+\item[(ii)] $(z_t)_{t\geq0}$, converges when $t$ goes to infinity, to $$z_{\infty}:=\left(1,\frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}\left[\int_a^1\frac{(1-x)^{\frac{1}{2s}}}{x^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-x}\right]dx\right],0\right).$$
+\end{description}
+\end{corollary}
+
+\begin{proof}
+ The first point is the application of Equation \eqref{eq-sol-syst} in $t=r_b$, therefore with $y_t=b$.   The convergence stated in $(ii)$ is immediate from Equation \eqref{eq-sol-syst} and notably the already mentioned fact that $(y_t)_{t\geq0}$ is strictly increasing and converges to $1$ when $t$ goes to infinity. 
+\end{proof}
+
+
+\subsection{Convergence}
+We finally prove that if $Y_0=\lfloor aN\rfloor$, then for any constant $c>0$, the stochastic process $(Z_{\lfloor Nt\rfloor})_{0\leq t\leq c}$ converges, when $N$ goes to infinity, to the solution $(y_t,u_t,v_t)_{0\leq t \leq c}$ of the dynamical system \eqref{eq:dyn-system}, starting from $(a,a,0)$. Recall that we denoted by $(\mathcal{F}^Z_n,n\geq 0)$ the filtration associated to the stochastic process $(Z_n)_{n\geq 0}$.
+
+
+
+\begin{theorem}\label{thmCvceDeterministe} Let $a\in(0,1)$. If $Y_0=\lfloor aN\rfloor$, then for any $c\in\mathbb{R}_+$, \begin{align}
+    \sup_{0\leq t\leq c}\|Z_{\lfloor Nt\rfloor}-z_t\|\longrightarrow_{N\rightarrow\infty}0
+\end{align} in probability.
+\end{theorem}
+\begin{proof}
+From Proposition \ref{prop-Z}, we can decompose : $$Z_{n+1}-Z_n=A_{n+1}+g(Z_n)$$ where $g(Z_n)=\mathbb{E}(Z_{n+1}-Z_n|\mathcal{F}^Z_n)$ is such that \begin{align*}
+    g(y,u,v)=\Big(\frac{y(1-y)s}{y+(1+s)(1-y)},&\frac{u}{2}+\frac{u+v}{2}y-\frac{u}{y+(1+s)(1-y)},\\&\frac{v}{2}+\frac{u+v}{2}(1-y)-\frac{(1+s)v}{y+(1+s)(1-y)}\Big)\end{align*} for all $(y,u,v)\in[0,1]^3$, and $A_{n+1}=Z_{n+1}-Z_n-\mathbb{E}(Z_{n+1}-Z_n|\mathcal{F}^Z_n)=Z_{n+1}-\mathbb{E}(Z_{n+1}|\mathcal{F}^Z_n)$. Therefore
+\begin{align}
+    Z_n=Z_0+\sum_{k=1}^n A_k+\frac{1}{N}\sum_{k=1}^{n-1} g(Z_k)
+\end{align}
+and the variables $(A_k)_{1\leq k\leq n}$
+are the increments of a $\mathcal{F}^Z$-martingale $(M_n)_{n\geq 0}=(\sum_{k=1}^nA_k)_{n\geq 0}$. 
+Now from Doob's martingale inequality, for all $c>0$, 
+$$\mathbb{E}\left(\sup_{0\leq n\leq \lfloor c N\rfloor} (M_n)^2\right)\leq  4\mathbb{E}\left(M_{\lfloor cN\rfloor}^2\right).$$ 
+Besides, $$\mathbb{E}(M_{\lfloor cN\rfloor}^2)=\mathbb{E}\left(\Big(\sum_{k=1}^{\lfloor cN\rfloor}A_k\Big)^2\right)=\mathbb{E}\left(\sum_{k=1}^{\lfloor cN\rfloor}(A_k)^2\right)\leq \frac{12c}{N}\quad\text{as $\|Z_{n+1}-Z_n\|^2\leq 3$,}$$ which gives that 
+$$\sup_{0\leq t\leq c}\left\|\sum_{k=1}^{\lfloor Nt\rfloor} A_k \right\|\longrightarrow 0 \quad\quad \text{in probability when $N$ goes to infinity.}$$ 
+Now from Proposition \ref{prop-z},
+\begin{align}
+    z_t=(a,a,0)+\int_{0}^{t}g(z_s)ds
+\end{align} for all $t\in[0,c]$.
+Therefore 
+\begin{align}
+    Z_{\lfloor Nt\rfloor}-z_t=(Y_0/N,Y_0/N,0)-(a,a,0)+\frac{1}{N}\sum_{k=1}^{\lfloor Nt\rfloor}A_k+\int_0^t g(Z_{\lfloor Ns\rfloor})-g(z_s)ds
+\end{align}
+and since the function Jacobian matrix of the function $g$ is bounded, there exists $K\in\mathbb{R}_+$ such that $\|g(z)-g(z')\|\leq K\|z-z'\|$ for all $z,z'\in[0,1]^3$, and then
+\begin{align}
+    \left\|Z_{\lfloor Nt\rfloor}-z_t\right\|\leq\|(Y_0/N,Y_0/N,0)-(a,a,0)\|+\|\frac{1}{N}\sum_{k=1}^{\lfloor Nt\rfloor}A_k\|+\int_0^t K\|Z_{\lfloor Ns\rfloor}-z_s)\|ds
+\end{align} 
+therefore by Gronwall's inequality, for any $t\in[0,c]$,
+\begin{align}
+    \|Z_{\lfloor Nt\rfloor}-z_t\|\leq\left(\|(Y_0/N,Y_0/N,0)-(a,a,0)\|+\left\|\frac{1}{N}\sum_{k=1}^{\lfloor Nt\rfloor}A_k\right\|\right)e^{Kt}
+\end{align} which gives the result.
+\end{proof}
+
+%\begin{proposition} Recall from Proposition \ref{prop:Y} that if $Y_0/N$ converges to $a\in(0,1]$ when $N$ goes to infinity, $\mathbb{P}(T_N<\infty)\longrightarrow 1$ when $N$ goes to infinity. Now $$\mathbb{E}(\|Z_{T_N}\mathbf{1}_{T_N<\infty}-z_{\infty}\|)\longrightarrow 0.$$
+%\end{proposition}
+
+%\begin{proof}
+%    Argument de suites adjacentes ?
+%\end{proof}
+
+The previous result gives the convergence of the trajectory of the stochastic process $(Z_{\lfloor Nt\rfloor})_{0\leq t\leq c}$ for any $c>0$, towards an explicit solution of a dynamical system. In particular, it gives the genetic contribution of the initially advantaged individuals at all time $t$, under a large population size assumption. The following corollary gives the asymptotic behaviour of this weight once the proportion of advantaged individuals in the population has reached any level $b>a$.
+
+
+
+\begin{corollary}\label{cor_main} Let $a<b\in(0,1)$. If $Y_0=\lfloor aN\rfloor$ then 
+\begin{align*}\frac{U_{T_{\lfloor bN\rfloor}}}{N}\mathbf{1}_{T_{\lfloor bN\rfloor}<\infty}\underset{N\rightarrow\infty}{\longrightarrow} b\frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}&\left[\frac{(1-b)^{\frac{1}{2s}}}{b^{\frac{1+s}{2s}}}+\int_a^{b}\frac{(1-x)^{\frac{1}{2s}}}{x^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-x}\right]dx\right] \end{align*} in probability.
+\end{corollary}
+
+\begin{proof}
+This results from Theorem \ref{thmCvceDeterministe}, Proposition \ref{prop-Y-TN} (ii) and Corollary \ref{cor-zb} (i).
+\end{proof}
+
+We think that this still holds true for $b=1$, but proving it would necessitate a finer study of the variance of $U_n$  (see \cite{coronLeJan2024}). 
+
+\bibliographystyle{plain}
+\bibliography{biblio}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+In this article we focus on the situation in which the mutation is already present in a significant proportion of the individuals, and study the order of magnitude of the weight of ancestors once the advantageous mutation has spread in the population. This leads us to use a continuous approximation, in which the previous equations will be replaced by differential equations.
+The first step of our study consists in studying the expectation of the difference of weights between advantaged and disadvantaged individuals. 
+Recall that $T^Z_y=\inf\{n:Z_n=y\}$. 
+
+\begin{proposition}\label{prop-X}
+For any $0<a<b<1$,
+
+$$\mathbb{E}(D_{T^Z_{\lfloor bN\rfloor}}\mathbf{1}_{T^Z_{\lfloor bN\rfloor}<\infty}| Z_0=\lfloor aN\rfloor)\rightarrow_{N\rightarrow\infty}\frac{\left(\frac{a}{b}\right)^{\frac{1+s}{2s}}}{\left(\frac{1-a}{1-b}\right)^{\frac{1}{2s}}}$$
+when $N$ goes to infinity.
+\end{proposition}
+
+Although we are particularly interested in the case where $b=1$, we start by considering the case where $b>1$, in order to simplify the approximation. The limit where $b$ goes to $1$ will be tackled in the final step of the proof of  Theorem \ref{thm}.
+
+%\textcolor{red}{Verifier pour differentes valeurs de $a$, $b$, $s$}
+
+%\textcolor{green}{\begin{lemme}\label{lem-prop-X}
+%Let $\epsilon>0$ be small enough, and define for any $k\in[\![1,N(1-\epsilon)]\!]$, $\phi_D(k)=\mathbb{E}(D_{T^Z_{0,N(1-\epsilon)}}| Z_0=k)$. Then for any $k\in[\![\epsilon N,(1-\epsilon)N]\!]$,
+%$$\phi_D(k)=\frac{\left(\frac{k}{N}\right)^{\frac{1+s}{2s}}}{(1-\frac{k}{N})^{\frac{1}{2s}}}(C+o(1))$$
+%when $N$ goes to infinity.
+%\end{lemme}}
+
+
+\begin{proof}
+Define for any $k\in[\![1,\lfloor bN\rfloor]\!]$, $$\phi_D(k)=\mathbb{E}(D_{T^Z_{\lfloor bN\rfloor}}\mathbf{1}_{T^Z_{\lfloor bN\rfloor}<\infty}| Z_0=k) \quad\text{ and }\quad
+\psi_D(k)=\frac{\left(\frac{k}{N}\right)^{\frac{1+s}{2s}}}{\left(1-\frac{k}{N}\right)^{\frac{1}{2s}}}\times \frac{(1-b)^{\frac{1}{2s}}}{b^{\frac{1+s}{2s}}}.$$ Our aim is to prove that the functions $\phi_D$ and $\psi_D$ are close to each other on $[\lfloor aN\rfloor,\lfloor bN\rfloor]$ for large $N$.
+
+Let us define the infinitesimal generator $\mathcal{L}$ on the set of real valued functions $g$ on $[\![0,N]\!]$ vanishing in $0$ and $N $ by $$\mathcal{L}g(k)=\frac{1+s}{2+s}\lambda_+(k)g(k+1)+\frac{1}{2+s}\lambda_-(k)g(k-1)-g(k)$$ for any $k\in[\![1,N-1]\!]$. Recall that $\lambda_+(k)=1-\frac{N+1}{(k+1)(2N+1)}$ and $\lambda_-(k)=1-\frac{N+1}{(N-k+1)(2N+1)}$. Therefore  \begin{align*}\mathcal{L}g(k)&=\frac{1+s}{2+s}\left(g(k+1)-g(k)\right)+\frac{1}{2+s}\left(g(k-1)-g(k)\right)\\&-\frac{1+s}{2+s}\frac{N+1}{(k+1)(2N+1)}g(k+1)-\frac{1}{2+s}\frac{N+1}{(N-k+1)(2N+1)}g(k-1).\end{align*}
+
+By definition, the function $\phi_D$ is such that for any $k\in[\![1,\lfloor bN\rfloor-1]\!]$,
+$$\mathcal{L}\phi_D(k)=0,$$ 
+and $\phi_D(\lfloor bN\rfloor)=1$. 
+
+Now the function $\psi_D$ is such that $\psi_D(\lfloor bN\rfloor)=1$. What is more,  for any $1\leq k \leq \lfloor bN\rfloor$, $$\psi_D(k)=f_D\left(\frac{k}{N}\right)$$ where $f_D(x)=C_b\frac{x^{\frac{1+s}{2s}}}{(1-x)^{\frac{1}{2s}}}$, where $C_b=\frac{(1-b)^{\frac{1}{2s}}}{(b^{\frac{1+s}{2s}}}$ for all $x\in[0,b]$. One has for all $x\in[0,b]$,
+ \begin{align*}f'_D(x)&=f_D(x)\left[\frac{1+s}{2s}\frac{1}{x}+\frac{1}{2s}\frac{1}{1-x}\right]\quad\text{and}\\f''_D(x)&=f_D(x)\left[\left(\frac{1+s}{2s}\frac{1}{x}+\frac{1}{2s}\frac{1}{1-x}\right)^2-\frac{1+s}{2s}\frac{1}{x^2}+\frac{1}{2s}\frac{1}{(1-x)^2}\right].\end{align*}
+ 
+ Hence $$\psi_D(k\pm1)=\psi_D(k)\pm\psi_D(k)\left[\frac{1+s}{2s}\frac{1}{k}+\frac{1}{2s}\frac{1}{N-k}\right]+R\left(\frac{k}{N}\right)$$ where the function $R$ is such that there exists a positive constant $C$ such that $|R(x)|\leq \frac{C}{N^2}$ for all $x\in[a,b]$.
+ %$$R\left(\frac{k}{N}\right)=\frac{1}{2}\int_{\frac{k}{N}}^{\frac{k+1}{N}}\left(\frac{k+1}{N}-t\right)^2f''(t)dt.$$
+ 
+ Therefore  for any $1\leq k \leq \lfloor bN\rfloor-1$  \begin{align*}\mathcal{L}\psi_D(k)&=\frac{1}{2+s}\frac{1}{2N}\psi_D(k)\left[\frac{1+s}{\frac{k}{N}}+\frac{1}{1-\frac{k}{N}}\right]-\frac{1}{2+s}\psi_D(k)\left(\frac{1+s}{2(k+1)}+\frac{1}{2(N-k+1)}\right)+\widetilde{R}\left(\frac{k}{N}\right)\\&=\frac{1}{2+s}\psi_D(k)\left[\frac{1+s}{2}\left(\frac{1}{k}-\frac{1}{k+1}\right)+\frac{1}{2}\left(\frac{1}{N-k}-\frac{1}{N-k+1}\right)\right]+\widetilde{R}\left(\frac{k}{N}\right)\end{align*}
+
+where the function $\widetilde{R}$  is such that there exists a positive constant $\widetilde{C}$ such that $|\widetilde{R}(x)|\leq \frac{C}{N^2}$ for all $x\in[a,b]$.
+Hence there exists a positive constant $C'$ such that for all $k\in[\lfloor aN\rfloor,\lfloor bN\rfloor]$,
+$$|\mathcal{L}\psi(k)|\leq \frac{C}{N^2}.$$
+
+Let us  now define the function $\bar{\psi}$ by $\bar{\psi}_D(k)=\psi_D(k)$ for all $k\in[\lfloor aN/2\rfloor,\lfloor bN\rfloor]$ and $\bar{\psi}_D(k)=\phi_D(k)$ for all $k\in[0,\lfloor aN/2\rfloor[$. Our aim from now is to prove that the functions $\phi_D$ and $\bar{\psi}_D$ are close to each other on $[\lfloor aN\rfloor, \lfloor bN\rfloor]$.
+
+Note that since $\bar{\psi_D}-\phi_D$ vanishes in $0$ and $N$,  $$-(\bar{\psi}_D-\phi_D)=((-\mathcal{L})^{-1})\mathcal{L})(\bar{\psi}_D-\phi_D),$$
+
+where $(-\mathcal{L})^{-1}=\sum_{n\geq 0} (I+\mathcal{L})^n=\sum_{n\geq 0} Q^n$ where $Q=(Q_{ij})_{1\leq i,j\leq \lfloor bN\rfloor-1}$ is defined by \begin{align*}Q_{k,k+1}&=\frac{1+s}{2+s}\lambda_+(k), \quad\quad\text{for all $k\in[1,\lfloor bN-2\rfloor]$}\\Q_{k,k-1}&=\frac{1}{2+s}\lambda_-(k) \quad\quad\text{for all $k\in[2,\lfloor bN\rfloor-1]$}\\
+Q_{k,l}&=0 \quad \text{elsewhere.}\end{align*}
+
+
+We know that \begin{equation}\label{eq-Ldiff}\left\{\begin{aligned}&\mathcal{L}(\bar{\psi}_D-\phi_D)(k)=O\left(\frac{1}{N^2}\right) \quad\text{ uniformly for $k\in[\![1,N]\!]\setminus\{\lfloor a N/2\rfloor-1,\lfloor a N/2\rfloor,\lfloor a N/2\rfloor +1\}$, and}\\&\mathcal{L}(\bar{\psi}_D-\phi_D)(k)\leq 1 \text{  for $k\in\{\lfloor a N/2\rfloor-1,\lfloor a N/2\rfloor,\lfloor aN/2\rfloor +1\}$.}\end{aligned}\right.\end{equation}
+
+Note now that since $\lambda_+(k)$ and $\lambda_-(k)$ are in $[0,1]$,  $$\big(\sum_{n\geq 0} Q^n\big)(x,y)\leq\mathbb{E}\big(\sum_{n\geq0} \mathbf{1}_{Z_n=y}|Z_0=x\big),$$ and from Markov property,
+
+$$\mathbb{E}\big(\sum_{n\geq0} \mathbf{1}_{Z_n=y}|Z_0=x\big)=\mathbb{P}(T^Z_y<\infty|Z_0=x)\mathbb{E}(\sum_{n\geq0}  \mathbf{1}_{Z_n=y}|Z_0=y)<C(s) \mathbb{P}_x(T^Z_y<\infty)$$ as $s>0$. 
+
+Besides, recall from Proposition \ref{prop-Z} that $\mathbb{P}(T^Z_{ a N/2}<\infty|Z_0= a N)$ decreases exponentially with $N$, when $ a$ is fixed. 
+
+
+Therefore \begin{align*}
+\left|\bar{\psi}_D-\phi_D\right|(k)&=\big|\big(\sum_{n\geq 0} Q^n\big)\big(\mathcal{L}(\bar{\psi}_D-\phi_D)\big)\big|(k)\\&\leq\big(\sum_{n\geq 0} Q^n\big)\big|\mathcal{L}(\bar{\psi}_D-\phi_D)\big|(k)\\&\leq\sum_{j\in[\![0,N]\!]}\sum_{n\geq 0} Q^n_{kj}\big|\big(\mathcal{L}(\bar{\psi}_D-\phi_D)\big)(j)\big|\\&=\sum_{j\in\{\lfloor  a N/2\rfloor-1,\lfloor a N/2\rfloor,\lfloor a N/2\rfloor +1\}}\sum_{n\geq 0} Q^n_{kj}\big|\big(\mathcal{L}(\bar{\psi}_D-\phi_D)\big)(j)\big|\\&+\quad\sum_{j\notin\{\lfloor  a N/2\rfloor-1,\lfloor a N/2\rfloor,\lfloor a N/2\rfloor +1\}}\sum_{n\geq 0} Q^n_{kj}\big|\big(\mathcal{L}(\bar{\psi}_D-\phi_D)\big)(j)\big|.\end{align*}
+
+The first quantity has an exponential bound from Proposition \ref{prop-Z}. The second quantity is bounded by $C/N$, from Equation \ref{eq-Ldiff} and since $\sum_j \sum_n Q^n_{kj}= \mathbb{E}(T_{0,N}^Z|Z_0=k)\leq C(s) N$. Therefore there exists a constant $C$ such that $\left|\bar{\psi}_D-\phi_D\right|(k)\leq C/N$ for all $k \in[ a N, bN]$.
+\end{proof}
+
+Pushing the same approach further and using the previous proposition, we get that
+
+%\textcolor{red}{Mettre les indicatrices}
+\begin{proposition}\label{prop-main}For any $0<a<b<1$,
+\begin{align*}\mathbb{E}(\widetilde{U}_{T_{0,b N}}\mathbf{1}_{T^Z_{\lfloor bN\rfloor}<\infty}|Z_0=\lfloor aN\rfloor)&\rightarrow_{N\rightarrow\infty} \frac{\left(\frac{a}{b}\right)^{\frac{1+s}{2s}}}{\left(\frac{1-a}{1-b}\right)^{\frac{1}{2s}}}+\left(\int_{a}^{b}\frac{(1-u)^{\frac{1}{2s}}}{u^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-u}\right]du\right)\times \frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}\end{align*}
+
+\begin{align*}\mathbb{E}(\widetilde{V}_{T_{0,b N}}\mathbf{1}_{T^Z_{\lfloor bN\rfloor}<\infty}|Z_0=\lfloor aN\rfloor)\rightarrow_{N\rightarrow\infty}\left(\int_{a}^{b}\frac{(1-u)^{\frac{1}{2s}}}{u^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-u}\right]du\right)\times \frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}\end{align*}
+\end{proposition}
+
+
+\begin{proof} For any $k\in[a N, b N]$ let us denote $\phi_{\widetilde{V}}(k)=\mathbb{E}(\widetilde{V}_{T_{0,b N}}|Z_0=k)$.  The function $\phi_{\widetilde{V}}$ now satisfies for any $k\in]\!]1, bN[\![$,
+$$\mathcal{L}\phi_{\widetilde{V}}(k)=-\frac{1+s}{2+s}\beta_+(k)-\frac{1}{2+s}\beta_-(k).$$
+Moreover, when $N$ is large, $\beta_+(k)\sim\frac{1+s}{2N(2+s)}$ and $\beta_-(k)\sim\frac{1+s}{2N(2+s)}+\frac{k}{2N(N-k)}$. Therefore
+
+\begin{align*}\mathcal{L}\phi_{V}(k)=-\frac{1+s}{2N(2+s)}-\frac{1}{2+s}\frac{k}{2N(N-k)}+O(1/N^2)=-\frac{1}{2N(2+s)}\frac{N+s(N-k)}{N-k}+O(1/N^2)\end{align*}
+for all $k\in[\![1,bN]\!]$.
+
+
+Now let $$\psi_{\widetilde{V}}(k)=\left(\int_{k/N}^{b}\frac{(1-u)^{\frac{1}{2s}}}{u^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-u}\right]du\right)\times \frac{\left(\frac{k}{N}\right)^{\frac{1+s}{2s}}}{(1-\frac{k}{N})^{\frac{1}{2s}}}.$$
+
+Our aim from here is to prove that the functions $\phi_{V}$ and $\psi_{V}$ are close to each other.
+
+
+Setting $\psi_{\widetilde{V}}(k)=f_{\widetilde{V}}(k/N)$, we have
+
+$$f_{V}(t)=\left(\int_{t}^{b}\frac{(1-u)^{\frac{1}{2s}}}{u^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-u}\right]du\right)\times \frac{t^{\frac{1+s}{2s}}}{(1-t)^{\frac{1}{2s}}}$$
+
+hence
+
+$$f_{\widetilde{V}}'(t)=f_{\widetilde{V}}(t)\left[\frac{1+s}{2s}\frac{1}{t}+\frac{1}{2s}\frac{1}{2(1-t)}\right]-\frac{1}{2}-\frac{1}{2s}\frac{1}{1-t}$$
+and 
+$$f_{\widetilde{V}}''(t)=f_{\widetilde{V}}(t)\left[\frac{1+s}{2s}\frac{1}{t}+\frac{1}{2s}\frac{1}{1-t}\right]-\frac{1+s}{2(2+s)}-\frac{1}{2+s}\frac{t}{2(1-t)}.$$
+
+Therefore $$\psi_{\widetilde{V}}(k\pm1)=\psi_{\widetilde{V}}(k)\pm\frac{1}{N}\left[\psi_{\widetilde{V}}(k)\left[\frac{1+s}{2+s}\frac{1}{2\frac{k}{N}}+\frac{1}{2+s}\frac{1}{2(1-\frac{k}{N})}\right]-\frac{1+s}{2(2+s)}-\frac{1}{2+s}\frac{\frac{k}{N}}{2(1-\frac{k}{N})}\right]+R(k/N)$$ where the function $R$ is such that there exists a positive constant $C$ such that $|R(x)|\leq \frac{C}{N^2}$. Hence, since $\psi_{\widetilde{V}}$ is bounded, 
+
+\begin{align*}\mathcal{L}\psi_{\widetilde{V}}(k)=-\frac{1}{2+s}\left[\frac{s}{2N}+\frac{1}{2(N-k)}\right]+O\left(\frac{1}{N^2}\right)=-\frac{1}{2+s}\frac{s(N-k)+N}{2N(N-k)}+O\left(\frac{1}{N^2}\right).\end{align*} for all $k\in[\![1,bN]\!]$.
+
+Therefore $$\mathcal{L}(\psi_{\widetilde{V}}-\phi_{\widetilde{V}})(k)=O\left(\frac{1}{N^2}\right)$$ for all $k\in[\![1,bN]\!]$.
+
+Now as in the proof of Proposition \ref{prop-X}, one can introduce a function $\bar{\psi}_{\tilde{V}}$ which coincides with $\psi_{\tilde{V}}$ above $\lfloor aN/2\rfloor$ and with $\phi_{\tilde{V}}$ below. Next, reasoning exactly as in the proof of Proposition \ref{prop-X}, the fact that $\mathbb{P}(T^Z_{aN.2}|Z_0=aN)$ decreases exponentially with $N$ when $a$ is fixed gives that there exists a constant $C$ such that $\left|\bar{\psi}_V-\phi_V\right|(k)\leq C/N$ for all $k \in[\![aN,bN]\!]$ which gives the result for $\tilde{V}$. The expression for $\tilde{U}$ then follows by Proposition \ref{prop-X}.
+
+
+\end{proof}
+We can now complete the proof of our theorem :
+\begin{theorem}\label{thm} 
+\begin{align*}\mathbb{E}(\Xi^A_{T^Y_N}\mathbf{1}_{T^Y_N<\infty}|Y_0=\lfloor aN\rfloor)&\underset{N\rightarrow\infty}{\longrightarrow}\frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}\left(\int_{a}^{1}\frac{(1-u)^{\frac{1}{2s}}}{u^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-u}\right]du\right). \end{align*}
+\end{theorem}
+
+\begin{proof}
+First, by definition of $\tilde U$, $\mathbb{E}(\Xi^A_{T^Y_N}\mathbf{1}_{T^Y_N<\infty}|Y_0=\lfloor aN\rfloor)=\mathbb{E}(\tilde U_{T^Z_N}\mathbf{1}_{T^Z_N<\infty}|Y_0=\lfloor aN\rfloor)$.\\
+Note that from Equation \eqref{eq-UV}, the sequences $(\widetilde{U}_n)_{n\in\mathbb{Z}_+}$ and $(\widetilde{V}_n)_{n\in\mathbb{Z}_+}$ are respectively  decreasing and increasing. In particular for any $\epsilon>0$, if $T^Z_N<\infty$,
+$$\widetilde{V}_{T^Z_{\lfloor N(1-\epsilon)\rfloor}}\leq \widetilde{V}_{T^Z_{N-1}}\leq\tilde{U}_{T^Z_{N-1}}=\tilde{U}_{T^Z_N}\leq \tilde{U}_{T^Z_N}.$$ 
+Therefore 
+$$\mathbb{E}\left(\widetilde{V}_{T^Z_{\lfloor N(1-\epsilon)\rfloor}}\mathbf{1}_{T^Z_N<\infty}\right)\leq \mathbb{E}\left(\tilde{U}_{T^Z_{N-1}}\mathbf{1}_{T^Z_N<\infty}\right)=\mathbb{E}\left(\tilde{U}_{T^Z_N}\mathbf{1}_{T^Z_N<\infty}\right)\leq \mathbb{E}\left(\tilde{U}_{T^Z_{\lfloor N(1-\epsilon)\rfloor}}\mathbf{1}_{T^Z_N<\infty}\right).$$ 
+What is more, $$\mathbb{E}\left(\widetilde{V}_{T^Z_{\lfloor N(1-\epsilon)\rfloor}}\mathbf{1}_{T^Z_N<\infty}\right)\geq \mathbb{E}\left(\widetilde{V}_{T^Z_{\lfloor N(1-\epsilon)\rfloor}}\mathbf{1}_{T^Z_{\lfloor N(1-\epsilon)\rfloor}<\infty}\right)-\mathbb{P}(T^Z_N=\infty,T^Z_{\lfloor N(1-\epsilon)\rfloor}<\infty),$$ while $$\mathbb{E}\left(\tilde{U}_{T^Z_{\lfloor N(1-\epsilon)\rfloor}}\mathbf{1}_{T^Z_N<\infty}\right)\leq \mathbb{E}\left(\tilde{U}_{T^Z_{\lfloor N(1-\epsilon)\rfloor}}\mathbf{1}_{T^Z_{\lfloor N(1-\epsilon)\rfloor}<\infty}\right).$$
+
+Therefore since $\mathbb{P}(T^Z_N=\infty,T^Z_{\lfloor N(1-\epsilon)\rfloor}<\infty)$ goes to $0$ when  $N$ goes to infinity, from Proposition \ref{prop-main},
+$$\limsup_{N\rightarrow\infty} \mathbb{E}\left(\tilde{U}_{T^Z_{N}}\mathbf{1}_{T^Z_N<\infty}\right)\leq \frac{\left(\frac{a}{(1-\epsilon)}\right)^{\frac{1+s}{2s}}}{\left(\frac{1-a}{\epsilon}\right)^{\frac{1}{2s}}}+\left(\int_{a}^{1-\epsilon}\frac{(1-u)^{\frac{1}{2s}}}{u^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-u}\right]du\right)\times \frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}$$
+
+and $$\liminf_{N\rightarrow\infty} \mathbb{E}\left(\tilde{U}_{T^Z_{N}}\mathbf{1}_{T^Z_N<\infty}\right)\geq \left(\int_{a}^{1-\epsilon}\frac{(1-u)^{\frac{1}{2s}}}{u^{\frac{1+s}{2s}}}\left[\frac{1}{2}+\frac{1}{2s}\frac{1}{1-u}\right]du\right)\times \frac{a^{\frac{1+s}{2s}}}{(1-a)^{\frac{1}{2s}}}.$$
+
+Letting $\epsilon$ go to $0$ gives the result.
+\end{proof}
+
+
+\appendix
+
+\section{Mathematica calculations}\label{sec:Mathematica}
+
+These calculations made by Mathematica are the justification for the calculation of $a$ given in Equation \eqref{eq-a}.
+
+\begin{doublespace}
+\noindent\(\pmb{\text{pk}=(2+s)*k*(N-k)/(N*(k+(1+s)*(N-k)));}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{ak}=((1-\text{pk})*k*(N-k))/((2+s)*(1-\text{pk})*k*(N-k)+\text{pk}*2*N*(k*k+(1+s)*(N-k)}\\
+\pmb{*(N-k)))}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\frac{k (-k+N) \left(1-\frac{k (-k+N) (2+s)}{N (k+(-k+N) (1+s))}\right)}{\frac{2 k (-k+N) (2+s) \left(k^2+(-k+N)^2 (1+s)\right)}{k+(-k+N)
+(1+s)}+k (-k+N) (2+s) \left(1-\frac{k (-k+N) (2+s)}{N (k+(-k+N) (1+s))}\right)}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{ak}=\text{Factor}[\text{FullSimplify}[\text{ak}]]}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\frac{1}{(1+2 N) (2+s)}\)
+\end{doublespace}
+
+
+
+
+\begin{proposition} Let $c>0$. There exists a constant $C$ such that for any $n\leq cN$, the difference $R_n=Z_n-\phi_{\frac{1}{N}}^n(a,0,a)$ satisfies
+    $$\mathbb{E}(R_n^2)\leq \frac{C}{N}.$$
+\end{proposition}
+
+\begin{proof}
+
+    
+\end{proof}
+
+This gives that
+
+\begin{proposition}
+$$f(Z_{n})=f(Z_0)+M^f_n+\sum_{k=0}^{n-1}L^{f,N}(Z_k)+\frac{1}{N^2}\tilde{R}^f(Z_n)$$
+ where $(M^f_n)_{n\geq0}$ is a martingale such that
+$$\mathbb{E}((M^f_n)^2)\leq \frac{Cn}{N^2},$$
+$\tilde{R}^f$ is a bounded function on $[0,1]^3$, and 
+\begin{align*}L^{f,N}(U,V,Y)&=\frac{1}{N}\frac{\partial f}{\partial U}(U,V,Y)\times \left[\frac{U}{2}+\frac{Y(U+V)}{2}-\frac{U}{Y+(1+s)(1-Y)}\right]\\&+\frac{1}{N}\frac{\partial f}{\partial V}(U,V,Y)\times\left[\frac{V}{2}+\frac{(1-Y)(U+V)}{2}-\frac{(1+s)V}{Y+(1+s)(1-Y)}\right]
+\\&+\frac{1}{N}\frac{\partial f}{\partial Y}(U,V,Y)\times\left[\frac{sY(1-Y)}{Y+(1+s)(1-Y)}\right].\end{align*}
+\end{proposition}
+
+\begin{proof}
+Let $f\in\mathcal{C}^2_b([0,1]^3)$.
+The sequence $(U_n,V_n,Y_n)_{n\in\mathbb{Z}_+}$ (which is not Markovian) is such that for any function $f$ in $\mathcal{C}^2_b(\mathbb{R}_+^3,\mathbb{R})$,
+\begin{align*}f(Z_{n+1})-f(Z_n)&=\mathbb{E}(f(Z_{n+1})-f(Z_n)|\mathcal{F}^Z_n)+f(Z_{n+1})-\mathbb{E}(f(Z_{n+1})|\mathcal{F}^Z_n)\\&=\mathbb{E}(f(Z_{n+1})-f(Z_n)|\mathcal{F}^Z_n)+M^f_{n+1}-M^f_n\end{align*}
+
+where $(M^f_n)$ is a martingale.
+
+Now
+\begin{align*}\mathbb{E}(f(Z_{n+1})-f(Z_n)|\mathcal{F}^Z_n)&=\frac{1}{N}\frac{\partial f}{\partial U}(U_n,V_n,Y_n)\times \left[\frac{U_n}{2}+\frac{U_n+V_n}{2}Y_n-\frac{U_n}{Y_n+(1+s)(1-Y_n)}\right]\\&+\frac{1}{N}\frac{\partial f}{\partial V}(U_n,V_n,Y_n)\times\left[\frac{V_n}{2}+\frac{U_n+V_n}{2}(1-Y_n)-\frac{V_n(1+s)}{Y_n+(1+s)(1-Y_n)}\right]
+\\&+\frac{1}{N}\frac{\partial f}{\partial Y}(U_n,V_n,Y_n)\times\left[\frac{sY_n(1-Y_n)}{Y_n+(1+s)(1-Y_n)}\right]\\&+\frac{1}{N^2}R(U_n,V_n,Y_n)\end{align*} where $R$ is bounded.
+
+
+Now
+\begin{align*}
+    \mathbb{E}((f(Z_{n+1})-f(Z_n))^2)=
+\end{align*}
+
+\end{proof}
+
+
+
+
+\begin{theorem}
+
+\textcolor{red}{Theoreme de convergence vers le systeme dynamique limite}
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{proof}
+    We look at the triplet $(\frac{U_n}{Y_n},\frac{V_n}{Y_n},\frac{Y_n}{N})\in[0,1]^3=\xi_n$ for all $n\geq 0$. 
+
+    Look at the limiting flow $\phi_{s,t}$ solution of the dynamical system :
+
+    $$f\circ \phi_{\frac{k}{n},\frac{k+1}{n}}=f+\frac{1}{N}Lf+O\left(\frac{1}{N^2}\right)$$
+
+    $$\mathbb{E}(\mathbf{1}_{T_b>n}\left|f_N(\xi_n)-f(u_n,v_n,y_n)\right|)$$
+
+    $$\xi_{\lfloor \frac{t}{N}\rfloor}$$
+\end{proof}
+
+
+
+
+
+%\textcolor{green}{A supprimer ?Let us denote by $\phi:[0,1]^3\times \mathbb{R_+}\rightarrow [0,1]^3$ the flow that maps $[0,1]^3$ to itself, at any time $t$, through the dynamical system defined in Equation \eqref{eq:dyn-system}, and $\phi_{\frac{1}{N}}$ its value at time $1/N$ (i.e. the function that sends any point of $[0,1]^3$ to its image after applying the dynamical system \eqref{eq:dyn-system} during time $1/N$). Let also $R_n=Z_n-\phi_{\frac{1}{N}}^n(a,0,a)$ be the difference between the stochastic process $Z$ at time $n$ and the solution of the dynamical system \eqref{eq:dyn-system} starting from $(a,0,a)$, at time $n/N$.}

@@ -1,0 +1,1304 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[top=0.85in,left=2.75in,footskip=0.75in,marginparwidth=2in]{geometry}
+
+% use Unicode characters - try changing the option if you run into troubles with special characters (e.g. umlauts)
+\usepackage[utf8]{inputenc}
+
+% clean citations
+\usepackage{cite}
+
+% hyperref makes references clicky. use \url{www.example.com} or \href{www.example.com}{description} to add a clicky url
+\usepackage{nameref,hyperref}
+
+% line numbers
+%\usepackage[right]{lineno}
+
+% improves typesetting in LaTeX
+\usepackage{microtype}
+\DisableLigatures[f]{encoding = *, family = * }
+
+% text layout - change as needed
+\raggedright
+\setlength{\parindent}{0.5cm}
+\textwidth 5.25in 
+\textheight 8.75in
+
+% Remove % for double line spacing
+%\usepackage{setspace} 
+%\doublespacing
+
+% use adjustwidth environment to exceed text width (see examples in text)
+\usepackage{changepage}
+
+% adjust caption style
+\usepackage[aboveskip=1pt,labelfont=bf,labelsep=period,singlelinecheck=off]{caption}
+
+% remove brackets from references
+\makeatletter
+\renewcommand{\@biblabel}[1]{\quad#1.}
+\makeatother
+
+% headrule, footrule and page numbers
+\usepackage{lastpage,fancyhdr,graphicx}
+\usepackage{epstopdf}
+\pagestyle{myheadings}
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
+\fancyheadoffset[L]{2.25in}
+\fancyfootoffset[L]{2.25in}
+
+\usepackage{amssymb}
+%% The amsmath package provides various useful equation environments.
+\usepackage{amsmath}
+%% The amsthm package provides extended theorem environments
+\usepackage{amsthm}
+
+% use \textcolor{color}{text} for colored text (e.g. highlight to-do areas)
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{float}
+
+\newtheorem{theorem}{Theorem}
+%\newtheorem{exercise}{Exercício}[chapter]
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+%\newtheorem{proof}{Proof}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+% define custom colors (this one is for figure captions)
+\definecolor{Gray}{gray}{.25}
+
+% this is required to include graphics
+\usepackage{graphicx}
+
+% use if you want to put caption to the side of the figure - see example in text
+\usepackage{sidecap}
+
+% use for have text wrap around figures
+\usepackage{wrapfig}
+\usepackage[pscoord]{eso-pic}
+\usepackage[fulladjust]{marginnote}
+\reversemarginpar
+
+% document begins here
+\begin{document}
+\vspace*{0.35in}
+
+% title goes here:
+\begin{flushleft}
+{\Large
+\textbf\newline{Optimizing Impulsive Releases in Species Competition Models}
+}
+\newline
+% authors go here:
+\\
+Jéssica C.S. Alves\textsuperscript{1,*},
+Sergio M. Oliva\textsuperscript{1},
+Christian E. Schaerer\textsuperscript{2},
+\\
+\bigskip
+\textsuperscript{1}University of São Paulo, Institute of Mathematics and Statistics, Department of Applied Mathematics, São Paulo, SP, 05508-090, Brazil.
+\\
+\textsuperscript{2}National University of Asunción, Polytechnic School, Campus UNA, San Lorenzo, Central, P.O. Box 2111 SL, Paraguay.
+\\
+\bigskip
+* Corresponding author: alvesj@ime.usp.br;\\
+Contributing authors: soliva@usp.br; cschaer@pol.una.py;
+
+\end{flushleft}
+
+\section*{Abstract}
+This study focuses on optimizing species release $S_2$ to control species population $S_1$ through impulsive release strategies. We investigate the conditions required to remove species $S_1$, which is equivalent to the establishment of $S_2$. The research includes a theoretical analysis that examines the positivity, existence, and uniqueness of solutions and the conditions for the global stability of the $S_1$-free solution. In addition, we formulate an optimal control problem to maximize the effectiveness of $S_2$ releases, manage the population of $S_1$, and minimize the costs associated with this intervention strategy. Numerical simulations are conducted to validate the proposed theories and allow visualization of population dynamics under various releases scenarios.
+
+
+\section{Introduction}
+
+Population control in ecological systems is a highly relevant issue, especially when two or more species directly compete for limited resources. These interactions can lead to competitive exclusion, in which only one species survives in the long term \cite{HOLT2017Species}. In many cases, managing such interactions involves introducing a new species into a region already occupied by another, aiming to control or suppress the original population.
+
+Various population control methods are used, ranging from chemical \cite{brunner1994integratedChemical1,carson2023overcomingI3,gautam2023pesticideChemical2,lees2023insecticidesI1} and mechanical \cite{adhikari2022insectMechanical1,vincent2009physicalM2} strategies to the use of biological agents \cite{brunner1994integratedChemical1,barbosa2018modellingI2, campo2018optimalW9,onen2023mosquito}. The introduction of a competing species is a widely used approach, as it allows natural ecological interactions, such as competition, to sustainably control the target population \cite{lopes2023exploringW4,almeida2022optimalSterile1,barclay1980sterile7,campo2017optimalW10}.
+
+Many studies use mathematical models to represent interactions between competing or predatory species, often based on continuous approaches \cite{campo2018optimalW9,ogunlade2020modelingC1,silva2020modelingC2,perez2020classC3}. These formulations assume that control or introduction of new species occurs continuously, which, although theoretically feasible, does not always reflect practical reality. In practice, interventions such as the introduction of a competing species generally occur periodically or impulsively due to logistical, financial, and operational constraints. To address these limitations, some studies propose alternative approaches, such as impulsive releases. Examples include the release of mosquitoes with Wolbachia to control the wild Aedes aegypti population \cite{almeida2022vectorImpulsive1,li2024modelingImpulsive3,liu2023analysisImpulsive2,dianavinnarasi2021controllingImpulsive4}, periodic and impulsive release of sterile mosquitoes \cite{huang2021studySterile4,huang2017modellingSterile7,huang2021impulsiveSterile5,li2020impulsiveSterile6}, and similar strategies applied to other insect populations \cite{liu2023analysisImpulsive2,pei2018optimizingPests1,wang2011analysisPests2}.
+
+In this work, we adapt the interaction model between wild females and infected females with Wolbachia bacteria in the mosquito \textit{Aedes aegypti}, presented in \cite{Campo2017}, to represent the competition between two species, $S_1$ and $S_2$. The adapted model incorporates impulsive releases of species $S_2$, formulated as a system of impulsive differential equations. This impulsive approach reflects a practical solution, as the continuous introduction of a control species is not always feasible or sustainable in the long term. Periodic releases represent an effective alternative to reducing the population of species $S_1$ using a competing species strategically and efficiently.
+
+The main objective of this study is to control the species $S_1$ in the target region by introducing the species $S_2$. We aim to identify the necessary conditions to ensure the fixation of $S_2$ using an impulsive release strategy. Furthermore, we intend to optimize this strategy to ensure the stable presence of $S_2$, eliminating the $S_1$ population with the minimum number of releases, thereby reducing the total cost of the intervention.
+
+To achieve these objectives, the article is structured as follows: In Section 2, we present the formulation of the adapted model from \cite{Campo2017}, including the impulsive equations that represent the release of individuals of population $S_2$. We then describe the model, discussing the parameters used and the specific conditions necessary to ensure the consistency of population dynamics. The section concludes with a theorem on the equilibrium points and stability of the model, originally proposed in \cite{Campo2017} and adapted to the context of this study.
+
+Section 3 is dedicated to the analysis of model dynamics. We begin with essential preliminary results for the analysis, addressing the existence, uniqueness, positivity, and boundedness of the solutions of the impulsive differential equation model, ensuring the temporal consistency of the solutions. Next, we investigate the existence of a solution in which species $S_1$ is eliminated and perform a detailed analysis of its stability, including the necessary conditions to guarantee the global stability of this solution. Based on these conditions, we derive a criterion that determines the number of individuals of species $S_2$ sufficient to ensure the elimination of species $S_1$ through impulsive releases.
+
+In Section 4, we formulate an optimal control problem aimed at minimizing the total sum of releases over the intervention interval $[0, T]$, where $T$ represents the final observation time. Simultaneously, we seek to ensure that the population of species $S_1$ is reduced to a value below its survival threshold, associated with the Allee effect, at time $T$. Additionally, we demonstrate the existence of at least one solution to the optimal control problem.
+
+In Section 5, we present numerical simulations, using the interaction between two subspecies as an example: wild females and females infected with Wolbachia in the mosquito Aedes aegypti. Initially, we simulate the proposed impulsive model to confirm the theoretical results of Section 3, validating the sufficient condition for the global stability of the $S_1$-free solution. Next, we perform simulations of the optimal control problem, considering predefined jump moments and varying the final intervention time $T$. These simulations allow us to evaluate how these factors influence control effectiveness and help optimize the strategy to reduce costs while eliminating species $S_1$.
+
+Finally, Section 6 presents the conclusions of the main results obtained. We discuss the relevance of impulsive release strategies in the dynamics of populations $S_1$ and $S_2$ and highlight the importance of optimal control in managing ecological interactions. We also suggest directions for future research, emphasizing the need for additional investigations that can expand and deepen the understanding of the dynamics analyzed in this study.
+
+
+
+
+
+\section{Model formulation}
+\label{sec:model}
+Based on a model introduced in \cite{Campo2017}, we define the impulsive model of competition between two generic species $S_1$ and $S_2$ as: 
+\begin{subequations}
+\begin{align}
+&\left.
+\begin{cases}\label{eq:equation_1}
+        \dfrac{dS_1}{dt}=S_1\left(\psi_1-\dfrac{r_1}{K_1}(S_1+S_2)\right)\left(\dfrac{S_1}{K_0} - 1 \right) - \delta_1 S_1,\\
+        \dfrac{dS_2}{dt}=S_2\left(\psi_2-\dfrac{r_2}{K_2}(S_1+S_2)\right)-\delta_2S_2,
+\end{cases}
+\right.\text{ if } t \neq k\tau,\, k \geq 0\\
+&\left.
+\begin{cases}\label{eq:equation_2}  
+        S_1(t^+)= S_1(t), \\
+        S_2(t^+)= S_2(t) + u_k, 
+\end{cases}
+\right.\text{ if } t = k\tau,\, k \geq 0,
+\end{align}
+\end{subequations}
+
+\noindent 
+with non-negative initial conditions and positive parameters, where $S_1(t)$ and $S_2(t)$ represent the populations of two species competing with each other over time $t$. The parameters $\psi_i$ and $\delta_i$ represent, respectively, the birth and death rates of species $S_1$ and $S_2$ for $i  = 1, 2$, as defined in the original model, while $r_i:= \psi_i - \delta_i$ for $i = 1, 2$ indicates the intrinsic growth rate of both populations. The parameter $K_i$ for $i = 1, 2$ is associated with the carrying capacity of the competing species populations. In this work, we disregard the density dependence of the parameters.
+
+For this impulsive differential equation system, the release period is $\tau$ and $u_k \in U$ denotes the impulsive release of species $S_2$ at time $t = k\tau$. In practice, $u_k$ is limited by the availability of species $S_2$, so the set of possible releases is given by $U:= \{ 0 \leq u_k \leq u_{\text{max}}, \mid k \geq 0 \}$, where $u_{\text{max}} \geq 0$ represents the maximum number of individuals of species $S_2$ that can be released at a given time. The population of $S_1$ immediately after the $k$-th release is given by $t = k\tau^+$, with $S_1(t^+) = \lim_{\epsilon \to 0^+} S_1(t + \epsilon)$.
+
+The system \eqref{eq:equation_1} incorporates the frequency-dependent Allee effect in the first equation, which applies to species $S_1$ \cite{campo2017optimalW10,Campo2017}. This effect is modeled by the critical compensation term $\left(\frac{S_1}{K_0} - 1\right)$, which directly influences the recruitment of individuals of species $S_1$. The term is positive when $S_1(t) > K_0$ and negative when $S_1(t) < K_0$. The parameter $K_0 > 0$, along with $K_1$ (where $0 < K_0 < K_1$), represents the ``minimum viable population size" (MVPS) commonly observed in models with the Allee effect \cite{barton2011spatialA1, clements2011biologyA2,HASTINGS2013175PopulationDynamics,kanarek2015overcomingA9,stephens1999alleeA7, ufuktepe2022discreteA4}. The MVPS threshold for species $S_1$ is given by $K_b$, while its carrying capacity is indicated by $K_*$. For more details, see \cite{Campo2017}.
+
+For this model, we consider
+\begin{equation}\label{eq:equation_3}
+    \psi_1 > \delta_1 \mbox{ and } \psi_2 > \delta_2,
+\end{equation}
+which guarantee a larger number of births than deaths. In addiction, we consider
+\begin{equation}\label{eq:equation_4}
+    \psi_2 < \psi_1, \, \delta_2 > \delta_1 \text{ and }r_2 < r_1,
+\end{equation}
+implying that the population of species $S_1$ exhibits greater survival ability than that of species $S_2$.
+
+The system in \eqref{eq:equation_1}, with nonnegative initial conditions, has four steady states, as described in \cite{Campo2017}. In the following, we present these steady states by adapting Theorem $1$ from \cite{Campo2017} to the context of this work.
+
+\begin{theorem}[adapted from Theorem $1$ in \cite{Campo2017}]\label{thm:thm_1}Under the conditions \eqref{eq:equation_4}, the dynamical system \eqref{eq:equation_1} with nonnegative initial conditions has four steady states in the region of biological interest $\mathbb{R}^2_+\setminus\{(0, 0)\}$, namely: 
+\begin{itemize}
+    \item one nodal repeller $(K_b, 0)$ where
+    \begin{equation}\label{eq:equation_5}
+        K_b = \dfrac{r_1K_0+\psi_1K_1-\sqrt{(r_1K_0+\psi_1K_1)^2-4r_1K_0K_1(\psi_1+\delta_1)}}{2r_1}>0,
+    \end{equation}
+    indicates the MVPS threshold for species $S_1$;
+    \item one saddle point $(S_1^*, S_2^*)$ of unstable coexistence of both species with coordinates given by
+    \begin{align}\label{eq:equation_6}
+        S_1^* =& \dfrac{K_0\left[\psi_1(K_1-K_2)+\delta_1(K_1+K_2)\right]}{\psi_1(K_1-K_2)+\delta_1K_2}>0,\\
+        S_2^* =& K_2-S_1^*>0;
+    \end{align}
+    \item two nodal attractors $(0,K_2)$ and $(K_*,0)$, where
+    \begin{equation}\label{eq:equation_7}
+        K_* = \dfrac{r_1K_0+\psi_1K_1+\sqrt{(r_1K_0+\psi_1K_1)^2-4r_1K_0K_1(\psi_1+\delta_1)}}{2r_1}>0,
+    \end{equation}
+    defines the carrying capacity of the first species. Only one of these steady states can be reached when $t\to \infty$ according to the initial conditions $S_1(0) > 0$, $S_2(0) > 0$ assigned to the system \eqref{eq:equation_1}, namely:
+    \begin{itemize}
+        \item[-]If $S_1(0) > K_b$ and $S_2(0) > 0$ then $(K_*,0)$ is
+reachable when $t\to \infty$ and the species $S_1$ should persist while the species $S_2$ become extinct.
+        \item[-]  If $S_1(0) < K_b$ and $S_2(0) > 0$ then $(0,K_2)$ is
+reachable when $t\to \infty$ and the species $S_2$ should persist while the species $S_1$ become extinct.
+    \end{itemize}
+\end{itemize}
+\end{theorem}
+In addition, for consistency with the results presented in \cite{{Campo2017}} we consider
+\begin{equation}\label{eq:equation_8}
+    0 < K_0 < K_b < K_2 < K_1 < K_*.
+\end{equation}
+
+Since the system we are working on is a model of interaction between two variables, with known terms, we chose the \eqref{eq:equation_1} model for this work, since when adding the pulse \eqref{eq:equation_2} conditions, we need to study the model \eqref{eq:equation_1}-\eqref{eq:equation_2} to assure that even with the discontinuity, the system remains well-posed.
+
+In the next section, we will explore the dynamic behavior of the impulsive differential equations system, including the analysis of the local and global stability of the free solution of species $S_1$.
+
+\section{Model Dynamics Analysis}
+\label{sec:dynamics}
+
+In this section, we begin by presenting some essential mathematical definitions and tools for analyzing the impulsive differential equations system. These tools are fundamental for establishing results related to positivity, existence, uniqueness, and boundedness of solutions. After this introduction, we conduct a detailed analysis of the system, focusing on the results obtained and their implications for the behavior of solutions over time. 
+
+Additionally, when considering the release of individuals from species $S_2$ to replace the population of $S_1$, we demonstrate the existence and uniqueness of the solution $(0, \bar{S_2})$ and analyze the conditions for its stability. The behavior of this solution is of great importance, as it allows us to understand how species  $S_2$ behaves in the absence of direct interactions with others. Through this investigation, we aim to better understand the conditions that ensure the maintenance of the free solution, which may have significant implications for the system dynamics and species interactions.
+
+\subsection{Fundamental Concepts}
+
+In this subsection, we review some definitions and tools for exploring the impulse response periodic solutions of model \eqref{eq:equation_1}-\eqref{eq:equation_2}. Throughout this paper, $\mathbb{R}_+ = \left[0, \infty\right)$, $\mathbb{R}^2_+ = \{x = (x_1, x_2) \in \mathbb{R}^2_+: x_1 \geq 0, x_2 \geq 0\}$, and $g = (g_1, g_2)^T$ denotes the mapping defined by the right-hand side of the system \eqref{eq:equation_1}.
+
+\begin{definition}{\rm (\cite{Laksh1989})}\label{def:1}
+    Let $V : \mathbb{R}_+ \times \mathbb{R}^2_+\to \mathbb{R}_+$, then $V$ is said to belong to class $\mathcal{V}_0$ if is continuous on $(k\tau, (k + 1)\tau] \times \mathbb{R}^2_+$ and\begin{equation}\label{eq:equation_9}
+       \lim\limits_{(t, y) \to (k\tau^+, x)} V(t, y) = V(k\tau^+, x), 
+    \end{equation} exists and is finite.
+\end{definition}
+
+\begin{definition}{\rm (\cite{Laksh1989})}\label{def:2} Let $V \in \mathcal{V}_0$. Then for $V(t, x) \in (k\tau, (k + 1)\tau] \times \mathbb{R}^2_+$, the upper right derivative of $V(t,x)$ with respect to the impulsive differential system \eqref{eq:equation_1}-\eqref{eq:equation_2} is defined as
+\begin{equation}\label{eq:equation_10}
+    D^+ V(t,x) = \lim_{h \to 0} \sup{\frac{1}{h}\left[V(t+h,x+hg(t,x))-V(t,x)\right]}.
+\end{equation}
+\end{definition}
+\begin{definition}{\rm (\cite{Laksh1989})}\label{def:3} Let $\varrho(t) = \varrho(t, t_0, x_0)$ be a solution of system \eqref{eq:equation_1}-\eqref{eq:equation_2} on $[t_0, t_0 + l)$. Function $\varrho(t)$ is called the maximal solution of system \eqref{eq:equation_1}-\eqref{eq:equation_2} if for
+any solution $x(t, t_0, x_0)$ of the system \eqref{eq:equation_1}-\eqref{eq:equation_2} existing on $[t_0, t_0 + l)$, it is verified $x(t) \leq \varrho(t)
+$, $t \in [t_0, t_0 + l)$.  
+\end{definition}
+
+The minimal solution $\rho(t)$ of system \eqref{eq:equation_1}-\eqref{eq:equation_2} can be   defined similarly to Definition \eqref{def:3}.
+
+Using Definitions \eqref{def:1}, \eqref{def:2} and \eqref{def:3}, the next theorem formalizes a comparison theorem for impulsive differential equations. 
+
+\begin{theorem}\label{thm:thm_2} {\rm (}Comparison theorem {\rm \cite{Laksh1989})}: Let $m \in \mathcal{V}_0$, and assume that 
+\begin{align}\label{eq:equation_11}
+    D^+m(t) \leq v(t,m(t)), \qquad t \neq t_k, \quad k = 1,2,...\\\nonumber
+    m(t_k^+) \leq \varphi_k(m(t_k)), \qquad t = t_k, \quad k = 1,2,...
+\end{align}where $\varphi_k \in \mathcal{C}(\mathbb{R},\mathbb{R})$ and $\varphi_k(u)$ is non-decreasing in $u$ for each $k =1, 2,. . .$. Let $\varrho(t)$ be a maximal solution of the scalar impulsive differential equation
+\begin{align}\label{eq:equation_12}\nonumber
+    \dot u(t) &= v(t,u), \qquad t \neq t_k, \quad k = 1,2,...\\
+    u(t_k^+)  &= \varphi_k(u(t_k)), \quad t = t_k, \quad t_k>t_0\geq0, \quad k = 1,2,...\\
+    u(t_0) &= u_0,\nonumber
+\end{align}
+which exists on $[t_0, \infty)$. Then, $m(t_0^+) \leq u_0$ implies that $m(t) \leq \varrho(t)$ for $t \geq t_0$. A similar result can be obtained when all the directions of the inequalities in the theorem are reversed and $\varphi_k(u)$ is non-increasing.
+\end{theorem}
+
+Notice that, in Theorem \eqref{thm:thm_2}, if $v$ is smooth enough to guarantee the existence and uniqueness of solution for the initial value problem \eqref{eq:equation_12}, then $\varrho(t)$ is indeed the unique solution of \eqref{eq:equation_12}.
+
+
+\subsection{Behavior of system solutions}\label{subs:behavior}
+As we are working with population dynamics, we must make sure that the solutions of system \eqref{eq:equation_1}-\eqref{eq:equation_2} are non-negative.
+\begin{proposition}\label{prop:prop_1}
+    Let $(S_1(0),S_2(0))$ be a non-negative initial condition, and let $(S_1(t),S_2(t))$ be a solution to the system \eqref{eq:equation_1}-\eqref{eq:equation_2}. Then, $(S_1(t),S_2(t))$ remains non-negative for all $t\geq 0$.
+
+\end{proposition}
+\begin{proof}
+    Note that $\dfrac{dS_1}{dt} = 0$ if $S_1(t) = 0$. Therefore, if $S_1(0) \geq 0$, we have $S_1(t) \geq 0$ for all $t \geq 0$. Similarly, if $S_2(0) \geq 0$, then $S_2(t) \geq 0$ for all $t \geq 0$.
+\end{proof}
+
+As demonstrated in the following proposition, the smoothness of the equations on the right-hand side of the model, given by \eqref{eq:equation_1}-\eqref{eq:equation_2}, together with Definition \eqref{def:1}, guarantees the existence and uniqueness of solutions for the model.
+
+\begin{proposition}\label{prop:prop_2} For each non-negative initial condition and each release a\-mount  $u_k \in U$ of individuals from species $S_2$, the system \eqref{eq:equation_1}–\eqref{eq:equation_2} has a unique solution defined on the interval $[0, \infty)$.
+\end{proposition}
+
+\begin{proof}
+Suppose $(S_1(t), S_2(t))$ is a solution to the system \eqref{eq:equation_1}-\eqref{eq:equation_2}. It is continuous in the intervals $(k\tau, (k+1)\tau]$ for $k \geq 0$, indicating that it remains continuous between each pair of pulses. Furthermore, there exist limits defined as follows:
+\begin{equation}\label{eq:equation_13}
+    S_1(k\tau^+) = \lim_{\epsilon \to 0^+} S_1(k\tau + \epsilon) \text{ and } S_2(k\tau^+) = \lim_{\epsilon \to 0^+} S_2(k\tau + \epsilon).
+\end{equation}
+Consequently, the existence and uniqueness of these solutions are guaranteed by the smoothness of the functions
+\begin{align}\label{eq:equation_14}
+    &g_1(S_1, S_2) = S_1\left(\psi_1 - \frac{r_1}{K_1}(S_1 + S_2)\right)\left(\frac{S_1}{K_0} - 1\right) - \delta_1 S_1,\\
+    &g_2(S_1, S_2) = S_2\left(\psi_2 - \frac{r_2}{K_2}(S_1 + S_2)\right) - \delta_2 S_2.
+\end{align}
+\end{proof}
+
+Due to the biological context of the problem \eqref{eq:equation_1}-\eqref{eq:equation_2}, we will show that the solutions of \eqref{eq:equation_1}-\eqref{eq:equation_2} are limited. Before that, however, we must look at the auxiliary system below, 
+\begin{align}
+\begin{cases}\label{eq:equation_15}
+\dfrac{dZ_2}{dt}(t) = Z_2\left(\psi_2 - \dfrac{r_2}{K_2} Z_2\right) - \delta_2 Z_2.
+\quad t \neq k\tau, \ k \geq 0  \\    
+Z_2(t^+)=Z_2(t) + u_k,  \qquad t = k\tau, \ u_k \in U\\
+Z_2(0^+)=S_2(0),
+\end{cases}
+\end{align} which reflects the behavior of individuals of species $S_2$ in the absence of individuals of species $S_1$. In this system, we will show that for each initial condition  $Z_2(0)$  and each set of releases  $U$, there exists a unique $\tau$-periodic solution that is globally asymptotically stable. This result is essential for establishing the bounds of the solutions and for analyzing the solution free of $S_1$ of the system \eqref{eq:equation_1}-\eqref{eq:equation_2}.
+\begin{theorem}\label{thm:thm_3}
+    Given the auxiliary system \eqref{eq:equation_15}, consider $Z_2(0) \geq 0$ and $u_k \in U$. Then, there exists a unique positive $\tau$-periodic solution $\Bar{Z}_2(t)$, expressed by:
+\begin{equation}\label{eq:equation_16}
+    \Bar{Z}_2(t) = \dfrac{K_2 Z_2^{+} e^{r_2 (t-k\tau)}}{Z_2^{+}\left(e^{r_2 (t-k\tau)} -1\right) + K_2}, \quad k\tau < t \leq (k+1)\tau, \, k \geq 0,
+\end{equation}
+where,
+\begin{equation}\label{eq:equation_17}
+   Z_2^+ = \frac{1}{2}\left[ (u_k + K_2) + \sqrt{(u_k + K_2)^2 + 4 u_k K_2 e^{r_2 \tau} - 4 u_k K_2} \right], \quad k \geq 0. 
+\end{equation}
+Furthermore, the solution $\Bar{Z}_2(t)$ is globally asymptotically stable.
+\end{theorem}
+The proof of \eqref{thm:thm_3} is given in the \eqref{appendix:A}.
+
+\begin{corollary}\label{cor:cor_1}
+    Let $\Bar{Z}_2(t)$ be the $\tau$-periodic solution of system \eqref{eq:equation_15}. Then for every solution $Z_2(t)$ of problem \eqref{eq:equation_15}, 
+    \begin{equation}\label{eq:equation_18}
+        Z_2(t) \to \Bar{Z}_2(t), \mbox{ as } t \to \infty,
+    \end{equation}where $\Bar{Z}_2(t)$ is given by \eqref{eq:equation_16}.
+\end{corollary}
+\begin{proof}
+    For every solution $Z_2(t)$ of the system \eqref{eq:equation_15}, we have $Z_2(t) \to \Bar{Z}_2(t)$ as  $t \to \infty$  follows directly from the Theorem \eqref{thm:thm_3} that establishes the global asymptotic stability of  $\Bar{Z}_2(t)$.
+\end{proof}
+
+
+Now, we can use the auxiliary system \eqref{eq:equation_15}, the Theorem \eqref{thm:thm_3}, and its Corollary \eqref{cor:cor_1} to bound $S_2(t)$, the solution corresponding to the species $S_2$ in the system \eqref{eq:equation_1}-\eqref{eq:equation_2}. For the solution $S_1(t)$ we employ its relationship with the carrying capacity $K_*$, as mentioned in \cite{Campo2017}. In this way, we prove the following lemma for the limitation of the $S_1$ species, followed by a theorem establishing the uniform boundedness of the solutions.
+
+\begin{lemma}\label{lem:lem_1}
+    Let $(S_1(t),S_2(t))$ be a solution of system \eqref{eq:equation_1}-\eqref{eq:equation_2}, with positive parameters, $u_k \in U$ and non-negative initial conditions. Then there exists a positive constant $K_*$ that satisfies $S_1(t)\leq K_*$ for all $t \geq 0$.
+\end{lemma}
+The proof of \eqref{lem:lem_1} is given in the \eqref{appendix:B}.
+
+\begin{theorem}\label{prop:prop_3}
+    Let $(S_1(t),S_2(t))$ be a solution of system \eqref{eq:equation_1}-\eqref{eq:equation_2}, with positive parameters, $u_k \in U$ and non-negative initial conditions. Then $(S_1(t),S_2(t))$ is uniformly  bounded.
+\end{theorem}
+\begin{proof}
+By hypothesis, the initial conditions are non-negative, by \eqref{prop:prop_1}, we have that $S_1(t)$ and $S_2(t)$ are lower bounded by zero, for all $t \geq 0 $, and by the Lemma \eqref{lem:lem_1}, $K_*>0$ is an upper bound for $S_1(t)$. Now, we will show that $S_2(t)$ is also upper bounded. To do this, first consider the second and fourth equation of the system \eqref{eq:equation_1}-\eqref{eq:equation_2}, from which we get
+\begin{equation}\label{eq:equation_19}
+    \dfrac{dS_2}{dt}(t) \leq \dfrac{dZ_2}{dt}(t) \mbox{ and } S_2(0) = Z_2(0),
+\end{equation} 
+where $Z_2$ satisfies \eqref{eq:equation_15} and $Z_2(t)$ is bounded, since that for $t \neq k\tau$, the solution of the continuous ODE is bounded by $\max\{K_2, S_2(0)\}$, where $K_2$ represents the environmental carrying capacity. At the instants $t = k\tau$, the impulses add a term $u_k \in U$, which is upper-bounded by $u_{\max}$. Thus, immediately after the impulse, $Z_2(t^+) \leq \max\{K_2, S_2(0)\}+u_{\max}$. Therefore, $Z_2(t)$ remains bounded over time. By the Theorem \eqref{thm:thm_2} we have,
+\begin{equation}\label{eq:equation_20}
+    S_2(t)\leq Z_2(t).
+\end{equation} Let $M_2 := \max\{K_2, S_2(0)\}+u_{\max}$, then $S_2(t)\leq M_2$ for all $t \geq 0$.
+
+To show that the solutions are uniformly bounded, consider $V(t) = S_1(t)+S_2(t)$. Then, $V(t) \in \mathcal{V}_0$ and for some $\lambda >0$ and $k\tau \leq t \leq (k+1)\tau$,
+\begin{align}\label{eq:equation_21}\nonumber
+    D^+V(t)+\lambda V(t) &= D^+S_1(t)+D^+S_2(t) + \lambda(S_1(t)+S_2(t)),\\\nonumber
+    &= S_1(t)\left(\psi_1-\dfrac{r_1}{K_1}(S_1(t)+S_2(t))\right) \left(\dfrac{S_1(t)}{K_0} - 1 \right) - \delta_1 S_1(t)\\\nonumber &+ S_2(t)\left(\psi_2-\dfrac{r_2}{K_2}(S_1(t)+S_2(t))\right) - \delta_2 S_2(t) + \lambda(S_1(t)+S_2(t))\\
+    & \leq (r_1 +\lambda)K_*+(r_2 +\lambda)M_2 := M_3.
+\end{align}
+When $t = k\tau$, we have $V(k\tau^+) = V(k\tau)+u_k$, for $u_k \in U$. Then, by the Lemma 2.2 in \cite{Bainov1993},
+\begin{align}\label{eq:equation_22}\nonumber
+    V(t)&\leq V(0) e^{-\lambda t} +\int_0^t M_3 e^{-\lambda (t-s)}\,ds + \sum_{0 \leq k\tau \leq t} u_k e^{-\lambda(t-k\tau)},\\
+    &\leq V(0) e^{-\lambda t} +\dfrac{M_3}{\lambda}(1-e^{-\lambda t})+\sum_{0 \leq k\tau \leq t} u_{max}e^{-\lambda(t-k\tau)}.
+\end{align}Thus, when $t \to \infty$
+\begin{equation}\label{eq:equation_23}
+    V(t) \leq \dfrac{M_3}{\lambda} + u_{max}\dfrac{e^{\lambda \tau}}{(e^{\lambda \tau}-1)}.
+\end{equation}
+In this way, we have $V(t)$ uniformly bounded and due to its definition, we have that each positive solution $S_1(t)$ and $S_2(t)$ of the system \eqref{eq:equation_1}-\eqref {eq:equation_2} is uniformly bounded.
+\end{proof}
+
+With the aid of Theorem \eqref{thm:thm_3}, we can demonstrate the existence of a unique periodic solution without individuals of species $S_1$ for the system \eqref{eq:equation_1}-\eqref{eq:equation_2}.
+
+\begin{theorem}\label{thm:thm_4} Let $S_1$ and $S_2$ be non-negative initial conditions, and $u_k \in U$. Then, $(0, \Bar{S_2}(t))$ is the unique positive $\tau$-periodic, $S_1$-free solution of system \eqref{eq:equation_1}-\eqref{eq:equation_2}.
+\end{theorem}
+
+\begin{proof}
+  Note that when $S_1(t) = 0$, we have $\dfrac{dS_2}{dt} = \dfrac{dZ_2}{dt}$, where $\dfrac{dZ_2}{dt}$ corresponds to the first equation of system \eqref{eq:equation_15}, with solution given by \eqref{eq:equation_61}. Therefore, by applying Theorem \eqref{thm:thm_3}, we conclude that $(0, \Bar{S_2}(t))$ is the unique periodic $S_1$-free solution of system \eqref{eq:equation_1}-\eqref{eq:equation_2}, where $\Bar{S_2}(t) = \bar{Z}_2(t)$ for all $t \geq 0$.
+\end{proof}
+
+\subsection{Stability of $S_1$-free periodic solution}
+\label{sec:stability}
+Due to the Allee effect described in the equation for $S_1$ species, we observed in the previous section that when $S_1(0) < K_b$, the $S_1$ species tend to disappear without external intervention. Therefore, it is crucial to analyze the stability of the solution $(0, \Bar{S_2}(t))$ when $S_1(0) > K_b$. Studying the behavior of this solution is essential for understanding the viability of $S_2$ species survival in the environment.
+
+In this section, we will investigate the stability of the periodic solution with no individuals of $S_1$ species in the system  \eqref{eq:equation_1}-\eqref{eq:equation_2}. Initially, we will demonstrate that this solution is always locally stable using Floquet theory for the stability of periodic solutions. Furthermore, we will show that this solution can also be globally stable under some conditions. 
+\begin{theorem}\label{thm:thm_5}
+    The $S_1$-free periodic solution $(0,\Bar{S}_2(t))$ of the system \eqref{eq:equation_1}-\eqref{eq:equation_2} is locally asymptotically stable.
+\end{theorem}
+The proof of \eqref{thm:thm_5} is given in the \eqref{appendix:C}.
+
+Similar to the previous result, we present a theorem that establishes the conditions under which $(0, \bar{S_2}(t))$ is a global attractor.
+
+\begin{theorem}\label{thm:thm_6}
+The $S_1$-free periodic solution $(0,\Bar{S}_2(t))$ is globally asymptotically stable if,
+\begin{equation}\label{eq:equation_24}
+    S_2(t)>K_1.
+\end{equation}
+\end{theorem}
+\begin{proof}
+As a consequence of the second equation of the model, we obtain \eqref{eq:equation_1} that,
+\begin{equation}\label{eq:equation_25}
+ \dfrac{dS_2}{dt}\leq\left(\psi_2-\dfrac{r_2}{K_2}S_2\right)S_2- \delta_2 S_2,   
+\end{equation}
+then we can use the auxiliary system \eqref{eq:equation_15} for comparison, which we saw in the Corollary \eqref{cor:cor_1} that,
+\begin{equation}\label{eq:equation_26}
+    \lim_{t \to \infty} Z_2(t) = \Bar{Z}_2(t).
+\end{equation}
+Thus, for small enough $\epsilon>0$, there exists $t_1>0$ such that 
+\begin{equation}\label{eq:equation_27}
+    Z_2(t)<\Bar{Z}_2(t)+\epsilon, \mbox{ for all } t>t_1.
+\end{equation}
+As $S_2(t) \leq Z_2(t)$, $Z_2(t) < \Bar{Z}_2(t)+\epsilon$ and $S_2(0) = Z_2(0)$, it follows from the Comparison Theorem \eqref{thm:thm_1} that
+\begin{equation}\label{eq:equation_28}
+    S_2(t)\leq\Bar{Z}_2(t)+\epsilon,  \forall t>t_1.
+\end{equation}
+Furthermore, since we are considering $S_1(0)>K_b >K_0$, then $\left(\frac{S_1}{K_0} - 1\right)>0$, as we want stability for the equilibrium solution $S_1(t) = 0$, we must adjust $-\frac{r_1}{K_1}S_2(t)$ such that
+\begin{equation}\label{eq:equation_29}
+    \left(\psi_1 - \dfrac{r_1}{K_1}(S_1+S_2)\right)\left(\dfrac{S_1}{K_0} - 1\right) < \delta_1,
+\end{equation}then
+\begin{equation}\label{eq:equation_30}
+    \psi_1 - \dfrac{r_1}{K_1}(S_1+S_2) < \dfrac{\delta_1}{\left(\dfrac{S_1}{K_0} - 1\right)},
+\end{equation}
+and for large enough $S_1$,
+\begin{align}\label{eq:equation_31}
+     \psi_1 - \dfrac{r_1}{K_1} S_2 < \delta_1,     
+\end{align}that is
+\begin{equation}\label{eq:equation_32}
+      S_2 > K_1,
+\end{equation}since $r_1 = \psi_1 - \delta_1$ by model hypothesis.
+Then, replacing \eqref{eq:equation_32} in the first equation of system \eqref{eq:equation_1} we have,
+\begin{align}\label{eq:equation_33}
+    \dfrac{dS_1}{dt} \leq S_1\left[\left(\psi_1 - \dfrac{r_1}{K_1}(S_1+K_1)\right)\left(\dfrac{S_1}{K_0} - 1\right) - \delta_1\right],
+\end{align} in this way we can consider the next equation for comparison 
+\begin{align}\label{eq:equation_34}
+\begin{cases}
+    \dfrac{dZ_1}{dt} = Z_1\left[\left(\psi_1 - \dfrac{r_1}{K_1}(Z_1+K_1)\right)\left(\dfrac{Z_1}{K_0} - 1\right) - \delta_1\right],\\
+    Z_1(0) = S_1(0),
+\end{cases}
+\end{align}
+which $Z_1(t) \to 0$ as $t \to \infty$. Consequently, by the Comparison Theorem, if condition \eqref{eq:equation_32} is satisfied, then for a sufficiently small $\epsilon>0$, there exists $t_2>t_3$ such that 
+\begin{equation}\label{eq:equation_35}
+    S_1(t) \leq Z_1(t) \leq \epsilon, \, t>t_2.
+\end{equation}
+Now, substituting $S_1(t) \leq \epsilon$ in the second equation of system \eqref{eq:equation_1} we have,
+\begin{align}
+\begin{cases}\label{eq:equation_36}
+\dfrac{dS_2}{dt}(t)\geq S_2\left(\psi_2-\dfrac{r_2}{K_2}\left(\epsilon+S_2\right)\right)-\delta_2S_2,
+\quad t \neq k\tau, \ k \geq 0  \\    
+S_2(t^+)=S_2(t) + u_k,  \qquad t = k\tau, \ u_k \in U\\
+S_2(0^+)=S_2(0).
+\end{cases}
+\end{align}
+Due to the continuity of the right side of the equation and analogously to the \eqref{thm:thm_3}, we conclude that for $\epsilon>0$ small enough, there exists $t_3>t_2$ such that 
+\begin{equation}\label{eq:equation_37}
+    \Bar{S}_2(t)-\epsilon \leq S_2(t),\mbox{ } t>t_3.
+\end{equation}
+Finally, if \eqref{eq:equation_32} is satisfied, then for $\epsilon>0$ we have, 
+\begin{equation}\label{eq:equation_38}
+    0\leq S_1(t) \leq \epsilon \mbox{ and }  \Bar{S}_2(t)-\epsilon \leq S_2(t) \leq \Bar{S}_2(t)+\epsilon, \mbox{ } t>t_3. 
+\end{equation}
+Letting $\epsilon \to 0$,
+\begin{equation}\label{eq:equation_39}
+    S_1(t) \to 0 \mbox{ and } S_2(t) \to \Bar{S}_2(t), \mbox{ as } t \to \infty.
+\end{equation}
+Therefore, if \eqref{eq:equation_32} is fulfilled, then $(0, \Bar{S}_2(t))$ is globally asymptotically stable.
+\end{proof}
+\subsection{A method to select $u_k$ (a sufficient condition)}
+In this subsection, we employ the global stability condition \eqref{eq:equation_24} to determine the appropriate number of $S_2$ individuals, $u_k$, to be released in order to ensure that the $S_2$ population stabilizes while driving the $S_1$ population to extinction. Let,
+\begin{align}\label{eq:equation_40}
+    \Bar{S}_2(t) &= \dfrac{K_2 Z_{2}^{+} e^{r_2 (t-k\tau)}}{Z_{2}^{+}\left(e^{r_2 (t-k\tau)} -1\right)+K_2}, \,  k\tau < t \leq (k+1)\tau, \,k \geq 0,
+\end{align} where $Z_2^+$ depends on $u_k$ and is defined in \eqref{eq:equation_17}. Then, at $t = (k+1)\tau$, we have
+\begin{equation}\label{eq:equation_41}
+    \bar{S}_2^{max} = \dfrac{K_2 Z_{2}^{+} e^{r_2 \tau}}{Z_{2}^{+}\left(e^{r_2\tau} -1\right)+K_2},
+\end{equation}such that
+\begin{equation}\label{eq:equation_42}
+    \bar{S}_2^{max} \geq \bar{S}_2(t), \, \forall t \geq 0.
+\end{equation} For the solution $(0,\bar{S}_2(t))$ to be globally asymptotically stable, we must have $\bar{S_2}(t)>K_1$, then 
+\begin{equation}\label{eq:equation_43}
+    \bar{S}_2^{max}  \geq K_1,
+\end{equation}
+thus, after some algebraic manipulations, we obtain the following sufficient condition to stabilize the $S_2$ population and lead the $S_1$ population to zero:
+\begin{equation}\label{eq:equation_44}%essa condição é suficiente, não nescessária.
+    u_k> \eta(\tau),\, \forall \tau \geq 0,
+\end{equation}where 
+\begin{equation}\label{eq:equation_45}
+    \eta(\tau) = \frac{(e^{r_2 \tau}-1)\phi(\tau)(\phi(\tau)-K_2)}{K_2 + \phi(\tau)(e^{r_2 \tau}-1)} \text{ and } \phi(\tau) = \frac{K_1 K_2}{e^{r_2 \tau} K_2 - K_1(e^{r_2 \tau}-1)}.
+\end{equation}
+
+However, we observe that $\eta(\tau)$ can assume negative values for certain values of $\tau > 0$. Considering that the biological application of this work is based on a context where $u_k$ is positive, we define $u_k > \sup\limits_{\tau \geq 0} \eta(\tau) > 0$ for the values of $\tau$ where $\eta(\tau)$ is negative. We will then demonstrate the existence of such a supremum for $\tau \geq 0$.
+
+\begin{proposition}\label{prop:prop_4}
+Let $\eta(\tau)$ and $\phi(\tau)$ be defined for $\tau \geq 0$ as given in \eqref{eq:equation_45}. Then, there exists a supremum of $\eta(\tau)$ for $\tau \geq 0$.
+\end{proposition}
+\begin{proof}
+  Indeed the function $\eta(\tau)$ is continuous and differentiable on the interval $[0, \infty)$. When $\tau \to 0$, $\phi(\tau) \to K_1$ and $\eta(\tau) \to 0$, and as $ \tau \to \infty$, $\phi(\tau) \to 0$ and  $\eta(\tau)0\to 0$. Despite the interval being unbounded above, the behavior of $\eta(\tau)$ suggests that it attains a local maximum, implying that the supremum exists at some point $\tau = \tau_{\text{max}}$.  
+\end{proof}
+
+The analysis realized in this section revealed the conditions for the global stability of the $S1$-free solution, providing a solid theoretical foundation for the dynamic behavior of the impulsive model. In the next section, we address the optimal control problem, where the previously introduced model is used as the control system, and the results obtained here are crucial to ensuring the existence of an optimal solution. This problem is formulated to determine strategies that maximize the effectiveness of population dynamics control. The numerical results of these approaches, as well as their implications, will be presented in Section \eqref{sec:numericalresults}.
+
+\section{Impulsive optimal control problem}
+After ensuring the existence, uniqueness, and limitation of the system solutions \eqref{eq:equation_1}-\eqref{eq:equation_2}, the focus becomes the fixation of the $S_2$ species with the lowest possible intervention cost. The control problem is formulated taking into account the release of $S_2$ individuals through impulsive control actions. Thus, the question to be solved is:
+
+What is the minimum number of individuals of $S_2$ species that must be released for a fixed frequency to ensure their fixation in the target location, while minimizing intervention costs?
+
+To answer this question, we formulate an optimal control problem where the control actions are impulsive releases. The objective is to find the control strategy that defines the optimal number of individuals of $S_2$ species to be released in each fixed period, in order to minimize total intervention costs and ensure the fixation of $S_2$ species in the target population.
+
+This control approach is designed to be implemented within a finite time interval, denoted by $[0, T]$, where $T$ represents the final time of the intervention. During this interval, it is possible to perform up to $N$ releases, each being an element of the set of admissible controls, defined by $\bar{U}:=\{u_k \in \mathbb{R} \mid 0 \leq u_k \leq u_{max}, \, k = 1,2,..., N\}$ where $u_{max}$ satisfies $u_{\text{max}} \geq \sup\limits_{0 < \tau \leq T} \eta(\tau)$, with $\eta(\tau)$ specified in the previous section.
+
+Given this framework, the optimal control problem can be formulated as follows: Find optimal $u^* = \displaystyle \ (u^*_{k})_{k=1}^{N}$, $u_k \in \bar{U}$ that minimize the cost functional 
+\begin{small}
+\begin{equation}\label{eq:equation_46}
+     J(u) = C \sum_{k=1}^{N} u_k,
+\end{equation}subject to
+\begin{align}
+&\left.
+\begin{cases}\label{eq:equation_47}
+        \dfrac{dS_1}{dt}=S_1\left(\psi_1-\dfrac{r_1}{K_1}(S_1+S_2)\right)\left(\dfrac{S_1}{K_0} - 1 \right) - \delta_1 S_1,\\
+        \dfrac{dS_2}{dt}=S_2\left(\psi_2-\dfrac{r_2}{K_2}(S_1+S_2)\right)-\delta_2S_2,
+\end{cases}
+\right.\text{ if } t \neq k\tau,\, k = 1, 2,...,N\\
+&\left.
+\begin{cases}\label{eq:equation_48}  
+        S_1(t^+)= S_1(t), \\
+        S_2(t^+)= S_2(t) + u_k,  
+\end{cases}
+\right.\text{ if } t = k\tau,\, k = 1, 2,...,N\\
+&\left.\begin{cases}\label{eq:equation_49}
+    S_1(T) < K_b
+\end{cases}\right.
+\end{align}
+with initial conditions:
+\begin{equation}\label{eq:equation_50}
+    S_1(0) \geq 0 \mbox{ and } S_2(0) \geq 0.
+\end{equation}
+\end{small}
+
+The condition \( u_{\text{max}} \geq \sup\limits_{0 < \tau \leq T} \eta(\tau) \) is established to ensure that there exists at least one value of \( u_k \) capable of solving the problem described in equations \eqref{eq:equation_46}-\eqref{eq:equation_49}, as will be demonstrated in \eqref{prop:prop_5}. In this way, we were able to determine an optimal release strategy for each fixed period, minimizing the number of individuals of $S_2$ and, consequently, the costs associated with this control policy. To this end, we consider the following aspects regarding the control problem we are working on:
+
+\begin{itemize}
+    \item[i.] The objective function \( J(u) \) accounts for the sum of all releases, along with a constant \( C \) that represents the costs of the intervention;
+    \item[ii.] \( J(u) \) is subject to the dynamics of the model defined by equations \eqref{eq:equation_47}-\eqref{eq:equation_48}, which characterize the control system;
+    \item[iii.] The constraint \eqref{eq:equation_49} aims to adjust the $S_1$ population at the final time \( T \) to the threshold \( K_b \), related to the Allee effect (see \cite{Campo2017,barton2011spatialA1}), to ensure the fixation of $S_2$ species.
+\end{itemize}
+Next, we present a proposition that demonstrates that \( \bar{U} \) is a non-empty set that satisfies the final constraint of the problem and is compact. This property is crucial to ensure a viable solution within the established conditions.
+\begin{proposition}\label{prop:prop_5}
+    The set of admissible controls $ \bar{U} $ is non-empty and compact.
+\end{proposition}
+\begin{proof}
+    In Section \eqref{subs:behavior}, we showed that the system of equations \eqref{eq:equation_47}-\eqref{eq:equation_48} is well-posed for any $ u_k \in U $. Since $ \bar{U} \subset U $, we conclude that the system is also well-posed for any $ u_k \in \bar{U} $, ensuring the existence of a unique solution.
+
+    By hypothesis, we have $ u_k \geq \sup\limits_{0 < \tau \leq T} \eta(\tau) $, where $ \eta(\tau) $ is an auxiliary function given in equation \eqref{eq:equation_45}. We choose $ k^* \in \{1, \dots, N\} $ such that $ u_{k^*} = \sup\limits_{0 < \tau \leq T} \eta(\tau) $. Thus, we have $ S_2 > K_1 $ for this choice, as shown in Theorem \eqref{thm:thm_6}, where $ K_1 $ is related to the carrying capacity for $S_1$ species. 
+
+    Analyzing the dynamics of $S_1$ species, given by
+    \begin{equation}\label{eq:equation_51}
+      \dfrac{dS_1}{dt} = S_1\left(\psi_1 - \dfrac{r_1}{K_1}(S_1 + S_2)\right)\left(\dfrac{S_1}{K_0} - 1 \right) - \delta_1 S_1,  
+    \end{equation}
+    with $ S_2 > K_1 $, the term $ \dfrac{r_1}{K_1}(S_1 + S_2) $ contributes to a negative growth rate for $ S_1 $, implying that $ S_1 $ tends to zero in finite time. Therefore, the constraint $ S_1(T) < K_b $ is satisfied for the control $ u_{k^*} $.
+
+    Finally, since $ u_k \in [0, u_{\max}] $, the set $ \bar{U} $ is a closed and bounded subset of $ \mathbb{R} $, which guarantees that $ \bar{U} $ is compact. 
+
+    Thus, we conclude that $ \bar{U} $ is non-empty and compact, with at least one control $ u_{k^*} \in \bar{U} $ that satisfies the control system \eqref{eq:equation_47}-\eqref{eq:equation_48} and the inequality constraint \eqref{eq:equation_49}.
+\end{proof}
+Based on Theorem (5.1) in Section (III) of \cite{berkovitz2013optimal}, we present the following theorem that guarantees the existence of the optimal control for the problem at hand.
+\begin{theorem}[Existence of Optimal Control]\label{thm:thm_7}
+    Consider the problem described in \eqref{eq:equation_46}-\eqref{eq:equation_49}. If the following conditions are satisfied:
+\begin{enumerate}
+    \item The set of admissible controls $ \bar{U} $ is non-empty and compact;
+    \item The control system \eqref{eq:equation_47}-\eqref{eq:equation_48} is well-posed for each $ u_k \in \bar{U} $;
+    \item The solutions of the system \eqref{eq:equation_47}-\eqref{eq:equation_48} are uniformly bounded for each $ u_k \in \bar{U} $;
+    \item The cost functional $ J(u) = C \sum_{k=1}^{N} u_k $ is continuous in $ u $.
+\end{enumerate}
+Then, there exists an optimal control $ u^* = (u^*_k)_{k=1}^{N} $ with $ u^*_k \in \bar{U} $ that minimizes the cost functional $ J(u) $, satisfying the dynamic equations and constraints of the problem.
+\end{theorem} 
+\begin{proof}
+    The first condition has already been verified in Proposition \eqref{prop:prop_5}. In Subsection \eqref{subs:behavior}, we established the existence, uniqueness, positivity, and uniform boundedness of the solutions to the system \eqref{eq:equation_47}-\eqref{eq:equation_48} for each $ u_k \in \bar{U} \subset U $, which satisfies the second and third condition. Additionally, the functional $ J(u) $ is a linear sum of the control variables $ u_k \in \bar{U} $, where $ \bar{U} $ is compact. Thus, $ J(u) $ is continuous in $ u $. Therefore, there exists an optimal control $ u^* = (u^*_k)_{k=1}^{N}$ with $ u^*_k \in \bar{U} $ that minimizes the cost functional $ J(u) $, satisfying the problem constraints described in \eqref{eq:equation_46}-\eqref{eq:equation_49}.
+\end{proof}
+
+Based on these results, for any initial configuration of the system, it is possible to find an optimal control policy that satisfies the necessary conditions, ensuring the viability of the proposed solution. In the next section, we present the numerical results of this work.
+
+\section{Numerical Results}\label{sec:numericalresults}
+
+This section presents the numerical results obtained to validate the theoretical findings and investigate the behavior of the optimal control problem through numerical simulations. First, we assess the consistency of the theoretical results by comparing them with numerical approximations. Then, we explore the numerical solution of the optimal control problem, illustrating how the proposed approach performs under different parameter configurations, and highlighting key observations. All simulations use the parameters detailed in Table \eqref{tab:tab_1} (\cite{Campo2017}) below.
+
+\begin{table}[htpb]
+\centering
+{\footnotesize
+\caption{Parameters for the model \eqref{eq:equation_1}-\eqref{eq:equation_2}}\label{tab:tab_1}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Parameter} & \textbf{Value} & \textbf{Range} & \textbf{Description} \\
+\midrule
+$\psi_1$ & 0.32667 & 0.28 - 0.38 & Birth rate of species $S_1$ \\
+$\psi_2$ & 0.21333 & 0.18 - 0.25 & Birth rate of species $S_2$ \\
+$\delta_1$ & 0.03333 & $1/8$ - $1/42$ & Death rate of species $S_1$ \\
+$\delta_2$ & 0.06666 & $2/8$ - $2/42$ & Death rate of species $S_2$ \\
+$K_1$ & 374 & - & Related to the carrying capacity of $S_1$ \\
+$K_2$ & 300 & - & Carrying capacity of species $S_2$ \\
+$K_0$ & 30 & - & Threshold population for species interaction \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+For the simulations, we exemplify the species in question, with $S_1$ representing wild female Aedes aegypti mosquitoes and $S_2$ representing female mosquitoes infected with Wolbachia bacteria \cite{almeida2019mosquitoW5,cardona2020wolbachiaW7,zara2016estrategiasW2}. The model with which we are working, without impulse control, was proposed by \cite{Campo2017} and applied in the context of Wolbachia for mosquito control. Here, we extend this model to handle any two species or subspecies, as long as their populations satisfy the conditions \eqref{eq:equation_3} and \eqref{eq:equation_4}. For example, we return to the specific case of Wolbachia.
+
+\subsection{Numerical consistency of theoretical results}
+
+To ensure a comprehensive assessment of the dynamics between species $S_1$ and $S_2$ (wild and infected female mosquitoes of Aedes aegypti), we performed simulations with four different initial conditions. The specific objective of this subsection is to demonstrate the global stability of the solution $(0, \bar{S}_2(t))$, based on the condition derived from Theorem \eqref{thm:thm_6}.
+
+The simulations were conducted over a period of 180 days, using the parameters listed in Table \eqref{tab:tab_1}, with Python and its libraries ensuring precision and efficiency in solving the equation system. We implemented the fourth-order Runge-Kutta method using the NumPy library, along with some adaptations to incorporate the jump, providing a robust numerical solution.
+
+The simulation results are presented in Figures \eqref{fig:1}, \eqref{fig:2}, \eqref{fig:3}, where each figure is divided into two images. These pairs illustrate an analysis of the global stability of the mosquito-free solution of wild females for different release periods $\tau$.
+
+Figures \eqref{fig:1}$(a)$ and \eqref{fig:1}$(b)$ illustrate situations where global stability is not achieved. This is consistent with the result presented in Theorem \eqref{thm:thm_6}, as in both cases the number of infected females $S_2$ released in each period $\tau$ does not satisfy the sufficient condition $u_k > \eta(\tau)$ to ensure global stability. For example, in Figure \eqref{fig:1}$(a)$, with $\tau = 7$ and a constant release sequence of $u_k = 100, \, \forall k > 0$, the release value does not meet the threshold derived in the previous subsection, since $\eta(7) \approx 300$. A similar situation occurs in Figure \eqref{fig:1}$(b)$, where for $\tau = 14$ and $u_k = 200, \, \forall k > 0$, the release does not satisfy the sufficient condition for global $(0, \bar{S}_2(t))$ stability given in \eqref{eq:equation_44}.
+
+\begin{figure}[!ht]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure/Figure_1.eps}
+        \par\vspace{2pt} (a)
+        %\subcaption*{(a)}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure/Figure_2.eps}
+        \par\vspace{2pt} (b)
+        %\subcaption*{(b)}
+    \end{minipage}
+   \caption{Impulsive solutions of the model \eqref{eq:equation_1}-\eqref{eq:equation_2} for different initial conditions. In Figure $(a)$, the release amount is $u_k = 100$, with $\tau=7$ $(u_k<\eta(7))$, and in Figure $(b)$, the release amount is $u_k = 200$, with $\tau=14$ $\left(u_k<\sup\limits_{\tau \geq 0} \eta(\tau)\right)$. In both cases, the $S_1$-free solution does not attain global stability. The dynamics of wild Aedes aegypti female mosquitoes $S_1$ are represented in blue, while those infected with Wolbachia $S_2$ are represented in red.}
+
+    \label{fig:1}
+\end{figure}
+
+In contrast, Figures \eqref{fig:2}$(c)$ and \eqref{fig:2}$(d)$ illustrate situations where global stability is achieved. This occurs when the number of individuals released in each period $\tau$ is increased to satisfy the sufficient condition given in \eqref{eq:equation_44}, as established in \eqref{sec:dynamics} through Theorem \eqref{thm:thm_6}. Specifically, in Figure \eqref{fig:2}$(c)$, for $\tau = 7$, and \eqref{fig:2}$(d)$, for $\tau = 14$, the release was adjusted to constant sequences of $u_k = 300$ and $u_k = 43760, \, \forall k > 0$, respectively, both of which satisfy the stability condition in \eqref{eq:equation_44}.
+
+Figures illustrate how a constant period release, $\tau$, and the quantity released, $u_k$, directly influence the population dynamics of wild female Aedes aegypti mosquitoes ($S_1$) and those infected with Wolbachia ($S_2$). For example, in Figures \eqref{fig:3}$(e)$ and \eqref{fig:3}$(f)$, we observe the effect when a constant release sequence of $u_k = 80, \, \forall k > 0$, is applied with two different release periods: $\tau = 3$ in Figure \eqref{fig:3}$(e)$ and $\tau = 7$ in Figure \eqref{fig:3}$(f)$. 
+\begin{figure}[!ht]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure/Figure_3.eps}
+        \par\vspace{2pt} (c)
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure/Figure_4.eps}
+        \par\vspace{2pt} (d)
+    \end{minipage}
+   \caption{Impulsive solutions of the model \eqref{eq:equation_1}-\eqref{eq:equation_2} for different initial conditions. In Figure $(c)$, the release amount is $u_k = 300$, with $\tau=7$ $(u_k>\eta(7))$, and in Figure $(d)$, the release amount is $u_k = 43760$, with $\tau=14$ $\left(u_k>\sup\limits_{\tau \geq 0} \eta(\tau)\right)$. In both cases, the $S_1$-free solution attain global stability. The dynamics of wild Aedes aegypti female mosquitoes $S_1$ are represented in blue, while those infected with Wolbachia $S_2$ are represented in red.}
+
+    \label{fig:2}
+\end{figure}
+\noindent In Figure \eqref{fig:3}$(e)$, global stability of the solution $(0, \bar{S}_2(t))$ is achieved, as $u_k = 80 > \eta(3) \approx 60, ,\ \forall k > 0$. Conversely, in Figure \eqref{fig:3}$(f)$, where $u_k = 80 < \eta(7) \approx 300, \, \forall k > 0$, global stability of the solution is not attained.
+
+\begin{figure}[!ht]
+    \centering
+    % Primeira imagem com etiqueta (a)
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure/Figure_5.eps}
+        \par\vspace{2pt} (e)
+    \end{minipage}
+    \hfill
+    % Segunda imagem com etiqueta (b)
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure/Figure_6.eps}
+        \par\vspace{2pt} (f)
+    \end{minipage}
+    % Legenda geral para as duas imagens
+   \caption{Impulsive solutions of the model \eqref{eq:equation_1}-\eqref{eq:equation_2} for different initial conditions. In Figures $(e)$ and $(f)$, the release amount is $u_k = 80$, with $\tau = 3$ $(u_k>\eta(3))$ and $\tau = 7$ $(u_k<\eta(7))$, respectively. In the first case, the $S_1$-free solution attains global stability, while in the second case it does not. The dynamics of wild Aedes aegypti female mosquitoes $S_1$ are shown in blue, and those infected with Wolbachia $S_2$ are shown in red.}
+
+    \label{fig:3}
+\end{figure}
+
+Based on the simulations performed, the dependence between $\tau$ and $u_k$ underscores the importance of carefully balancing the frequency and quantity of releases, as both parameters directly impact the success in achieving global system stability. Notably, as the interval between releases increases, the required number of individuals to be released also rises. Furthermore, considering the model conditions and the parameters presented in Table \eqref{tab:tab_1}, we observe that in all implemented scenarios, particularly for $\tau = 14$ with $\eta(14) < 0$, as shown in Figure \eqref{fig:2}$(d)$, the release value $u_k = 43760$ which is large than $\sup\limits_{\tau \geq 0} \eta(\tau) \approx 43759.89$, thereby satisfying the condition for global stability. However, Figure \eqref{fig:2}$(d)$ implies that this amount might exceed the necessary to eliminate the $S_1$ population.
+
+These observations suggest the sufficiency of the condition \eqref{eq:equation_44} to guarantee the global stability of $S_1$-free solution, but this condition may not be strictly necessary. For example, in Figure \eqref{fig:4}$(g)$ and \eqref{fig:4}$(h)$, we observe that the global stability of the wild female free solution $S_1$ is attained with constant sequences of releases of $u_k = 200$ and $u_k = 600, \, \forall k > 0$, for $\tau = 7$ and $\tau = 14$, respectively.
+
+\begin{figure}[!ht]
+    \centering
+    % Primeira imagem com etiqueta (a)
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure/Figure_7.eps}
+        \par\vspace{2pt} (g)
+    \end{minipage}
+    \hfill
+    % Segunda imagem com etiqueta (b)
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure/Figure_8.eps}
+        \par\vspace{2pt} (h)
+    \end{minipage}
+    % Legenda geral para as duas imagens
+   \caption{Impulsive solutions of the model \eqref{eq:equation_1}-\eqref{eq:equation_2} for different initial conditions. In Figure $(g)$, the release amount is $u_k = 200$, with $\tau=7$ $(u_k<\eta(7))$, and in Figure $(h)$, the release amount is $u_k = 600$, with $\tau=14$ $\left(u_k<\sup\limits_{\tau \geq 0} \eta(\tau)\right)$. In both cases, even without satisfying the condition \eqref{eq:equation_44}, the $S_1$-free solution attains global stability. The dynamics of wild Aedes aegypti female mosquitoes $S_1$ are represented in blue, while those infected with Wolbachia $S_2$ are represented in red.}
+    \label{fig:4}
+\end{figure}
+
+These simulations provide a deeper understanding of the conditions that either ensure or compromise the system's stability. Furthermore, we observed that it is possible to release fewer infected females and still achieve global stability. However, condition \eqref{eq:equation_44} does ensure the global stability of the solution $(0, \bar{S}_2(t))$.
+
+Finally, we compared the simulation results with the theoretical analysis, confirming the validity of our results for the impulsive model studied. Additionally, we highlighted the need for an optimization strategy for the release process that minimizes intervention costs while ensuring the fixation of Wolbachia-infected females in the target area, a topic that will be further explored in the next subsection.
+
+\subsection{Impulsive optimal control solutions}
+
+ After ensuring the existence of a solution for the problem \eqref{eq:equation_46}-\eqref{eq:equation_49}, we used Gekko, an optimization package in Python widely used to solve problems involving dynamic programming, optimal control, and nonlinear optimization \cite{gekko}. 
+
+The following presents simulations of the problem $\eqref{eq:equation_46}-\eqref{eq:equation_49}$. As in the simulations from the previous subsection, $S_1$ represents the wild \textit{Aedes aegypti} females, and $S_2$ represents the females infected with the \textit{Wolbachia} bacterium. Using the parameters listed in Table $\eqref{tab:tab_1}$ and the constant $C = \frac{1}{200}$, we simulated four scenarios by varying the release interval $\tau$. The values of $\tau$ for each scenario are: $\tau = 7$ (Case 1), $\tau = 14$ (Case 2), $\tau = 21$ (Case 3), and $\tau = 30$ (Case 4).  
+
+For each case, the final intervention time $T$ also varies, taking the values $T = 300$, $T = 180$, $T = 100$, and $T = 70$. Additionally, for each $T$, we present the corresponding release amounts $u_k$ over time.  
+
+We conducted multiple simulations to thoroughly investigate the dynamics and identify the most effective strategies, comparing results across different release intervals $\tau$ and intervention times $T$. This approach aimed to determine, for each combination of $\tau$ and $T$, the optimal release strategy required to achieve the proposed objectives, which include minimizing costs and ensuring the dominance of the infected population $S_2$. 
+
+$\bullet$ \textbf{Case 1: $\tau = 7$}. In the first simulation case, we set the time interval between releases at $\tau = 7$. In Table \eqref{tab:tab_2}, we present the values obtained in this simulation, including the total sum of the released $u_k$ values and the minimum value of the functional for each of the four final times $T$ considered. Figure \eqref{fig:5} illustrates the dynamics of the wild mosquito female population $S_1$ (in blue) and the infected population $S_2$ (in red) over time for each of the final times considered, together with the corresponding values of the releases $u_k$. We observe that the maximum number of infected females released at a time may be smaller for a longer final time than other intervention periods, as the system has more time to converge to the desired solution.
+
+\begin{table}[h!]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\caption{Numerical optimization results for Case 1 ($\tau = 7$).}
+\begin{tabular}{ccc}
+\hline
+\textbf{$T$} & \textbf{$\sum u_k$} & \textbf{$\min J(u)$} \\ \hline
+300                       & 2949.52                                     & 14.75                                           \\ 
+180                       & 1243.07                                     & 6.22                                            \\ 
+100                       & 1126.62                                     & 5.63                                            \\ 
+70                        & 908.66                                      & 4.54                                            \\ \hline
+\end{tabular}
+\label{tab:tab_2}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\caption{Numerical optimization results for Case 2 ($\tau = 14$).}
+\begin{tabular}{ccc}
+\hline
+\textbf{$T$} & \textbf{$\sum u_k$} & \textbf{$\min J(u)$} \\ \hline
+300                       & 3604.23                                     & 18.02                                           \\ 
+180                       & 1677.15                                     & 8.39                                            \\ 
+100                       & 1109.34                                     & 5.55                                            \\ 
+70                        & 1110.13                                     & 5.55                                            \\ \hline
+\end{tabular}
+\label{tab:tab_3}
+\end{minipage}
+\end{table}
+
+$\bullet$ \textbf{Case 2: $\tau = 14$}. For the second simulation case, we choose the period releases at $\tau = 14$. Similar to Case 1, we present the results obtained in Table \eqref{tab:tab_3}, for each of the four final times $T$ considered. Figure \eqref{fig:6} shows the dynamics of the wild female population $S_1$ and the infected population $S_2$ over time for each of the final times considered, along with the corresponding values of the releases $u_k$. Compared to the first case, we observe that by increasing the release interval $\tau$, in most cases it becomes necessary to increase the maximum number of infected females released at a period so that the wild females remain below their survival threshold $K_b$. However, when comparing Cases 1 and 2 with $T=100$, we see that the total sum of the released infected females was smaller in Case 2, even with the increase in the maximum number released at a period.
+
+$\bullet$ \textbf{Case 3: $\tau = 21$}. In this case, Figure \eqref{fig:7} illustrates the dynamics of problem \eqref{eq:equation_46}-\eqref{eq:equation_49} with $\tau = 21$, and the results are summarized in Table \eqref{tab:tab_4}. Compared to the previous cases, we continue to observe an increase in the maximum number released per period. However, the relationship between the minimum value of the functional varies across the three cases. For example, in Case 3, for $T = 180$ and $T = 100$, the minimum values of the functional were $11.42$ and $6.47$, respectively, which were higher than those obtained in Cases 1 and 2. Conversely, for the other final times, the opposite trend was observed.
+
+\begin{table}[h!]
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\caption{Numerical optimization results for Case 3 ($\tau = 21$).}
+\begin{tabular}{ccc}
+\hline
+\textbf{$T$} & \textbf{$\sum u_k$} & \textbf{$\min J(u)$} \\ \hline
+300                       & 2918.42                                     & 14.59                                           \\ 
+180                       & 2283.66                                     & 11.42                                           \\ 
+100                       & 1294.69                                     & 6.47                                            \\ 
+70                        & 1106.70                                     & 5.53                                            \\ \hline
+\end{tabular}
+\label{tab:tab_4}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\caption{Numerical optimization results for Case 4 ($\tau = 30$).}
+\begin{tabular}{ccc}
+\hline
+\textbf{$T$} & \textbf{$\sum u_k$} & \textbf{$\min J(u)$} \\ \hline
+300                       & 3788.17                                     & 18.94                                           \\ 
+180                       & 2081.34                                     & 10.41                                           \\ 
+100                       & 1256.42                                     & 6.28                                            \\ 
+70                        & 873.47                                      & 4.37                                            \\ \hline
+\end{tabular}
+\label{tab:tab_5}
+\end{minipage}
+\end{table}
+
+$\bullet$ \textbf{Case 4: $\tau = 30$}. We consider $\tau = 30$ for the final case, with the numerical results summarized in \eqref{tab:tab_5}. Figure \eqref{fig:8} illustrates the dynamics of problem \eqref{eq:equation_46}-\eqref{eq:equation_49}. Compared to previous cases, for $T = 300$, this scenario required the largest total number of infected females to be released, with a total of 3788.17, while Case 3 showed the smallest total release. Furthermore, in Case 4 with $T = 70$, we observe that only a single release of $u_k = 873.47$ was sufficient to bring the wild female population to its survival threshold, ensuring the fixation of infected females in the target location.
+
+We can also compare the results for $T = 180$, where the highest number of releases was observed for $\tau = 21$, while the lowest occurs for $\tau = 7$.
+
+\begin{figure}[H]
+    \centering
+    % Primeira linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \textbf{Optimal Control $u^*$ for Case 1}
+        \includegraphics[width=\linewidth]{Figure/Figure_9.eps}
+        \par\vspace{1pt} $(a_1)$ $\tau = 7$, $T = 300$ 
+        %\caption*{$(a_1)$ $\tau = 7$, $T = 300$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \textbf{Optimal Trajectory for Case 1}
+        \includegraphics[width=\linewidth]{Figure/Figure_10.eps}
+        \par\vspace{1pt} $(a_2)$ $\tau = 7$, $T = 300$ 
+        %\caption*{$(a_2)$ $\tau = 7$, $T = 300$}
+    \end{subfigure}
+    \\[10pt] % Espaçamento entre linhas
+    
+    % Segunda linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_11.eps}
+        \par\vspace{1pt} $(a_3)$ $\tau = 7$, $T = 180$ 
+        %\caption*{$(a_3)$ $\tau = 7$, $T = 180$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_12.eps}
+        \par\vspace{1pt} $(a_4)$ $\tau = 7$, $T = 180$ 
+        %\caption*{$(a_4)$ $\tau = 7$, $T = 180$}
+    \end{subfigure}
+    \\[10pt]
+    
+    % Terceira linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_13.eps}
+        \par\vspace{1pt} $(a_5)$ $\tau = 7$, $T = 100$ 
+        %\caption*{$(a_5)$ $\tau = 7$, $T = 100$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_14.eps}
+        \par\vspace{1pt} $(a_6)$ $\tau = 7$, $T = 100$
+        %\caption*{$(a_6)$ $\tau = 7$, $T = 100$}
+    \end{subfigure}
+    \\[10pt]
+    
+    % Quarta linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_15.eps}
+        \par\vspace{1pt} $(a_7)$ $\tau = 7$, $T = 70$
+        %\caption*{$(a_7)$ $\tau = 7$, $T = 70$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_16.eps}
+        \par\vspace{1pt} $(a_8)$ $\tau = 7$, $T = 70$
+        %\caption*{$(a_8)$ $\tau = 7$, $T = 70$}
+    \end{subfigure}
+
+    \hspace{1pt}\caption{Optimal controls and trajectories for Case 1 with initial condition $(K_1,0)$.}
+    \label{fig:5}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    % Primeira linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \textbf{Optimal Control $u^*$ for Case 2}
+        \includegraphics[width=\linewidth]{Figure/Figure_17.eps}
+        \par \vspace{1pt} $(b_1)$ $\tau = 14$, $T = 300$
+        %\caption*{$(b_1)$ $\tau = 14$, $T = 300$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \textbf{Optimal Trajectory for Case 2}
+        \includegraphics[width=\linewidth]{Figure/Figure_18.eps}
+        \par \vspace{1pt} $(b_2)$ $\tau = 14$, $T = 300$
+        %\caption*{$(b_2)$ $\tau = 14$, $T = 300$}
+    \end{subfigure}
+    \\[10pt] % Espaçamento entre linhas
+    
+    % Segunda linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_19.eps}
+        \par \vspace{1pt} $(b_3)$ $\tau = 14$, $T = 180$
+        %\caption*{$(b_3)$ $\tau = 14$, $T = 180$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_20.eps}
+        \par \vspace{1pt} $(b_4)$ $\tau = 14$, $T = 180$
+        %\caption*{$(b_4)$ $\tau = 14$, $T = 180$}
+    \end{subfigure}
+    \\[10pt]
+    
+    % Terceira linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_21.eps}
+        \par \vspace{1pt} $(b_5)$ $\tau = 14$, $T = 100$
+        %\caption*{$(b_5)$ $\tau = 14$, $T = 100$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_22.eps}
+        \par \vspace{1pt} $(b_6)$ $\tau = 14$, $T = 100$
+        %\caption*{$(b_6)$ $\tau = 14$, $T = 100$}
+    \end{subfigure}
+    \\[10pt]
+    
+    % Quarta linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_23.eps}
+        \par \vspace{1pt} $(b_7)$ $\tau = 14$, $T = 70$
+        %\caption*{$(b_7)$ $\tau = 14$, $T = 70$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_24.eps}
+        \par \vspace{1pt} $(b_8)$ $\tau = 14$, $T = 70$
+        %\caption*{$(b_8)$ $\tau = 14$, $T = 70$}
+    \end{subfigure}
+
+    \hspace{1pt}\caption{Optimal controls and trajectories for Case 2 with initial condition $(K_1,0)$.}
+    \label{fig:6}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    % Primeira linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \textbf{Optimal Control $u^*$ for Case 3}
+        \includegraphics[width=\linewidth]{Figure/Figure_25.eps}
+        \par \vspace{1pt} $(c_1)$ $\tau = 21$, $T = 300$
+        %\caption*{$(c_1)$ $\tau = 21$, $T = 300$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \textbf{Optimal Trajectory for Case 3}
+        \includegraphics[width=\linewidth]{Figure/Figure_26.eps}
+        \par \vspace{1pt} $(c_2)$ $\tau = 21$, $T = 300$
+        %\caption*{$(c_2)$ $\tau = 21$, $T = 300$}
+    \end{subfigure}
+    \\[10pt] % Espaçamento entre linhas
+    
+    % Segunda linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_27.eps}
+        \par \vspace{1pt} $(c_3)$ $\tau = 21$, $T = 180$
+        %\caption*{$(c_3)$ $\tau = 21$, $T = 180$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_28.eps}
+        \par \vspace{1pt} $(c_4)$ $\tau = 21$, $T = 180$
+        %\caption*{$(c_4)$ $\tau = 21$, $T = 180$}
+    \end{subfigure}
+    \\[10pt]
+    
+    % Terceira linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_29.eps}
+        \par \vspace{1pt} $(c_5)$ $\tau = 21$, $T = 100$
+        %\caption*{$(c_5)$ $\tau = 21$, $T = 100$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_30.eps}
+        \par \vspace{1pt} $(c_6)$ $\tau = 21$, $T = 100$
+        %\caption*{$(c_6)$ $\tau = 21$, $T = 100$}
+    \end{subfigure}
+    \\[10pt]
+    
+    % Quarta linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_31.eps}
+        \par \vspace{1pt} $(c_7)$ $\tau = 21$, $T = 70$
+        %\caption*{$(c_7)$ $\tau = 21$, $T = 70$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_32.eps}
+        \par \vspace{1pt} $(c_8)$ $\tau = 21$, $T = 70$
+        %\caption*{$(c_8)$ $\tau = 21$, $T = 70$}
+    \end{subfigure}
+
+    \hspace{1pt}\caption{Optimal controls and trajectories for Case 3 with initial condition $(K_1,0)$.}
+    \label{fig:7}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    % Primeira linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \textbf{Optimal Control $u^*$ for Case 4}
+        \includegraphics[width=\linewidth]{Figure/Figure_33.eps}
+        \par \vspace{1pt} $(d_1)$ $\tau = 30$, $T = 300$
+        %\caption*{$(d_1)$ $\tau = 30$, $T = 300$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \textbf{Optimal Trajectory for Case 4}
+        \includegraphics[width=\linewidth]{Figure/Figure_34.eps}
+        \par \vspace{1pt} $(d_2)$ $\tau = 30$, $T = 300$
+        %\caption*{$(d_2)$ $\tau = 30$, $T = 300$}
+    \end{subfigure}
+    \\[10pt] % Espaçamento entre linhas
+    
+    % Segunda linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_34.eps}
+        \par \vspace{1pt} $(d_3)$ $\tau = 30$, $T = 180$
+        %\caption*{$(d_3)$ $\tau = 30$, $T = 180$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_36.eps}
+        \par \vspace{1pt} $(d_4)$ $\tau = 30$, $T = 180$
+        %\caption*{$(d_4)$ $\tau = 30$, $T = 180$}
+    \end{subfigure}
+    \\[10pt]
+    
+    % Terceira linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_37.eps}
+        \par \vspace{1pt} $(d_5)$ $\tau = 30$, $T = 100$
+        %\caption*{$(d_5)$ $\tau = 30$, $T = 100$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_38.eps}
+        \par \vspace{1pt} $(d_6)$ $\tau = 30$, $T = 100$
+        %\caption*{$(d_6)$ $\tau = 30$, $T = 100$}
+    \end{subfigure}
+    \\[10pt]
+    
+    % Quarta linha de figuras
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_39.eps}
+        \par \vspace{1pt} $(d_7)$ $\tau = 30$, $T = 70$
+        %\caption*{$(d_7)$ $\tau = 30$, $T = 70$}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure/Figure_40.eps}
+        \par \vspace{1pt} $(d_8)$ $\tau = 30$, $T = 70$
+        %\caption*{$(d_8)$ $\tau = 30$, $T = 70$}
+    \end{subfigure}
+
+    \hspace{1pt}\caption{Optimal controls and trajectories for Case 4 with initial condition $(K_1,0)$.}
+    \label{fig:8}
+\end{figure}
+
+These simulations showed a strong relationship between the impulse periods $\tau$, the amount to be released $u_k$, and the final time proposed. The more spaced out these periods are, the greater the number of infected females that need to be released at a time. However, longer intervals between releases and more individuals released per event do not necessarily result in a higher cost for the functional.
+
+This underscores the importance of conducting simulations with multiple cases, varying parameters such as $\tau$ and $T$, to derive different optimal strategies. These strategies can then be compared, allowing us to determine the best one to apply, depending on existing conditions, such as the total time available and the number of infected females available for implementing the control approach. In conclusion, the simulation results demonstrate the effectiveness of the optimal control strategy in releasing females infected with Wolbachia. 
+
+\section{Final Remarks}
+\label{sec:conclusions}
+This study presents a mathematical framework to explore the dynamics of two competing species under impulsive release strategies. By adapting an impulsive differential equation model, we demonstrate the potential of periodic interventions in ecological systems, particularly in reducing the population of one species $S_1$ through strategic competition with another species $S_2$.
+
+Theoretical analysis ensured that the model is well-posed, guaranteeing the existence and uniqueness of the free solution of $S_1$ under specific conditions. Furthermore, we derive a sufficient condition for impulsive releases of $S_2$, achieving the global stability of the desired solution and providing a solid basis for ecological control strategies.
+
+The application of optimal control allows the development of customized intervention strategies that consider real-world constraints such as costs, logistics, and operational feasibility. Numerical simulations highlighted the efficiency of the impulsive strategy, highlighting the importance of adapting release schedules to the ecological context.
+
+This work highlights the relevance of mathematical modeling and control theory in addressing ecological challenges. Future research could explore extending these methods to more complex environmental systems, working with other models that can be applied to species that explicitly depend on factors such as temperature, humidity, and pesticides (or insecticides). These advances could further improve the applicability and effectiveness of impulsive intervention strategies in ecological control.
+
+\appendix
+\section*{Appendix}
+\section{Proof of Theorem \eqref{thm:thm_3}} 
+\label{appendix:A}
+\begin{proof}
+First, we will show that $\Bar{Z}_2(t)$ is the unique positive $\tau$-periodic solution of system \eqref{eq:equation_15}. Let 
+\begin{equation}\label{eq:equation_52}
+    Z_2(t) = \dfrac{c K_2 e^{r_2 t}}{ce^{r_2 t}-1},
+\end{equation}be the solution of 
+\begin{eqnarray}\label{eq:equation_53}
+    \dfrac{dZ_2}{dt}=&Z_2\left(\psi_2-\dfrac{r_2}{K_2}Z_2\right)-\delta_2Z_2,\mbox{   } t \neq k\tau, \ k \geq 0 
+\end{eqnarray}the first equation of \eqref{eq:equation_15}, where $c \in \mathbb{R}$ is a constant to be determined, which is associated with the initial conditions of the problem. 
+For $t = k\tau$, $k\geq 0$ we have $Z_2(k\tau^+)$ the initial value at time $k\tau$, and
+\begin{equation}\label{eq:equation_54}
+    c= \dfrac{Z_2(k\tau^+)e^{-r_2 k\tau^+}}{Z_2(k\tau^+)-K_2},
+\end{equation}
+then,
+\begin{equation}\label{eq:equation_55}
+Z_2(t) = \dfrac{K_2 Z_2(k\tau^+) e^{r_2 (t-k\tau)}}{Z_2(k\tau^+)\left(e^{r_2 (t-k\tau)}     -1\right)+K_2} \mbox{, }  k\tau < t \leq (k+1)\tau, \mbox{ }k \geq 0,
+\end{equation}
+is the solution of system \eqref{eq:equation_15} between the pulses.
+
+In moments of pulses, when $t = (k+1)\tau$, $k \geq 0$, from the second equation of \eqref{eq:equation_15} with $u_k \in U$, we have the following difference equation, 
+\begin{eqnarray}\label{eq:equation_56}\nonumber
+    Z_2((k+1)\tau^+) = & Z_2((k+1)\tau) + u_k\\
+    = &\dfrac{K_2 Z_2(k\tau^+) e^{r_2 ((k+1)\tau-k\tau)}}{Z_2(k\tau^+)\left(e^{r_2 ((k+1)\tau-k\tau)} -1\right)+K_2} + u_k\\\nonumber
+    = &\dfrac{K_2 Z_2(k\tau^+) e^{r_2 \tau}}{Z_2(k\tau^+)\left(e^{r_2 \tau} -1\right)+K_2} + u_k, \nonumber
+\end{eqnarray}
+which is a recursive relation between $Z_2((k+1)\tau)$ and $Z_2(k\tau)$. We can rewrite it as
+\begin{equation}\label{eq:equation_57}
+    Z_2^{k+1} = \dfrac{K_2 Z_2^k e^{r_2 \tau}}{Z_2^k\left(e^{r_2 \tau} -1\right)+K_2} + u_k,
+\end{equation}where $Z_2^k = Z_2(k \tau)$.
+Set, \begin{align}
+    h(Z_2) = \dfrac{K_2 Z_2 e^{r_2 \tau}}{Z_2\left(e^{r_2 \tau} -1\right)+K_2} + u_k.
+\end{align}and notice that \eqref{eq:equation_57} has a single positive equilibrium point, since for 
+\begin{align}\label{eq:equation_58}
+    h(Z_2) = Z_2,
+\end{align}
+the condition to determine the equilibrium point of the recursive equation \eqref{eq:equation_57}, which is $\tau$-periodic. Doing some algebraic manipulations we have,
+\begin{equation}\label{eq:equation_59}
+    Z_2^2-(u_k+K_2)Z_2-\dfrac{u_kK_2}{e^{r_2 \tau}-1} = 0,
+\end{equation}
+which has two real solutions, but only one positive, given by
+\begin{align}\label{eq:equation_60}
+    Z_2^{+} = \dfrac{1}{2}\left[(u_k+K_2)+\sqrt{(u_k+K_2)^2+4\dfrac{u_kK_2}{e^{r_2 \tau}-1}}\right], \,k \geq 0.
+\end{align}Then, substituting $Z_2^+$ into \eqref{eq:equation_55} we have  
+\begin{align}\label{eq:equation_61}
+    \Bar{Z_2}(t) &= \dfrac{K_2 Z_2^+ e^{r_2 (t-k\tau)}}{Z_2^+\left(e^{r_2 (t-k\tau)} -1\right)+K_2} \mbox{, }  k\tau < t \leq (k+1)\tau, \mbox{ }k \geq 0,
+\end{align}which is the unique positive $\tau$-periodic solution of the system \eqref{eq:equation_15}.
+
+Now, we will show that $\Bar{Z_2}(t)$ is globally asymptotically stable, for this we will show that $Z_2^+$ is globally asymptotically stable, using the result present in \cite{CULL1981} which says that if the difference equation $$Z_2^{k+1} = h(Z_2 ^k),$$ has only one positive equilibrium point and if 
+\begin{equation}\label{eq:equation_62}
+    Z_2<h(Z_2)<Z_2^+ \text{ for } 0<Z_2<Z_2^+ \text{ and } Z_2^+<h(Z_2)<Z_2 \text{ for } Z_2^+<Z_2,
+\end{equation}then $Z_2^+$ is a globally asymptotically stable equilibrium and that for every positive initial condition, $S_2(0)$, $Z_2^k$ monotonically approaches $Z_2^+$.
+
+We have already seen that $Z_2^+$ is the only positive equilibrium point of \eqref{eq:equation_57}, so it remains to be shown that the condition \eqref{eq:equation_62} is satisfied. Note that,
+\begin{align}\label{eq:equation_63}
+     h(Z_2) < Z_2^+ &\Longleftrightarrow \dfrac{K_2 Z_2 e^{r_2 \tau}}{Z_2\left(e^{r_2 \tau} -1\right)+K_2} + u_k < \dfrac{K_2 Z_2^+ e^{r_2 \tau}}{Z_2^+\left(e^{r_2 \tau} -1\right)+K_2} + u_k\\\nonumber
+     &\Longleftrightarrow \dfrac{K_2 Z_2 e^{r_2 \tau}}{Z_2\left(e^{r_2 \tau} -1\right)+K_2} < \dfrac{K_2 Z_2^+ e^{r_2 \tau}}{Z_2^+\left(e^{r_2 \tau} -1\right)+K_2}\\\nonumber
+     &\Longleftrightarrow K_2 Z_2 e^{r_2 \tau}\left(Z_2^+\left(e^{r_2 \tau} -1\right)+K_2\right)< K_2 Z_2^+ e^{r_2 \tau}\left(Z_2\left(e^{r_2 \tau} -1\right)+K_2\right)\\\nonumber
+     &\Longleftrightarrow K_2 e^{r_2 \tau}K_2 \left(Z_2 - Z_2^+\right)<0\\\nonumber
+    &\Longleftrightarrow Z_2<Z_2^+.
+\end{align}therefore, $h(Z_2)<Z_2^+$ if $0<Z_2<Z_2^+$. Similarly, we can show that $Z_2^+<h(Z_2)$ if $Z_2^+<Z_2$. With this, we can conclude that $Z_2^+$ is a globally asymptotically stable equilibrium point for the equation \eqref{eq:equation_57}. It implies that the corresponding periodic solution $\Bar{Z_2}(t)$ of \eqref{eq:equation_15} is globally asymptotically stable.
+\end{proof}
+
+\section{Proof of Lemma \eqref{lem:lem_1}} 
+\label{appendix:B}
+\begin{proof}
+    From the first equation of system \eqref{eq:equation_1}-\eqref{eq:equation_2},
+\begin{equation}\label{eq:equation_64}
+    \dfrac{dS_1}{dt}(t) = S_1(t)\left(\psi_1-\dfrac{r_1}{K_1}(S_1(t)+S_2(t))\right) \left(\dfrac{S_1(t)}{K_0} - 1 \right) - \delta_1 S_1(t)
+\end{equation}which does not include impulsive releases, we will separate our study into two cases due to the critical depensation term $\left(\dfrac{S_1(t)}{K_0} - 1 \right)$.
+\begin{itemize}
+    \item[\textbf{a.}] If $S_1(t)\leq K_0$, then $\left(\dfrac{S_1(t)}{K_0} - 1 \right)\leq 0.$ Soon, $K_0$ is an upper bound of $S_1(t)$, for all $t\geq0$.
+    \item[\textbf{b.}] If $S_1(t)>K_0$, then $\left(\dfrac{S_1(t)}{K_0} - 1 \right)>0.$ We have,
+\begin{eqnarray}\label{eq:equation_65}\nonumber
+   \dfrac{dS_1}{dt}(t) &=& S_1(t)\left[\left(\psi_1 -\dfrac{r_1}{K_1}S_1(t)\right)\left(\dfrac{S_1(t)}{K_0} - 1 \right)-\dfrac{r_1}{K_1}S_2(t)\left(\dfrac{S_1(t)}{K_0} - 1 \right)-\delta_1\right]\\
+   &\leq&S_1(t)\left[\left(\psi_1 -\dfrac{r_1}{K_1}S_1(t)\right)\left(\dfrac{S_1(t)}{K_0} - 1 \right)-\delta_1\right],
+\end{eqnarray}and we can use the following comparison differential equation
+\begin{align}
+\begin{matrix}\label{eq:equation_66}
+\dfrac{dy}{dt}(t)=& y(t)\left[\left(\psi_1 -\dfrac{r_1}{K_1}y(t)\right)\left(\dfrac{y(t)}{K_0} - 1 \right)-\delta_1\right]\\
+y(0)=&\hspace{-5.5cm}S_1(0),
+\end{matrix}
+\end{align}which has three equilibrium points, $y(t) = 0$ and the solutions of \begin{equation}\label{eq:equation_67}
+    \left[\left(\psi_1 -\dfrac{r_1}{K_1}y(t)\right)\left(\dfrac{y(t)}{K_0} - 1 \right)-\delta_1\right] = 0.
+\end{equation}
+For \eqref{eq:equation_67} we have,
+\begin{equation}\label{eq:equation_68}
+-\dfrac{r_1}{K_1K_0}y^2 + \dfrac{(\psi_1K_1+r_1K_0)}{K_1K_0}y-(\delta_1+\psi_1) = 0,    
+\end{equation}
+solving the quadratic equation above,
+\begin{equation}\label{eq:equation_69}
+    \Delta = \dfrac{(\psi_1K_1+r_1K_0)}{(K_1K_0)^2}^2 - \dfrac{4r_1K_0K_1}{(K_1K_0)^2}(\delta_1+\psi_1),
+\end{equation}
+then, we find two solutions 
+\begin{equation}\label{eq:equation_70}
+     y_1 =\dfrac{\psi_1K_1+r_1K_0 - \sqrt{(\psi_1K_1+r_1K_0)^2 -4r_1K_0K_1(\delta_1+\psi_1)}}{2r_1},
+\end{equation} and
+\begin{equation}\label{eq:equation_71}
+    y_2 = \dfrac{\psi_1K_1+r_1K_0 + \sqrt{(\psi_1K_1+r_1K_0)^2 -4r_1K_0K_1(\delta_1+\psi_1)}}{2r_1},
+\end{equation} but following the naming in \cite{Campo2017} we have, $y_1 = K_b$ and $y_2 = K_*$. Since, $0<K_b<K_*$ we can analyze the sign of the right side of \eqref{eq:equation_65} among these points,
+\begin{eqnarray}\label{eq:equation_72}
+    \left \{ \begin{matrix} \dfrac{dy}{dt}<0, & \mbox{if }& 0<y<K_b, \\ \dfrac{dy}{dt}>0, & \mbox{if }&K_b<y<K_*, \\ \dfrac{dy}{dt}<0, & \mbox{if }&y>K_*. \end{matrix} \right. 
+\end{eqnarray}Therefore, for the initial condition $y(0) = S_1(0)$ we have,
+\begin{itemize}
+    \item[i)] if $0\leq S_1(0) < K_b$, then $y(t)$ decreases down to $0$ in finite time as $t$ increases;
+    \item[ii)] if $K_b<S_1(0)<K_*$, then $y(t)$ increases up to $K_*$ as $t \to \infty$;
+    \item[iii)] if $S_1(0)>K_*$, then $y(t)$ decreases down to $K_*$ as $t \to \infty$;
+\end{itemize} 
+As a result, as following in \cite{Campo2017} given a population of species $S_1$ large enough to survive, that is, $S_1(0) > K_b$, $K_*$ is the steady state population and $K_b$ is the threshold for survival. With this, we can conclude that $K_*$ is an upper limit for $y(t)$ and since $\dfrac{dS_1}{dt}(t) \leq \dfrac{dy}{dt}(t)$ and $S_1(0) = y(0)$, by the Comparison Theorem, we have that $S_1(t)$ is also upper bounded by $K_*$. As shown in \cite{Campo2017}, that $K_0 < K_1 < K_*$, we have $S_1(t) \leq K_*$, $\forall t \geq 0$.
+\end{itemize}
+\end{proof}
+
+\section{Proof of Theorem \eqref{thm:thm_5}} 
+\label{appendix:C}
+
+\begin{proof}
+Let $(0,\Bar{S}_2(t))$ be the $\tau$-periodic solution of the system \eqref{eq:equation_1}-\eqref{eq:equation_2}. Consider a small perturbation $p(t)$ and $q(t)$ of the solution, that is,
+\begin{equation}\label{eq:equation_73}
+    S_1(t) = p(t) \mbox{ and } S_2(t) = \Bar{S_2}(t) + q(t),
+\end{equation}
+then, we can to linearize the equations of system \eqref{eq:equation_1} around the solution $(0,\Bar{S_2}(t))$ to use Floquet's Theorem \cite{Bainov1993}. Thus, we have the following linearized system:
+\begin{subequations}
+\begin{align}
+&\left.
+\begin{cases}\label{eq:equation_74}
+       \dfrac{dp(t)}{dt} =p(t)\left( -\psi_1+\dfrac{r_1}{K_1}\Bar{S_2}(t)\right)-p(t)\delta_1,\\
+       \dfrac{dq(t)}{dt} =q(t)\left( r_2-2\dfrac{r_2}{K_2}\Bar{S_2}(t) \right) -p(t)\dfrac{r_2}{K_2}\Bar{S_2}(t),
+\end{cases}
+\right.\mbox{ if } t \neq k\tau, k \geq 0\\
+&\left.
+\begin{cases}\label{eq:equation_75}  
+        p(k\tau^+) = p(k\tau), \\
+        q(k\tau^+) = q(k\tau),
+\end{cases}
+\right.\mbox{ if } t = k\tau, k \geq 0
+\end{align}
+\end{subequations}
+with $\phi(t)$ being the fundamental matrix of \eqref{eq:equation_74}, which must satisfy 
+\begin{align}\label{eq:equation_76}
+\begin{cases}
+\dfrac{d\phi}{dt} = A\phi(t)\\
+\phi(0) = I_d,
+\end{cases}
+\end{align}
+where 
+\begin{eqnarray}\label{eq:equation_77}
+A&=& \begin{pmatrix}
+-\psi_1+\dfrac{r_1}{K_1}\Bar{S_2}(t)-\delta_1 & 0  \\
+-\dfrac{r_2}{K_2}\Bar{S_2}(t) & r_2-2\dfrac{r_2}{K_2}\Bar{S_2}(t)\\
+\end{pmatrix}.
+\end{eqnarray}
+Also for the \eqref{eq:equation_74} system we have its monodromy matrix 
+\begin{eqnarray}\label{eq:equation_78}
+M&=& \begin{pmatrix}
+1 & 0  \\
+0 & 1\\
+\end{pmatrix}\phi(\tau) = \phi(\tau).
+\end{eqnarray}
+Solving \eqref{eq:equation_76} we have
+\begin{eqnarray}\label{eq:equation_79}
+    \phi(\tau) &=& \phi(0)\exp{\left(\int_0^{\tau}A\,dt\right)}\\
+    &=& \begin{pmatrix}
+1 & 0  \\
+0 & 1\\
+\end{pmatrix}\exp{\begin{pmatrix}
+\int_0^{\tau}\left(\dfrac{r_1}{K_1}\Bar{S_2}(t)-(\psi_1+\delta_1)\right)\,dt & 0  \\\nonumber
+\int_0^{\tau}\left(-\dfrac{r_2}{K_2}\Bar{S_2}(t)\right)\,dt & \int_0^{\tau}\left(r_2-2\dfrac{r_2}{K_2}\Bar{S_2}(t)\right)\,dt\\
+\end{pmatrix}}.   
+\end{eqnarray}
+According to Floquet's Theorem, the solution $(0,\Bar{S_2}(t))$ is asymptotically stable if, $e^{\lambda_1}$ and $e^{\lambda_2}$ have absolute values less than one, where $\lambda_1$ and $\lambda_2$ are the eigenvalues of the matrix
+\begin{equation}\label{eq:equation_80}
+    \int_0^{\tau}A\,dt.
+\end{equation}
+With this,
+\begin{eqnarray}\label{eq:equation_81}
+    \lambda_1 = \int_0^{\tau}\left(\dfrac{r_1}{K_1}\Bar{S_2}(t)-(\psi_1+\delta_1)\right)\,dt \,\text{ and }\,\lambda_2 = \int_0^{\tau}\left(r_2-2\dfrac{r_2}{K_2}\Bar{S_2}(t)\right)\,dt.
+\end{eqnarray}
+Solving $\int_0^{\tau}\Bar{S_2}(t)\,dt$ we have
+\begin{align}\label{eq:equation_82}\nonumber
+    \int_0^{\tau}\Bar{S_2}(t)\,dt =& \int_0^{\tau}\dfrac{K_2 Z_2^{+} e^{r_2 (t-k\tau)}}{Z_2^{+}\left(e^{r_2 (t-k\tau)} -1\right)+K_2}\,dt,\\
+    =&\dfrac{K_2}{r_2}\left[\ln{\left(Z_2^{+}e^{r_2 t}+(K_2-Z_2^{+}\right)}\right]_0^{\tau},\\
+    =&\dfrac{K_2}{r_2}\ln\left[\dfrac{Z_2^{+}\left(e^{r_2 \tau} -1\right)}{K_2} + 1\right].\nonumber
+\end{align}
+Hence,
+\begin{equation}\label{eq:equation_83}
+    \lambda_1 = -(\psi_1+\delta_1) \tau +\dfrac{K_2r_1}{K_1r_2}\ln\left[\dfrac{Z_2^{+}\left(e^{r_2 \tau} -1\right)}{K_2} + 1\right],
+\end{equation}
+and,
+\begin{equation}\label{eq:equation_84}
+    \lambda_2 = r_2 \tau -2\ln\left[\dfrac{Z_2^{+}\left(e^{r_2 \tau} -1\right)}{K_2} + 1\right].
+\end{equation}
+In order for $|e^{\lambda_1}|<1$ and $|e^{\lambda_2}|<1$ we must have $\lambda_1<0$ and $\lambda_2<0.$ Thus,
+\begin{itemize}
+    \item $\lambda_1<0$, if 
+    \begin{equation}\label{eq:equation_85}
+    \ln\left[\dfrac{Z_2^{+}\left(e^{r_2 \tau} -1\right)}{K_2} + 1\right] < \dfrac{K_1r_2}{K_2r_1}(\psi_1+\delta_1)\tau.
+\end{equation}
+Observe that $\psi_1+\delta_1 < K_2$ and $r_2<r_1$ is one of the conditions imposed in the model, then
+\begin{equation}\label{eq:equation_86}
+    \dfrac{Z_2^{+}}{K_2} < \dfrac{\left(e^{K_1\tau} -1\right)}{\left(e^{r_2 \tau} -1\right)},
+\end{equation}
+which always happens, since the exponential of $K_1 \tau$ dominates this inequality.
+    \item $\lambda_2<0$, if
+    \begin{equation}\label{eq:equation_87}
+    \dfrac{r_2}{2} \tau < \ln\left[\dfrac{Z_2^{+}\left(e^{r_2 \tau} -1\right)}{K_2} + 1\right],
+\end{equation}that is,
+\begin{equation}\label{eq:equation_88}
+    \dfrac{\left(e^{\frac{r_2}{2} \tau} -1\right)}{\left(e^{r_2 \tau} -1\right)}<\dfrac{Z_2^{+}}{K_2},
+\end{equation}
+which also always happens, since $\dfrac{Z_2^{+}}{K_2} >1$ and $\dfrac{\left(e^{\frac{r_2}{2} \tau} -1\right)}{\left(e^{r_2 \tau} -1\right)} <1$.
+\end{itemize}
+
+Therefore, the $S_1$-free $\tau$-periodic solution $(0,\Bar{S_2}(t))$ of system \eqref{eq:equation_1}-\eqref{eq:equation_2} is locally asymptotically stable.
+\end{proof}
+
+\section*{Acknowledgments}
+J.C.S.A. thanks CAPES (Finance Code 001) for the scholarship. C.E.S. acknowledges support by FEEI-PROCIENCIA-CONACYT-PRONII.
+
+
+\bibliography{references}
+
+
+\bibliographystyle{abbrv}
+
+
+\end{document}
+

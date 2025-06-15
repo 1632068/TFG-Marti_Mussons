@@ -1,0 +1,177 @@
+\definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
+\newcommand{\ke}[1]{\color{purple} #1 \color{black}}
+\newcommand{\red}[1]{\color{red} #1 \color{black}}
+%\usepackage{stackengine}
+%\newcommand\barb[1]{\stackunder[1.2pt]{$#1$}{\rule{.8ex}{.075ex}}}
+
+\newcommand{\IND}{\mathbf{1}}
+%%%%%mathcal%%%%%%%%
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cL}{\mathcal{L}}
+%%%%scr%%%%%
+\newcommand{\scrA}{\mathscr{A}}
+\newcommand{\scrE}{\mathscr{E}}
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrH}{\mathscr{H}}
+\newcommand{\scrI}{\mathscr{I}}
+\newcommand{\scrU}{\mathscr{U}}
+\newcommand{\scrV}{\mathscr{V}}
+\newcommand{\scrP}{\mathscr{P}}
+\newcommand{\scrL}{\mathscr{L}}
+%%%%mathbbletters%%%%%
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbV}{\mathbb{V}}
+
+%%%%%boldletters%%%%%
+\newcommand{\bd}{\mathbf{d}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bg}{\mathbf{g}}
+\newcommand{\bh}{\mathbf{h}}
+\newcommand{\bt}{\mathbf{t}}
+\newcommand{\bff}{\mathbf{f}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bY}{\mathbf{Y}}
+%%%%%miscellanea%%%%%
+\newcommand{\De}{\mathrm{d}}
+
+%%%%%%hat%%%%%%
+\newcommand{\hP}{\hat{P}}
+%%%rm%%%%%%%%%%
+\newcommand{\rmH}{\mathrm{H}}
+\newcommand{\rmI}{\mathrm{I}}
+\newcommand{\rmP}{\mathrm{P}}
+\newcommand{\rmQ}{\mathrm{Q}}
+\newcommand{\rmR}{\mathrm{R}}
+\newcommand{\rme}{\mathrm{e}}
+%%%%%%bm%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bmX}{\bm{X}}
+\newcommand{\bmY}{\bm{Y}}
+\newcommand{\bmC}{\bm{C}}
+\newcommand{\bmL}{\bm{L}}
+\newcommand{\bmZ}{\bm{Z}}
+\newcommand{\bmu}{\bm{u}}
+\newcommand{\bmw}{\bm{w}}
+\newcommand{\bmf}{\bm{f}}
+\newcommand{\bmQ}{\bm{Q}}
+
+%%% mathsf
+\def\msi{\mathsf{I}}
+\def\msa{\mathsf{A}}
+\def\tmsa{\tilde{\msa}}
+\def\msd{\mathsf{D}}
+\def\msz{\mathsf{Z}}
+\def\msk{\mathsf{K}}
+\def\mss{\mathsf{S}}
+\def\msn{\mathsf{N}}
+\def\msat{\tilde{\mathsf{A}}}
+\def\msb{\mathsf{B}}
+\def\msc{\mathsf{C}}
+\def\mse{\mathsf{E}}
+\def\msf{\mathsf{F}}
+\def\mso{\mathsf{o}}
+\def\msg{\mathsf{G}}
+\def\msh{\mathsf{H}}
+\def\msm{\mathsf{M}}
+\def\msu{\mathsf{U}}
+\def\msv{\mathsf{V}}
+\def\msr{\mathsf{R}}
+\newcommand{\msff}[2]{\mathsf{F}_{#1}^{#2}}
+\def\msp{\mathsf{P}}
+\def\msq{\mathsf{Q}}
+\def\msx{\mathsf{X}}
+\def\msy{\mathsf{Y}}
+
+
+\DeclareMathOperator{\tr}{tr}
+
+
+
+
+% Operands
+\newcommand{\absolute}[1]{\left\vert #1 \right\vert}
+\newcommand{\abs}[1]{\left\vert #1 \right\vert}
+\newcommand{\absLigne}[1]{\vert #1 \vert}
+\newcommand{\tvnorm}[1]{\| #1 \|_{\mathrm{TV}}}
+\newcommand{\tvnormEq}[1]{\left \| #1 \right \|_{\mathrm{TV}}}
+\newcommandx{\Vnorm}[2][1=V]{\| #2 \|_{#1}}
+\newcommandx{\norm}[2][1=]{\ifthenelse{\equal{#1}{}}{\left\Vert #2 \right\Vert}{\left\Vert #2 \right\Vert^{#1}}}
+\newcommandx{\normLigne}[2][1=]{\ifthenelse{\equal{#1}{}}{\Vert #2 \Vert}{\Vert #2\Vert^{#1}}}
+\newcommand{\crochet}[1]{\left\langle#1 \right\rangle}
+\newcommand{\parenthese}[1]{\left(#1 \right)}
+\newcommand{\parentheseLigne}[1]{(#1 )}
+\newcommand{\parentheseDeux}[1]{\left[ #1 \right]}
+\newcommand{\defEns}[1]{\left\lbrace #1 \right\rbrace }
+\newcommand{\defEnsLigne}[1]{\lbrace #1 \rbrace }
+\newcommand{\defEnsPoint}[1]{\left\lbrace #1 \right. }
+\newcommand{\defEnsPointDeux}[1]{\left. #1 \right  \rbrace }
+\newcommand{\defEnsL}[1]{\left\lbrace #1 \right. }
+\newcommand{\defEnsR}[1]{\left. #1 \right  \rbrace }
+
+
+\def\ie{\textit{i.e.}}
+\def\cadlag{càdlàg}
+\def\eqsp{\;}
+
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Ent}{\mathrm{Ent}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+
+
+\newcommand{\kat}[1]{\todo[color=blue!20]{{\textbf{KE}:} #1}}
+\newcommand{\kati}[1]{\todo[color=blue!20,inline]{{\textbf{KE}:} #1}}
+
+\def\transpose{\top}
+\DeclareMathOperator{\Id}{\mathrm{Id}}
+
+\newcommand*{\eqset}{\coloneqq}
+\renewcommand{\div}{\mathrm{div}}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\ip}[2]{\langle #1,#2\rangle}
+
+\def\const{\mathrm{C}}
+
+\newcommand{\ffl}[1]{\overrightarrow{\mu}_{#1}}
+\newcommand{\bfl}[1]{\overleftarrow{\mu}_{#1}}
+
+\newcommand{\TV}{\mathrm{TV}}
