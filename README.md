@@ -11,7 +11,7 @@ Aquest projecte de treball de fi de grau explora l'ús de **Large Language Model
 - Comparar diferents models: preentrenats (AnswerDotAI, NomicAI) i fine-tuned.
 - Visualitzar els resultats amb corbes ROC, matrius de confusió i UMAP.
 
----
+```
 
 ## Estructura del projecte
 
@@ -63,7 +63,7 @@ TFG/
 - [`nomic-ai/modernbert-embed-base`](https://huggingface.co/nomic-ai/modernbert-embed-base)
 - Model contrastiu **fine-tuned** sobre corpus matemàtic propi (guardat a `training/modernbert-contrastive-manual/`)
 
----
+```
 
 ## Resultats
 
