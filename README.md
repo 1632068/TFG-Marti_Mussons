@@ -50,12 +50,12 @@ TFG/
 │       ├── parelles_mal_classificades.csv
 │       └── train_finetuned.ipynb
 │
-├── actica.ps1, entorn.ps1        # Scripts d'activació de l'entorn virtual
+├── activa.ps1, entorn.ps1        # Scripts d'activació de l'entorn virtual
 ├── requirements.txt              # Llistat de llibreries Python necessàries
 ├── README.md                     # Aquest fitxer
 └── .gitignore
 
----
+```
 
 ## Models utilitzats
 
@@ -63,7 +63,7 @@ TFG/
 - [`nomic-ai/modernbert-embed-base`](https://huggingface.co/nomic-ai/modernbert-embed-base)
 - Model contrastiu **fine-tuned** sobre corpus matemàtic propi (guardat a `training/modernbert-contrastive-manual/`)
 
-```
+---
 
 ## Resultats
 
