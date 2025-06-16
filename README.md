@@ -37,9 +37,9 @@ TFG/
 │   │
 │   ├── prova/                    # Experiments 
 │   │   ├── output/
-│   │   ├── parelles2.csv
-│   │   ├── parelles3.csv
-│   │   └── train2.ipynb
+│   │   ├── df_blocks.csv
+│   │   └── validacio_robustesa.ipynb
+│   │   
 │   │
 │   └── training/                 # Entrenament i resultats finals
 │       ├── modernbert-contrastive-manual/
